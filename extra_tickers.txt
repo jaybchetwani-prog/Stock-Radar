@@ -1,0 +1,3 @@
+# Extra NSE stocks to fetch (for portfolio stocks outside the Nifty 500).
+# One NSE symbol per line, e.g.
+# IRCTC
