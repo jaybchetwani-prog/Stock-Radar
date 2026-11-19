@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Stock radar</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%20role%3D%22img%22%20aria-label%3D%22Stock%20Radar%20logo%22%3E%20%20%3Cdefs%3E%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%231b2a4a%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230d1526%22/%3E%3C/linearGradient%3E%20%20%20%20%3ClinearGradient%20id%3D%22sw%22%20x1%3D%220%22%20y1%3D%221%22%20x2%3D%221%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2322c58b%22%20stop-opacity%3D%220%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2322c58b%22%20stop-opacity%3D%22.55%22/%3E%3C/linearGradient%3E%20%20%3C/defs%3E%20%20%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2215%22%20fill%3D%22url%28%23bg%29%22/%3E%20%20%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2222%22%20fill%3D%22none%22%20stroke%3D%22%235b86ff%22%20stroke-opacity%3D%22.35%22%20stroke-width%3D%222%22/%3E%20%20%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2213.5%22%20fill%3D%22none%22%20stroke%3D%22%235b86ff%22%20stroke-opacity%3D%22.5%22%20stroke-width%3D%222%22/%3E%20%20%3Cpath%20d%3D%22M32%2032%20L32%2010%20A22%2022%200%200%201%2051.05%2021%20Z%22%20fill%3D%22url%28%23sw%29%22/%3E%20%20%3Cpath%20d%3D%22M32%2032%20L51.05%2021%22%20stroke%3D%22%233ee0a1%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22/%3E%20%20%3Cline%20x1%3D%2226%22%20y1%3D%2227%22%20x2%3D%2226%22%20y2%3D%2245%22%20stroke%3D%22%23ff6b5b%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22/%3E%20%20%3Crect%20x%3D%2223%22%20y%3D%2230%22%20width%3D%226%22%20height%3D%2210%22%20rx%3D%221.2%22%20fill%3D%22%23ff6b5b%22/%3E%20%20%3Cline%20x1%3D%2237%22%20y1%3D%2222%22%20x2%3D%2237%22%20y2%3D%2243%22%20stroke%3D%22%233ee0a1%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22/%3E%20%20%3Crect%20x%3D%2234%22%20y%3D%2225%22%20width%3D%226%22%20height%3D%2214%22%20rx%3D%221.2%22%20fill%3D%22%233ee0a1%22/%3E%20%20%3Ccircle%20cx%3D%2245.5%22%20cy%3D%2217%22%20r%3D%222.6%22%20fill%3D%22%23ffffff%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -63,7 +64,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .hero p{margin:4px 0 0;color:var(--muted)}
 .brand{display:flex;align-items:center;gap:10px}
 .brand h1{font-size:22px;font-weight:700;letter-spacing:-.01em;margin:0}
-.brand svg{width:30px;height:30px;color:var(--accent)}
+.brand svg.logo{width:38px;height:38px;flex:none;border-radius:10px;box-shadow:0 2px 8px rgba(13,21,38,.25)}
 .seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:3px;gap:2px}
 .seg button{border:0;background:transparent;padding:6px 14px;border-radius:7px;cursor:pointer;font-weight:600;color:var(--muted)}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
@@ -220,6 +221,43 @@ a.btn{text-decoration:none;color:var(--ink);display:inline-flex;align-items:cent
 .pf-fine{font-size:13px;color:var(--muted);margin:8px 2px}
 .linkbtn{border:0;background:none;color:var(--bear);cursor:pointer;text-decoration:underline;padding:0;font-size:13px}
 .pf-filter{margin:0 0 10px}
+.g-h{margin:22px 2px 8px;font-size:18px}
+.g-intro{color:var(--muted);margin:0 2px 12px;max-width:80ch}
+.g-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.g-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.g-card h4{margin:8px 0 4px;font-size:16px}.g-card p{margin:0;color:var(--muted);font-size:14px}
+.ill{width:100%;height:auto;max-height:140px;background:var(--surface-2);border-radius:10px}
+.ill .sup-l{stroke:var(--sig-support)}.ill .res-l{stroke:var(--sig-breakout)}
+.ill-t{font-size:11px;font-weight:600;font-family:inherit}.sup-l-t{fill:var(--sig-support)}.res-l-t{fill:var(--sig-breakout)}
+.g-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px;margin:0}
+.g-list>div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.g-list dt{font-weight:700}.g-list dd{margin:4px 0 0;color:var(--muted);font-size:14px}
+.modal{top:50%;bottom:auto;left:50%;right:auto;transform:translate(-50%,-50%);width:min(680px,94vw);border-radius:18px;max-height:92vh}
+@media (prefers-reduced-motion:no-preference){.modal{animation:none}}
+.risk-opts{border:0;padding:0;margin:14px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.risk-opts legend{font-weight:700;margin-bottom:8px;padding:0}
+.risk-card{display:flex;flex-direction:column;gap:4px;border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;background:var(--surface-2)}
+.risk-card input{position:absolute;opacity:0}.risk-card span{font-size:13px;color:var(--muted)}
+.risk-card:has(input:checked){border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--surface))}
+.risk-card:has(input:focus-visible){outline:2px solid var(--focus)}
+.prof-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:10px}
+.prof-grid label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)}
+.prof-grid input,.prof-grid select{padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink)}
+.plan{margin-top:14px}
+.plan-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.plan-head h3{margin:0;font-size:17px}.plan-head span{font-size:13px;color:var(--muted)}
+.plan-ask{margin:8px 0;padding:10px 12px;border-radius:10px;border:1px dashed var(--accent);display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;font-size:14px}
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin-top:8px}
+.pcard{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--surface-2)}
+.pcard.pref{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.pcard h4{margin:0;font-size:15px;display:flex;justify-content:space-between;gap:6px;align-items:center}
+.pcard .sub{font-size:12px;color:var(--muted);margin:2px 0 8px}
+.pill{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:99px;white-space:nowrap}
+.pill.ok{color:var(--bull);background:color-mix(in srgb,var(--bull) 14%,transparent)}.pill.wait{color:var(--sig-hammer);background:color-mix(in srgb,var(--sig-hammer) 16%,transparent)}
+.prow{display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-top:1px solid var(--line);font-size:13.5px}
+.prow:first-of-type{border-top:0}.prow span{color:var(--muted)}.prow b{text-align:right;font-variant-numeric:tabular-nums}
+.prow b small{display:block;font-weight:500;color:var(--muted);font-size:12px}
+.pnote{font-size:12.5px;color:var(--muted);margin-top:6px}
 [hidden]{display:none !important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
@@ -228,7 +266,23 @@ a.btn{text-decoration:none;color:var(--ink);display:inline-flex;align-items:cent
 <div class="wrap">
   <header class="top">
     <div class="brand">
-      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="16" cy="16" r="13"/><circle cx="16" cy="16" r="7.5" opacity=".55"/><path d="M16 16 L26 9" stroke-linecap="round"/><circle cx="22.5" cy="20" r="1.8" fill="currentColor" stroke="none"/></svg>
+      <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+  <defs>
+    <linearGradient id="lgbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1b2a4a"/><stop offset="1" stop-color="#0d1526"/></linearGradient>
+    <linearGradient id="lgsw" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#22c58b" stop-opacity="0"/><stop offset="1" stop-color="#22c58b" stop-opacity=".55"/></linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#lgbg)"/>
+  <circle cx="32" cy="32" r="22" fill="none" stroke="#5b86ff" stroke-opacity=".35" stroke-width="2"/>
+  <circle cx="32" cy="32" r="13.5" fill="none" stroke="#5b86ff" stroke-opacity=".5" stroke-width="2"/>
+  <path d="M32 32 L32 10 A22 22 0 0 1 51.05 21 Z" fill="url(#lgsw)"/>
+  <path d="M32 32 L51.05 21" stroke="#3ee0a1" stroke-width="2.6" stroke-linecap="round"/>
+  <line x1="26" y1="27" x2="26" y2="45" stroke="#ff6b5b" stroke-width="2" stroke-linecap="round"/>
+  <rect x="23" y="30" width="6" height="10" rx="1.2" fill="#ff6b5b"/>
+  <line x1="37" y1="22" x2="37" y2="43" stroke="#3ee0a1" stroke-width="2" stroke-linecap="round"/>
+  <rect x="34" y="25" width="6" height="14" rx="1.2" fill="#3ee0a1"/>
+  <circle cx="45.5" cy="17" r="2.6" fill="#ffffff"/>
+</svg>
+
       <h1>Stock radar<small>Pattern scanner and portfolio check for Nifty 500 and US stocks</small></h1>
     </div>
     <div class="top-right">
@@ -236,12 +290,14 @@ a.btn{text-decoration:none;color:var(--ink);display:inline-flex;align-items:cent
         <button type="button" data-market="NSE">NSE</button>
         <button type="button" data-market="US">US</button>
       </div>
+      <button type="button" class="icon-btn" id="profileBtn" title="Your investing profile" aria-label="Your investing profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></button>
       <button type="button" class="icon-btn" id="themeBtn"></button>
     </div>
   </header>
   <nav class="views" role="tablist" aria-label="Sections">
     <button type="button" role="tab" data-view="radar">Radar</button>
     <button type="button" role="tab" data-view="portfolio">My portfolio</button>
+    <button type="button" role="tab" data-view="guide">Guide</button>
   </nav>
   <div id="radarView">
 
@@ -256,7 +312,7 @@ a.btn{text-decoration:none;color:var(--ink);display:inline-flex;align-items:cent
       <div class="chips" id="chips" role="group" aria-label="Signals to show"></div>
     </div>
     <div class="tools">
-      <select id="indexSel" class="btn" aria-label="Index"><option value="200">Nifty 200</option><option value="500">Nifty 500</option></select>
+      <select id="indexSel" class="btn" aria-label="What to scan"><option value="200">Nifty 200</option><option value="500">Nifty 500</option><option value="etf">ETFs (BeES)</option><option value="index">Indices</option><option value="all">Everything</option></select>
       <input type="search" id="q" placeholder="Search symbol or company" aria-label="Search symbol or company">
       <div class="small-seg" role="group" aria-label="How signals combine">
         <button type="button" data-match="any" title="Show stocks with at least one selected signal">Any</button>
@@ -312,6 +368,56 @@ a.btn{text-decoration:none;color:var(--ink);display:inline-flex;align-items:cent
   </section>
   </div>
 
+
+  <section id="guideView" hidden aria-labelledby="gTitle">
+    <div class="hero"><div><h2 id="gTitle">Guide</h2><p>What every signal, level and word on this radar means.</p></div></div>
+    <h3 class="g-h">Candlestick patterns</h3>
+    <p class="g-intro">A candle shows one period’s open, high, low and close. Green means it closed higher than it opened, red means lower. The thin lines (wicks) show how far the price travelled. These three are <b>bullish reversal</b> patterns: after a fall, they hint that buyers are stepping in. The radar only counts them when they form <b>at support</b>.</p>
+    <div class="g-cards">
+      <article class="g-card"><svg viewBox="0 0 260 110" class="ill" aria-hidden="true"><line x1="4" x2="256" y1="97.5" y2="97.5" class="sup-l" stroke-dasharray="5 4" stroke-width="1.5"/><text x="254" y="110.5" text-anchor="end" class="ill-t sup-l-t">support</text><line x1="52.5" x2="52.5" y1="12.5" y2="29.5" class="c-bear" stroke-width="2"/><rect x="43.5" y="15.3" width="18.0" height="11.3" rx="2" class="c-bear"/><line x1="97.5" x2="97.5" y1="23.8" y2="43.7" class="c-bear" stroke-width="2"/><rect x="88.5" y="26.7" width="18.0" height="14.2" rx="2" class="c-bear"/><line x1="142.5" x2="142.5" y1="38.0" y2="57.8" class="c-bear" stroke-width="2"/><rect x="133.5" y="40.8" width="18.0" height="14.2" rx="2" class="c-bear"/><line x1="187.5" x2="187.5" y1="59.2" y2="97.5" class="c-bull" stroke-width="2"/><rect x="178.5" y="60.7" width="18.0" height="5.7" rx="2" class="c-bull"/></svg><h4>Hammer</h4><p>One candle with a small body near the top and a long lower wick, at least twice the body. Sellers pushed the price down, but buyers pushed it back up before the close. Strongest when it appears at support after a fall.</p></article>
+      <article class="g-card"><svg viewBox="0 0 260 110" class="ill" aria-hidden="true"><line x1="4" x2="256" y1="96.7" y2="96.7" class="sup-l" stroke-dasharray="5 4" stroke-width="1.5"/><text x="254" y="109.7" text-anchor="end" class="ill-t sup-l-t">support</text><line x1="48.0" x2="48.0" y1="13.3" y2="31.8" class="c-bear" stroke-width="2"/><rect x="39.0" y="16.4" width="18.0" height="12.4" rx="2" class="c-bear"/><line x1="84.0" x2="84.0" y1="25.6" y2="50.4" class="c-bear" stroke-width="2"/><rect x="75.0" y="28.7" width="18.0" height="18.5" rx="2" class="c-bear"/><line x1="120.0" x2="120.0" y1="44.2" y2="84.4" class="c-bear" stroke-width="2"/><rect x="111.0" y="47.3" width="18.0" height="34.0" rx="2" class="c-bear"/><line x1="156.0" x2="156.0" y1="82.8" y2="96.7" class="c-bear" stroke-width="2"/><rect x="147.0" y="87.5" width="18.0" height="3.1" rx="2" class="c-bear"/><line x1="192.0" x2="192.0" y1="50.4" y2="85.9" class="c-bull" stroke-width="2"/><rect x="183.0" y="53.5" width="18.0" height="30.9" rx="2" class="c-bull"/></svg><h4>Morning star</h4><p>Three candles: a big red candle, then a small candle that shows indecision, then a strong green candle closing above the middle of the first one. It marks a shift from selling to buying.</p></article>
+      <article class="g-card"><svg viewBox="0 0 260 110" class="ill" aria-hidden="true"><line x1="4" x2="256" y1="95.3" y2="95.3" class="sup-l" stroke-dasharray="5 4" stroke-width="1.5"/><text x="254" y="108.3" text-anchor="end" class="ill-t sup-l-t">support</text><line x1="52.5" x2="52.5" y1="14.7" y2="43.4" class="c-bear" stroke-width="2"/><rect x="43.5" y="18.3" width="18.0" height="21.5" rx="2" class="c-bear"/><line x1="97.5" x2="97.5" y1="36.2" y2="68.4" class="c-bear" stroke-width="2"/><rect x="88.5" y="39.8" width="18.0" height="25.1" rx="2" class="c-bear"/><line x1="142.5" x2="142.5" y1="68.4" y2="89.9" class="c-bear" stroke-width="2"/><rect x="133.5" y="72.0" width="18.0" height="14.3" rx="2" class="c-bear"/><line x1="187.5" x2="187.5" y1="50.5" y2="95.3" class="c-bull" stroke-width="2"/><rect x="178.5" y="54.1" width="18.0" height="37.6" rx="2" class="c-bull"/></svg><h4>Bullish engulfing (BE)</h4><p>Two candles: a red candle, then a bigger green candle whose body completely covers (engulfs) the red one’s body. Buyers overpowered the sellers in a single session.</p></article>
+    </div>
+    <h3 class="g-h">Price levels and setups</h3>
+    <div class="g-cards">
+      <article class="g-card"><svg viewBox="0 0 260 110" class="ill" aria-hidden="true"><line x1="4" x2="256" y1="95.6" y2="95.6" class="sup-l" stroke-dasharray="5 4" stroke-width="1.5"/><text x="254" y="108.6" text-anchor="end" class="ill-t sup-l-t">support</text><line x1="48.0" x2="48.0" y1="14.4" y2="42.0" class="c-bear" stroke-width="2"/><rect x="39.0" y="17.8" width="18.0" height="20.7" rx="2" class="c-bear"/><line x1="84.0" x2="84.0" y1="35.1" y2="66.2" class="c-bear" stroke-width="2"/><rect x="75.0" y="38.6" width="18.0" height="24.2" rx="2" class="c-bear"/><line x1="120.0" x2="120.0" y1="59.3" y2="93.9" class="c-bear" stroke-width="2"/><rect x="111.0" y="62.8" width="18.0" height="20.7" rx="2" class="c-bear"/><line x1="156.0" x2="156.0" y1="69.7" y2="95.6" class="c-bull" stroke-width="2"/><rect x="147.0" y="73.2" width="18.0" height="10.4" rx="2" class="c-bull"/><line x1="192.0" x2="192.0" y1="52.4" y2="76.6" class="c-bull" stroke-width="2"/><rect x="183.0" y="55.9" width="18.0" height="17.3" rx="2" class="c-bull"/></svg><h4>Support and support bounce</h4><p><b>Support</b> is a price where falls have stopped before, so buyers tend to show up there. The radar uses the lowest low of the lookback and swing lows (a low with higher lows on both sides) from the last 60 candles. A <b>support bounce</b> means price recently tested support and the latest candle closed green and higher.</p></article>
+      <article class="g-card"><svg viewBox="0 0 260 110" class="ill" aria-hidden="true"><line x1="4" x2="256" y1="48.9" y2="48.9" class="res-l" stroke-dasharray="5 4" stroke-width="1.5"/><text x="254" y="61.9" text-anchor="end" class="ill-t res-l-t">resistance</text><line x1="45.0" x2="45.0" y1="65.2" y2="93.8" class="c-bull" stroke-width="2"/><rect x="36.8" y="69.3" width="16.5" height="20.4" rx="2" class="c-bull"/><line x1="75.0" x2="75.0" y1="48.9" y2="77.4" class="c-bear" stroke-width="2"/><rect x="66.8" y="69.3" width="16.5" height="4.1" rx="2" class="c-bear"/><line x1="105.0" x2="105.0" y1="53.0" y2="85.6" class="c-bull" stroke-width="2"/><rect x="96.8" y="57.0" width="16.5" height="16.3" rx="2" class="c-bull"/><line x1="135.0" x2="135.0" y1="48.9" y2="73.4" class="c-bear" stroke-width="2"/><rect x="126.8" y="57.0" width="16.5" height="12.2" rx="2" class="c-bear"/><line x1="165.0" x2="165.0" y1="44.8" y2="73.4" class="c-bull" stroke-width="2"/><rect x="156.8" y="53.0" width="16.5" height="16.3" rx="2" class="c-bull"/><line x1="195.0" x2="195.0" y1="16.2" y2="57.0" class="c-bull" stroke-width="2"/><rect x="186.8" y="20.3" width="16.5" height="32.6" rx="2" class="c-bull"/></svg><h4>Resistance and breakout</h4><p><b>Resistance</b> is a price where rises have stalled before. The radar uses the highest high of the lookback (20 candles by default). <b>Near breakout</b> means the close is within 3% of it; <b>Breakout</b> means it closed above it.</p></article>
+    </div>
+    <h3 class="g-h">Indicators</h3>
+    <dl class="g-list">
+      <div><dt>RSI (Relative Strength Index)</dt><dd>Momentum on a 0 to 100 scale over 14 candles. Above 70 is often called overbought, below 30 oversold. 50 to 70 usually means healthy upward momentum.</dd></div>
+      <div><dt>EMA (exponential moving average)</dt><dd>The average closing price, weighted towards recent days. Price above its <b>50-day EMA</b> suggests a medium-term uptrend; above its <b>200-day EMA</b>, a long-term uptrend. The 20 EMA is drawn in Pattern view.</dd></div>
+      <div><dt>ATR (Average True Range)</dt><dd>How much a stock typically moves in one candle, over the last 14 candles. Used to place stop losses outside normal day-to-day noise.</dd></div>
+      <div><dt>Volume vs average</dt><dd>Today’s volume divided by the average of the previous 20 candles. 1.5× means 50% more shares traded than usual, which adds weight to a signal.</dd></div>
+      <div><dt>Market breadth</dt><dd>How many stocks in the list rose versus fell, and what share trade above their 50 EMA. It shows whether the whole market is strong or only a few stocks.</dd></div>
+      <div><dt>India VIX</dt><dd>The market’s “fear index”: expected volatility of the Nifty over the next 30 days. Higher VIX means bigger expected swings.</dd></div>
+    </dl>
+    <h3 class="g-h">Trade plan</h3>
+    <dl class="g-list">
+      <div><dt>Short term (ST)</dt><dd>Holding for about 2 to 6 weeks. Worked out from the daily chart.</dd></div>
+      <div><dt>Medium term (MT)</dt><dd>Holding for about 3 to 6 months. Worked out from the weekly chart over the last 6 months.</dd></div>
+      <div><dt>Long term (LT)</dt><dd>Holding for a year or more. Worked out from the weekly chart over 2 years and the 200-day trend, with targets based on your expected yearly return.</dd></div>
+      <div><dt>Buy range</dt><dd>From the nearest support up to one ATR above it. Buying near support keeps the stop loss close, so you risk less per share. If the price is above this range, the plan suggests waiting for a dip.</dd></div>
+      <div><dt>Stop loss</dt><dd>The price where you exit to limit the loss if the setup fails. Set just below support, by 0.5, 1 or 1.5 ATR for a conservative, moderate or aggressive profile.</dd></div>
+      <div><dt>Sell range (targets)</dt><dd>Target 1 and Target 2, where you could book profits in parts. For ST and MT they are set by risk to reward; for LT by your expected return over 1 and 2 years.</dd></div>
+      <div><dt>Risk : reward</dt><dd>How much you could gain for each rupee you risk. 1 : 2 means the target is twice as far from your entry as the stop loss. Conservative uses 1 : 1.5 and 1 : 2.5, moderate 1 : 2 and 1 : 3, aggressive 1 : 2.5 and 1 : 4.</dd></div>
+      <div><dt>Position size</dt><dd>How many shares to buy so that hitting the stop loss costs only your chosen risk per trade (0.5%, 1% or 2% of capital by default), capped at 25% of capital in one stock.</dd></div>
+      <div><dt>Risk appetite</dt><dd>How much loss you can accept. Conservative: tight stops, small positions. Moderate: balanced. Aggressive: wider stops and bigger targets, with bigger swings along the way. Set it with the person icon at the top.</dd></div>
+    </dl>
+    <h3 class="g-h">Portfolio</h3>
+    <dl class="g-list">
+      <div><dt>Add more, Hold, Review</dt><dd>Signals from each holding’s trend, momentum and support, explained in “How the signals work” on the portfolio tab. Review means “look closer”, not an automatic sell.</dd></div>
+      <div><dt>Portfolio health</dt><dd>A 0 to 100 score: the value-weighted average of your holdings’ signals, reduced if one stock or sector is too large or you hold fewer than 5 stocks.</dd></div>
+    </dl>
+    <h3 class="g-h">ETFs, BeES and indices</h3>
+    <dl class="g-list">
+      <div><dt>ETF and BeES</dt><dd>An exchange-traded fund holds a basket (an index, gold, silver and so on) and trades like a share. <b>BeES</b> is the name Nippon India uses for its ETFs, for example NIFTYBEES tracks the Nifty 50 and GOLDBEES tracks gold prices.</dd></div>
+      <div><dt>LIQUIDBEES and liquid ETFs</dt><dd>These hold overnight money-market investments and stay at almost the same price, so chart patterns on them mean little. They are listed so your portfolio can include them.</dd></div>
+      <div><dt>Indices</dt><dd>Nifty 50, Bank Nifty, sector indices and others show where the market and each sector are heading. You can’t buy an index directly, so the trade plan shows levels without a position size.</dd></div>
+      <div><dt>“BE” on NSE</dt><dd>On this radar, BE means bullish engulfing. On NSE, BE is also a trading series (trade-for-trade), where every trade must be settled by delivery and intraday trading isn’t allowed.</dd></div>
+    </dl>
+    <p class="pf-fine">Everything on this radar is calculated automatically from price data. It is a research aid, not financial advice.</p>
+  </section>
   <section id="portfolioView" hidden aria-labelledby="pfTitle">
     <div class="hero">
       <div><h2 id="pfTitle">My portfolio</h2><p id="pfSub">Upload your holdings for a health check and an add, hold or review signal on every stock.</p></div>
@@ -361,6 +467,25 @@ a.btn{text-decoration:none;color:var(--ink);display:inline-flex;align-items:cent
 </div>
 
 <div class="scrim" id="scrim" hidden></div>
+<div class="sheet modal" id="profileDlg" role="dialog" aria-modal="true" aria-labelledby="profTitle" hidden>
+  <div class="sheet-inner">
+    <div class="sheet-head"><div><h2 id="profTitle">Your investing profile</h2><p>Used for stop losses, targets and position sizes in every trade plan. Saved only on this device.</p></div><button type="button" class="btn" id="profClose">Close</button></div>
+    <fieldset class="risk-opts">
+      <legend>What is your risk appetite?</legend>
+      <label class="risk-card"><input type="radio" name="appetite" value="conservative"><b>Conservative</b><span>Protecting money matters most. Tight stop losses, smaller positions, modest targets. Risks 0.5% of capital per trade.</span></label>
+      <label class="risk-card"><input type="radio" name="appetite" value="moderate"><b>Moderate</b><span>Balanced growth with controlled losses. Risks 1% of capital per trade.</span></label>
+      <label class="risk-card"><input type="radio" name="appetite" value="aggressive"><b>Aggressive</b><span>Comfortable with big swings for bigger gains. Wider stops, higher targets. Risks 2% of capital per trade.</span></label>
+    </fieldset>
+    <div class="prof-grid">
+      <label>What return do you expect per year? (%)<input type="number" id="profExp" min="1" max="100" step="1"></label>
+      <label>Capital you trade with (₹, optional)<input type="number" id="profCap" min="0" step="1000" placeholder="e.g. 500000"></label>
+      <label>Maximum loss per trade (% of capital)<input type="number" id="profRisk" min="0.1" max="10" step="0.1"></label>
+      <label>How long do you usually hold?<select id="profHz"><option value="st">Short term (2 to 6 weeks)</option><option value="mt">Medium term (3 to 6 months)</option><option value="lt">Long term (1 year or more)</option></select></label>
+    </div>
+    <p class="pf-fine" id="profNote"></p>
+    <button type="button" class="btn primary" id="profSave">Save profile</button>
+  </div>
+</div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden>
   <div class="sheet-inner">
     <div class="sheet-head">
@@ -380,6 +505,7 @@ a.btn{text-decoration:none;color:var(--ink);display:inline-flex;align-items:cent
       <div class="chartbox" id="chartbox"></div>
       <div class="readout num" id="readout">Tap or hover the chart to read a candle.</div>
     </div>
+    <section class="plan" id="plan"></section>
     <dl class="facts num" id="facts"></dl>
     <ul class="why" id="why"></ul>
   </div>
@@ -393,7 +519,7 @@ const SIGNALS=[
   {id:"mstar",label:"Morning star",color:"var(--sig-mstar)"},
   {id:"hammer",label:"Hammer",color:"var(--sig-hammer)"},
   {id:"breakout",label:"Near breakout",color:"var(--sig-breakout)"},
-  {id:"engulf",label:"Bullish engulfing",color:"var(--sig-engulf)"},
+  {id:"engulf",label:"Bullish engulfing (BE)",color:"var(--sig-engulf)"},
   {id:"support",label:"Support bounce",color:"var(--sig-support)"}
 ];
 const TF_NAME={D:"day",W:"week",M:"month"};
@@ -401,7 +527,7 @@ const TF_NAME={D:"day",W:"week",M:"month"};
 const NIFTY200=[["360ONE","360 ONE WAM Ltd.","Financial Services"],["ABB","ABB India Ltd.","Capital Goods"],["APLAPOLLO","APL Apollo Tubes Ltd.","Capital Goods"],["AUBANK","AU Small Finance Bank Ltd.","Financial Services"],["ADANIENSOL","Adani Energy Solutions Ltd.","Power"],["ADANIENT","Adani Enterprises Ltd.","Metals & Mining"],["ADANIGREEN","Adani Green Energy Ltd.","Power"],["ADANIPORTS","Adani Ports and Special Economic Zone Ltd.","Services"],["ADANIPOWER","Adani Power Ltd.","Power"],["ATGL","Adani Total Gas Ltd.","Oil Gas & Consumable Fuels"],["ABCAPITAL","Aditya Birla Capital Ltd.","Financial Services"],["AMBUJACEM","Ambuja Cements Ltd.","Construction Materials"],["APARINDS","Apar Industries Ltd.","Capital Goods"],["APOLLOHOSP","Apollo Hospitals Enterprise Ltd.","Healthcare"],["ASHOKLEY","Ashok Leyland Ltd.","Capital Goods"],["ASIANPAINT","Asian Paints Ltd.","Consumer Durables"],["ASTRAL","Astral Ltd.","Capital Goods"],["AUROPHARMA","Aurobindo Pharma Ltd.","Healthcare"],["DMART","Avenue Supermarts Ltd.","Consumer Services"],["AXISBANK","Axis Bank Ltd.","Financial Services"],["BSE","BSE Ltd.","Financial Services"],["BAJAJ-AUTO","Bajaj Auto Ltd.","Automobile and Auto Components"],["BAJFINANCE","Bajaj Finance Ltd.","Financial Services"],["BAJAJFINSV","Bajaj Finserv Ltd.","Financial Services"],["BAJAJHLDNG","Bajaj Holdings & Investment Ltd.","Financial Services"],["BANKBARODA","Bank of Baroda","Financial Services"],["BANKINDIA","Bank of India","Financial Services"],["MAHABANK","Bank of Maharashtra","Financial Services"],["BDL","Bharat Dynamics Ltd.","Capital Goods"],["BEL","Bharat Electronics Ltd.","Capital Goods"],["BHARATFORG","Bharat Forge Ltd.","Automobile and Auto Components"],["BHEL","Bharat Heavy Electricals Ltd.","Capital Goods"],["BPCL","Bharat Petroleum Corporation Ltd.","Oil Gas & Consumable Fuels"],["BHARTIARTL","Bharti Airtel Ltd.","Telecommunication"],["GROWW","Billionbrains Garage Ventures Ltd.","Financial Services"],["BIOCON","Biocon Ltd.","Healthcare"],["BLUESTARCO","Blue Star Ltd.","Consumer Durables"],["BOSCHLTD","Bosch Ltd.","Automobile and Auto Components"],["BRITANNIA","Britannia Industries Ltd.","Fast Moving Consumer Goods"],["CGPOWER","CG Power and Industrial Solutions Ltd.","Capital Goods"],["CANBK","Canara Bank","Financial Services"],["CHOLAFIN","Cholamandalam Investment and Finance Company Ltd.","Financial Services"],["CIPLA","Cipla Ltd.","Healthcare"],["COALINDIA","Coal India Ltd.","Oil Gas & Consumable Fuels"],["COCHINSHIP","Cochin Shipyard Ltd.","Capital Goods"],["COFORGE","Coforge Ltd.","Information Technology"],["COLPAL","Colgate Palmolive (India) Ltd.","Fast Moving Consumer Goods"],["CONCOR","Container Corporation of India Ltd.","Services"],["CUMMINSIND","Cummins India Ltd.","Capital Goods"],["DLF","DLF Ltd.","Realty"],["DABUR","Dabur India Ltd.","Fast Moving Consumer Goods"],["DIVISLAB","Divi's Laboratories Ltd.","Healthcare"],["DIXON","Dixon Technologies (India) Ltd.","Consumer Durables"],["DRREDDY","Dr. Reddy's Laboratories Ltd.","Healthcare"],["EICHERMOT","Eicher Motors Ltd.","Automobile and Auto Components"],["ETERNAL","Eternal Ltd.","Consumer Services"],["EXIDEIND","Exide Industries Ltd.","Automobile and Auto Components"],["NYKAA","FSN E-Commerce Ventures Ltd.","Consumer Services"],["FEDERALBNK","Federal Bank Ltd.","Financial Services"],["FORTIS","Fortis Healthcare Ltd.","Healthcare"],["GAIL","GAIL (India) Ltd.","Oil Gas & Consumable Fuels"],["GVT&D","GE Vernova T&D India Ltd.","Capital Goods"],["GMRAIRPORT","GMR Airports Ltd.","Services"],["GLENMARK","Glenmark Pharmaceuticals Ltd.","Healthcare"],["GODFRYPHLP","Godfrey Phillips India Ltd.","Fast Moving Consumer Goods"],["GODREJCP","Godrej Consumer Products Ltd.","Fast Moving Consumer Goods"],["GODREJPROP","Godrej Properties Ltd.","Realty"],["GRASIM","Grasim Industries Ltd.","Construction Materials"],["HCLTECH","HCL Technologies Ltd.","Information Technology"],["HDFCAMC","HDFC Asset Management Company Ltd.","Financial Services"],["HDFCBANK","HDFC Bank Ltd.","Financial Services"],["HDFCLIFE","HDFC Life Insurance Company Ltd.","Financial Services"],["HAVELLS","Havells India Ltd.","Consumer Durables"],["HEROMOTOCO","Hero MotoCorp Ltd.","Automobile and Auto Components"],["HINDALCO","Hindalco Industries Ltd.","Metals & Mining"],["HAL","Hindustan Aeronautics Ltd.","Capital Goods"],["HINDCOPPER","Hindustan Copper Ltd.","Metals & Mining"],["HINDPETRO","Hindustan Petroleum Corporation Ltd.","Oil Gas & Consumable Fuels"],["HINDUNILVR","Hindustan Unilever Ltd.","Fast Moving Consumer Goods"],["HINDZINC","Hindustan Zinc Ltd.","Metals & Mining"],["POWERINDIA","Hitachi Energy India Ltd.","Capital Goods"],["HYUNDAI","Hyundai Motor India Ltd.","Automobile and Auto Components"],["ICICIBANK","ICICI Bank Ltd.","Financial Services"],["ICICIGI","ICICI Lombard General Insurance Company Ltd.","Financial Services"],["ICICIAMC","ICICI Prudential Asset Management Company Ltd.","Financial Services"],["IDFCFIRSTB","IDFC First Bank Ltd.","Financial Services"],["ITC","ITC Ltd.","Fast Moving Consumer Goods"],["INDIANB","Indian Bank","Financial Services"],["INDHOTEL","Indian Hotels Co. Ltd.","Consumer Services"],["IOC","Indian Oil Corporation Ltd.","Oil Gas & Consumable Fuels"],["IRCTC","Indian Railway Catering And Tourism Corporation Ltd.","Consumer Services"],["IRFC","Indian Railway Finance Corporation Ltd.","Financial Services"],["IREDA","Indian Renewable Energy Development Agency Ltd.","Financial Services"],["INDUSTOWER","Indus Towers Ltd.","Telecommunication"],["INDUSINDBK","IndusInd Bank Ltd.","Financial Services"],["NAUKRI","Info Edge (India) Ltd.","Consumer Services"],["INFY","Infosys Ltd.","Information Technology"],["INDIGO","InterGlobe Aviation Ltd.","Services"],["JSWENERGY","JSW Energy Ltd.","Power"],["JSWSTEEL","JSW Steel Ltd.","Metals & Mining"],["JINDALSTEL","Jindal Steel Ltd.","Metals & Mining"],["JIOFIN","Jio Financial Services Ltd.","Financial Services"],["JUBLFOOD","Jubilant Foodworks Ltd.","Consumer Services"],["KEI","KEI Industries Ltd.","Capital Goods"],["KALYANKJIL","Kalyan Jewellers India Ltd.","Consumer Durables"],["KOTAKBANK","Kotak Mahindra Bank Ltd.","Financial Services"],["LTF","L&T Finance Ltd.","Financial Services"],["LGEINDIA","LG Electronics India Ltd.","Consumer Durables"],["LICHSGFIN","LIC Housing Finance Ltd.","Financial Services"],["LTM","LTM Ltd.","Information Technology"],["LT","Larsen & Toubro Ltd.","Construction"],["LAURUSLABS","Laurus Labs Ltd.","Healthcare"],["LENSKART","Lenskart Solutions Ltd.","Consumer Services"],["LICI","Life Insurance Corporation of India","Financial Services"],["LODHA","Lodha Developers Ltd.","Realty"],["LUPIN","Lupin Ltd.","Healthcare"],["MRF","MRF Ltd.","Automobile and Auto Components"],["M&MFIN","Mahindra & Mahindra Financial Services Ltd.","Financial Services"],["M&M","Mahindra & Mahindra Ltd.","Automobile and Auto Components"],["MANKIND","Mankind Pharma Ltd.","Healthcare"],["MARICO","Marico Ltd.","Fast Moving Consumer Goods"],["MARUTI","Maruti Suzuki India Ltd.","Automobile and Auto Components"],["MFSL","Max Financial Services Ltd.","Financial Services"],["MAXHEALTH","Max Healthcare Institute Ltd.","Healthcare"],["MAZDOCK","Mazagoan Dock Shipbuilders Ltd.","Capital Goods"],["MEESHO","Meesho Ltd.","Consumer Services"],["MOTILALOFS","Motilal Oswal Financial Services Ltd.","Financial Services"],["MPHASIS","MphasiS Ltd.","Information Technology"],["MCX","Multi Commodity Exchange of India Ltd.","Financial Services"],["MUTHOOTFIN","Muthoot Finance Ltd.","Financial Services"],["NHPC","NHPC Ltd.","Power"],["NLCINDIA","NLC India Ltd.","Power"],["NMDC","NMDC Ltd.","Metals & Mining"],["NTPC","NTPC Ltd.","Power"],["NATIONALUM","National Aluminium Co. Ltd.","Metals & Mining"],["NESTLEIND","Nestle India Ltd.","Fast Moving Consumer Goods"],["OBEROIRLTY","Oberoi Realty Ltd.","Realty"],["ONGC","Oil & Natural Gas Corporation Ltd.","Oil Gas & Consumable Fuels"],["OIL","Oil India Ltd.","Oil Gas & Consumable Fuels"],["PAYTM","One 97 Communications Ltd.","Financial Services"],["OFSS","Oracle Financial Services Software Ltd.","Information Technology"],["POLICYBZR","PB Fintech Ltd.","Financial Services"],["PIIND","PI Industries Ltd.","Chemicals"],["PAGEIND","Page Industries Ltd.","Textiles"],["PATANJALI","Patanjali Foods Ltd.","Fast Moving Consumer Goods"],["PERSISTENT","Persistent Systems Ltd.","Information Technology"],["PHOENIXLTD","Phoenix Mills Ltd.","Realty"],["PIDILITIND","Pidilite Industries Ltd.","Chemicals"],["POLYCAB","Polycab India Ltd.","Capital Goods"],["PFC","Power Finance Corporation Ltd.","Financial Services"],["POWERGRID","Power Grid Corporation of India Ltd.","Power"],["PREMIERENE","Premier Energies Ltd.","Capital Goods"],["PRESTIGE","Prestige Estates Projects Ltd.","Realty"],["PNB","Punjab National Bank","Financial Services"],["RECLTD","REC Ltd.","Financial Services"],["RADICO","Radico Khaitan Ltd","Fast Moving Consumer Goods"],["RVNL","Rail Vikas Nigam Ltd.","Construction"],["RELIANCE","Reliance Industries Ltd.","Oil Gas & Consumable Fuels"],["SBICARD","SBI Cards and Payment Services Ltd.","Financial Services"],["SBILIFE","SBI Life Insurance Company Ltd.","Financial Services"],["SRF","SRF Ltd.","Chemicals"],["MOTHERSON","Samvardhana Motherson International Ltd.","Automobile and Auto Components"],["SHRIRAMFIN","Shriram Finance Ltd.","Financial Services"],["ENRIN","Siemens Energy India Ltd.","Capital Goods"],["SIEMENS","Siemens Ltd.","Capital Goods"],["SOLARINDS","Solar Industries India Ltd.","Chemicals"],["SBIN","State Bank of India","Financial Services"],["SAIL","Steel Authority of India Ltd.","Metals & Mining"],["SUNPHARMA","Sun Pharmaceutical Industries Ltd.","Healthcare"],["SUPREMEIND","Supreme Industries Ltd.","Capital Goods"],["SUZLON","Suzlon Energy Ltd.","Capital Goods"],["SWIGGY","Swiggy Ltd.","Consumer Services"],["TVSMOTOR","TVS Motor Company Ltd.","Automobile and Auto Components"],["TATACAP","Tata Capital Ltd.","Financial Services"],["TATACOMM","Tata Communications Ltd.","Telecommunication"],["TCS","Tata Consultancy Services Ltd.","Information Technology"],["TATACONSUM","Tata Consumer Products Ltd.","Fast Moving Consumer Goods"],["TMCV","Tata Motors Ltd.","Capital Goods"],["TMPV","Tata Motors Passenger Vehicles Ltd.","Automobile and Auto Components"],["TATAPOWER","Tata Power Co. Ltd.","Power"],["TATASTEEL","Tata Steel Ltd.","Metals & Mining"],["TECHM","Tech Mahindra Ltd.","Information Technology"],["TITAN","Titan Company Ltd.","Consumer Durables"],["TORNTPHARM","Torrent Pharmaceuticals Ltd.","Healthcare"],["TRENT","Trent Ltd.","Consumer Services"],["TIINDIA","Tube Investments of India Ltd.","Automobile and Auto Components"],["UPL","UPL Ltd.","Chemicals"],["ULTRACEMCO","UltraTech Cement Ltd.","Construction Materials"],["UNIONBANK","Union Bank of India","Financial Services"],["UNITDSPR","United Spirits Ltd.","Fast Moving Consumer Goods"],["VBL","Varun Beverages Ltd.","Fast Moving Consumer Goods"],["VAML","Vedanta Aluminium Metal Ltd.","Metals & Mining"],["VEDL","Vedanta Ltd.","Metals & Mining"],["VMM","Vishal Mega Mart Ltd.","Consumer Services"],["IDEA","Vodafone Idea Ltd.","Telecommunication"],["VOLTAS","Voltas Ltd.","Consumer Durables"],["WAAREEENER","Waaree Energies Ltd.","Capital Goods"],["WIPRO","Wipro Ltd.","Information Technology"],["YESBANK","Yes Bank Ltd.","Financial Services"],["ZYDUSLIFE","Zydus Lifesciences Ltd.","Healthcare"]];
 const N200INFO={};for(const [s,n,i] of NIFTY200)N200INFO[s]={name:n,sector:i};
 const NSE_INFO=Object.assign({},N200INFO);const ISIN_MAP={};
-const INDEX_LISTS={"200":NIFTY200.map(x=>x[0]),"500":null};
+const INDEX_LISTS={"200":NIFTY200.map(x=>x[0]),"500":null,"etf":null,"index":null};const TV_MAP={};const KIND={};
 function absorbList(parsed,key){
   const cols=mapCols(parsed.meta.fields||[]);if(!cols.symbol)return 0;const isinCol=(parsed.meta.fields||[]).find(f=>/isin/i.test(f));
   const syms=[];for(const r of parsed.data){const sy=cleanSym(r[cols.symbol]);if(!sy)continue;syms.push(sy);
@@ -412,6 +538,9 @@ function absorbList(parsed,key){
 async function loadIndexLists(){
   for(const [key,file] of [["200","ind_nifty200list.csv"],["500","ind_nifty500list.csv"]]){
     try{const r=await fetch("data/"+file);if(r.ok)absorbList(parseCSVText(await r.text()),key);}catch(e){}}
+  try{const r=await fetch("data/nse_groups.json?t="+Date.now(),{cache:"no-store"});if(r.ok){const g=await r.json();
+    for(const [key,sector] of [["etf","ETF"],["index","Index"]]){const arr=g[key]||[];if(!arr.length)continue;INDEX_LISTS[key]=arr.map(x=>x.sym);
+      for(const x of arr){NSE_INFO[x.sym]={name:x.name,sector};if(x.tv)TV_MAP[x.sym]=x.tv;KIND[x.sym]=key;}}}}catch(e){}
 }
 const DEFAULTS={market:"NSE",tf:"D",active:["mstar","hammer","engulf","breakout","support"],sort:"best",theme:"auto",index:"200",view:"radar",match:"any",starredOnly:false,
   settings:{lookback:20,tol:3,recent:1,downtrend:true,volume:false,atSupport:true},stars:{NSE:[],US:[]}};
@@ -585,11 +714,14 @@ function analyze(s,st){
     chg:(c[last]/c[last-1]-1)*100,dayAbs:c[last]-c[last-1],close:c[last],t:s.t[last],n,recentLow};
 }
 
-function indexSyms(){return (prefs.index==="500"&&INDEX_LISTS["500"])||INDEX_LISTS["200"];}
-function indexName(){return prefs.index==="500"&&INDEX_LISTS["500"]?"Nifty 500":"Nifty 200";}
+function indexSyms(){const L=INDEX_LISTS,ix=prefs.index;
+  if(ix==="all")return [...new Set([...(L["500"]||L["200"]),...(L.etf||[]),...(L.index||[])])];
+  if(ix!=="200"&&L[ix])return L[ix];return L["200"];}
+function indexName(){const ix=prefs.index;if(ix!=="200"&&ix!=="all"&&!INDEX_LISTS[ix])return "Nifty 200";
+  return ({"200":"Nifty 200","500":"Nifty 500",etf:"ETFs",index:"Indices",all:"Stocks, ETFs and indices"})[ix]||"Nifty 200";}
 function scan(){
   const m=prefs.market,d=state.data[m];if(!d)return null;
-  const key=[m,prefs.tf,prefs.index,!!INDEX_LISTS["500"],JSON.stringify(prefs.settings),d.version].join("|");
+  const key=[m,prefs.tf,prefs.index,!!INDEX_LISTS["500"],!!INDEX_LISTS.etf,JSON.stringify(prefs.settings),d.version].join("|");
   if(state.cache&&state.cache.key===key)return state.cache;
   let syms=Object.keys(d.series);let missing=[];
   const uni=(d.universe&&d.universe.length)?d.universe:(m==="NSE"&&!d.demo?indexSyms():null);
@@ -641,22 +773,24 @@ function renderControls(){
   document.querySelectorAll("[data-match]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.match===prefs.match)));
   $("#starredBtn").setAttribute("aria-pressed",String(!!prefs.starredOnly));
   $("#sortSel").value=prefs.sort||"best";
-  const isel=$("#indexSel");isel.hidden=prefs.market!=="NSE";const o5=isel.querySelector('option[value="500"]');
-  o5.disabled=!INDEX_LISTS["500"];o5.textContent=INDEX_LISTS["500"]?"Nifty 500":"Nifty 500 (add list file)";isel.value=prefs.index==="500"&&INDEX_LISTS["500"]?"500":"200";
+  const isel=$("#indexSel");isel.hidden=prefs.market!=="NSE";
+  for(const [k,lab] of [["500","Nifty 500"],["etf","ETFs (BeES)"],["index","Indices"]]){const o=isel.querySelector(`option[value="${k}"]`);o.disabled=!INDEX_LISTS[k];o.textContent=INDEX_LISTS[k]?lab:lab+" (not loaded yet)";}
+  isel.value=(prefs.index==="all"||INDEX_LISTS[prefs.index])?prefs.index:"200";
   $("#s-lookback").value=prefs.settings.lookback;$("#s-tol").value=prefs.settings.tol;$("#s-recent").value=prefs.settings.recent;
   $("#s-down").checked=!!prefs.settings.downtrend;$("#s-atsup").checked=!!prefs.settings.atSupport;$("#s-vol").checked=!!prefs.settings.volume;
   $("#uniBtn").hidden=prefs.market!=="NSE";
 }
 
 function showView(){
-  const v=prefs.view==="portfolio"?"portfolio":"radar";
+  const v=["portfolio","guide"].includes(prefs.view)?prefs.view:"radar";
   document.querySelectorAll("[data-view]").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.view===v)));
-  $("#radarView").hidden=v!=="radar";$("#portfolioView").hidden=v!=="portfolio";
-  document.querySelector(".top .seg").style.visibility=v==="portfolio"?"hidden":"";
+  $("#radarView").hidden=v!=="radar";$("#portfolioView").hidden=v!=="portfolio";$("#guideView").hidden=v!=="guide";
+  document.querySelector(".top .seg").style.visibility=v==="radar"?"":"hidden";
 }
 function render(){
   showView();
   if(prefs.view==="portfolio"){renderPortfolio();return;}
+  if(prefs.view==="guide")return;
   renderRadar();
 }
 function renderRadar(){
@@ -767,8 +901,8 @@ function signalNames(r){return SIGNALS.filter(s=>r.sig[s.id]!==undefined).map(s=
 function exportCSV(){
   const rows=state.shown||[];if(!rows.length){alert("Nothing to export yet.");return;}
   const d=state.data[prefs.market];const q=v=>{v=String(v==null?"":v);return /[",\n]/.test(v)?`"${v.replace(/"/g,'""')}"`:v;};
-  const out=[["Symbol","Company","Sector","Close","Change %","Signals","RSI","Volume vs avg","Resistance","Support","Distance to high %"].join(",")];
-  for(const r of rows){const info=infoOf(d,r.sym);out.push([r.sym,info.name,info.sector,r.close.toFixed(2),r.chg.toFixed(2),signalNames(r).join(" + "),r.rsi==null?"":r.rsi.toFixed(1),r.volRatio==null?"":r.volRatio.toFixed(2),r.res.toFixed(2),r.sup.toFixed(2),r.distRes.toFixed(2)].map(q).join(","));}
+  const out=[["Symbol","Company","Sector","Close","Change %","Signals","RSI","Volume vs avg","Resistance","Support","Distance to high %","ST buy from","ST buy to","ST stop loss","ST target 1","ST target 2"].join(",")];
+  for(const r of rows){const info=infoOf(d,r.sym);out.push([r.sym,info.name,info.sector,r.close.toFixed(2),r.chg.toFixed(2),signalNames(r).join(" + "),r.rsi==null?"":r.rsi.toFixed(1),r.volRatio==null?"":r.volRatio.toFixed(2),r.res.toFixed(2),r.sup.toFixed(2),r.distRes.toFixed(2),...(()=>{const raw=d.series[r.sym];const pl=raw&&horizonPlan(raw,"st",profile(),KIND[r.sym]==="index");return pl?[pl.buyLow,pl.buyHigh,pl.stop,pl.t1,pl.t2].map(x=>x.toFixed(2)):["","","","",""];})()].map(q).join(","));}
   const blob=new Blob([out.join("\n")],{type:"text/csv"});const a=document.createElement("a");
   a.href=URL.createObjectURL(blob);a.download=`stock-radar-${prefs.market}-${prefs.tf}-${new Date().toISOString().slice(0,10)}.csv`;
   document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);
@@ -806,6 +940,7 @@ function openSheet(r,opts){
   add("Volume vs 20 avg",r.volRatio==null?"–":r.volRatio.toFixed(2)+"×");
   add(`Resistance (${prefs.settings.lookback}-candle high)`,fmtP(r.res));add("Distance to resistance",r.close>r.res?"Above by "+fmtPct((r.close/r.res-1)*100):fmtPct(r.distRes));
   add(`Support (${prefs.settings.lookback}-candle low)`,fmtP(r.sup));add("Above support",fmtPct(r.distSup));
+  renderPlan(r.sym,sheetMarket);
   const why=$("#why");why.replaceChildren();
   const s=r.sig;
   if(s.mstar!==undefined)why.append(el("li",null,`Morning star completed ${agoText(s.mstar,sheetTf)}${atSup(r,'mstar')}: a strong red candle, a small pause candle, then a green candle closing above the middle of the red one.`));
@@ -824,7 +959,7 @@ function openSheet(r,opts){
   requestAnimationFrame(()=>{if(tvState==="failed")drawChart(r);$("#closeSheet").focus();});
 }
 let currentRow=null,tvState="idle";
-function tvSymbol(sym){return sheetMarket==="NSE"?"NSE:"+sym.replace(/[&-]/g,"_"):sym.replace(/-/g,".");}
+function tvSymbol(sym){if(sheetMarket==="NSE"&&TV_MAP[sym])return TV_MAP[sym];return sheetMarket==="NSE"?"NSE:"+sym.replace(/[&-]/g,"_"):sym.replace(/-/g,".");}
 function loadTv(){
   if(window.TradingView)return Promise.resolve(true);
   if(tvState==="failed")return Promise.resolve(false);
@@ -885,6 +1020,98 @@ function drawChart(r){
     const ch=i>0?(s.c[i]/s.c[i-1]-1)*100:null;
     ro.textContent=`${candleLabel(s.t[i],sheetTf)}: Open ${fmtP(s.o[i])}, High ${fmtP(s.h[i])}, Low ${fmtP(s.l[i])}, Close ${fmtP(s.c[i])} (${fmtPct(ch,true)}), Volume ${Math.round(s.v[i]).toLocaleString()}`;};
   sv.addEventListener("pointermove",pick);sv.addEventListener("pointerdown",pick);
+}
+
+/* ---------- profile & trade plan ---------- */
+const APPETITE={
+  conservative:{label:"Conservative",stopAtr:0.5,rr:[1.5,2.5],risk:0.5},
+  moderate:{label:"Moderate",stopAtr:1,rr:[2,3],risk:1},
+  aggressive:{label:"Aggressive",stopAtr:1.5,rr:[2.5,4],risk:2}};
+function profile(){const p=Object.assign({appetite:"moderate",exp:15,cap:null,risk:null,hz:"mt",set:false},prefs.profile||{});
+  if(!APPETITE[p.appetite])p.appetite="moderate";if(!(p.risk>0))p.risk=APPETITE[p.appetite].risk;return p;}
+function atrLast(s,p){const n=s.t.length;if(n<p+1)return null;let a=0;
+  for(let i=1;i<=p;i++)a+=Math.max(s.h[i]-s.l[i],Math.abs(s.h[i]-s.c[i-1]),Math.abs(s.l[i]-s.c[i-1]));a/=p;
+  for(let i=p+1;i<n;i++){const tr=Math.max(s.h[i]-s.l[i],Math.abs(s.h[i]-s.c[i-1]),Math.abs(s.l[i]-s.c[i-1]));a=(a*(p-1)+tr)/p;}return a;}
+function emaLast(c,p){let e=c[0];const k=2/(p+1);for(let i=1;i<c.length;i++)e=c[i]*k+e*(1-k);return e;}
+const HZ={
+  st:{label:"Short term",sub:"2 to 6 weeks, daily chart",tf:"D",L:60,trend:50,trendName:"50-day average",min:60},
+  mt:{label:"Medium term",sub:"3 to 6 months, weekly chart",tf:"W",L:26,trend:20,trendName:"20-week average",min:30,emaSup:20},
+  lt:{label:"Long term",sub:"1 year or more, weekly chart",tf:"W",L:104,trend:40,trendName:"40-week (200-day) average",min:45,emaSup:40}};
+function horizonPlan(daily,key,prof,isIndex){
+  const cfg=HZ[key],s=cfg.tf==="D"?daily:resample(daily,"W"),n=s.t.length;if(n<cfg.min)return null;
+  const a=APPETITE[prof.appetite],c=s.c[n-1],atr=atrLast(s,14);if(!atr)return null;
+  const from=Math.max(3,n-cfg.L),to=n-4,lows=[],highs=[];let mn=Infinity,mx=-Infinity;
+  for(let j=from;j<n;j++){if(s.l[j]<mn)mn=s.l[j];if(s.h[j]>mx)mx=s.h[j];}
+  for(let j=from;j<=to;j++){
+    if(s.l[j]<=s.l[j-1]&&s.l[j]<=s.l[j-2]&&s.l[j]<=s.l[j-3]&&s.l[j]<=s.l[j+1]&&s.l[j]<=s.l[j+2]&&s.l[j]<=s.l[j+3])lows.push(s.l[j]);
+    if(s.h[j]>=s.h[j-1]&&s.h[j]>=s.h[j-2]&&s.h[j]>=s.h[j-3]&&s.h[j]>=s.h[j+1]&&s.h[j]>=s.h[j+2]&&s.h[j]>=s.h[j+3])highs.push(s.h[j]);}
+  const cands=lows.concat([mn]);let supNote="swing low";
+  if(cfg.emaSup){const e=emaLast(s.c,cfg.emaSup);cands.push(e);}
+  const below=cands.filter(x=>x<c*0.995);let sup=below.length?Math.max(...below):null;
+  if(cfg.emaSup&&sup!=null&&Math.abs(sup-emaLast(s.c,cfg.emaSup))<1e-9)supNote=cfg.emaSup+"-week average";
+  if(sup==null){sup=c-2*atr;supNote="2 ATR below price (no support below)";}
+  const above=highs.concat([mx]).filter(x=>x>c*1.005);const res=above.length?Math.min(...above):null;
+  const buyLow=sup,buyHigh=Math.max(Math.min(c,sup+atr),sup+0.25*atr);
+  const entry=Math.min(c,(buyLow+buyHigh)/2);
+  const stop=sup-a.stopAtr*atr,risk=entry-stop;
+  let t1,t2;
+  if(key==="lt"){t1=entry*(1+prof.exp/100);t2=entry*Math.pow(1+prof.exp/100,2);}
+  else{t1=entry+a.rr[0]*risk;t2=entry+a.rr[1]*risk;}
+  const trendUp=c>emaLast(s.c,cfg.trend);
+  let qty=null;if(!isIndex&&prof.cap>0&&risk>0){qty=Math.floor(prof.cap*prof.risk/100/risk);qty=Math.max(0,Math.min(qty,Math.floor(prof.cap*0.25/entry)));}
+  return {key,cfg,c,atr,sup,supNote,res,buyLow,buyHigh,entry,stop,risk,t1,t2,trendUp,qty,rr1:(t1-entry)/risk,rr2:(t2-entry)/risk,
+    above:c>buyHigh?(c/buyHigh-1)*100:0};
+}
+function tradePlans(sym,market){const d=state.data[market];const daily=d&&d.series[sym];if(!daily)return null;
+  const prof=profile(),isIndex=KIND[sym]==="index";const out={};for(const k of ["st","mt","lt"])out[k]=horizonPlan(daily,k,prof,isIndex);return {prof,isIndex,plans:out};}
+function renderPlan(sym,market){
+  const box=$("#plan");box.replaceChildren();const tp=tradePlans(sym,market);if(!tp)return;
+  const {prof,isIndex,plans}=tp,a=APPETITE[prof.appetite];
+  const head=el("div","plan-head");const sp=el("span",null,`For ${prof.appetite==="aggressive"?"an":"a"} ${a.label.toLowerCase()} investor expecting ${prof.exp}% a year. `);
+  const ch=el("button","linkbtn","Change");ch.type="button";ch.style.color="var(--accent)";ch.addEventListener("click",openProfile);sp.append(ch);
+  head.append(el("h3",null,"Trade plan"),sp);box.append(head);
+  if(!prof.set){const ask=el("div","plan-ask");ask.append(el("span",null,"Tell the radar your risk appetite and expected return so stop losses, targets and position sizes fit you."));
+    const b=el("button","btn primary","Set my profile");b.type="button";b.addEventListener("click",openProfile);ask.append(b);box.append(ask);}
+  const grid=el("div","plan-grid");
+  for(const k of ["st","mt","lt"]){const p=plans[k];const card=el("div","pcard"+(prof.hz===k?" pref":""));
+    const h=el("h4",null,HZ[k].label);if(p)h.append(el("span","pill "+(p.trendUp?"ok":"wait"),p.trendUp?"Trend up":"Trend down"));
+    card.append(h,el("div","sub",HZ[k].sub+(prof.hz===k?". Your usual horizon":"")));
+    if(!p){card.append(el("div","pnote","Not enough price history for this horizon yet."));grid.append(card);continue;}
+    const row=(label,val,small)=>{const r=el("div","prow");const b=el("b",null,val);if(small)b.append(el("small",null,small));r.append(el("span",null,label),b);card.append(r);};
+    row("Buy range",`${fmtP(p.buyLow)} – ${fmtP(p.buyHigh)}`,p.above>0.3?`price is ${p.above.toFixed(1)}% above: wait for a dip`:"price is in the range");
+    row("Stop loss",fmtP(p.stop),`${fmtPct((p.stop/p.entry-1)*100)} from entry ${fmtP(p.entry)}`);
+    row("Sell range",`${fmtP(p.t1)} – ${fmtP(p.t2)}`,`${fmtPct((p.t1/p.entry-1)*100,true)} to ${fmtPct((p.t2/p.entry-1)*100,true)}${k==="lt"?", 1 and 2 years":""}`);
+    row("Risk : reward",`1 : ${p.rr1.toFixed(1)} / 1 : ${p.rr2.toFixed(1)}`);
+    if(p.res)row("Resistance ahead",fmtP(p.res),`${fmtPct((p.res/p.c-1)*100,true)} from now`);
+    if(isIndex)row("Position","Index: levels only");
+    else if(p.qty!=null)row("Position size",p.qty?`${p.qty.toLocaleString("en-IN")} shares`:"0 shares",p.qty?`${inr(p.qty*p.entry)}, risking ${inr(p.qty*p.risk)}`:"stop is too far for your risk limit");
+    else row("Position size","Add capital","in your profile to size it");
+    const notes=[];
+    if(!p.trendUp)notes.push(`Price is below its ${HZ[k].trendName}. Wait for the trend to turn up or keep the position small.`);
+    if(p.res&&p.res<p.t1)notes.push(`Resistance at ${fmtP(p.res)} comes before Target 1, so the price may stall there.`);
+    if(k!=="lt"&&(p.t2/p.entry-1)*100<prof.exp*(k==="st"?0.1:0.4))notes.push("Targets are small next to your expected return. This horizon may not suit your goal.");
+    notes.push(`Support: ${fmtP(p.sup)} (${p.supNote}).`);
+    for(const t of notes)card.append(el("div","pnote",t));
+    grid.append(card);}
+  box.append(grid);
+  box.append(el("p","pnote","Buy range starts at the nearest support. Stop loss sits below support by a multiple of ATR that depends on your risk appetite. Targets use risk to reward for ST and MT, and your expected yearly return for LT. See the Guide tab for details. Not financial advice."));
+}
+function openProfile(){
+  const p=profile();lastFocusProf=document.activeElement;
+  document.querySelectorAll('input[name="appetite"]').forEach(r=>r.checked=r.value===p.appetite);
+  $("#profExp").value=p.exp;$("#profCap").value=p.cap||"";$("#profRisk").value=p.risk;$("#profHz").value=p.hz;updateProfNote();
+  $("#scrim").hidden=false;$("#profileDlg").hidden=false;$("#profileDlg").style.zIndex=30;$("#scrim").style.zIndex=25;
+  setTimeout(()=>{const c=document.querySelector('input[name="appetite"]:checked');(c||$("#profExp")).focus();},30);
+}
+let lastFocusProf=null;
+function closeProfile(){$("#profileDlg").hidden=true;$("#scrim").style.zIndex="";if($("#sheet").hidden)$("#scrim").hidden=true;if(lastFocusProf)lastFocusProf.focus();}
+function updateProfNote(){const ap=(document.querySelector('input[name="appetite"]:checked')||{}).value||"moderate";const a=APPETITE[ap];
+  $("#profNote").textContent=`${a.label}: stop loss ${a.stopAtr} ATR below support, targets at 1 : ${a.rr[0]} and 1 : ${a.rr[1]} risk to reward, risking ${a.risk}% of capital per trade by default.`;}
+function saveProfile(){
+  const ap=(document.querySelector('input[name="appetite"]:checked')||{}).value||"moderate";
+  const exp=Math.min(100,Math.max(1,toNum($("#profExp").value)||15));const cap=toNum($("#profCap").value);const risk=Math.min(10,Math.max(0.1,toNum($("#profRisk").value)||APPETITE[ap].risk));
+  prefs.profile={appetite:ap,exp,cap:cap>0?cap:null,risk,hz:$("#profHz").value,set:true};savePrefs();closeProfile();
+  if(!$("#sheet").hidden&&currentRow)renderPlan(currentRow.sym,sheetMarket);
 }
 
 /* ---------- portfolio ---------- */
@@ -1177,6 +1404,9 @@ $("#pfForm").addEventListener("submit",e=>{e.preventDefault();const sym=resolveS
 $("#pfClear").addEventListener("click",()=>{if(confirm("Remove all holdings from this device?")){PF=[];savePF();pfMsg("");render();}});
 document.querySelectorAll("#pfFilter [data-f]").forEach(b=>b.addEventListener("click",()=>{pfState.filter=b.dataset.f;render();}));
 $("#pfSort").addEventListener("change",e=>{pfState.sort=e.target.value;render();});
+$("#profileBtn").addEventListener("click",openProfile);
+$("#profClose").addEventListener("click",closeProfile);$("#profSave").addEventListener("click",saveProfile);
+document.querySelectorAll('input[name="appetite"]').forEach(r=>r.addEventListener("change",()=>{$("#profRisk").value=APPETITE[r.value].risk;updateProfNote();}));
 $("#themeBtn").addEventListener("click",()=>{const order=["auto","light","dark"];prefs.theme=order[(order.indexOf(prefs.theme||"auto")+1)%3];savePrefs();applyTheme();
   if(!$("#sheet").hidden&&!$("#tvPane").hidden)showTv();else if(!$("#sheet").hidden&&currentRow)drawChart(currentRow);});
 $("#indexSel").addEventListener("change",e=>{prefs.index=e.target.value;savePrefs();render();});
@@ -1184,8 +1414,8 @@ $("#sortSel").addEventListener("change",e=>{prefs.sort=e.target.value;savePrefs(
 $("#exportBtn").addEventListener("click",exportCSV);
 if(navigator.share){$("#shareBtn").hidden=false;$("#shareBtn").addEventListener("click",shareList);}
 $("#tabTv").addEventListener("click",()=>setTab("tv"));$("#tabPat").addEventListener("click",()=>setTab("pat"));
-$("#closeSheet").addEventListener("click",closeSheet);$("#scrim").addEventListener("click",closeSheet);
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#sheet").hidden)closeSheet();});
+$("#closeSheet").addEventListener("click",closeSheet);$("#scrim").addEventListener("click",()=>{if(!$("#profileDlg").hidden)closeProfile();else closeSheet();});
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(!$("#profileDlg").hidden)closeProfile();else if(!$("#sheet").hidden)closeSheet();});
 
 /* ---------- live mode: data/ folder published next to this page (GitHub Pages) ---------- */
 const POLL_MS=3*60*1000;let liveMeta=null,liveTimer=null;
