@@ -1,3 +1,15 @@
 # Extra NSE stocks to fetch (for portfolio stocks outside the Nifty 500).
-# One NSE symbol per line, e.g.
-# IRCTC
+# One NSE symbol per line.
+ASIANENE
+BHARATWIRE
+BORORENEW
+CSBBANK
+JITFINFRA
+NELCO
+RENUKA
+SAIPARENT
+SGBFEB32IV-GB
+SUDARSCHEM
+TEXRAIL
+UJJIVANSFB
+WORTHPERI
