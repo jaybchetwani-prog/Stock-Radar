@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Stock radar</title>
+<script>
+/* ===== ACCOUNTS SETUP: paste your Supabase details here (Supabase → Project Settings → API) =====
+   Leave them empty to run the site without accounts. The anon key is meant to be public;
+   your data is protected by the database rules in supabase_setup.sql. */
+window.RADAR_CONFIG = {
+  supabaseUrl: "",       // e.g. "https://abcdefghijkl.supabase.co"
+  supabaseAnonKey: ""    // the long "anon public" key
+};
+</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%20role%3D%22img%22%20aria-label%3D%22Stock%20Radar%20logo%22%3E%20%20%3Cdefs%3E%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%231b2a4a%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230d1526%22/%3E%3C/linearGradient%3E%20%20%20%20%3ClinearGradient%20id%3D%22sw%22%20x1%3D%220%22%20y1%3D%221%22%20x2%3D%221%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2322c58b%22%20stop-opacity%3D%220%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2322c58b%22%20stop-opacity%3D%22.55%22/%3E%3C/linearGradient%3E%20%20%3C/defs%3E%20%20%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2215%22%20fill%3D%22url%28%23bg%29%22/%3E%20%20%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2222%22%20fill%3D%22none%22%20stroke%3D%22%235b86ff%22%20stroke-opacity%3D%22.35%22%20stroke-width%3D%222%22/%3E%20%20%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2213.5%22%20fill%3D%22none%22%20stroke%3D%22%235b86ff%22%20stroke-opacity%3D%22.5%22%20stroke-width%3D%222%22/%3E%20%20%3Cpath%20d%3D%22M32%2032%20L32%2010%20A22%2022%200%200%201%2051.05%2021%20Z%22%20fill%3D%22url%28%23sw%29%22/%3E%20%20%3Cpath%20d%3D%22M32%2032%20L51.05%2021%22%20stroke%3D%22%233ee0a1%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22/%3E%20%20%3Cline%20x1%3D%2226%22%20y1%3D%2227%22%20x2%3D%2226%22%20y2%3D%2245%22%20stroke%3D%22%23ff6b5b%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22/%3E%20%20%3Crect%20x%3D%2223%22%20y%3D%2230%22%20width%3D%226%22%20height%3D%2210%22%20rx%3D%221.2%22%20fill%3D%22%23ff6b5b%22/%3E%20%20%3Cline%20x1%3D%2237%22%20y1%3D%2222%22%20x2%3D%2237%22%20y2%3D%2243%22%20stroke%3D%22%233ee0a1%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22/%3E%20%20%3Crect%20x%3D%2234%22%20y%3D%2225%22%20width%3D%226%22%20height%3D%2214%22%20rx%3D%221.2%22%20fill%3D%22%233ee0a1%22/%3E%20%20%3Ccircle%20cx%3D%2245.5%22%20cy%3D%2217%22%20r%3D%222.6%22%20fill%3D%22%23ffffff%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -192,7 +201,7 @@ a.btn{text-decoration:none;color:var(--ink);display:inline-flex;align-items:cent
 .pf-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:12px}
 .pf-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
 .pf-card dt{font-size:12.5px;color:var(--muted)} .pf-card dd{margin:2px 0 0;font-size:21px;font-weight:700;font-variant-numeric:tabular-nums}
-.pf-card dd span{white-space:nowrap}.pf-card dd small{display:inline-block;margin-left:0!important;margin-right:6px}
+.pf-card dd span{white-space:nowrap}.pf-card dd small{margin-left:6px}.pf-card dd small{display:inline-block;margin-left:0!important;margin-right:6px}
 .pf-card dd span+small{margin-left:6px!important}
 .pf-card dd small{font-size:13px;font-weight:600;margin-left:6px}
 .gauge{display:flex;align-items:center;gap:10px}
@@ -390,7 +399,7 @@ h1,h2,h3,.hero h2,.g-h,.pf-card dd,.chip .count{font-family:"Bricolage Grotesque
 .bottom-nav{display:none}
 @media (max-width:760px){
   .views{display:none}
-  .bottom-nav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:12;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
+  .bottom-nav{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;position:fixed;left:0;right:0;bottom:0;z-index:12;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
   .bottom-nav button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:600;color:var(--muted);padding:4px 0;cursor:pointer}
   .bottom-nav svg{width:22px;height:22px}
   .bottom-nav button[aria-selected="true"]{color:var(--accent)}
@@ -444,6 +453,42 @@ h1,h2,h3,.hero h2,.g-h,.pf-card dd,.chip .count{font-family:"Bricolage Grotesque
 .ranges{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
 .ranges .rbar{font-size:12.5px}.ranges .rbar b{color:var(--ink);font-size:13px}
 .ranges .trk{height:6px}
+/* ---- accounts & admin ---- */
+.acct-wrap{position:relative}
+.acct-btn.in{background:linear-gradient(135deg,#2350c8,#16614f);color:#fff;border-color:transparent;font-weight:800;font-size:14px;font-family:"Bricolage Grotesque",sans-serif}
+.acct-menu{position:absolute;right:0;top:calc(100% + 8px);width:270px;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 40px -12px rgba(10,20,40,.35);padding:8px;z-index:16}
+.acct-menu .am-head{padding:8px 10px 10px;border-bottom:1px solid var(--line);margin-bottom:6px}
+.acct-menu .am-head b{display:block}.acct-menu .am-head span{font-size:12.5px;color:var(--muted);word-break:break-all}
+.acct-menu button{display:flex;align-items:center;gap:8px;width:100%;border:0;background:none;padding:9px 10px;border-radius:9px;cursor:pointer;color:var(--ink);font-weight:600;text-align:left}
+.acct-menu button:hover{background:var(--surface-2)}.acct-menu button.danger{color:var(--bear)}
+.acct-menu .sync{font-size:12px;color:var(--muted);padding:2px 10px 8px}
+.auth-inner{max-width:460px}
+.auth-brand{display:flex;gap:12px;align-items:center}.auth-brand svg{width:44px;height:44px;flex:none}
+.auth-tabs{margin:14px 0 10px;width:100%;display:grid;grid-template-columns:1fr 1fr}
+.auth-form{display:grid;gap:10px}
+.auth-form label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)}
+.auth-form input:not([type=checkbox]){padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);font-size:15px}
+.auth-form input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
+.auth-form .check{flex-direction:row;align-items:flex-start;gap:8px;font-size:12.5px;line-height:1.45}
+.auth-form .check input{margin-top:3px;flex:none}
+.auth-submit{padding:11px;font-size:15px}
+.auth-link{color:var(--accent)!important;justify-self:center;font-size:13.5px}
+.auth-msg{padding:9px 12px;border-radius:10px;font-size:13.5px;background:color-mix(in srgb,var(--bear) 12%,var(--surface));color:var(--bear)}
+.auth-msg.ok{background:color-mix(in srgb,var(--bull) 12%,var(--surface));color:var(--bull)}
+.ad-table{display:flex;flex-direction:column;gap:6px}
+.ad-row{display:grid;grid-template-columns:minmax(200px,1.6fr) minmax(110px,.8fr) minmax(110px,.8fr) minmax(150px,1fr) auto;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+.ad-row .who{display:flex;gap:10px;align-items:center;min-width:0}.ad-row .who div{min-width:0}
+.ad-row b{display:block}.ad-row span{display:block;font-size:12.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ad-row .who .avatar{display:grid;color:#fff;font-size:12.5px}
+.ad-row .tagline{display:inline-block;font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;margin-left:6px;vertical-align:1px}
+.tagline.admin{background:color-mix(in srgb,var(--accent) 15%,transparent);color:var(--accent)}
+.tagline.has{background:color-mix(in srgb,var(--bull) 14%,transparent);color:var(--bull)}
+.tagline.none{background:var(--surface-2);color:var(--muted)}
+@media (max-width:760px){.ad-row{grid-template-columns:1fr auto;grid-template-areas:"who act" "c1 c2" "c3 c3"}.ad-row .who{grid-area:who}.ad-row .c1{grid-area:c1}.ad-row .c2{grid-area:c2}.ad-row .c3{grid-area:c3}.ad-row .ad-act{grid-area:act}}
+.ad-bars svg{width:100%;height:auto;display:block}
+.hold-tbl{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:14px}
+.hold-tbl th,.hold-tbl td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:right}.hold-tbl th:first-child,.hold-tbl td:first-child{text-align:left}
+.hold-tbl th{font-size:12px;color:var(--muted);font-weight:600}
 [hidden]{display:none !important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
@@ -485,7 +530,11 @@ h1,h2,h3,.hero h2,.g-h,.pf-card dd,.chip .count{font-family:"Bricolage Grotesque
         <button type="button" data-market="US">US</button>
       </div>
       <button type="button" class="icon-btn" id="alertsBtn" title="Price alerts" aria-label="Price alerts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg><span class="bell-dot" id="bellDot" hidden></span></button>
-      <button type="button" class="icon-btn" id="profileBtn" title="Your investing profile" aria-label="Your investing profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></button>
+      <button type="button" class="icon-btn" id="profileBtn" title="Your investing profile" aria-label="Your investing profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button>
+      <div class="acct-wrap">
+        <button type="button" class="icon-btn acct-btn" id="acctBtn" hidden aria-haspopup="true" aria-expanded="false" title="Log in or sign up" aria-label="Log in or sign up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></button>
+        <div class="acct-menu" id="acctMenu" hidden></div>
+      </div>
       <button type="button" class="icon-btn" id="themeBtn"></button>
     </div>
   </header>
@@ -495,6 +544,7 @@ h1,h2,h3,.hero h2,.g-h,.pf-card dd,.chip .count{font-family:"Bricolage Grotesque
     <button type="button" role="tab" data-view="portfolio">My portfolio</button>
     <button type="button" role="tab" data-view="sectors">Sectors</button>
     <button type="button" role="tab" data-view="guide">Guide</button>
+    <button type="button" role="tab" data-view="admin" class="admin-only" hidden>Admin</button>
   </nav>
   <div id="radarView">
 
@@ -604,6 +654,21 @@ h1,h2,h3,.hero h2,.g-h,.pf-card dd,.chip .count{font-family:"Bricolage Grotesque
     </div>
     <div class="list" id="secList"></div>
   </section>
+  <section id="adminView" hidden aria-labelledby="adTitle">
+    <div class="hero"><div class="hero-main"><h2 id="adTitle">Admin dashboard</h2><p id="adSub">Accounts and uploaded holdings. Only admins can see this page.</p></div>
+      <div class="pf-actions"><button type="button" class="btn" id="adRefresh">Refresh</button><button type="button" class="btn" id="adExport">Export users CSV</button></div></div>
+    <div class="pf-cards" id="adCards"></div>
+    <div class="sec-grid">
+      <section class="panel"><h3>Sign-ups, last 30 days</h3><div id="adChart"></div></section>
+      <section class="panel"><h3>Most held stocks</h3><div id="adTop"></div></section>
+    </div>
+    <div class="panel wl-bar">
+      <div class="wl-add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="adQ" type="search" placeholder="Search by name or email" aria-label="Search users"></div>
+      <div class="small-seg" id="adFilter" role="group" aria-label="Filter users"><button type="button" data-af="all">All</button><button type="button" data-af="with">With holdings</button><button type="button" data-af="without">No holdings</button></div>
+      <select id="adSort" class="btn" aria-label="Sort users"><option value="new">Newest first</option><option value="active">Recently active</option><option value="holdings">Most holdings</option><option value="name">Name A to Z</option></select>
+    </div>
+    <div class="ad-table" id="adList"></div>
+  </section>
   <section id="guideView" hidden aria-labelledby="gTitle">
     <div class="hero"><div><h2 id="gTitle">Guide</h2><p>What every signal, level and word on this radar means.</p></div></div>
     <h3 class="g-h">Candlestick patterns</h3>
@@ -708,7 +773,7 @@ h1,h2,h3,.hero h2,.g-h,.pf-card dd,.chip .count{font-family:"Bricolage Grotesque
   </section>
 </div>
 
-<nav class="bottom-nav" aria-label="Sections"><button type="button" data-view="radar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6-4.5"/></svg><span>Radar</span></button><button type="button" data-view="watch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8 6.8 19.5l1-5.8-4.2-4.1 5.8-.8z"/></svg><span>Watchlist</span></button><button type="button" data-view="portfolio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7"/></svg><span>Portfolio</span></button><button type="button" data-view="sectors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v9h9A9 9 0 1 1 12 3z"/><path d="M15 3.5A9 9 0 0 1 20.5 9H15z"/></svg><span>Sectors</span></button><button type="button" data-view="guide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg><span>Guide</span></button></nav>
+<nav class="bottom-nav" aria-label="Sections"><button type="button" data-view="radar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6-4.5"/></svg><span>Radar</span></button><button type="button" data-view="watch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8 6.8 19.5l1-5.8-4.2-4.1 5.8-.8z"/></svg><span>Watchlist</span></button><button type="button" data-view="portfolio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7"/></svg><span>Portfolio</span></button><button type="button" data-view="sectors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v9h9A9 9 0 1 1 12 3z"/><path d="M15 3.5A9 9 0 0 1 20.5 9H15z"/></svg><span>Sectors</span></button><button type="button" data-view="admin" class="admin-only" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/></svg><span>Admin</span></button><button type="button" data-view="guide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg><span>Guide</span></button></nav>
 <footer class="site-foot">
   <div class="foot-inner">
     <div class="foot-brand"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#logoSym"/></svg><b>Stock radar</b></div>
@@ -739,6 +804,24 @@ h1,h2,h3,.hero h2,.g-h,.pf-card dd,.chip .count{font-family:"Bricolage Grotesque
     </div>
     <p class="pnote">Browser alerts work while this website is open. For alerts on your phone even when it’s closed, download alerts.csv, upload it to your GitHub repo and connect Telegram. The steps are in the Guide tab.</p>
   </div>
+</div>
+<div class="sheet modal" id="authDlg" role="dialog" aria-modal="true" aria-labelledby="authTitle" hidden>
+  <div class="sheet-inner auth-inner">
+    <div class="sheet-head"><div class="auth-brand"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#logoSym"/></svg><div><h2 id="authTitle">Welcome back</h2><p id="authSubt">Log in to sync your portfolio, watchlists and alerts.</p></div></div><button type="button" class="btn" id="authClose">Close</button></div>
+    <div class="small-seg auth-tabs" id="authTabs" role="group"><button type="button" data-am="login">Log in</button><button type="button" data-am="signup">Create account</button></div>
+    <form id="authForm" class="auth-form" novalidate>
+      <label id="fName">Full name<input id="aName" autocomplete="name" maxlength="80"></label>
+      <label id="fEmail">Email<input id="aEmail" type="email" autocomplete="email" required></label>
+      <label id="fPass">Password<input id="aPass" type="password" autocomplete="current-password" minlength="8"></label>
+      <label class="check" id="fConsent"><input type="checkbox" id="aConsent"> <span>I agree that my email, name, holdings, watchlists and alerts are stored in my account to run this website, and that the site administrator can see who has an account and the holdings I upload. I can delete my account and data at any time. I understand this site is based purely on technical analysis and is not investment advice.</span></label>
+      <div class="auth-msg" id="authMsg" role="alert" hidden></div>
+      <button type="submit" class="btn primary auth-submit" id="authSubmit">Log in</button>
+      <button type="button" class="linkbtn auth-link" id="authForgot">Forgot password?</button>
+    </form>
+  </div>
+</div>
+<div class="sheet modal" id="adHoldDlg" role="dialog" aria-modal="true" aria-labelledby="adHoldTitle" hidden>
+  <div class="sheet-inner"><div class="sheet-head"><div><h2 id="adHoldTitle">Holdings</h2><p id="adHoldSub"></p></div><button type="button" class="btn" id="adHoldClose">Close</button></div><div id="adHoldList"></div></div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <div class="sheet modal" id="profileDlg" role="dialog" aria-modal="true" aria-labelledby="profTitle" hidden>
@@ -1063,9 +1146,10 @@ function renderControls(){
 }
 
 function showView(){
-  const v=["portfolio","guide","sectors","watch"].includes(prefs.view)?prefs.view:"radar";
+  const v=["portfolio","guide","sectors","watch"].includes(prefs.view)||(prefs.view==="admin"&&IS_ADMIN)?prefs.view:"radar";
   document.querySelectorAll("[data-view]").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.view===v)));
-  $("#radarView").hidden=v!=="radar";$("#portfolioView").hidden=v!=="portfolio";$("#guideView").hidden=v!=="guide";$("#sectorsView").hidden=v!=="sectors";$("#watchView").hidden=v!=="watch";
+  $("#radarView").hidden=v!=="radar";$("#portfolioView").hidden=v!=="portfolio";$("#guideView").hidden=v!=="guide";$("#sectorsView").hidden=v!=="sectors";$("#watchView").hidden=v!=="watch";$("#adminView").hidden=v!=="admin";
+  document.querySelectorAll(".admin-only").forEach(b=>b.hidden=!IS_ADMIN);
   document.querySelector(".top .seg").style.visibility=v==="radar"?"":"hidden";
 }
 function render(){
@@ -1074,6 +1158,7 @@ function render(){
   if(prefs.view==="guide")return;
   if(prefs.view==="sectors"){renderSectors();return;}
   if(prefs.view==="watch"){renderWatch();state.flash=false;return;}
+  if(prefs.view==="admin"&&IS_ADMIN){renderAdmin();return;}
   renderRadar();
 }
 function renderRadar(){
@@ -1227,7 +1312,7 @@ function sparkline(s){
 let WL=null;try{WL=JSON.parse(localStorage.getItem("radar.watchlists")||"null");}catch(e){WL=null;}
 if(!WL||!Array.isArray(WL.lists)||!WL.lists.length){WL={lists:[{id:"w1",name:"Watchlist 1",items:[]}],active:"w1",sort:"order"};
   for(const m of ["NSE","US"])for(const sy of ((prefs.stars||{})[m]||[]))WL.lists[0].items.push({sym:sy,market:m});}
-function saveWL(){try{localStorage.setItem("radar.watchlists",JSON.stringify(WL));}catch(e){}}
+function saveWL(){try{localStorage.setItem("radar.watchlists",JSON.stringify(WL));}catch(e){}cloudQueue("data");}
 function activeWL(){return WL.lists.find(l=>l.id===WL.active)||WL.lists[0];}
 function inWL(sym,market){return activeWL().items.some(i=>i.sym===sym&&i.market===market);}
 function toggleWL(sym,market,silent){const l=activeWL();const i=l.items.findIndex(x=>x.sym===sym&&x.market===market);
@@ -1561,7 +1646,7 @@ function openSector(x){
 
 /* ---------- alerts ---------- */
 let ALERTS=[];try{ALERTS=JSON.parse(localStorage.getItem("radar.alerts")||"[]")||[];}catch(e){ALERTS=[];}
-function saveAlerts(){try{localStorage.setItem("radar.alerts",JSON.stringify(ALERTS));}catch(e){}updateBell();}
+function saveAlerts(){try{localStorage.setItem("radar.alerts",JSON.stringify(ALERTS));}catch(e){}updateBell();cloudQueue("data");}
 function updateBell(){$("#bellDot").hidden=!ALERTS.some(a=>a.firedAt&&!a.seen);}
 let toastT;function toast(t){const e=$("#toast");e.textContent=t;e.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>e.hidden=true,4200);}
 function addAlert(sym,market,cond,price,note){
@@ -1702,14 +1787,14 @@ function updateProfNote(){const ap=(document.querySelector('input[name="appetite
 function saveProfile(){
   const ap=(document.querySelector('input[name="appetite"]:checked')||{}).value||"moderate";
   const exp=Math.min(100,Math.max(1,toNum($("#profExp").value)||15));const cap=toNum($("#profCap").value);const risk=Math.min(10,Math.max(0.1,toNum($("#profRisk").value)||APPETITE[ap].risk));
-  prefs.profile={appetite:ap,exp,cap:cap>0?cap:null,risk,hz:$("#profHz").value,set:true};savePrefs();closeProfile();
+  prefs.profile={appetite:ap,exp,cap:cap>0?cap:null,risk,hz:$("#profHz").value,set:true};savePrefs();cloudQueue("data");closeProfile();
   if(!$("#sheet").hidden&&currentRow)renderPlan(currentRow.sym,sheetMarket);
 }
 
 /* ---------- portfolio ---------- */
 let PF=[];try{PF=JSON.parse(localStorage.getItem("radar.portfolio")||"[]")||[];}catch(e){PF=[];}
 const pfState={filter:"all",sort:"value",rows:[]};
-function savePF(){try{localStorage.setItem("radar.portfolio",JSON.stringify(PF));}catch(e){}}
+function savePF(){try{localStorage.setItem("radar.portfolio",JSON.stringify(PF));}catch(e){}cloudQueue("holdings");}
 function pfMsg(t,kind){const m=$("#pfMsg");if(!t){m.hidden=true;return;}m.hidden=false;m.className="note"+(kind==="warn"?" demo":"");m.textContent=t;}
 const normName=x=>String(x||"").toLowerCase().replace(/&/g,"and").replace(/\b(limited|ltd|the|india|co|company|corporation|corp|inc)\b/g,"").replace(/[^a-z0-9]/g,"");
 function resolveSym(raw,isin){
@@ -2034,6 +2119,15 @@ $("#wlSort").addEventListener("change",e=>{WL.sort=e.target.value;saveWL();rende
 $("#wlRename").addEventListener("click",()=>{const l=activeWL();const n=prompt("Rename watchlist:",l.name);if(n){l.name=n.slice(0,30);saveWL();render();}});
 $("#wlDelete").addEventListener("click",()=>{if(WL.lists.length<2)return;const l=activeWL();if(!confirm(`Delete “${l.name}” and its ${l.items.length} items?`))return;WL.lists=WL.lists.filter(x=>x!==l);WL.active=WL.lists[0].id;saveWL();render();});
 $("#profileBtn").addEventListener("click",openProfile);
+$("#acctBtn").addEventListener("click",e=>{e.stopPropagation();if(!$("#acctMenu").hidden)closeAcctMenu();else openAcctMenu();});
+document.addEventListener("click",e=>{if(!$("#acctMenu").hidden&&!e.target.closest(".acct-wrap"))closeAcctMenu();});
+document.querySelectorAll("[data-am]").forEach(b=>b.addEventListener("click",()=>{authMode=b.dataset.am;paintAuth();}));
+$("#authForm").addEventListener("submit",submitAuth);$("#authClose").addEventListener("click",closeAuth);
+$("#authForgot").addEventListener("click",()=>{authMode="forgot";paintAuth();});
+$("#adRefresh").addEventListener("click",()=>{adState.users=null;adState.top=null;renderAdmin();});$("#adExport").addEventListener("click",exportUsers);
+$("#adQ").addEventListener("input",e=>{adState.q=e.target.value;renderAdmin();});$("#adSort").addEventListener("change",e=>{adState.sort=e.target.value;renderAdmin();});
+document.querySelectorAll("[data-af]").forEach(b=>b.addEventListener("click",()=>{adState.filter=b.dataset.af;renderAdmin();}));
+$("#adHoldClose").addEventListener("click",()=>{$("#adHoldDlg").hidden=true;$("#scrim").hidden=true;$("#scrim").style.zIndex="";});
 $("#alertsBtn").addEventListener("click",openAlerts);$("#alClose").addEventListener("click",closeAlerts);$("#alExport").addEventListener("click",exportAlerts);
 $("#alNotify").addEventListener("click",async()=>{try{const r=await Notification.requestPermission();toast(r==="granted"?"Browser notifications are on.":"Notifications were not allowed. You can change this in your browser settings.");$("#alNotify").hidden=r==="granted";}catch(e){}});
 $("#discOk").addEventListener("click",()=>{prefs.discAck=true;savePrefs();$("#discDlg").hidden=true;$("#scrim").hidden=true;$("#scrim").style.zIndex="";});
@@ -2045,8 +2139,8 @@ $("#indexSel").addEventListener("change",e=>{prefs.index=e.target.value;savePref
 $("#sortSel").addEventListener("change",e=>{prefs.sort=e.target.value;savePrefs();render();});
 $("#exportBtn").addEventListener("click",exportCSV);
 if(navigator.share){$("#shareBtn").hidden=false;$("#shareBtn").addEventListener("click",shareList);}
-$("#closeSheet").addEventListener("click",closeSheet);$("#scrim").addEventListener("click",()=>{if(!$("#discDlg").hidden)return;if(!$("#alertsDlg").hidden)closeAlerts();else if(!$("#profileDlg").hidden)closeProfile();else closeSheet();});
-document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(!$("#discDlg").hidden)return;if(!$("#alertsDlg").hidden)closeAlerts();else if(!$("#profileDlg").hidden)closeProfile();else if(!$("#sheet").hidden)closeSheet();});
+$("#closeSheet").addEventListener("click",closeSheet);$("#scrim").addEventListener("click",()=>{if(!$("#discDlg").hidden)return;if(!$("#authDlg").hidden){closeAuth();return;}if(!$("#adHoldDlg").hidden){$("#adHoldDlg").hidden=true;$("#scrim").hidden=true;$("#scrim").style.zIndex="";return;}if(!$("#alertsDlg").hidden)closeAlerts();else if(!$("#profileDlg").hidden)closeProfile();else closeSheet();});
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if(!$("#discDlg").hidden)return;if(!$("#authDlg").hidden){closeAuth();return;}if(!$("#acctMenu").hidden){closeAcctMenu();return;}if(!$("#adHoldDlg").hidden){$("#adHoldDlg").hidden=true;$("#scrim").hidden=true;$("#scrim").style.zIndex="";return;}if(!$("#alertsDlg").hidden)closeAlerts();else if(!$("#profileDlg").hidden)closeProfile();else if(!$("#sheet").hidden)closeSheet();});
 
 /* ---------- live mode: data/ folder published next to this page (GitHub Pages) ---------- */
 const POLL_MS=3*60*1000;let liveMeta=null,liveTimer=null;
@@ -2091,9 +2185,180 @@ function startLive(){
   setInterval(showLive,60000);
 }
 
+/* ---------- accounts (Supabase) ---------- */
+const CFG=window.RADAR_CONFIG||{};let SB=null,USER=null,IS_ADMIN=false,authMode="login",cloudTimer=null,cloudDirty=new Set(),cloudReady=false,lastSync=null;
+async function initAuth(){
+  if(!CFG.supabaseUrl||!CFG.supabaseAnonKey)return;
+  try{if(!window.supabase)await loadScript("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js");}catch(e){console.warn("Accounts library failed to load");return;}
+  SB=window.supabase.createClient(CFG.supabaseUrl,CFG.supabaseAnonKey);$("#acctBtn").hidden=false;
+  SB.auth.onAuthStateChange((ev,session)=>{if(ev==="PASSWORD_RECOVERY"){openAuth("reset");}setTimeout(()=>onSession(session),0);});
+  const {data}=await SB.auth.getSession();await onSession(data&&data.session);
+}
+async function onSession(session){
+  const u=session?session.user:null;if((u&&u.id)===(USER&&USER.id)&&cloudReady===!!u)return;
+  USER=u;IS_ADMIN=false;cloudReady=false;
+  if(USER){try{const {data:p}=await SB.from("profiles").select("is_admin,full_name").eq("id",USER.id).maybeSingle();IS_ADMIN=!!(p&&p.is_admin);
+      SB.from("profiles").update({last_seen:new Date().toISOString()}).eq("id",USER.id).then(()=>{});}catch(e){}
+    await pullCloud();cloudReady=true;}
+  renderAccount();render();
+}
+function displayName(){if(!USER)return "";return (USER.user_metadata&&USER.user_metadata.full_name)||USER.email.split("@")[0];}
+function renderAccount(){
+  const b=$("#acctBtn");if(!SB){b.hidden=true;return;}b.hidden=false;
+  if(USER){const n=displayName();b.classList.add("in");b.textContent=(n.match(/\b\w/g)||["U"]).slice(0,2).join("").toUpperCase();b.title=`${n} (account)`;b.setAttribute("aria-label",`Account menu for ${n}`);}
+  else{b.classList.remove("in");b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>';b.title="Log in or sign up";b.setAttribute("aria-label","Log in or sign up");}
+}
+function openAcctMenu(){
+  if(!USER){openAuth("login");return;}
+  const m=$("#acctMenu");m.replaceChildren();const h=el("div","am-head");h.append(el("b",null,displayName()),el("span",null,USER.email));m.append(h);
+  m.append(el("div","sync",lastSync?`Synced ${lastSync.toLocaleTimeString(undefined,{hour:"2-digit",minute:"2-digit"})}. Your portfolio, watchlists and alerts follow you to any device.`:"Syncing…"));
+  const item=(t,fn,cls)=>{const x=el("button",cls||null,t);x.type="button";x.addEventListener("click",()=>{closeAcctMenu();fn();});m.append(x);};
+  if(IS_ADMIN)item("🛡 Admin dashboard",()=>{prefs.view="admin";savePrefs();render();window.scrollTo(0,0);});
+  item("☁ Sync now",async()=>{cloudDirty.add("holdings");cloudDirty.add("data");await cloudFlush();toast("Synced.");});
+  item("↩ Log out",logout);
+  item("🗑 Delete my account and data",deleteAccount,"danger");
+  m.hidden=false;$("#acctBtn").setAttribute("aria-expanded","true");
+}
+function closeAcctMenu(){$("#acctMenu").hidden=true;$("#acctBtn").setAttribute("aria-expanded","false");}
+async function logout(){await cloudFlush();await SB.auth.signOut();
+  PF=[];WL={lists:[{id:"w1",name:"Watchlist 1",items:[]}],active:"w1",sort:"order"};ALERTS=[];
+  try{localStorage.removeItem("radar.portfolio");localStorage.removeItem("radar.watchlists");localStorage.removeItem("radar.alerts");}catch(e){}
+  if(prefs.view==="admin")prefs.view="radar";savePrefs();toast("Logged out. Your data stays safe in your account.");render();updateBell();}
+async function deleteAccount(){
+  if(!confirm("Delete your account, holdings, watchlists and alerts permanently? This can’t be undone."))return;
+  const {error}=await SB.rpc("delete_my_account");if(error){toast("Couldn’t delete the account: "+error.message);return;}
+  await SB.auth.signOut();PF=[];ALERTS=[];WL={lists:[{id:"w1",name:"Watchlist 1",items:[]}],active:"w1",sort:"order"};
+  try{localStorage.removeItem("radar.portfolio");localStorage.removeItem("radar.watchlists");localStorage.removeItem("radar.alerts");}catch(e){}
+  toast("Your account and data have been deleted.");render();}
+/* sync: cloud wins when it has data, otherwise local data is uploaded */
+async function pullCloud(){
+  try{
+    const [{data:h},{data:u}]=await Promise.all([SB.from("holdings").select("items").eq("user_id",USER.id).maybeSingle(),SB.from("user_data").select("watchlists,alerts,profile").eq("user_id",USER.id).maybeSingle()]);
+    if(h&&Array.isArray(h.items)&&h.items.length){PF=h.items;try{localStorage.setItem("radar.portfolio",JSON.stringify(PF));}catch(e){}}else if(PF.length)cloudDirty.add("holdings");
+    if(u){if(u.watchlists&&u.watchlists.lists){WL=u.watchlists;try{localStorage.setItem("radar.watchlists",JSON.stringify(WL));}catch(e){}}
+      if(Array.isArray(u.alerts)){ALERTS=u.alerts;try{localStorage.setItem("radar.alerts",JSON.stringify(ALERTS));}catch(e){}updateBell();}
+      if(u.profile&&u.profile.set){prefs.profile=u.profile;savePrefs();}}
+    else cloudDirty.add("data");
+    lastSync=new Date();if(cloudDirty.size)await cloudFlush(true);
+  }catch(e){console.warn("sync failed",e);}
+}
+function cloudQueue(what){if(!SB||!USER||!cloudReady)return;cloudDirty.add(what);clearTimeout(cloudTimer);cloudTimer=setTimeout(cloudFlush,1500);}
+async function cloudFlush(force){
+  if(!SB||!USER||(!cloudReady&&!force)||!cloudDirty.size)return;clearTimeout(cloudTimer);const now=new Date().toISOString();const jobs=[];
+  if(cloudDirty.has("holdings")){const inv=PF.reduce((x,h)=>x+(h.avg>0?h.qty*h.avg:0),0);
+    jobs.push(SB.from("holdings").upsert({user_id:USER.id,items:PF,count:PF.length,invested:Math.round(inv),updated_at:now}));}
+  if(cloudDirty.has("data"))jobs.push(SB.from("user_data").upsert({user_id:USER.id,watchlists:WL,alerts:ALERTS,profile:prefs.profile||null,updated_at:now}));
+  cloudDirty.clear();const res=await Promise.all(jobs);const err=res.find(r=>r&&r.error);
+  if(err){toast("Couldn’t sync to your account: "+err.error.message);}else lastSync=new Date();
+}
+function openAuth(mode){authMode=mode||"login";paintAuth();$("#scrim").hidden=false;$("#scrim").style.zIndex=25;$("#authDlg").style.zIndex=30;$("#authDlg").hidden=false;setTimeout(()=>($(authMode==="reset"?"#aPass":"#aEmail")).focus(),30);}
+function closeAuth(){$("#authDlg").hidden=true;$("#scrim").style.zIndex="";if($("#sheet").hidden)$("#scrim").hidden=true;}
+function authMsg(t,ok){const m=$("#authMsg");if(!t){m.hidden=true;return;}m.hidden=false;m.textContent=t;m.classList.toggle("ok",!!ok);}
+function paintAuth(){
+  const M=authMode;document.querySelectorAll("[data-am]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.am===M)));
+  $("#authTabs").hidden=M==="forgot"||M==="reset";
+  $("#authTitle").textContent={login:"Welcome back",signup:"Create your account",forgot:"Reset your password",reset:"Choose a new password"}[M];
+  $("#authSubt").textContent={login:"Log in to sync your portfolio, watchlists and alerts.",signup:"Free. Your portfolio, watchlists and alerts on every device.",forgot:"We’ll email you a link to set a new password.",reset:"Enter a new password for your account."}[M];
+  $("#fName").hidden=M!=="signup";$("#fConsent").hidden=M!=="signup";$("#fEmail").hidden=M==="reset";$("#fPass").hidden=M==="forgot";
+  $("#aPass").autocomplete=M==="login"?"current-password":"new-password";
+  $("#authSubmit").textContent={login:"Log in",signup:"Create account",forgot:"Send reset link",reset:"Save new password"}[M];
+  $("#authForgot").hidden=M!=="login";$("#authForgot").textContent="Forgot password?";authMsg("");
+}
+async function submitAuth(e){
+  e.preventDefault();const M=authMode,email=$("#aEmail").value.trim(),pass=$("#aPass").value,name=$("#aName").value.trim();
+  const redirect=location.origin+location.pathname;const btn=$("#authSubmit");
+  if(M!=="reset"&&!/^\S+@\S+\.\S+$/.test(email)){authMsg("Enter a valid email address.");return;}
+  if((M==="signup"||M==="reset")&&pass.length<8){authMsg("Use a password of at least 8 characters.");return;}
+  if(M==="signup"&&!name){authMsg("Enter your name.");return;}
+  if(M==="signup"&&!$("#aConsent").checked){authMsg("Please tick the consent box to create an account.");return;}
+  btn.disabled=true;let r;
+  try{
+    if(M==="login")r=await SB.auth.signInWithPassword({email,password:pass});
+    else if(M==="signup")r=await SB.auth.signUp({email,password:pass,options:{data:{full_name:name,consent_at:new Date().toISOString()},emailRedirectTo:redirect}});
+    else if(M==="forgot")r=await SB.auth.resetPasswordForEmail(email,{redirectTo:redirect});
+    else r=await SB.auth.updateUser({password:pass});
+  }finally{btn.disabled=false;}
+  if(r.error){authMsg(r.error.message==="Invalid login credentials"?"Email or password is wrong.":r.error.message);return;}
+  if(M==="signup"&&!(r.data&&r.data.session)){authMsg("Almost done! Check your email and click the link to confirm your account, then log in.",true);return;}
+  if(M==="forgot"){authMsg("If that email has an account, a reset link is on its way.",true);return;}
+  closeAuth();$("#aPass").value="";const uu=r.data&&r.data.user;const nm=uu?((uu.user_metadata&&uu.user_metadata.full_name)||uu.email.split("@")[0]):"";toast(M==="reset"?"Password updated.":`Welcome${nm?", "+nm.split(" ")[0]:""}!`);
+}
+/* ---------- admin dashboard ---------- */
+const adState={users:null,hold:null,filter:"all",sort:"new",q:"",loading:false};
+async function loadAdmin(){
+  if(adState.loading)return;adState.loading=true;
+  try{const [p,h]=await Promise.all([SB.from("profiles").select("id,email,full_name,created_at,last_seen,is_admin,consent_at").order("created_at",{ascending:false}),
+      SB.from("holdings").select("user_id,count,invested,updated_at")]);
+    if(p.error||h.error){toast("Couldn’t load admin data: "+((p.error||h.error).message));return;}
+    adState.users=p.data;adState.hold=Object.fromEntries(h.data.map(x=>[x.user_id,x]));adState.loaded=new Date();
+  }finally{adState.loading=false;}
+  renderAdmin();
+}
+const fmtDT=t=>t?new Date(t).toLocaleString(undefined,{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}):"–";
+function ago(t){if(!t)return "never";const m=(Date.now()-new Date(t))/6e4;if(m<2)return "just now";if(m<60)return Math.round(m)+" min ago";if(m<1440)return Math.round(m/60)+" h ago";const dd=Math.round(m/1440);return dd+(dd===1?" day ago":" days ago");}
+function renderAdmin(){
+  if(!adState.users){if(!adState.loading){$("#adList").replaceChildren(...Array.from({length:4},()=>el("div","skel")));loadAdmin();}return;}
+  document.querySelectorAll("[data-af]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.af===adState.filter)));$("#adSort").value=adState.sort;
+  const U=adState.users,H=adState.hold,now=Date.now();
+  const withH=U.filter(u=>H[u.id]&&H[u.id].count>0);
+  $("#adSub").textContent=`Updated ${adState.loaded.toLocaleTimeString(undefined,{hour:"2-digit",minute:"2-digit"})}. Only admins can see this page.`;
+  const cards=$("#adCards");cards.replaceChildren();
+  const card=(lab,val,sub)=>{const c=el("dl","pf-card");const w=el("div");w.append(el("dt",null,lab));const dd=el("dd",null,val);if(sub)dd.append(el("small",null,sub));w.append(dd);c.append(w);cards.append(c);};
+  card("Accounts",String(U.length));
+  card("New in 7 days",String(U.filter(u=>now-new Date(u.created_at)<7*864e5).length));
+  card("Active in 7 days",String(U.filter(u=>u.last_seen&&now-new Date(u.last_seen)<7*864e5).length));
+  card("Uploaded holdings",String(withH.length),U.length?`(${Math.round(withH.length/U.length*100)}% of accounts)`:"");
+  card("Holdings uploaded",withH.reduce((x,u)=>x+H[u.id].count,0).toLocaleString("en-IN"));
+  // signups chart
+  const days=30,buckets=new Array(days).fill(0),start=new Date();start.setHours(0,0,0,0);
+  for(const u of U){const d=Math.floor((start-new Date(new Date(u.created_at).setHours(0,0,0,0)))/864e5);if(d>=0&&d<days)buckets[days-1-d]++;}
+  const mx=Math.max(1,...buckets),W=560,Hh=170;let g=`<svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="Sign-ups per day for the last 30 days">`;
+  buckets.forEach((v,i)=>{const bw=W/days,h=v/mx*(Hh-30);g+=`<rect x="${(i*bw+2).toFixed(1)}" y="${(Hh-18-h).toFixed(1)}" width="${(bw-4).toFixed(1)}" height="${Math.max(1,h).toFixed(1)}" rx="3" fill="var(--accent)" opacity="${v?1:.25}"><title>${v} sign-up${v===1?"":"s"}</title></rect>`;
+    if(v)g+=`<text x="${(i*bw+bw/2).toFixed(1)}" y="${(Hh-22-h).toFixed(1)}" text-anchor="middle" class="g-text">${v}</text>`;});
+  g+=`<text x="0" y="${Hh-3}" class="g-text">30 days ago</text><text x="${W}" y="${Hh-3}" text-anchor="end" class="g-text">today</text></svg>`;
+  const ch=$("#adChart");ch.className="ad-bars";ch.innerHTML=g;
+  // most held (needs items; loaded lazily)
+  const top=$("#adTop");if(!adState.top){top.replaceChildren(el("p","pnote","Loading…"));
+    SB.from("holdings").select("items").then(({data})=>{const c={};for(const r of data||[])for(const it of (r.items||[]))c[it.sym]=(c[it.sym]||0)+1;
+      adState.top=Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,8);renderAdmin();});}
+  else{top.replaceChildren();if(!adState.top.length)top.append(el("p","pnote","No holdings uploaded yet."));const mxT=adState.top.length?adState.top[0][1]:1;
+    adState.top.forEach(([s,n])=>top.append(hbar(s,n/mxT*100,"var(--sig-support)",`${n} user${n>1?"s":""}`)));}
+  // table
+  let rows=U.filter(u=>adState.filter==="all"||(adState.filter==="with")===!!(H[u.id]&&H[u.id].count>0));
+  const q=adState.q.toLowerCase();if(q)rows=rows.filter(u=>((u.full_name||"")+" "+(u.email||"")).toLowerCase().includes(q));
+  const S={new:(a,b)=>new Date(b.created_at)-new Date(a.created_at),active:(a,b)=>new Date(b.last_seen||0)-new Date(a.last_seen||0),
+    holdings:(a,b)=>((H[b.id]||{}).count||0)-((H[a.id]||{}).count||0),name:(a,b)=>(a.full_name||a.email).localeCompare(b.full_name||b.email)};
+  rows.sort(S[adState.sort]);
+  const box=$("#adList");box.replaceChildren();
+  if(!rows.length){box.append(el("div","empty","No accounts match."));return;}
+  for(const u of rows){const h=H[u.id];const r=el("div","ad-row");
+    const who=el("div","who");const tx=el("div");const nm=el("b",null,u.full_name||u.email.split("@")[0]);if(u.is_admin)nm.append(el("span","tagline admin","Admin"));
+    tx.append(nm,el("span",null,u.email));who.append(avatar((u.full_name||u.email).toUpperCase().replace(/[^A-Z]/g,"")||"U",u.email),tx);
+    const c1=el("div","c1");c1.append(el("span",null,"Signed up"),el("b",null,new Date(u.created_at).toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"})));
+    const c2=el("div","c2");c2.append(el("span",null,"Last active"),el("b",null,ago(u.last_seen)));
+    const c3=el("div","c3");c3.append(el("span",null,"Holdings"));const hb=el("b");
+    if(h&&h.count>0){hb.append(document.createTextNode(`${h.count} stock${h.count>1?"s":""}`),el("span","tagline has",h.invested?inr(h.invested):"uploaded"));c3.append(hb,el("span",null,"Updated "+ago(h.updated_at)));}
+    else{hb.append(el("span","tagline none","Not uploaded"));c3.append(hb);}
+    const act=el("div","ad-act");if(h&&h.count>0){const v=el("button","btn","View");v.type="button";v.addEventListener("click",()=>viewHoldings(u));act.append(v);}
+    r.append(who,c1,c2,c3,act);box.append(r);}
+}
+async function viewHoldings(u){
+  const {data,error}=await SB.from("holdings").select("items,updated_at").eq("user_id",u.id).maybeSingle();if(error){toast(error.message);return;}
+  $("#adHoldTitle").textContent=`${u.full_name||u.email}: holdings`;$("#adHoldSub").textContent=`${u.email}. Uploaded ${fmtDT(data&&data.updated_at)}. Prices are today’s from the radar.`;
+  const items=(data&&data.items)||[];const t=el("table","hold-tbl");t.innerHTML="<thead><tr><th>Symbol</th><th>Qty</th><th>Avg price</th><th>LTP</th><th>Return</th></tr></thead>";
+  const tb=el("tbody");for(const it of items){const q=quoteOf(it.sym,"NSE");const tr=el("tr");const ret=q&&it.avg?(q.c/it.avg-1)*100:null;
+    for(const [v,cls] of [[it.sym],[Number(it.qty).toLocaleString("en-IN")],[it.avg?fmtP(it.avg):"–"],[q?fmtP(q.c):"–"],[fmtPct(ret,true),ret==null?null:ret>=0?"up":"dn"]]){const td=el("td",cls||null,v);tr.append(td);}tb.append(tr);}
+  t.append(tb);$("#adHoldList").replaceChildren(t);
+  $("#scrim").hidden=false;$("#scrim").style.zIndex=25;$("#adHoldDlg").style.zIndex=30;$("#adHoldDlg").hidden=false;$("#adHoldClose").focus();
+}
+function exportUsers(){if(!adState.users)return;const H=adState.hold;const q=v=>`"${String(v??"").replace(/"/g,'""')}"`;
+  const lines=["Name,Email,Signed up,Last active,Admin,Holdings count,Invested,Holdings updated"].concat(adState.users.map(u=>{const h=H[u.id]||{};
+    return [u.full_name,u.email,u.created_at,u.last_seen,u.is_admin?"yes":"no",h.count||0,h.invested||"",h.updated_at||""].map(q).join(",");}));
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([lines.join("\n")],{type:"text/csv"}));a.download="stock-radar-users.csv";document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);}
+
 /* ---------- start ---------- */
 (async()=>{
-  state.loading=true;applyTheme();render();updateBell();
+  state.loading=true;applyTheme();render();updateBell();initAuth();
   if(!prefs.discAck){$("#scrim").hidden=false;$("#scrim").style.zIndex=25;$("#discDlg").style.zIndex=30;$("#discDlg").hidden=false;$("#discOk").focus();}
   if(/^https?:$/.test(location.protocol)){
     await loadIndexLists();
