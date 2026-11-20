@@ -514,7 +514,7 @@ h1,h2,h3,.hero h2,.g-h,.pf-card dd,.chip .count{font-family:"Bricolage Grotesque
       <div class="chips" id="chips" role="group" aria-label="Signals to show"></div>
     </div>
     <div class="tools">
-      <select id="indexSel" class="btn" aria-label="What to scan"><option value="200">Nifty 200</option><option value="500">Nifty 500</option><option value="etf">ETFs (BeES)</option><option value="index">Indices</option><option value="all">Everything</option></select>
+      <select id="indexSel" class="btn" aria-label="What to scan"><option value="200">Nifty 200</option><option value="500">Nifty 500</option><option value="etf">ETFs (BeES)</option><option value="index">Indices</option><option value="sgb">SGBs (gold bonds)</option><option value="all">Everything</option></select>
       <input type="search" id="q" placeholder="Search symbol or company" aria-label="Search symbol or company">
       <div class="small-seg" role="group" aria-label="How signals combine">
         <button type="button" data-match="any" title="Show stocks with at least one selected signal">Any</button>
@@ -799,7 +799,9 @@ const TF_NAME={D:"day",W:"week",M:"month"};
 const NIFTY200=[["360ONE","360 ONE WAM Ltd.","Financial Services"],["ABB","ABB India Ltd.","Capital Goods"],["APLAPOLLO","APL Apollo Tubes Ltd.","Capital Goods"],["AUBANK","AU Small Finance Bank Ltd.","Financial Services"],["ADANIENSOL","Adani Energy Solutions Ltd.","Power"],["ADANIENT","Adani Enterprises Ltd.","Metals & Mining"],["ADANIGREEN","Adani Green Energy Ltd.","Power"],["ADANIPORTS","Adani Ports and Special Economic Zone Ltd.","Services"],["ADANIPOWER","Adani Power Ltd.","Power"],["ATGL","Adani Total Gas Ltd.","Oil Gas & Consumable Fuels"],["ABCAPITAL","Aditya Birla Capital Ltd.","Financial Services"],["AMBUJACEM","Ambuja Cements Ltd.","Construction Materials"],["APARINDS","Apar Industries Ltd.","Capital Goods"],["APOLLOHOSP","Apollo Hospitals Enterprise Ltd.","Healthcare"],["ASHOKLEY","Ashok Leyland Ltd.","Capital Goods"],["ASIANPAINT","Asian Paints Ltd.","Consumer Durables"],["ASTRAL","Astral Ltd.","Capital Goods"],["AUROPHARMA","Aurobindo Pharma Ltd.","Healthcare"],["DMART","Avenue Supermarts Ltd.","Consumer Services"],["AXISBANK","Axis Bank Ltd.","Financial Services"],["BSE","BSE Ltd.","Financial Services"],["BAJAJ-AUTO","Bajaj Auto Ltd.","Automobile and Auto Components"],["BAJFINANCE","Bajaj Finance Ltd.","Financial Services"],["BAJAJFINSV","Bajaj Finserv Ltd.","Financial Services"],["BAJAJHLDNG","Bajaj Holdings & Investment Ltd.","Financial Services"],["BANKBARODA","Bank of Baroda","Financial Services"],["BANKINDIA","Bank of India","Financial Services"],["MAHABANK","Bank of Maharashtra","Financial Services"],["BDL","Bharat Dynamics Ltd.","Capital Goods"],["BEL","Bharat Electronics Ltd.","Capital Goods"],["BHARATFORG","Bharat Forge Ltd.","Automobile and Auto Components"],["BHEL","Bharat Heavy Electricals Ltd.","Capital Goods"],["BPCL","Bharat Petroleum Corporation Ltd.","Oil Gas & Consumable Fuels"],["BHARTIARTL","Bharti Airtel Ltd.","Telecommunication"],["GROWW","Billionbrains Garage Ventures Ltd.","Financial Services"],["BIOCON","Biocon Ltd.","Healthcare"],["BLUESTARCO","Blue Star Ltd.","Consumer Durables"],["BOSCHLTD","Bosch Ltd.","Automobile and Auto Components"],["BRITANNIA","Britannia Industries Ltd.","Fast Moving Consumer Goods"],["CGPOWER","CG Power and Industrial Solutions Ltd.","Capital Goods"],["CANBK","Canara Bank","Financial Services"],["CHOLAFIN","Cholamandalam Investment and Finance Company Ltd.","Financial Services"],["CIPLA","Cipla Ltd.","Healthcare"],["COALINDIA","Coal India Ltd.","Oil Gas & Consumable Fuels"],["COCHINSHIP","Cochin Shipyard Ltd.","Capital Goods"],["COFORGE","Coforge Ltd.","Information Technology"],["COLPAL","Colgate Palmolive (India) Ltd.","Fast Moving Consumer Goods"],["CONCOR","Container Corporation of India Ltd.","Services"],["CUMMINSIND","Cummins India Ltd.","Capital Goods"],["DLF","DLF Ltd.","Realty"],["DABUR","Dabur India Ltd.","Fast Moving Consumer Goods"],["DIVISLAB","Divi's Laboratories Ltd.","Healthcare"],["DIXON","Dixon Technologies (India) Ltd.","Consumer Durables"],["DRREDDY","Dr. Reddy's Laboratories Ltd.","Healthcare"],["EICHERMOT","Eicher Motors Ltd.","Automobile and Auto Components"],["ETERNAL","Eternal Ltd.","Consumer Services"],["EXIDEIND","Exide Industries Ltd.","Automobile and Auto Components"],["NYKAA","FSN E-Commerce Ventures Ltd.","Consumer Services"],["FEDERALBNK","Federal Bank Ltd.","Financial Services"],["FORTIS","Fortis Healthcare Ltd.","Healthcare"],["GAIL","GAIL (India) Ltd.","Oil Gas & Consumable Fuels"],["GVT&D","GE Vernova T&D India Ltd.","Capital Goods"],["GMRAIRPORT","GMR Airports Ltd.","Services"],["GLENMARK","Glenmark Pharmaceuticals Ltd.","Healthcare"],["GODFRYPHLP","Godfrey Phillips India Ltd.","Fast Moving Consumer Goods"],["GODREJCP","Godrej Consumer Products Ltd.","Fast Moving Consumer Goods"],["GODREJPROP","Godrej Properties Ltd.","Realty"],["GRASIM","Grasim Industries Ltd.","Construction Materials"],["HCLTECH","HCL Technologies Ltd.","Information Technology"],["HDFCAMC","HDFC Asset Management Company Ltd.","Financial Services"],["HDFCBANK","HDFC Bank Ltd.","Financial Services"],["HDFCLIFE","HDFC Life Insurance Company Ltd.","Financial Services"],["HAVELLS","Havells India Ltd.","Consumer Durables"],["HEROMOTOCO","Hero MotoCorp Ltd.","Automobile and Auto Components"],["HINDALCO","Hindalco Industries Ltd.","Metals & Mining"],["HAL","Hindustan Aeronautics Ltd.","Capital Goods"],["HINDCOPPER","Hindustan Copper Ltd.","Metals & Mining"],["HINDPETRO","Hindustan Petroleum Corporation Ltd.","Oil Gas & Consumable Fuels"],["HINDUNILVR","Hindustan Unilever Ltd.","Fast Moving Consumer Goods"],["HINDZINC","Hindustan Zinc Ltd.","Metals & Mining"],["POWERINDIA","Hitachi Energy India Ltd.","Capital Goods"],["HYUNDAI","Hyundai Motor India Ltd.","Automobile and Auto Components"],["ICICIBANK","ICICI Bank Ltd.","Financial Services"],["ICICIGI","ICICI Lombard General Insurance Company Ltd.","Financial Services"],["ICICIAMC","ICICI Prudential Asset Management Company Ltd.","Financial Services"],["IDFCFIRSTB","IDFC First Bank Ltd.","Financial Services"],["ITC","ITC Ltd.","Fast Moving Consumer Goods"],["INDIANB","Indian Bank","Financial Services"],["INDHOTEL","Indian Hotels Co. Ltd.","Consumer Services"],["IOC","Indian Oil Corporation Ltd.","Oil Gas & Consumable Fuels"],["IRCTC","Indian Railway Catering And Tourism Corporation Ltd.","Consumer Services"],["IRFC","Indian Railway Finance Corporation Ltd.","Financial Services"],["IREDA","Indian Renewable Energy Development Agency Ltd.","Financial Services"],["INDUSTOWER","Indus Towers Ltd.","Telecommunication"],["INDUSINDBK","IndusInd Bank Ltd.","Financial Services"],["NAUKRI","Info Edge (India) Ltd.","Consumer Services"],["INFY","Infosys Ltd.","Information Technology"],["INDIGO","InterGlobe Aviation Ltd.","Services"],["JSWENERGY","JSW Energy Ltd.","Power"],["JSWSTEEL","JSW Steel Ltd.","Metals & Mining"],["JINDALSTEL","Jindal Steel Ltd.","Metals & Mining"],["JIOFIN","Jio Financial Services Ltd.","Financial Services"],["JUBLFOOD","Jubilant Foodworks Ltd.","Consumer Services"],["KEI","KEI Industries Ltd.","Capital Goods"],["KALYANKJIL","Kalyan Jewellers India Ltd.","Consumer Durables"],["KOTAKBANK","Kotak Mahindra Bank Ltd.","Financial Services"],["LTF","L&T Finance Ltd.","Financial Services"],["LGEINDIA","LG Electronics India Ltd.","Consumer Durables"],["LICHSGFIN","LIC Housing Finance Ltd.","Financial Services"],["LTM","LTM Ltd.","Information Technology"],["LT","Larsen & Toubro Ltd.","Construction"],["LAURUSLABS","Laurus Labs Ltd.","Healthcare"],["LENSKART","Lenskart Solutions Ltd.","Consumer Services"],["LICI","Life Insurance Corporation of India","Financial Services"],["LODHA","Lodha Developers Ltd.","Realty"],["LUPIN","Lupin Ltd.","Healthcare"],["MRF","MRF Ltd.","Automobile and Auto Components"],["M&MFIN","Mahindra & Mahindra Financial Services Ltd.","Financial Services"],["M&M","Mahindra & Mahindra Ltd.","Automobile and Auto Components"],["MANKIND","Mankind Pharma Ltd.","Healthcare"],["MARICO","Marico Ltd.","Fast Moving Consumer Goods"],["MARUTI","Maruti Suzuki India Ltd.","Automobile and Auto Components"],["MFSL","Max Financial Services Ltd.","Financial Services"],["MAXHEALTH","Max Healthcare Institute Ltd.","Healthcare"],["MAZDOCK","Mazagoan Dock Shipbuilders Ltd.","Capital Goods"],["MEESHO","Meesho Ltd.","Consumer Services"],["MOTILALOFS","Motilal Oswal Financial Services Ltd.","Financial Services"],["MPHASIS","MphasiS Ltd.","Information Technology"],["MCX","Multi Commodity Exchange of India Ltd.","Financial Services"],["MUTHOOTFIN","Muthoot Finance Ltd.","Financial Services"],["NHPC","NHPC Ltd.","Power"],["NLCINDIA","NLC India Ltd.","Power"],["NMDC","NMDC Ltd.","Metals & Mining"],["NTPC","NTPC Ltd.","Power"],["NATIONALUM","National Aluminium Co. Ltd.","Metals & Mining"],["NESTLEIND","Nestle India Ltd.","Fast Moving Consumer Goods"],["OBEROIRLTY","Oberoi Realty Ltd.","Realty"],["ONGC","Oil & Natural Gas Corporation Ltd.","Oil Gas & Consumable Fuels"],["OIL","Oil India Ltd.","Oil Gas & Consumable Fuels"],["PAYTM","One 97 Communications Ltd.","Financial Services"],["OFSS","Oracle Financial Services Software Ltd.","Information Technology"],["POLICYBZR","PB Fintech Ltd.","Financial Services"],["PIIND","PI Industries Ltd.","Chemicals"],["PAGEIND","Page Industries Ltd.","Textiles"],["PATANJALI","Patanjali Foods Ltd.","Fast Moving Consumer Goods"],["PERSISTENT","Persistent Systems Ltd.","Information Technology"],["PHOENIXLTD","Phoenix Mills Ltd.","Realty"],["PIDILITIND","Pidilite Industries Ltd.","Chemicals"],["POLYCAB","Polycab India Ltd.","Capital Goods"],["PFC","Power Finance Corporation Ltd.","Financial Services"],["POWERGRID","Power Grid Corporation of India Ltd.","Power"],["PREMIERENE","Premier Energies Ltd.","Capital Goods"],["PRESTIGE","Prestige Estates Projects Ltd.","Realty"],["PNB","Punjab National Bank","Financial Services"],["RECLTD","REC Ltd.","Financial Services"],["RADICO","Radico Khaitan Ltd","Fast Moving Consumer Goods"],["RVNL","Rail Vikas Nigam Ltd.","Construction"],["RELIANCE","Reliance Industries Ltd.","Oil Gas & Consumable Fuels"],["SBICARD","SBI Cards and Payment Services Ltd.","Financial Services"],["SBILIFE","SBI Life Insurance Company Ltd.","Financial Services"],["SRF","SRF Ltd.","Chemicals"],["MOTHERSON","Samvardhana Motherson International Ltd.","Automobile and Auto Components"],["SHRIRAMFIN","Shriram Finance Ltd.","Financial Services"],["ENRIN","Siemens Energy India Ltd.","Capital Goods"],["SIEMENS","Siemens Ltd.","Capital Goods"],["SOLARINDS","Solar Industries India Ltd.","Chemicals"],["SBIN","State Bank of India","Financial Services"],["SAIL","Steel Authority of India Ltd.","Metals & Mining"],["SUNPHARMA","Sun Pharmaceutical Industries Ltd.","Healthcare"],["SUPREMEIND","Supreme Industries Ltd.","Capital Goods"],["SUZLON","Suzlon Energy Ltd.","Capital Goods"],["SWIGGY","Swiggy Ltd.","Consumer Services"],["TVSMOTOR","TVS Motor Company Ltd.","Automobile and Auto Components"],["TATACAP","Tata Capital Ltd.","Financial Services"],["TATACOMM","Tata Communications Ltd.","Telecommunication"],["TCS","Tata Consultancy Services Ltd.","Information Technology"],["TATACONSUM","Tata Consumer Products Ltd.","Fast Moving Consumer Goods"],["TMCV","Tata Motors Ltd.","Capital Goods"],["TMPV","Tata Motors Passenger Vehicles Ltd.","Automobile and Auto Components"],["TATAPOWER","Tata Power Co. Ltd.","Power"],["TATASTEEL","Tata Steel Ltd.","Metals & Mining"],["TECHM","Tech Mahindra Ltd.","Information Technology"],["TITAN","Titan Company Ltd.","Consumer Durables"],["TORNTPHARM","Torrent Pharmaceuticals Ltd.","Healthcare"],["TRENT","Trent Ltd.","Consumer Services"],["TIINDIA","Tube Investments of India Ltd.","Automobile and Auto Components"],["UPL","UPL Ltd.","Chemicals"],["ULTRACEMCO","UltraTech Cement Ltd.","Construction Materials"],["UNIONBANK","Union Bank of India","Financial Services"],["UNITDSPR","United Spirits Ltd.","Fast Moving Consumer Goods"],["VBL","Varun Beverages Ltd.","Fast Moving Consumer Goods"],["VAML","Vedanta Aluminium Metal Ltd.","Metals & Mining"],["VEDL","Vedanta Ltd.","Metals & Mining"],["VMM","Vishal Mega Mart Ltd.","Consumer Services"],["IDEA","Vodafone Idea Ltd.","Telecommunication"],["VOLTAS","Voltas Ltd.","Consumer Durables"],["WAAREEENER","Waaree Energies Ltd.","Capital Goods"],["WIPRO","Wipro Ltd.","Information Technology"],["YESBANK","Yes Bank Ltd.","Financial Services"],["ZYDUSLIFE","Zydus Lifesciences Ltd.","Healthcare"]];
 const N200INFO={};for(const [s,n,i] of NIFTY200)N200INFO[s]={name:n,sector:i};
 const NSE_INFO=Object.assign({},N200INFO);const ISIN_MAP={};
-const INDEX_LISTS={"200":NIFTY200.map(x=>x[0]),"500":null,"etf":null,"index":null};const TV_MAP={};const KIND={};let EXTRA_SYMS=[];
+const INDEX_LISTS={"200":NIFTY200.map(x=>x[0]),"500":null,"etf":null,"index":null};const TV_MAP={};const KIND={};let EXTRA_SYMS=[];const OTHERS={};let OTHERS_N=0;
+const KIND_LABEL={etf:"ETF",index:"Index",sgb:"SGB",gsec:"G-Sec",sdl:"SDL",tbill:"T-Bill",bond:"Bond",eq:""};
+const KIND_SECTOR={sgb:"Sovereign Gold Bond",gsec:"Government securities",sdl:"State development loans",tbill:"Treasury bills",bond:"Corporate bonds",eq:"Other NSE stocks"};
 function absorbList(parsed,key){
   const cols=mapCols(parsed.meta.fields||[]);if(!cols.symbol)return 0;const isinCol=(parsed.meta.fields||[]).find(f=>/isin/i.test(f));
   const syms=[];for(const r of parsed.data){const sy=cleanSym(r[cols.symbol]);if(!sy)continue;syms.push(sy);
@@ -814,6 +816,11 @@ async function loadIndexLists(){
     for(const [key,sector] of [["etf","ETF"],["index","Index"]]){const arr=g[key]||[];if(!arr.length)continue;INDEX_LISTS[key]=arr.map(x=>x.sym);
       for(const x of arr){NSE_INFO[x.sym]={name:x.name,sector};if(x.tv)TV_MAP[x.sym]=x.tv;KIND[x.sym]=key;}}
     for(const x of (g.extra||[])){EXTRA_SYMS.push(x.sym);if(!NSE_INFO[x.sym])NSE_INFO[x.sym]={name:x.name||"",sector:x.sector||"Unclassified"};}}}catch(e){}
+  try{const r=await fetch("data/others_index.json",{cache:"no-cache"});if(r.ok){const j=await r.json();
+    for(const it of (j.items||[])){OTHERS[it.sym]=it;if(it.kind!=="eq")KIND[it.sym]=it.kind;
+      if(!NSE_INFO[it.sym])NSE_INFO[it.sym]={name:it.name&&it.name!=="nan"?it.name:"",sector:KIND_SECTOR[it.kind]||""};
+      if(it.isin&&it.isin!=="nan"&&!ISIN_MAP[it.isin])ISIN_MAP[it.isin]=it.sym;}
+    OTHERS_N=Object.keys(OTHERS).length;INDEX_LISTS.sgb=Object.values(OTHERS).filter(x=>x.kind==="sgb").map(x=>x.sym);if(!INDEX_LISTS.sgb.length)INDEX_LISTS.sgb=null;}}catch(e){}
 }
 const DEFAULTS={market:"NSE",tf:"D",active:["mstar","hammer","engulf","breakout","support"],sort:"best",theme:"auto",index:"200",view:"radar",match:"any",starredOnly:false,
   settings:{lookback:20,tol:3,recent:1,downtrend:true,volume:false,atSupport:true},stars:{NSE:[],US:[]}};
@@ -991,10 +998,11 @@ function indexSyms(){const L=INDEX_LISTS,ix=prefs.index;
   if(ix==="all")return [...new Set([...(L["500"]||L["200"]),...(L.etf||[]),...(L.index||[])])];
   if(ix!=="200"&&L[ix])return L[ix];return L["200"];}
 function indexName(){const ix=prefs.index;if(ix!=="200"&&ix!=="all"&&!INDEX_LISTS[ix])return "Nifty 200";
-  return ({"200":"Nifty 200","500":"Nifty 500",etf:"ETFs",index:"Indices",all:"Stocks, ETFs and indices"})[ix]||"Nifty 200";}
+  return ({"200":"Nifty 200","500":"Nifty 500",etf:"ETFs",index:"Indices",sgb:"Sovereign Gold Bonds (end-of-day)",all:"Stocks, ETFs and indices"})[ix]||"Nifty 200";}
 function scan(){
   const m=prefs.market,d=state.data[m];if(!d)return null;
-  const key=[m,prefs.tf,prefs.index,!!INDEX_LISTS["500"],!!INDEX_LISTS.etf,JSON.stringify(prefs.settings),d.version].join("|");
+  if(m==="NSE"&&prefs.index==="sgb"&&INDEX_LISTS.sgb){const miss=INDEX_LISTS.sgb.filter(x=>!hasSeries(x));if(miss.length){ensureMany(miss);}}
+  const key=[m,prefs.tf,prefs.index,!!INDEX_LISTS["500"],!!INDEX_LISTS.etf,Object.keys(d.series).length,JSON.stringify(prefs.settings),d.version].join("|");
   if(state.cache&&state.cache.key===key)return state.cache;
   let syms=Object.keys(d.series);let missing=[];
   const uni=(d.universe&&d.universe.length)?d.universe:(m==="NSE"&&!d.demo?indexSyms():null);
@@ -1047,7 +1055,7 @@ function renderControls(){
   $("#starredBtn").setAttribute("aria-pressed",String(!!prefs.starredOnly));
   $("#sortSel").value=prefs.sort||"best";
   const isel=$("#indexSel");isel.hidden=prefs.market!=="NSE";
-  for(const [k,lab] of [["500","Nifty 500"],["etf","ETFs (BeES)"],["index","Indices"]]){const o=isel.querySelector(`option[value="${k}"]`);o.disabled=!INDEX_LISTS[k];o.textContent=INDEX_LISTS[k]?lab:lab+" (not loaded yet)";}
+  for(const [k,lab] of [["500","Nifty 500"],["etf","ETFs (BeES)"],["index","Indices"],["sgb","SGBs (gold bonds)"]]){const o=isel.querySelector(`option[value="${k}"]`);o.disabled=!INDEX_LISTS[k];o.textContent=INDEX_LISTS[k]?lab:lab+" (not loaded yet)";}
   isel.value=(prefs.index==="all"||INDEX_LISTS[prefs.index])?prefs.index:"200";
   $("#s-lookback").value=prefs.settings.lookback;$("#s-tol").value=prefs.settings.tol;$("#s-recent").value=prefs.settings.recent;
   $("#s-down").checked=!!prefs.settings.downtrend;$("#s-atsup").checked=!!prefs.settings.atSupport;$("#s-vol").checked=!!prefs.settings.volume;
@@ -1306,24 +1314,42 @@ function drawChart(r){
   sv.addEventListener("pointermove",pick);sv.addEventListener("pointerdown",pick);
 }
 
+/* ---------- securities outside the main bundle (loaded on demand) ---------- */
+const OLOAD={};
+function hasSeries(sym){const d=state.data.NSE;return !!(d&&d.series[sym]);}
+async function ensureSeries(sym){
+  if(hasSeries(sym))return true;const o=OTHERS[sym];if(!o||!state.data.NSE)return false;
+  if(!OLOAD[sym])OLOAD[sym]=fetch("data/"+o.file).then(r=>r.ok?r.text():null).then(t=>{if(!t)return false;
+      const tmp=emptyData();ingestRows(parseCSVText(t),o.file,"NSE",tmp);const sr=tmp.series[sym];if(!sr)return false;
+      if(state.data.NSE)state.data.NSE.series[sym]=sr;return true;}).catch(()=>false).finally(()=>{delete OLOAD[sym];});
+  return OLOAD[sym];
+}
+let loadingMany=false;
+async function ensureMany(syms){const need=syms.filter(x=>!hasSeries(x)&&OTHERS[x]);if(!need.length||loadingMany)return false;
+  loadingMany=true;try{for(let i=0;i<need.length;i+=12)await Promise.all(need.slice(i,i+12).map(ensureSeries));}finally{loadingMany=false;}
+  state.cache=null;SIDX=null;render();return true;}
+
 /* ---------- search ---------- */
 let SIDX=null,SIDXkey="";
-function searchIndex(){const key=[state.data.NSE&&state.data.NSE.version,state.data.US&&state.data.US.version,Object.keys(NSE_INFO).length].join("|");
+function searchIndex(){const key=[state.data.NSE&&state.data.NSE.version,state.data.US&&state.data.US.version,Object.keys(NSE_INFO).length,OTHERS_N].join("|");
   if(SIDX&&SIDXkey===key)return SIDX;SIDX=[];
   for(const m of ["NSE","US"]){const d=state.data[m];if(!d)continue;
-    for(const sym in d.series){const info=infoOf(d,sym,m);SIDX.push({sym,market:m,name:info.name||"",kind:m==="US"?"US":KIND[sym]==="etf"?"ETF":KIND[sym]==="index"?"Index":"",lc:(sym+" "+(info.name||"")).toLowerCase()});}}
+    for(const sym in d.series){if(m==="NSE"&&OTHERS[sym])continue;const info=infoOf(d,sym,m);SIDX.push({sym,market:m,name:info.name||"",kind:m==="US"?"US":KIND_LABEL[KIND[sym]]||"",lc:(sym+" "+(info.name||"")).toLowerCase()});}}
+  for(const sym in OTHERS){const o=OTHERS[sym],nm=(NSE_INFO[sym]||{}).name||"";SIDX.push({sym,market:"NSE",name:nm,kind:KIND_LABEL[o.kind]||"",lc:(sym+" "+nm).toLowerCase(),other:true});}
   SIDXkey=key;return SIDX;}
 function searchFind(q){q=q.trim().toLowerCase();if(!q)return [];const qs=q.replace(/\s+/g,"");const out=[];
   for(const it of searchIndex()){const s=it.sym.toLowerCase();let sc=0;
     if(s===qs)sc=100;else if(s.startsWith(qs))sc=80-s.length*0.1;else if(it.name.toLowerCase().startsWith(q))sc=60;else if(s.includes(qs))sc=40;else if(it.lc.includes(q))sc=30;
-    if(sc)out.push([sc+(it.market==="NSE"?1:0),it]);}
+    if(sc)out.push([sc+(it.market==="NSE"?1:0)-(it.other&&it.kind?3:0),it]);}
   return out.sort((a,b)=>b[0]-a[0]).slice(0,10).map(x=>x[1]);}
-function quoteOf(sym,market){const d=state.data[market];const s=d&&d.series[sym];if(!s||s.t.length<2)return null;const n=s.t.length;
+function quoteOf(sym,market){const d=state.data[market];const s=d&&d.series[sym];
+  if((!s||s.t.length<2)&&market==="NSE"&&OTHERS[sym]&&OTHERS[sym].pc){const o=OTHERS[sym];return {c:o.c,ch:o.c-o.pc,pct:(o.c/o.pc-1)*100,s:null};}
+  if(!s||s.t.length<2)return null;const n=s.t.length;
   return {c:s.c[n-1],ch:s.c[n-1]-s.c[n-2],pct:(s.c[n-1]/s.c[n-2]-1)*100,s};}
 function attachSearch(input,box,mode){
   let items=[],sel=-1;
   const close=()=>{box.hidden=true;input.setAttribute("aria-expanded","false");sel=-1;};
-  const pick=it=>{if(!it)return;if(mode==="add"){toggleWL(it.sym,it.market);paint();input.focus();}else{close();input.value="";input.blur();$("#gsearch").classList.remove("open");openStock(it.sym,it.market);}};
+  const pick=it=>{if(!it)return;if(mode==="add"){if(it.market==="NSE"&&OTHERS[it.sym])ensureSeries(it.sym).then(()=>render());toggleWL(it.sym,it.market);paint();input.focus();}else{close();input.value="";input.blur();$("#gsearch").classList.remove("open");openStock(it.sym,it.market);}};
   const paint=()=>{box.replaceChildren();items=searchFind(input.value);
     if(!input.value.trim()){close();return;}
     box.hidden=false;input.setAttribute("aria-expanded","true");
@@ -1344,7 +1370,8 @@ function attachSearch(input,box,mode){
     else if(e.key==="Escape"){close();input.blur();$("#gsearch").classList.remove("open");}});
 }
 const fmtPx=(x,m)=>x==null||!isFinite(x)?"–":x.toLocaleString(m==="US"?"en-US":"en-IN",{minimumFractionDigits:2,maximumFractionDigits:2});
-function openStock(sym,market){const d=state.data[market];const s=d&&d.series[sym];if(!s){toast("No price data for "+sym+" yet.");return;}
+async function openStock(sym,market){if(market==="NSE"&&!hasSeries(sym)&&OTHERS[sym]){toast("Loading "+sym+"…");await ensureSeries(sym);}
+  const d=state.data[market];const s=d&&d.series[sym];if(!s){toast("No price data for "+sym+" yet.");return;}
   const a=analyze(s,prefs.settings);if(a.short){toast("Not enough price history for "+sym+".");return;}
   openSheet(Object.assign({sym,series:s},a),{tf:"D",market});}
 
@@ -1386,13 +1413,15 @@ function renderWatch(){
   const box=$("#wlList");box.replaceChildren();
   if(!l.items.length){const e=el("div","empty");e.append(el("b",null,"This watchlist is empty"),el("span",null,"Use the box above to add stocks, ETFs or indices, or tap the ☆ next to any stock on the Radar."));box.append(e);return;}
   if(!state.data.NSE&&!state.data.US){for(let i=0;i<Math.min(5,l.items.length);i++)box.append(el("div","skel"));return;}
+  const miss=l.items.filter(it=>it.market==="NSE"&&!hasSeries(it.sym)&&OTHERS[it.sym]).map(it=>it.sym);
+  if(miss.length)ensureMany(miss);
   let rows=l.items.map((it,idx)=>{const d=state.data[it.market];const s=d&&d.series[it.sym];const a=s?analyze(s,prefs.settings):null;return {it,idx,s,a:a&&!a.short?a:null};});
   const so=WL.sort||"order",nsig=r=>r.a?Object.keys(r.a.sig).length:-1;
   if(so==="az")rows.sort((a,b)=>a.it.sym.localeCompare(b.it.sym));else if(so==="gain")rows.sort((a,b)=>(b.a?b.a.chg:-1e9)-(a.a?a.a.chg:-1e9));
   else if(so==="loss")rows.sort((a,b)=>(a.a?a.a.chg:1e9)-(b.a?b.a.chg:1e9));else if(so==="sig")rows.sort((a,b)=>nsig(b)-nsig(a));
   for(const r of rows){const {it,s,a}=r;const info=infoOf(state.data[it.market],it.sym,it.market);const row=el("div","wl-row");
-    const who=el("div","who");const tx=el("div");const t=el("b",null,it.sym);if(it.market==="US")t.append(el("span","tag","US"));else if(KIND[it.sym])t.append(el("span","tag",KIND[it.sym]==="etf"?"ETF":"Index"));
-    tx.append(t,el("span",null,info.name||info.sector||(s?"":"No price data")));who.append(avatar(it.sym,info.sector),tx);
+    const who=el("div","who");const tx=el("div");const t=el("b",null,it.sym);if(it.market==="US")t.append(el("span","tag","US"));else if(KIND_LABEL[KIND[it.sym]])t.append(el("span","tag",KIND_LABEL[KIND[it.sym]]));
+    tx.append(t,el("span",null,(info.name||info.sector||(s?"":OTHERS[it.sym]?"Loading…":"No price data"))+(OTHERS[it.sym]?" · end-of-day prices":"")));who.append(avatar(it.sym,info.sector),tx);
     const del=el("button","del","×");del.type="button";del.setAttribute("aria-label","Remove "+it.sym);del.addEventListener("click",e=>{e.stopPropagation();toggleWL(it.sym,it.market);});
     if(!a){row.append(who,el("span","spark"),el("div","pxc","–"),el("div","rbar",""),el("div","badges"),del);box.append(row);continue;}
     const n=s.t.length;const pxc=el("div","pxc num");const chA=s.c[n-1]-s.c[n-2];
@@ -1687,7 +1716,7 @@ function resolveSym(raw,isin){
   if(isin){const s=ISIN_MAP[String(isin).trim().toUpperCase()];if(s)return s;}
   let s=cleanSym(raw).replace(/-(EQ|BE|BL|BZ|SM|ST)$/,"").replace(/\s+/g,"");
   const series=(state.data.NSE&&state.data.NSE.series)||{};
-  if(series[s]||NSE_INFO[s])return s;
+  if(series[s]||NSE_INFO[s]||OTHERS[s])return s;
   const n=normName(raw);if(n.length>=3){
     for(const k in NSE_INFO){if(normName(NSE_INFO[k].name)===n)return k;}
     for(const k in NSE_INFO){const nn=normName(NSE_INFO[k].name);if(nn&&(nn.startsWith(n)||n.startsWith(nn)))return k;}}
@@ -1753,9 +1782,10 @@ function scoreHolding(a){
 const ACT_LABEL={add:"Add more",hold:"Hold",review:"Review",na:"No price data"};
 function analyzeHoldings(){
   const d=state.data.NSE;const out=[];
+  const miss=PF.filter(h=>!hasSeries(h.sym)&&OTHERS[h.sym]).map(h=>h.sym);if(miss.length)ensureMany(miss);
   for(const h of PF){
     const s=d&&d.series[h.sym];const info=NSE_INFO[h.sym]||{};
-    const row={...h,name:info.name||"",sector:info.sector||(s?"Unclassified":"No price data")};
+    const row={...h,name:info.name||"",sector:info.sector||(s?"Unclassified":OTHERS[h.sym]?"Loading…":"No price data")};
     if(s&&s.t.length>=30){const a=analyze(s,Object.assign({},prefs.settings,{recent:3}));
       if(!a.short){Object.assign(row,{a,ltp:a.close,...scoreHolding(a)});}}
     if(row.ltp==null){row.action="na";row.ltp=null;}

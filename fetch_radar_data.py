@@ -17,8 +17,11 @@ NSE symbols scanned = Nifty 200 list + Nifty 500 list + the ETFs and indices bel
 Also writes data/nse_groups.json (ETF and index names) for the page.
 """
 import datetime as dt
+import gzip
 import io
 import json
+import re
+import zipfile
 import os
 import shutil
 import sys
@@ -344,6 +347,126 @@ def check_alerts():
     print(f"Alerts: {len(alerts)} checked, {sent} sent")
 
 
+# ---------- every other NSE security (end of day, from NSE bhavcopy) ----------
+BHAV_URL = "https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_{}_F_0000.csv.zip"
+EQ_SERIES = {"EQ", "BE", "BZ", "SM", "ST"}
+DEBT_SERIES = {"GB": "sgb", "GS": "gsec", "SG": "sdl", "TB": "tbill"}
+EOD_DAYS = 370          # keep about one year of history
+EOD_MAX_FETCH = 300     # bhavcopies to download in one run (first run backfills)
+
+
+def series_kind(series):
+    if series in EQ_SERIES:
+        return "eq"
+    if series in DEBT_SERIES:
+        return DEBT_SERIES[series]
+    if len(series) == 2 and series[0] in "NY":
+        return "bond"
+    return None
+
+
+def fetch_bhav(session, day):
+    try:
+        r = session.get(BHAV_URL.format(day.strftime("%Y%m%d")), timeout=30)
+        if r.status_code != 200 or r.content[:2] != b"PK":
+            return None, r.status_code
+        with zipfile.ZipFile(io.BytesIO(r.content)) as z:
+            df = pd.read_csv(z.open(z.namelist()[0]))
+    except Exception as e:
+        return None, str(e)
+    df.columns = [c.strip() for c in df.columns]
+    df["SctySrs"] = df["SctySrs"].astype(str).str.strip()
+    df["kind"] = df["SctySrs"].map(series_kind)
+    df = df[df["kind"].notna()]
+    out = pd.DataFrame({
+        "Date": day.isoformat(), "Symbol": df["TckrSymb"].astype(str).str.strip(), "Series": df["SctySrs"],
+        "Name": df.get("FinInstrmNm", "").astype(str).str.strip(), "ISIN": df.get("ISIN", "").astype(str).str.strip(),
+        "Open": df["OpnPric"], "High": df["HghPric"], "Low": df["LwPric"], "Close": df["ClsPric"],
+        "Volume": df["TtlTradgVol"].fillna(0).astype("int64")})
+    return out, 200
+
+
+def safe_name(sym):
+    return re.sub(r"[^A-Za-z0-9]", "_", sym)
+
+
+def eod_update(main_syms):
+    """Keep data/eod_history.csv.gz (one year, all NSE securities outside the main bundle) up to date,
+    and write one small file per security in data/x/ plus data/others_index.json for the page."""
+    prev = None
+    if SITE_URL:
+        try:
+            r = requests.get(f"{SITE_URL}/data/eod_history.csv.gz", params={"t": time.time()}, timeout=120)
+            if r.ok and r.content[:2] == b"\x1f\x8b":
+                prev = pd.read_csv(io.BytesIO(r.content), compression="gzip", dtype={"Series": str})
+        except Exception as e:
+            print(f"EOD: couldn't load previous history: {e}")
+    now = dt.datetime.now(dt.timezone.utc)
+    today_ist = (now + dt.timedelta(hours=5, minutes=30)).date()
+    after_close = (now + dt.timedelta(hours=5, minutes=30)).time() >= dt.time(18, 30)
+    start = today_ist - dt.timedelta(days=EOD_DAYS)
+    have = set(prev["Date"].unique()) if prev is not None else set()
+    last = max(have) if have else None
+    days, d = [], today_ist
+    while d > start and len(days) < EOD_MAX_FETCH:
+        if d.weekday() < 5 and d.isoformat() not in have and (d < today_ist or after_close):
+            if last and d.isoformat() < last:
+                break          # only fetch days after what we already have
+            days.append(d)
+        d -= dt.timedelta(days=1)
+    frames = [prev] if prev is not None else []
+    if days:
+        session = requests.Session()
+        session.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                                "(KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+                                "Referer": "https://www.nseindia.com/", "Accept": "*/*"})
+        got, blocked = 0, 0
+        print(f"EOD: downloading up to {len(days)} NSE bhavcopies…")
+        for d in days:
+            df, status = fetch_bhav(session, d)
+            if df is None:
+                if status in (401, 403):
+                    blocked += 1
+                    if blocked >= 3 and not got:
+                        print("EOD: NSE is refusing downloads from this server (HTTP 403).")
+                        break
+                continue
+            frames.append(df)
+            got += 1
+            time.sleep(0.4)
+        print(f"EOD: {got} new bhavcopies")
+    if not frames:
+        print("EOD: no data for securities outside the Nifty 500")
+        return
+    allf = pd.concat(frames, ignore_index=True)
+    allf = allf[allf["Date"] >= start.isoformat()]
+    allf = allf.drop_duplicates(["Date", "Symbol", "Series"], keep="last")
+    with gzip.open(os.path.join(OUT, "eod_history.csv.gz"), "wt") as f:
+        allf.to_csv(f, index=False)
+    # one series per symbol: the one with the most recent data (an equity can move EQ <-> BE)
+    allf = allf[~((allf["Series"].map(series_kind) == "eq") & allf["Symbol"].isin(main_syms))]
+    lastrow = allf.sort_values("Date").groupby("Symbol").tail(1).set_index("Symbol")
+    xdir = os.path.join(OUT, "x")
+    os.makedirs(xdir, exist_ok=True)
+    index = []
+    for sym, g in allf.groupby("Symbol"):
+        lr = lastrow.loc[sym]
+        g = g[g["Series"] == lr["Series"]].sort_values("Date")
+        if g.empty:
+            continue
+        fname = safe_name(sym) + ".csv"
+        g[["Date", "Symbol", "Open", "High", "Low", "Close", "Volume"]].to_csv(os.path.join(xdir, fname), index=False)
+        prevc = float(g["Close"].iloc[-2]) if len(g) > 1 else None
+        index.append({"sym": sym, "name": lr["Name"], "series": lr["Series"], "kind": series_kind(lr["Series"]),
+                      "isin": lr["ISIN"], "file": "x/" + fname, "c": float(lr["Close"]), "pc": prevc, "t": lr["Date"]})
+    with open(os.path.join(OUT, "others_index.json"), "w") as f:
+        json.dump({"updated": now_iso(), "items": index}, f, separators=(",", ":"))
+    kinds = {}
+    for it in index:
+        kinds[it["kind"]] = kinds.get(it["kind"], 0) + 1
+    print(f"EOD: {len(index)} other securities published {kinds}")
+
+
 def now_iso():
     return dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
 
@@ -395,6 +518,10 @@ def main():
         json.dump(meta, f, indent=1)
     if not meta["markets"]:
         sys.exit("No market data available. Check the log above.")
+    try:
+        eod_update({p[0] for p in nse_symbols()})
+    except Exception as e:
+        print(f"EOD update failed: {e}")
     check_alerts()
 
 
