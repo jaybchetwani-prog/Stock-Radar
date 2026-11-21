@@ -9,8 +9,8 @@
    Leave them empty to run the site without accounts. The anon key is meant to be public;
    your data is protected by the database rules in supabase_setup.sql. */
 window.RADAR_CONFIG = {
-  supabaseUrl: "https://orgvuxqaxguhaamfalwa.supabase.co/rest/v1/",       // e.g. "https://abcdefghijkl.supabase.co"
-  supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9yZ3Z1eHFheGd1aGFhbWZhbHdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUxNTk5NDMsImV4cCI6MjExMDczNTk0M30.0t1Zs6TeW9Iw_xRn6fhAcit24QBlhnrp_QTNJ2wdAeI"    // the long "anon public" key
+  supabaseUrl: "",       // e.g. "https://abcdefghijkl.supabase.co"
+  supabaseAnonKey: ""    // the long "anon public" key
 };
 </script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%20role%3D%22img%22%20aria-label%3D%22Stock%20Radar%20logo%22%3E%20%20%3Cdefs%3E%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%231b2a4a%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230d1526%22/%3E%3C/linearGradient%3E%20%20%20%20%3ClinearGradient%20id%3D%22sw%22%20x1%3D%220%22%20y1%3D%221%22%20x2%3D%221%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2322c58b%22%20stop-opacity%3D%220%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2322c58b%22%20stop-opacity%3D%22.55%22/%3E%3C/linearGradient%3E%20%20%3C/defs%3E%20%20%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2215%22%20fill%3D%22url%28%23bg%29%22/%3E%20%20%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2222%22%20fill%3D%22none%22%20stroke%3D%22%235b86ff%22%20stroke-opacity%3D%22.35%22%20stroke-width%3D%222%22/%3E%20%20%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2213.5%22%20fill%3D%22none%22%20stroke%3D%22%235b86ff%22%20stroke-opacity%3D%22.5%22%20stroke-width%3D%222%22/%3E%20%20%3Cpath%20d%3D%22M32%2032%20L32%2010%20A22%2022%200%200%201%2051.05%2021%20Z%22%20fill%3D%22url%28%23sw%29%22/%3E%20%20%3Cpath%20d%3D%22M32%2032%20L51.05%2021%22%20stroke%3D%22%233ee0a1%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22/%3E%20%20%3Cline%20x1%3D%2226%22%20y1%3D%2227%22%20x2%3D%2226%22%20y2%3D%2245%22%20stroke%3D%22%23ff6b5b%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22/%3E%20%20%3Crect%20x%3D%2223%22%20y%3D%2230%22%20width%3D%226%22%20height%3D%2210%22%20rx%3D%221.2%22%20fill%3D%22%23ff6b5b%22/%3E%20%20%3Cline%20x1%3D%2237%22%20y1%3D%2222%22%20x2%3D%2237%22%20y2%3D%2243%22%20stroke%3D%22%233ee0a1%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22/%3E%20%20%3Crect%20x%3D%2234%22%20y%3D%2225%22%20width%3D%226%22%20height%3D%2214%22%20rx%3D%221.2%22%20fill%3D%22%233ee0a1%22/%3E%20%20%3Ccircle%20cx%3D%2245.5%22%20cy%3D%2217%22%20r%3D%222.6%22%20fill%3D%22%23ffffff%22/%3E%3C/svg%3E">
@@ -489,6 +489,18 @@ h1,h2,h3,.hero h2,.g-h,.pf-card dd,.chip .count{font-family:"Bricolage Grotesque
 .hold-tbl{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:14px}
 .hold-tbl th,.hold-tbl td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:right}.hold-tbl th:first-child,.hold-tbl td:first-child{text-align:left}
 .hold-tbl th{font-size:12px;color:var(--muted);font-weight:600}
+/* ---- login gate ---- */
+body.locked .wrap,body.locked .site-foot,body.locked .bottom-nav{display:none!important}
+body.locked .scrim{background:radial-gradient(900px 500px at 80% -10%,rgba(62,224,161,.25),transparent 60%),linear-gradient(135deg,#16233f 0%,#203d78 55%,#16614f 100%)!important;opacity:1}
+body.locked #authClose{display:none}
+#authDlg{width:min(500px,94vw)}
+body.locked #authDlg{box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
+.gate-splash{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#fff;
+  background:radial-gradient(900px 500px at 80% -10%,rgba(62,224,161,.25),transparent 60%),linear-gradient(135deg,#16233f 0%,#203d78 55%,#16614f 100%)}
+.gate-splash svg{width:72px;height:72px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.gate-splash b{font-family:"Bricolage Grotesque",sans-serif;font-size:28px;font-weight:800}
+.gate-splash span{color:rgba(235,242,255,.8);text-align:center;padding:0 20px}
+@media (prefers-reduced-motion:no-preference){.gate-splash svg{animation:pulse 1.6s ease-in-out infinite}@keyframes pulse{50%{transform:scale(1.06)}}}
 [hidden]{display:none !important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
@@ -780,6 +792,7 @@ h1,h2,h3,.hero h2,.g-h,.pf-card dd,.chip .count{font-family:"Bricolage Grotesque
     <p><b>Disclaimer:</b> Stock radar is based purely on technical analysis of past price and volume data. It does not consider company fundamentals, results, news, valuation or your personal financial situation. Nothing on this website is investment advice or a recommendation to buy, sell or hold any security. This website is not a SEBI-registered investment adviser or research analyst. Prices come from Yahoo Finance, may be delayed and may contain errors. Investments in the securities market are subject to market risks, and past patterns do not guarantee future results. Do your own research or consult a SEBI-registered adviser before investing.</p>
   </div>
 </footer>
+<div class="gate-splash" id="gateSplash" hidden><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#logoSym"/></svg><b>Stock radar</b><span id="gateMsg">Checking your login…</span></div>
 <div class="scrim" id="scrim" hidden></div>
 <div class="sheet modal" id="discDlg" role="dialog" aria-modal="true" aria-labelledby="discTitle" hidden>
   <div class="sheet-inner">
@@ -2187,20 +2200,27 @@ function startLive(){
 
 /* ---------- accounts (Supabase) ---------- */
 const CFG=window.RADAR_CONFIG||{};let SB=null,USER=null,IS_ADMIN=false,authMode="login",cloudTimer=null,cloudDirty=new Set(),cloudReady=false,lastSync=null;
+const GATED=!!(CFG.supabaseUrl&&CFG.supabaseAnonKey);let recovering=false;
+function maybeDisclaimer(){if(!prefs.discAck){$("#scrim").hidden=false;$("#scrim").style.zIndex=25;$("#discDlg").style.zIndex=30;$("#discDlg").hidden=false;$("#discOk").focus();}}
+function applyGate(){
+  if(!GATED)return;$("#gateSplash").hidden=true;
+  if(USER){if(document.body.classList.contains("locked")){document.body.classList.remove("locked");if(!recovering)closeAuth(true);else $("#scrim").style.zIndex=25;maybeDisclaimer();}}
+  else{document.body.classList.add("locked");if($("#authDlg").hidden)openAuth(authMode==="signup"?"signup":"login");else paintAuth();}
+}
 async function initAuth(){
-  if(!CFG.supabaseUrl||!CFG.supabaseAnonKey)return;
-  try{if(!window.supabase)await loadScript("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js");}catch(e){console.warn("Accounts library failed to load");return;}
+  if(!GATED)return;
+  try{if(!window.supabase)await loadScript("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js");}catch(e){$("#gateMsg").textContent="Couldn’t load the login service. Check your internet connection and refresh the page.";return;}
   SB=window.supabase.createClient(CFG.supabaseUrl,CFG.supabaseAnonKey);$("#acctBtn").hidden=false;
-  SB.auth.onAuthStateChange((ev,session)=>{if(ev==="PASSWORD_RECOVERY"){openAuth("reset");}setTimeout(()=>onSession(session),0);});
+  SB.auth.onAuthStateChange((ev,session)=>{if(ev==="PASSWORD_RECOVERY"){recovering=true;openAuth("reset");}setTimeout(()=>onSession(session),0);});
   const {data}=await SB.auth.getSession();await onSession(data&&data.session);
 }
 async function onSession(session){
-  const u=session?session.user:null;if((u&&u.id)===(USER&&USER.id)&&cloudReady===!!u)return;
+  const u=session?session.user:null;if((u&&u.id)===(USER&&USER.id)&&cloudReady===!!u){applyGate();return;}
   USER=u;IS_ADMIN=false;cloudReady=false;
   if(USER){try{const {data:p}=await SB.from("profiles").select("is_admin,full_name").eq("id",USER.id).maybeSingle();IS_ADMIN=!!(p&&p.is_admin);
       SB.from("profiles").update({last_seen:new Date().toISOString()}).eq("id",USER.id).then(()=>{});}catch(e){}
     await pullCloud();cloudReady=true;}
-  renderAccount();render();
+  renderAccount();applyGate();render();
 }
 function displayName(){if(!USER)return "";return (USER.user_metadata&&USER.user_metadata.full_name)||USER.email.split("@")[0];}
 function renderAccount(){
@@ -2252,13 +2272,14 @@ async function cloudFlush(force){
   if(err){toast("Couldn’t sync to your account: "+err.error.message);}else lastSync=new Date();
 }
 function openAuth(mode){authMode=mode||"login";paintAuth();$("#scrim").hidden=false;$("#scrim").style.zIndex=25;$("#authDlg").style.zIndex=30;$("#authDlg").hidden=false;setTimeout(()=>($(authMode==="reset"?"#aPass":"#aEmail")).focus(),30);}
-function closeAuth(){$("#authDlg").hidden=true;$("#scrim").style.zIndex="";if($("#sheet").hidden)$("#scrim").hidden=true;}
+function closeAuth(force){if(document.body.classList.contains("locked")&&force!==true)return;$("#authDlg").hidden=true;$("#scrim").style.zIndex="";if($("#sheet").hidden)$("#scrim").hidden=true;}
 function authMsg(t,ok){const m=$("#authMsg");if(!t){m.hidden=true;return;}m.hidden=false;m.textContent=t;m.classList.toggle("ok",!!ok);}
 function paintAuth(){
   const M=authMode;document.querySelectorAll("[data-am]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.am===M)));
   $("#authTabs").hidden=M==="forgot"||M==="reset";
-  $("#authTitle").textContent={login:"Welcome back",signup:"Create your account",forgot:"Reset your password",reset:"Choose a new password"}[M];
-  $("#authSubt").textContent={login:"Log in to sync your portfolio, watchlists and alerts.",signup:"Free. Your portfolio, watchlists and alerts on every device.",forgot:"We’ll email you a link to set a new password.",reset:"Enter a new password for your account."}[M];
+  $("#authTitle").textContent={login:document.body.classList.contains("locked")?"Log in to Stock radar":"Welcome back",signup:"Create your account",forgot:"Reset your password",reset:"Choose a new password"}[M];
+  const lk=document.body.classList.contains("locked");
+  $("#authSubt").textContent={login:lk?"Log in to use the radar, your watchlists and your portfolio.":"Log in to sync your portfolio, watchlists and alerts.",signup:lk?"Create a free account to use Stock radar.":"Free. Your portfolio, watchlists and alerts on every device.",forgot:"We’ll email you a link to set a new password.",reset:"Enter a new password for your account."}[M];
   $("#fName").hidden=M!=="signup";$("#fConsent").hidden=M!=="signup";$("#fEmail").hidden=M==="reset";$("#fPass").hidden=M==="forgot";
   $("#aPass").autocomplete=M==="login"?"current-password":"new-password";
   $("#authSubmit").textContent={login:"Log in",signup:"Create account",forgot:"Send reset link",reset:"Save new password"}[M];
@@ -2281,7 +2302,7 @@ async function submitAuth(e){
   if(r.error){authMsg(r.error.message==="Invalid login credentials"?"Email or password is wrong.":r.error.message);return;}
   if(M==="signup"&&!(r.data&&r.data.session)){authMsg("Almost done! Check your email and click the link to confirm your account, then log in.",true);return;}
   if(M==="forgot"){authMsg("If that email has an account, a reset link is on its way.",true);return;}
-  closeAuth();$("#aPass").value="";const uu=r.data&&r.data.user;const nm=uu?((uu.user_metadata&&uu.user_metadata.full_name)||uu.email.split("@")[0]):"";toast(M==="reset"?"Password updated.":`Welcome${nm?", "+nm.split(" ")[0]:""}!`);
+  if(M==="reset"){recovering=false;closeAuth(true);}else closeAuth();$("#aPass").value="";const uu=r.data&&r.data.user;const nm=uu?((uu.user_metadata&&uu.user_metadata.full_name)||uu.email.split("@")[0]):"";toast(M==="reset"?"Password updated.":`Welcome${nm?", "+nm.split(" ")[0]:""}!`);
 }
 /* ---------- admin dashboard ---------- */
 const adState={users:null,hold:null,filter:"all",sort:"new",q:"",loading:false};
@@ -2358,8 +2379,9 @@ function exportUsers(){if(!adState.users)return;const H=adState.hold;const q=v=>
 
 /* ---------- start ---------- */
 (async()=>{
+  if(GATED){document.body.classList.add("locked");$("#gateSplash").hidden=false;}
   state.loading=true;applyTheme();render();updateBell();initAuth();
-  if(!prefs.discAck){$("#scrim").hidden=false;$("#scrim").style.zIndex=25;$("#discDlg").style.zIndex=30;$("#discDlg").hidden=false;$("#discOk").focus();}
+  if(!GATED)maybeDisclaimer();
   if(/^https?:$/.test(location.protocol)){
     await loadIndexLists();
     const ok=await liveCheck();state.loading=false;
