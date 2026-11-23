@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Stock radar</title>
+<title>Chartviewer</title>
 <link rel="manifest" href="data/manifest.webmanifest">
 <link rel="apple-touch-icon" href="data/icon-192.png">
 <meta name="theme-color" content="#16233f">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%20role%3D%22img%22%20aria-label%3D%22Stock%20Radar%20logo%22%3E%20%20%3Cdefs%3E%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%231b2a4a%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230d1526%22/%3E%3C/linearGradient%3E%20%20%20%20%3ClinearGradient%20id%3D%22sw%22%20x1%3D%220%22%20y1%3D%221%22%20x2%3D%221%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2322c58b%22%20stop-opacity%3D%220%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2322c58b%22%20stop-opacity%3D%22.55%22/%3E%3C/linearGradient%3E%20%20%3C/defs%3E%20%20%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2215%22%20fill%3D%22url%28%23bg%29%22/%3E%20%20%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2222%22%20fill%3D%22none%22%20stroke%3D%22%235b86ff%22%20stroke-opacity%3D%22.35%22%20stroke-width%3D%222%22/%3E%20%20%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2213.5%22%20fill%3D%22none%22%20stroke%3D%22%235b86ff%22%20stroke-opacity%3D%22.5%22%20stroke-width%3D%222%22/%3E%20%20%3Cpath%20d%3D%22M32%2032%20L32%2010%20A22%2022%200%200%201%2051.05%2021%20Z%22%20fill%3D%22url%28%23sw%29%22/%3E%20%20%3Cpath%20d%3D%22M32%2032%20L51.05%2021%22%20stroke%3D%22%233ee0a1%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22/%3E%20%20%3Cline%20x1%3D%2226%22%20y1%3D%2227%22%20x2%3D%2226%22%20y2%3D%2245%22%20stroke%3D%22%23ff6b5b%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22/%3E%20%20%3Crect%20x%3D%2223%22%20y%3D%2230%22%20width%3D%226%22%20height%3D%2210%22%20rx%3D%221.2%22%20fill%3D%22%23ff6b5b%22/%3E%20%20%3Cline%20x1%3D%2237%22%20y1%3D%2222%22%20x2%3D%2237%22%20y2%3D%2243%22%20stroke%3D%22%233ee0a1%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22/%3E%20%20%3Crect%20x%3D%2234%22%20y%3D%2225%22%20width%3D%226%22%20height%3D%2214%22%20rx%3D%221.2%22%20fill%3D%22%233ee0a1%22/%3E%20%20%3Ccircle%20cx%3D%2245.5%22%20cy%3D%2217%22%20r%3D%222.6%22%20fill%3D%22%23ffffff%22/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%20role%3D%22img%22%20aria-label%3D%22Chartviewer%20logo%22%3E%20%20%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2215%22%20fill%3D%22%2316233f%22/%3E%20%20%3Cline%20x1%3D%228%22%20y1%3D%2225%22%20x2%3D%2256%22%20y2%3D%2225%22%20stroke%3D%22%237aa2ff%22%20stroke-width%3D%222%22%20stroke-dasharray%3D%224%203%22/%3E%20%20%3Cline%20x1%3D%2219%22%20y1%3D%2238%22%20x2%3D%2219%22%20y2%3D%2256%22%20stroke%3D%22%23ff6b5b%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22/%3E%20%20%3Crect%20x%3D%2215%22%20y%3D%2241%22%20width%3D%228%22%20height%3D%2211%22%20rx%3D%221.6%22%20fill%3D%22%23ff6b5b%22/%3E%20%20%3Cline%20x1%3D%2232%22%20y1%3D%2229%22%20x2%3D%2232%22%20y2%3D%2254%22%20stroke%3D%22%233ee0a1%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22/%3E%20%20%3Crect%20x%3D%2228%22%20y%3D%2232%22%20width%3D%228%22%20height%3D%2217%22%20rx%3D%221.6%22%20fill%3D%22%233ee0a1%22/%3E%20%20%3Cline%20x1%3D%2245%22%20y1%3D%2215%22%20x2%3D%2245%22%20y2%3D%2248%22%20stroke%3D%22%233ee0a1%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22/%3E%20%20%3Crect%20x%3D%2241%22%20y%3D%2218%22%20width%3D%228%22%20height%3D%2224%22%20rx%3D%221.6%22%20fill%3D%22%233ee0a1%22/%3E%20%20%3Cpath%20d%3D%22M39.5%2015.5%20L45%209%20L50.5%2015.5%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Familjen+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -599,28 +599,30 @@ table.dt{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numer
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="logoSym" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#16233f"/><circle cx="32" cy="32" r="22" fill="none" stroke="#5b86ff" stroke-opacity=".4" stroke-width="2"/><circle cx="32" cy="32" r="13.5" fill="none" stroke="#5b86ff" stroke-opacity=".55" stroke-width="2"/><path d="M32 32 L51.05 21" stroke="#3ee0a1" stroke-width="2.6" stroke-linecap="round"/><line x1="26" y1="27" x2="26" y2="45" stroke="#ff6b5b" stroke-width="2"/><rect x="23" y="30" width="6" height="10" rx="1.2" fill="#ff6b5b"/><line x1="37" y1="22" x2="37" y2="43" stroke="#3ee0a1" stroke-width="2"/><rect x="34" y="25" width="6" height="14" rx="1.2" fill="#3ee0a1"/><circle cx="45.5" cy="17" r="2.6" fill="#fff"/></symbol></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="logoSym" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#16233f"/>
+  <line x1="8" y1="25" x2="56" y2="25" stroke="#7aa2ff" stroke-width="2" stroke-dasharray="4 3"/>
+  <line x1="19" y1="38" x2="19" y2="56" stroke="#ff6b5b" stroke-width="2.2" stroke-linecap="round"/>
+  <rect x="15" y="41" width="8" height="11" rx="1.6" fill="#ff6b5b"/>
+  <line x1="32" y1="29" x2="32" y2="54" stroke="#3ee0a1" stroke-width="2.2" stroke-linecap="round"/>
+  <rect x="28" y="32" width="8" height="17" rx="1.6" fill="#3ee0a1"/>
+  <line x1="45" y1="15" x2="45" y2="48" stroke="#3ee0a1" stroke-width="2.2" stroke-linecap="round"/>
+  <rect x="41" y="18" width="8" height="24" rx="1.6" fill="#3ee0a1"/>
+  <path d="M39.5 15.5 L45 9 L50.5 15.5" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol></defs></svg>
 <div class="wrap">
   <header class="top">
     <div class="brand">
-      <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
-  <defs>
-    <linearGradient id="lgbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1b2a4a"/><stop offset="1" stop-color="#0d1526"/></linearGradient>
-    <linearGradient id="lgsw" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#22c58b" stop-opacity="0"/><stop offset="1" stop-color="#22c58b" stop-opacity=".55"/></linearGradient>
-  </defs>
-  <rect width="64" height="64" rx="15" fill="url(#lgbg)"/>
-  <circle cx="32" cy="32" r="22" fill="none" stroke="#5b86ff" stroke-opacity=".35" stroke-width="2"/>
-  <circle cx="32" cy="32" r="13.5" fill="none" stroke="#5b86ff" stroke-opacity=".5" stroke-width="2"/>
-  <path d="M32 32 L32 10 A22 22 0 0 1 51.05 21 Z" fill="url(#lgsw)"/>
-  <path d="M32 32 L51.05 21" stroke="#3ee0a1" stroke-width="2.6" stroke-linecap="round"/>
-  <line x1="26" y1="27" x2="26" y2="45" stroke="#ff6b5b" stroke-width="2" stroke-linecap="round"/>
-  <rect x="23" y="30" width="6" height="10" rx="1.2" fill="#ff6b5b"/>
-  <line x1="37" y1="22" x2="37" y2="43" stroke="#3ee0a1" stroke-width="2" stroke-linecap="round"/>
-  <rect x="34" y="25" width="6" height="14" rx="1.2" fill="#3ee0a1"/>
-  <circle cx="45.5" cy="17" r="2.6" fill="#ffffff"/>
+      <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">  <rect width="64" height="64" rx="15" fill="#16233f"/>
+  <line x1="8" y1="25" x2="56" y2="25" stroke="#7aa2ff" stroke-width="2" stroke-dasharray="4 3"/>
+  <line x1="19" y1="38" x2="19" y2="56" stroke="#ff6b5b" stroke-width="2.2" stroke-linecap="round"/>
+  <rect x="15" y="41" width="8" height="11" rx="1.6" fill="#ff6b5b"/>
+  <line x1="32" y1="29" x2="32" y2="54" stroke="#3ee0a1" stroke-width="2.2" stroke-linecap="round"/>
+  <rect x="28" y="32" width="8" height="17" rx="1.6" fill="#3ee0a1"/>
+  <line x1="45" y1="15" x2="45" y2="48" stroke="#3ee0a1" stroke-width="2.2" stroke-linecap="round"/>
+  <rect x="41" y="18" width="8" height="24" rx="1.6" fill="#3ee0a1"/>
+  <path d="M39.5 15.5 L45 9 L50.5 15.5" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 
-      <h1>Stock radar<small>Market research terminal: India, US and global markets</small></h1>
+      <h1>Chartviewer<small>Market research terminal: India, US and global markets</small></h1>
     </div>
     <div class="gsearch" id="gsearch">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
@@ -964,15 +966,15 @@ table.dt{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numer
 <nav class="bottom-nav" aria-label="Sections"><button type="button" data-view="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg><span>Markets</span></button><button type="button" data-view="radar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6-4.5"/></svg><span>Scanner</span></button><button type="button" data-view="watch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8 6.8 19.5l1-5.8-4.2-4.1 5.8-.8z"/></svg><span>Watchlist</span></button><button type="button" data-view="portfolio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7"/></svg><span>Portfolio</span></button><button type="button" id="moreBtn" aria-controls="side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>More</span></button></nav><div class="side-scrim" id="sideScrim" hidden></div>
 <footer class="site-foot">
   <div class="foot-inner">
-    <div class="foot-brand"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#logoSym"/></svg><b>Stock radar</b></div>
-    <p><b>Disclaimer:</b> Stock radar is based purely on technical analysis of past price and volume data. It does not consider company fundamentals, results, news, valuation or your personal financial situation. Nothing on this website is investment advice or a recommendation to buy, sell or hold any security. This website is not a SEBI-registered investment adviser or research analyst. Prices come from Yahoo Finance, may be delayed and may contain errors. Investments in the securities market are subject to market risks, and past patterns do not guarantee future results. Do your own research or consult a SEBI-registered adviser before investing.</p>
+    <div class="foot-brand"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#logoSym"/></svg><b>Chartviewer</b></div>
+    <p><b>Disclaimer:</b> Chartviewer is based purely on technical analysis of past price and volume data. It does not consider company fundamentals, results, news, valuation or your personal financial situation. Nothing on this website is investment advice or a recommendation to buy, sell or hold any security. This website is not a SEBI-registered investment adviser or research analyst. Prices come from Yahoo Finance, may be delayed and may contain errors. Investments in the securities market are subject to market risks, and past patterns do not guarantee future results. Do your own research or consult a SEBI-registered adviser before investing.</p>
   </div>
 </footer>
 <div class="scrim" id="scrim" hidden></div>
 <div class="sheet modal" id="discDlg" role="dialog" aria-modal="true" aria-labelledby="discTitle" hidden>
   <div class="sheet-inner">
     <h2 id="discTitle">Before you start</h2>
-    <p>Stock radar is a <b>technical analysis</b> tool. Every signal, buy range, stop loss and target comes only from price charts: patterns, support and resistance, moving averages, RSI and ATR.</p>
+    <p>Chartviewer is a <b>technical analysis</b> tool. Every signal, buy range, stop loss and target comes only from price charts: patterns, support and resistance, moving averages, RSI and ATR.</p>
     <ul class="disc-list">
       <li>It does not look at company results, news, valuation or your finances.</li>
       <li>It is not investment advice, and this website is not a SEBI-registered adviser or research analyst.</li>
@@ -1478,14 +1480,14 @@ function exportCSV(){
   const out=[["Symbol","Company","Sector","Close","Change %","Signals","RSI","Volume vs avg","Resistance","Support","Distance to high %","ST buy from","ST buy to","ST stop loss","ST target 1","ST target 2"].join(",")];
   for(const r of rows){const info=infoOf(d,r.sym);out.push([r.sym,info.name,info.sector,r.close.toFixed(2),r.chg.toFixed(2),signalNames(r).join(" + "),r.rsi==null?"":r.rsi.toFixed(1),r.volRatio==null?"":r.volRatio.toFixed(2),r.res.toFixed(2),r.sup.toFixed(2),r.distRes.toFixed(2),...(()=>{const raw=d.series[r.sym];const pl=raw&&horizonPlan(raw,"st",profile(),KIND[r.sym]==="index");return pl?[pl.buyLow,pl.buyHigh,pl.stop,pl.t1,pl.t2].map(x=>x.toFixed(2)):["","","","",""];})()].map(q).join(","));}
   const blob=new Blob([out.join("\n")],{type:"text/csv"});const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);a.download=`stock-radar-${prefs.market}-${prefs.tf}-${new Date().toISOString().slice(0,10)}.csv`;
+  a.href=URL.createObjectURL(blob);a.download=`chartviewer-${prefs.market}-${prefs.tf}-${new Date().toISOString().slice(0,10)}.csv`;
   document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);
 }
 async function shareList(){
   const rows=(state.shown||[]).slice(0,15);if(!rows.length)return;
   const tf=({D:"Daily",W:"Weekly",M:"Monthly"})[prefs.tf];
-  const text=`Stock radar, ${prefs.market} ${tf}:\n`+rows.map(r=>`${r.sym} ${fmtP(r.close)} (${fmtPct(r.chg,true)}): ${signalNames(r).join(", ")}`).join("\n");
-  try{await navigator.share({title:"Stock radar",text,url:location.href});}catch(e){}
+  const text=`Chartviewer, ${prefs.market} ${tf}:\n`+rows.map(r=>`${r.sym} ${fmtP(r.close)} (${fmtPct(r.chg,true)}): ${signalNames(r).join(", ")}`).join("\n");
+  try{await navigator.share({title:"Chartviewer",text,url:location.href});}catch(e){}
 }
 function atSup(r,id){return r.patSup&&r.patSup[id]!=null?` at support ${fmtP(r.patSup[id])}`:"";}
 const AV_COLORS=["#2f5fd0","#0f8a63","#b0306b","#9a6410","#6d43c9","#0d7f9a","#c2412d","#3d5a80","#7a5c00","#5b6b2f"];
@@ -1870,7 +1872,7 @@ function checkAlerts(){
     else{const w=smartCheck(a,s);if(w){a.firedAt=Date.now();a.firedPrice=c;a.what=w;fired.push(a);}}}
   if(!fired.length)return;saveAlerts();
   for(const a of fired){const msg=a.what?`${a.sym}: ${a.what}. Price ${fmtP(a.firedPrice)}.`:`${a.sym} is ${fmtP(a.firedPrice)}, ${a.cond==="above"?"at or above":"at or below"} your alert ${fmtP(a.price)}${a.note?" ("+a.note+")":""}`;
-    toast(msg);try{if("Notification" in window&&Notification.permission==="granted")new Notification("Stock radar alert",{body:msg});}catch(e){}}
+    toast(msg);try{if("Notification" in window&&Notification.permission==="granted")new Notification("Chartviewer alert",{body:msg});}catch(e){}}
 }
 function renderAlertsList(){
   const box=$("#alList");box.replaceChildren();
@@ -2363,7 +2365,7 @@ $("#scExport").addEventListener("click",()=>{const rows=state.scOut||[];if(!rows
   const q=v=>{v=String(v==null?"":v);return /[",\n]/.test(v)?`"${v.replace(/"/g,'""')}"`:v;};
   const head=["Symbol","Company","Sector","Price","Change %","Market cap (Cr)","P/E","P/B","ROE %","ROCE %","Revenue growth %","Profit growth %","Debt/Equity","RSI","Above 50 DMA","Above 200 DMA"];
   const lines=[head.join(",")].concat(rows.map(r=>[r.sym,r.name,r.sector,r.c.toFixed(2),r.chp.toFixed(2),r.mcap!=null?(r.mcap/1e7).toFixed(0):"",r.pe??"",r.pb??"",r.roe??"",r.roce??"",r.revg??"",r.npg??"",r.de??"",r.rsi!=null?r.rsi.toFixed(1):"",r.above50,r.above200].map(q).join(",")));
-  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([lines.join("\n")],{type:"text/csv"}));a.download="stock-radar-screener.csv";document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);});
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([lines.join("\n")],{type:"text/csv"}));a.download="chartviewer-screener.csv";document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);});
 attachSearch($("#fuq"),$("#fures"),it=>openStock(it.sym,it.market,"fund"));
 attachSearch($("#cmpq"),$("#cmpres"),addCompare);
 $("#alertsBtn").addEventListener("click",openAlerts);$("#alClose").addEventListener("click",closeAlerts);$("#alExport").addEventListener("click",exportAlerts);
@@ -2900,7 +2902,7 @@ async function renderChart(r,market){
   ch.subscribeClick(prm=>{if(!drawMode||!prm||!prm.point)return;const price=main.coordinateToPrice(prm.point.y);if(price==null)return;const list=getDraw(r.sym,market);
     if(drawMode==="h"){list.push({t:"h",p:+price.toFixed(4)});setDraw(r.sym,market,list);setDrawMode(null);renderChart(r,market);}
     else if(drawMode==="t"&&prm.time!=null){if(!drawFirst){drawFirst={time:prm.time,value:price};$("#drawHint").textContent="Now click the second point.";}else{if(prm.time!==drawFirst.time){list.push({t:"l",m:dmode,a:drawFirst,b:{time:prm.time,value:price}});setDraw(r.sym,market,list);}drawFirst=null;setDrawMode(null);renderChart(r,market);}}});
-  if(!D.intraday&&r.patLv&&chartState.iv==="D")for(const id in r.sig){const v=r.sig[id];if(v&&typeof v==="object"&&v.level&&SIGMAP[id])main.createPriceLine({price:v.level,color:SIGMAP[id].bias==="bear"?bear:bull,lineStyle:2,lineWidth:1,title:SIGMAP[id].label});}
+  if(!D.intraday&&r.patLv&&chartState.iv==="D")for(const id in r.sig){const v=r.sig[id];if(v&&typeof v==="object"&&v.level&&SIGMAP[id]&&!["trendtpl","pocket"].includes(id))main.createPriceLine({price:v.level,color:SIGMAP[id].bias==="bear"?bear:bull,lineStyle:2,lineWidth:1,title:SIGMAP[id].label});}
   if(!D.intraday&&chartState.iv==="D"&&r.res&&!sheetTf.match(/[WM]/)){
     main.createPriceLine({price:r.res,color:cssv("--sig-breakout"),lineStyle:2,lineWidth:1,title:"Resistance"});
     main.createPriceLine({price:r.sup,color:cssv("--sig-support"),lineStyle:2,lineWidth:1,title:"Support"});
@@ -3028,7 +3030,7 @@ const CANDLE_LEN={piercing:2,bharami:2,tws:3,ihammer:1,dragonfly:1,tweezb:2,shoo
 const NEEDS_SUP=new Set(["piercing","bharami","ihammer","dragonfly","tweezb"]),NEEDS_RES=new Set(["shoot","hangman","bengulf","estar","darkcloud","bearharami","gravestone","tweezt"]);
 
 /* candle detectors on arrays A={o,h,l,c}; i = last bar of the pattern; tr = trend check on/off */
-function candleFns(A,tr){
+function candleFnsBase(A,tr){
   const {o,h,l,c}=A;const B=i=>Math.abs(c[i]-o[i]),R=i=>h[i]-l[i],G=i=>c[i]>o[i],D=i=>c[i]<o[i];
   const up=i=>h[i]-Math.max(o[i],c[i]),lo=i=>Math.min(o[i],c[i])-l[i];
   const avgB=i=>{let s=0,k=0;for(let j=Math.max(0,i-10);j<i;j++){s+=B(j);k++;}return k?s/k:B(i);};
@@ -3065,7 +3067,7 @@ function pivK(A,from,to,k){const L=[],H=[];for(let j=Math.max(k,from);j<=to-k;j+
 function crossedUp(A,lv,n,k){for(let i=n-1;i>=Math.max(1,n-k);i--)if(A.c[i]>lv&&A.c[i-1]<=lv)return true;return false;}
 function crossedDn(A,lv,n,k){for(let i=n-1;i>=Math.max(1,n-k);i--)if(A.c[i]<lv&&A.c[i-1]>=lv)return true;return false;}
 /* chart patterns on the latest bar: returns {state:"near"|"confirmed", level} or null */
-function chartPatterns(A,tol){
+function chartPatternsBase(A,tol){
   const n=A.c.length,c=A.c[n-1],out={};if(n<60)return out;
   const P=pivK(A,n-150,n-1,4);const L=P.L,H=P.H;
   const near=(lv,dir)=>dir>0?(c<=lv&&c>=lv*(1-tol/100)):(c>=lv&&c<=lv*(1+tol/100));
@@ -3109,7 +3111,7 @@ function chartPatterns(A,tol){
 }
 /* run on the latest bars (used by analyze) */
 function patExtra(s,st){
-  const n=s.c.length,out={sig:{},lv:{}};if(n<30)return out;const A={o:s.o,h:s.h,l:s.l,c:s.c};const N=Math.max(5,Math.round(st.lookback)),tol=Math.max(0,st.tol);
+  const n=s.c.length,out={sig:{},lv:{}};if(n<30)return out;const A={o:s.o,h:s.h,l:s.l,c:s.c,v:s.v};const N=Math.max(5,Math.round(st.lookback)),tol=Math.max(0,st.tol);
   const F=candleFns(A,st.downtrend!==false);const recent=Math.min(3,Math.max(1,Math.round(st.recent)));
   for(const id in CANDLE_LEN){for(let k=0;k<recent;k++){const i=n-1-k;if(!F[id](i))continue;const first=i-CANDLE_LEN[id]+1;
       if(NEEDS_SUP.has(id)&&st.atSupport){let lo=Infinity;for(let j=first;j<=i;j++)lo=Math.min(lo,A.l[j]);const lv=levelNear(A,first,lo,N,tol,"sup");if(lv==null)continue;out.lv[id]=lv;}
@@ -3130,12 +3132,12 @@ function ipoBase(sym,market,s,tol){
 
 /* ---------- pattern badges & explorer ---------- */
 function patBadgeText(id,v,tf,a){const s=SIGMAP[id];if(!s)return "";if(v&&typeof v==="object"){const conf=v.state==="confirmed";
-    return s.bias==="bear"?(conf?"breakdown below "+fmtP(v.level):"near neckline "+fmtP(v.level)):s.group==="brk"?"":conf?"breakout above "+fmtP(v.level):"forming, pivot "+fmtP(v.level);}
+    return ["trendtpl","pocket","islandb","islandt"].includes(id)?"":s.bias==="bear"?(conf?"breakdown below "+fmtP(v.level):"near neckline "+fmtP(v.level)):s.group==="brk"?"":conf?"breakout above "+fmtP(v.level):"forming, pivot "+fmtP(v.level);}
   if(typeof v==="number"&&CANDLE_LEN[id])return agoText(v,tf)+(a&&a.patLv&&a.patLv[id]!=null?(NEEDS_SUP.has(id)?", at support":", at resistance"):"");return "";}
 function renderPatternExplorer(base){
-  let box=$("#patExplorer");if(!box){box=el("details","pat-ex");box.id="patExplorer";const sm=el("summary",null,"Pattern library: 35 more candlestick and chart patterns");box.append(sm,el("div","pat-ex-body"));$("#chips").closest(".panel").append(box);if(prefs.patOpen)box.open=true;box.addEventListener("toggle",()=>{prefs.patOpen=box.open;savePrefs();});}
+  let box=$("#patExplorer");if(!box){box=el("details","pat-ex");box.id="patExplorer";const sm=el("summary",null,"Pattern library");box.append(sm,el("div","pat-ex-body"));$("#chips").closest(".panel").append(box);if(prefs.patOpen)box.open=true;box.addEventListener("toggle",()=>{prefs.patOpen=box.open;savePrefs();});}
   const body=box.querySelector(".pat-ex-body");body.replaceChildren();
-  const sel=prefs.active.filter(id=>SIGMAP[id]&&SIGMAP[id].extra).length;box.querySelector("summary").textContent=`Pattern library: 35 more candlestick and chart patterns${sel?` (${sel} selected)`:""}`;
+  const sel=prefs.active.filter(id=>SIGMAP[id]&&SIGMAP[id].extra).length;box.querySelector("summary").textContent=`Pattern library: ${SIGNALS.filter(x=>x.extra).length} more setups and patterns${sel?` (${sel} selected)`:""}`;
   for(const [g,gl] of PAT_GROUPS){const row=el("div","pat-grp");row.append(el("div","pat-gh",gl));const wrap=el("div","pat-chips");
     for(const s of SIGNALS.filter(x=>x.extra&&x.group===g)){const b=el("button","pchip "+s.bias);b.type="button";b.title=s.desc;b.setAttribute("aria-pressed",String(prefs.active.includes(s.id)));
       b.append(el("span",null,s.label),el("b",null,String(base.filter(r=>r.sig[s.id]!==undefined).length)));
@@ -3165,12 +3167,13 @@ function btDetectors(A,st){const F=candleFns(A,st.downtrend!==false);const n=A.c
     gapup:i=>i>=1&&A.o[i]>A.h[i-1]*1.01&&A.l[i]>A.h[i-1],gapdn:i=>i>=1&&A.o[i]<A.l[i-1]*0.99&&A.h[i]<A.l[i-1],
     breakdown:i=>{if(i<22)return false;let l=Infinity;for(let j=i-20;j<i;j++)l=Math.min(l,A.l[j]);return A.c[i]<l&&A.c[i-1]>=l;},
     gcross:i=>s50&&i>200&&s50[i]>s200[i]&&s50[i-1]<=s200[i-1],dcross:i=>s50&&i>200&&s50[i]<s200[i]&&s50[i-1]>=s200[i-1]});
+  Object.assign(D,btExtra(A,st));
   return {D,ok};}
 async function runBacktest(uni){
   if(BT.running)return;const N=state.data.NSE;if(!N)return;const st=prefs.settings;const key=[uni,N.version,JSON.stringify(st)].join("|");if(BT.res&&BT.key===key){renderBacktest();return;}
   BT.running=true;const H=[5,10,20];const acc={};for(const id of BT_IDS)acc[id]={n:0,r:H.map(()=>[])};const base=H.map(()=>({s:0,n:0,w:0}));
   const syms=universeSyms(uni).filter(x=>N.series[x]&&KIND[x]!=="etf"&&KIND[x]!=="index");let done=0;
-  for(const sym of syms){const s=N.series[sym];const A={o:s.o,h:s.h,l:s.l,c:s.c};const n=s.c.length;if(n<80){done++;continue;}const {D,ok}=btDetectors(A,st);
+  for(const sym of syms){const s=N.series[sym];const A={o:s.o,h:s.h,l:s.l,c:s.c,v:s.v};const n=s.c.length;if(n<80){done++;continue;}const {D,ok}=btDetectors(A,st);
     for(let i=60;i<n-20;i++){for(let h=0;h<3;h++){const r=s.c[i+H[h]]/s.c[i]-1;base[h].s+=r;base[h].n++;if(r>0)base[h].w++;}
       for(const id of BT_IDS){const f=D[id];if(f&&f(i)&&ok(id,i)){const a=acc[id];a.n++;for(let h=0;h<3;h++)a.r[h].push(s.c[i+H[h]]/s.c[i]-1);}}}
     done++;if(done%25===0){$("#btStatus").textContent=`Testing… ${done} of ${syms.length} stocks`;await new Promise(r=>setTimeout(r,0));}}
@@ -3396,6 +3399,121 @@ function closeNote(){$("#noteDlg").hidden=true;$("#scrim").style.zIndex="";if($(
 
 /* PWA install prompt */
 let installEvt=null;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installEvt=e;const b=$("#installBtn");if(b)b.hidden=false;});
+
+/* =====================================================================
+   PRO SETUPS & EXTRA PATTERNS (Weinstein, Minervini, O'Neil, Darvas,
+   classic chart patterns, rarer candlesticks)
+   ===================================================================== */
+const PAT_META2=[
+  ["trendtpl","Trend template (Minervini)","setup","bull","Price above its 50, 150 and 200-day averages in that order, the 200-day rising for a month, at least 30% above the 52-week low and within 25% of the 52-week high."],
+  ["stage2","Stage 2 breakout (Weinstein)","setup","bull","Price breaks above its 40-session base while the 30-week (150-day) average is rising, on at least 1.5× normal volume."],
+  ["vcp","VCP (volatility contraction)","setup","bull","Three or more pullbacks, each smaller than the last (the final one under 10%), with volume drying up, in an uptrend. Bullish above the last pivot high."],
+  ["pocket","Pocket pivot","setup","bull","An up day above the 50-day average whose volume beats the biggest down-day volume of the previous 10 sessions: an early sign of institutional buying."],
+  ["flatbase","Flat base (O’Neil)","setup","bull","A tight sideways range under 15% deep for at least 6 weeks after a rise of 20% or more. Bullish above the top of the base."],
+  ["htf","High tight flag","setup","bull","A stock that roughly doubles within 8 weeks, then pulls back only 10 to 25%. Rare; bullish above the flag high."],
+  ["darvas","Darvas box","setup","bull","A stock near its 52-week high forms a tight box (under 12% tall) after a top that held for 3 sessions. Bullish above the box top."],
+  ["fwedge","Falling wedge","chart","bull","Lower highs and lower lows converging, with highs falling faster. Bullish on a close above the upper line."],
+  ["rwedge","Rising wedge","chart","bear","Higher highs and higher lows converging, with lows rising faster. Bearish on a close below the lower line."],
+  ["rbottom","Rounding bottom","chart","bull","A slow U-shaped turn over about 4 months: decline, flat bottom, recovery. Bullish above the left-side high."],
+  ["tbottom","Triple bottom","chart","bull","Three similar lows with peaks between them; bullish on a close above the highest peak."],
+  ["ttop","Triple top","chart","bear","Three similar highs with dips between them; bearish on a close below the lowest dip."],
+  ["pennant","Bull pennant","chart","bull","A sharp rise followed by a small converging triangle; bullish on a break above the pennant."],
+  ["chanbo","Falling channel breakout","chart","bull","Price closes above the upper line of a falling, roughly parallel channel."],
+  ["chanbd","Rising channel breakdown","chart","bear","Price closes below the lower line of a rising, roughly parallel channel."],
+  ["islandb","Island reversal (bottom)","chart","bull","A gap down, a few sessions isolated below, then a gap up that leaves them as an island."],
+  ["islandt","Island reversal (top)","chart","bear","A gap up, a few sessions isolated above, then a gap down that leaves them as an island."],
+  ["kickerb","Bullish kicker","bullc","bull","A red candle followed by a strong green candle that opens above the red candle’s open: a sharp change in sentiment."],
+  ["r3m","Rising three methods","bullc","bull","A big green candle, three small candles inside its range, then a big green candle closing higher: the uptrend continues."],
+  ["ababyb","Abandoned baby (bullish)","bullc","bull","A red candle, a doji that gaps below it, then a green candle that gaps up. Rare, strong reversal."],
+  ["kickers","Bearish kicker","bearc","bear","A green candle followed by a strong red candle that opens below the green candle’s open."],
+  ["f3m","Falling three methods","bearc","bear","A big red candle, three small candles inside its range, then a big red candle closing lower: the downtrend continues."],
+  ["ababys","Abandoned baby (bearish)","bearc","bear","A green candle, a doji that gaps above it, then a red candle that gaps down. Rare, strong reversal."]
+];
+PAT_GROUPS.splice(0,0,["setup","Pro setups (O’Neil, Minervini, Weinstein, Darvas)"]);
+for(const [id,label,group,bias,desc] of PAT_META2){const s={id,label,group,bias,desc,color:BIAS_COLOR[bias],extra:true};SIGNALS.push(s);SIGMAP[id]=s;}
+Object.assign(CANDLE_LEN,{kickerb:2,kickers:2,r3m:5,f3m:5,ababyb:3,ababys:3});
+
+function candleFns(A,tr){
+  const F=candleFnsBase(A,tr);const {o,h,l,c}=A;const B=i=>Math.abs(c[i]-o[i]),R=i=>h[i]-l[i],G=i=>c[i]>o[i],D=i=>c[i]<o[i];
+  const avgB=i=>{let s=0,k=0;for(let j=Math.max(0,i-10);j<i;j++){s+=B(j);k++;}return k?s/k:B(i);};
+  return Object.assign(F,{
+    kickerb:i=>i>=11&&D(i-1)&&B(i-1)>=0.6*avgB(i-1)&&G(i)&&o[i]>=o[i-1]&&B(i)>=avgB(i)&&l[i]>=c[i-1],
+    kickers:i=>i>=11&&G(i-1)&&B(i-1)>=0.6*avgB(i-1)&&D(i)&&o[i]<=o[i-1]&&B(i)>=avgB(i)&&h[i]<=c[i-1],
+    r3m:i=>{const a=i-4;if(a<11||!G(a)||B(a)<avgB(a)||!G(i)||B(i)<0.8*B(a)||c[i]<=c[a])return false;for(let j=a+1;j<i;j++)if(B(j)>0.5*B(a)||h[j]>h[a]||l[j]<l[a])return false;return true;},
+    f3m:i=>{const a=i-4;if(a<11||!D(a)||B(a)<avgB(a)||!D(i)||B(i)<0.8*B(a)||c[i]>=c[a])return false;for(let j=a+1;j<i;j++)if(B(j)>0.5*B(a)||h[j]>h[a]||l[j]<l[a])return false;return true;},
+    ababyb:i=>{const a=i-2,b=i-1;return a>=8&&D(a)&&B(a)>=avgB(a)&&R(b)>0&&B(b)<=0.1*R(b)&&h[b]<l[a]&&G(i)&&l[i]>h[b];},
+    ababys:i=>{const a=i-2,b=i-1;return a>=8&&G(a)&&B(a)>=avgB(a)&&R(b)>0&&B(b)<=0.1*R(b)&&l[b]>h[a]&&D(i)&&h[i]<l[b];}
+  });
+}
+/* line through two pivots, value at bar x */
+const lineAt=(p1,p2,x)=>p1[1]+(p2[1]-p1[1])*(x-p1[0])/(p2[0]-p1[0]);
+function setupPatterns(A,tol){
+  const n=A.c.length,c=A.c[n-1],out={};if(n<60)return out;const v=A.v||[];
+  const near=(lv,dir)=>dir>0?(c<=lv&&c>=lv*(1-tol/100)):(c>=lv&&c<=lv*(1+tol/100));
+  const s50=smaA(A.c,50),s150=smaA(A.c,150),s200=smaA(A.c,200);
+  let hi52=-Infinity,lo52=Infinity;for(let j=Math.max(0,n-252);j<n;j++){hi52=Math.max(hi52,A.h[j]);lo52=Math.min(lo52,A.l[j]);}
+  let vAvg=0;for(let j=Math.max(0,n-21);j<n-1;j++)vAvg+=v[j]||0;vAvg/=20;
+  // Minervini trend template
+  if(n>=230&&s200[n-1]!=null&&s200[n-21]!=null){if(c>s50[n-1]&&s50[n-1]>s150[n-1]&&s150[n-1]>s200[n-1]&&s200[n-1]>s200[n-21]&&c>=lo52*1.3&&c>=hi52*0.75)out.trendtpl={state:"confirmed",level:s50[n-1]};}
+  // Weinstein stage 2 breakout
+  if(n>=170&&s150[n-1]!=null&&s150[n-11]!=null&&s150[n-1]>s150[n-11]&&c>s150[n-1]){let bh=-Infinity,bl=Infinity;for(let j=n-41;j<n-1;j++){bh=Math.max(bh,A.h[j]);bl=Math.min(bl,A.l[j]);}
+    if((bh-bl)/bh<=0.30){let vmax=0;for(let j=n-3;j<n;j++)vmax=Math.max(vmax,v[j]||0);
+      if(c>bh&&crossedUp(A,bh,n,3)&&vAvg>0&&vmax>=1.5*vAvg)out.stage2={state:"confirmed",level:bh};else if(near(bh,1))out.stage2={state:"near",level:bh};}}
+  // VCP
+  {const P=pivK(A,n-80,n-1,3);const ev=[...P.H.map(x=>[x[0],x[1],"H"]),...P.L.map(x=>[x[0],x[1],"L"])].sort((a,b)=>a[0]-b[0]);const d=[];let lastH=null;
+    for(const e of ev){if(e[2]==="H")lastH=e;else if(lastH){d.push([(lastH[1]-e[1])/lastH[1],lastH]);lastH=null;}}
+    if(d.length>=3){const t=d.slice(-3);const up=s50[n-1]!=null&&c>s50[n-1]&&(s200[n-1]==null||s50[n-1]>s200[n-1]);let v10=0;for(let j=n-10;j<n;j++)v10+=v[j]||0;v10/=10;let v50=0;for(let j=Math.max(0,n-50);j<n;j++)v50+=v[j]||0;v50/=Math.min(50,n);
+      if(up&&t[0][0]>t[1][0]&&t[1][0]>t[2][0]&&t[2][0]<=0.10&&t[0][0]>=0.08&&(!v50||v10<=0.9*v50)){const piv=t[2][1][1];if(c>piv&&crossedUp(A,piv,n,3))out.vcp={state:"confirmed",level:piv};else if(near(piv,1))out.vcp={state:"near",level:piv};}}}
+  // Pocket pivot
+  if(s50[n-1]!=null&&c>s50[n-1]&&c>A.c[n-2]&&c>A.o[n-1]){let dmax=0;for(let j=n-11;j<n-1;j++)if(A.c[j]<A.c[j-1])dmax=Math.max(dmax,v[j]||0);if(dmax>0&&(v[n-1]||0)>dmax)out.pocket={state:"confirmed",level:A.c[n-2]};}
+  // Flat base
+  if(n>=125){let bh=-Infinity,bl=Infinity;for(let j=n-31;j<n-1;j++){bh=Math.max(bh,A.h[j]);bl=Math.min(bl,A.l[j]);}if((bh-bl)/bh<=0.15&&A.c[n-31]>=A.c[n-91]*1.2){if(c>bh&&crossedUp(A,bh,n,3))out.flatbase={state:"confirmed",level:bh};else if(near(bh,1))out.flatbase={state:"near",level:bh};}}
+  // High tight flag
+  {let pk=-1,ph=-Infinity;for(let j=n-45;j<=n-6;j++)if(j>=0&&A.h[j]>ph){ph=A.h[j];pk=j;}
+    if(pk>40){let lo=Infinity;for(let j=pk-40;j<pk;j++)lo=Math.min(lo,A.l[j]);let fl=Infinity;for(let j=pk+1;j<n;j++)fl=Math.min(fl,A.l[j]);const pb=(ph-fl)/ph;
+      if(ph/lo>=1.9&&pb>=0.10&&pb<=0.25){if(c>ph&&crossedUp(A,ph,n,3))out.htf={state:"confirmed",level:ph};else if(near(ph,1))out.htf={state:"near",level:ph};}}}
+  // Darvas box
+  if(s50[n-1]!=null&&c>s50[n-1]&&(s200[n-1]==null||s50[n-1]>s200[n-1]))for(let j=n-5;j>=n-30&&j>=3;j--){let top=true;for(let q=1;q<=3;q++){if(A.h[j-q]>A.h[j]||(j+q<n-1&&A.h[j+q]>A.h[j]))top=false;}if(!top)continue;if(A.h[j]<hi52*0.95)break;
+    let bl=Infinity;for(let q=j;q<n-1;q++)bl=Math.min(bl,A.l[q]);const tp=A.h[j];if((tp-bl)/tp<=0.12&&n-1-j>=3){if(c>tp&&crossedUp(A,tp,n,3))out.darvas={state:"confirmed",level:tp};else if(near(tp,1))out.darvas={state:"near",level:tp};}break;}
+  // wedges and channels (last 60 bars)
+  {const P=pivK(A,n-60,n-1,3);const H=P.H.slice(-3),L=P.L.slice(-3);
+    if(H.length>=2&&L.length>=2){const h1=H[0],h2=H[H.length-1],l1=L[0],l2=L[L.length-1];const sH=(h2[1]/h1[1]-1)/(h2[0]-h1[0]||1),sL=(l2[1]/l1[1]-1)/(l2[0]-l1[0]||1);
+      const wStart=h1[1]-l1[1],wEnd=lineAt(h1,h2,n-1)-lineAt(l1,l2,n-1);const upper=lineAt(h1,h2,n-1),lower=lineAt(l1,l2,n-1);
+      if(sH<0&&sL<0&&sH<sL&&wEnd<0.7*wStart&&wEnd>0){if(c>upper&&A.c[n-2]<=lineAt(h1,h2,n-2))out.fwedge={state:"confirmed",level:upper};else if(near(upper,1))out.fwedge={state:"near",level:upper};}
+      if(sH>0&&sL>0&&sL>sH&&wEnd<0.7*wStart&&wEnd>0){if(c<lower&&A.c[n-2]>=lineAt(l1,l2,n-2))out.rwedge={state:"confirmed",level:lower};else if(near(lower,-1))out.rwedge={state:"near",level:lower};}
+      const par=Math.abs(sH-sL)<=Math.max(Math.abs(sH),Math.abs(sL))*0.35;
+      if(par&&sH<-0.0005&&sL<-0.0005&&c>upper&&A.c[n-2]<=lineAt(h1,h2,n-2))out.chanbo={state:"confirmed",level:upper};
+      if(par&&sH>0.0005&&sL>0.0005&&c<lower&&A.c[n-2]>=lineAt(l1,l2,n-2))out.chanbd={state:"confirmed",level:lower};}}
+  // rounding bottom (about 90 sessions)
+  if(n>=95){let lh=-Infinity;for(let j=n-90;j<n-60;j++)lh=Math.max(lh,A.h[j]);let lo=Infinity,li=-1;for(let j=n-90;j<n;j++)if(A.l[j]<lo){lo=A.l[j];li=j;}
+    const dep=(lh-lo)/lh;const s20=smaA(A.c,20);if(li>=n-62&&li<=n-30&&dep>=0.12&&dep<=0.40&&s20[n-1]>s20[n-11]){if(c>lh&&crossedUp(A,lh,n,3))out.rbottom={state:"confirmed",level:lh};else if(near(lh,1))out.rbottom={state:"near",level:lh};}}
+  // triple bottom / top
+  {const P=pivK(A,n-150,n-1,4);const L=P.L.slice(-3),H=P.H.slice(-3);
+    if(L.length===3){const vals=L.map(x=>x[1]);if(Math.max(...vals)/Math.min(...vals)-1<=0.03&&L[2][0]-L[0][0]>=20&&n-1>L[2][0]+2){let nk=-Infinity;for(let j=L[0][0];j<=L[2][0];j++)nk=Math.max(nk,A.h[j]);
+      if(nk>=Math.max(...vals)*1.05){if(c>nk&&crossedUp(A,nk,n,5))out.tbottom={state:"confirmed",level:nk};else if(near(nk,1))out.tbottom={state:"near",level:nk};}}}
+    if(H.length===3){const vals=H.map(x=>x[1]);if(Math.max(...vals)/Math.min(...vals)-1<=0.03&&H[2][0]-H[0][0]>=20&&n-1>H[2][0]+2){let nk=Infinity;for(let j=H[0][0];j<=H[2][0];j++)nk=Math.min(nk,A.l[j]);
+      if(nk<=Math.min(...vals)*0.95){if(c<nk&&crossedDn(A,nk,n,5))out.ttop={state:"confirmed",level:nk};else if(near(nk,-1))out.ttop={state:"near",level:nk};}}}}
+  // bull pennant
+  for(let p=n-6;p>=n-20&&p>15;p--){let pl=Infinity;for(let j=p-15;j<=p;j++)pl=Math.min(pl,A.l[j]);if(A.c[p]/pl-1<0.15)continue;
+    const seg=n-1-p;if(seg<5)break;let ok=true;const hs=[],ls=[];for(let j=p+1;j<n-1;j++){hs.push(A.h[j]);ls.push(A.l[j]);}
+    const half=Math.floor(hs.length/2);const h1=Math.max(...hs.slice(0,half||1)),h2=Math.max(...hs.slice(half)),l1=Math.min(...ls.slice(0,half||1)),l2=Math.min(...ls.slice(half));
+    if(!(h2<h1&&l2>l1&&l1>=A.c[p]-0.5*(A.c[p]-pl)))ok=false;if(ok){if(c>h2&&A.c[n-2]<=h2)out.pennant={state:"confirmed",level:h2};else if(near(h2,1))out.pennant={state:"near",level:h2};}break;}
+  // island reversals (today's gap completes the island)
+  for(let k=1;k<=10&&n-2-k>=0;k++){const s=n-1-k,e=n-2;let bh=-Infinity,bl=Infinity;for(let j=s;j<=e;j++){bh=Math.max(bh,A.h[j]);bl=Math.min(bl,A.l[j]);}
+    if(A.l[n-1]>bh&&A.l[s-1]>bh){out.islandb={state:"confirmed",level:bh};break;}
+    if(A.h[n-1]<bl&&A.h[s-1]<bl){out.islandt={state:"confirmed",level:bl};break;}}
+  return out;
+}
+function chartPatterns(A,tol){return Object.assign(chartPatternsBase(A,tol),setupPatterns(A,tol));}
+/* backtest additions (event on the day the condition first appears) */
+BT_IDS.push("kickerb","kickers","r3m","f3m","ababyb","ababys","pocket","trendtpl","stage2");
+function btExtra(A,st){const n=A.c.length,v=A.v||[];const s50=smaA(A.c,50),s150=smaA(A.c,150),s200=smaA(A.c,200);
+  const tpl=i=>{if(i<252||s200[i-20]==null)return false;let hi=-Infinity,lo=Infinity;for(let j=i-251;j<=i;j++){hi=Math.max(hi,A.h[j]);lo=Math.min(lo,A.l[j]);}const c=A.c[i];return c>s50[i]&&s50[i]>s150[i]&&s150[i]>s200[i]&&s200[i]>s200[i-20]&&c>=lo*1.3&&c>=hi*0.75;};
+  return {
+    pocket:i=>{if(i<60||s50[i]==null||!(A.c[i]>s50[i]&&A.c[i]>A.c[i-1]&&A.c[i]>A.o[i]))return false;let dm=0;for(let j=i-10;j<i;j++)if(A.c[j]<A.c[j-1])dm=Math.max(dm,v[j]||0);return dm>0&&(v[i]||0)>dm;},
+    trendtpl:i=>tpl(i)&&!tpl(i-1),
+    stage2:i=>{if(i<170||s150[i-10]==null||!(s150[i]>s150[i-10]&&A.c[i]>s150[i]))return false;let bh=-Infinity,bl=Infinity;for(let j=i-40;j<i;j++){bh=Math.max(bh,A.h[j]);bl=Math.min(bl,A.l[j]);}
+      if((bh-bl)/bh>0.30||!(A.c[i]>bh&&A.c[i-1]<=bh))return false;let va=0;for(let j=i-20;j<i;j++)va+=v[j]||0;va/=20;return va>0&&(v[i]||0)>=1.5*va;}};}
 
 /* ---------- start ---------- */
 (async()=>{
