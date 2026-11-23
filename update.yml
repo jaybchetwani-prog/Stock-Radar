@@ -2,8 +2,8 @@ name: Update stock radar
 
 on:
   schedule:
-    - cron: "*/15 3-10 * * 1-5"    # NSE hours (IST 08:30-16:30)
-    - cron: "*/15 13-21 * * 1-5"   # US hours
+    - cron: "*/15 * * * 1-5"       # every 15 minutes on weekdays (India, US and global markets)
+    - cron: "0 */3 * * 0,6"        # every 3 hours at weekends (crypto)
   workflow_dispatch:                # "Run workflow" button
   push:
     branches: [main]
@@ -20,7 +20,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 40
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -45,6 +45,7 @@ jobs:
         run: |
           mkdir -p site/data
           cp index.html site/
+          if [ -f config.js ]; then cp config.js site/; fi
           cp -r data/. site/data/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
