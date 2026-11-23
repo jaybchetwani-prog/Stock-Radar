@@ -42,7 +42,7 @@ jobs:
         run: |
           mkdir -p site/data
           cp index.html site/
-          cp data/* site/data/
+          cp -r data/. site/data/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
