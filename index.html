@@ -642,6 +642,62 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
 #lwc{position:relative}.draw-ov{position:absolute;inset:0;pointer-events:none;z-index:4;width:100%;height:100%}
 .site-foot{background:transparent!important}
 @media (max-width:1000px){.layout{grid-template-columns:minmax(0,1fr)!important}}
+/* ===== Technical screener ===== */
+.hero{overflow:visible!important}.w-pop{z-index:30!important}
+.ts-panel{padding:10px 12px!important;margin-bottom:10px}
+.ts-bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.ts-bar.f2{margin-top:8px;padding-top:8px;border-top:1px solid var(--line)}
+.ts-bar .btn,.ts-bar select{padding:6px 9px!important;font-size:13px!important}
+.ts-search{flex:1 1 130px}.ts-search input{width:100%;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);font-size:13px}
+.ts-rng{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:2px 6px;background:var(--surface-2)}
+.ts-rng input{width:46px;border:0;background:transparent;color:var(--ink);font-size:13px;padding:4px 2px}
+.ts-rng span{color:var(--muted)}
+.tst{border:1px solid var(--line);border-radius:10px;background:var(--surface);overflow:hidden}
+.tsr{display:grid;grid-template-columns:30px minmax(130px,1.5fr) 96px 88px minmax(200px,2.4fr) 44px 60px 74px 78px 30px;gap:8px;align-items:center;padding:0 8px;min-height:46px;border-bottom:1px solid var(--line);cursor:pointer;font-size:13px}
+.tsr.det{grid-template-columns:30px minmax(130px,1.4fr) 96px 132px minmax(220px,2.4fr) 44px 60px 74px 44px 50px 60px 80px 78px 30px}
+.tsr:hover{background:var(--surface-2)}.tsr:last-child{border-bottom:0}
+.tsh{min-height:34px;cursor:default;background:var(--surface-2);font-size:11.5px;font-weight:600;color:var(--muted)}.tsh:hover{background:var(--surface-2)}
+.tsh .srt{cursor:pointer}.tsh .srt:hover{color:var(--ink)}
+.tc{min-width:0;text-align:right;overflow:hidden}.tc.l{text-align:left}.tc.c{text-align:center}
+.tname b{display:block;font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tname span{display:block;font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tc.num b{display:block;font-weight:600}.tc.num span{font-size:12px}.tc.num{font-variant-numeric:tabular-nums}
+.tc .spark{width:84px;height:26px}.tc .spark.big{width:128px;height:32px}
+.tc.hot{color:var(--sig-hammer);font-weight:600}.tc.cold{color:var(--sig-breakout);font-weight:600}.tc.strong{color:var(--bull);font-weight:600}
+.tsigs{display:flex;gap:4px;align-items:center;flex-wrap:nowrap;overflow:hidden}
+.tsig{font-size:11.5px;font-weight:500;padding:2px 7px;border-radius:5px;border:1px solid;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px;flex:0 1 auto;line-height:1.5}
+.tsig.bull{color:var(--bull);border-color:color-mix(in srgb,var(--bull) 35%,transparent);background:color-mix(in srgb,var(--bull) 7%,transparent)}
+.tsig.bear{color:var(--bear);border-color:color-mix(in srgb,var(--bear) 35%,transparent);background:color-mix(in srgb,var(--bear) 7%,transparent)}
+.tsig.neu{color:var(--sig-mstar);border-color:color-mix(in srgb,var(--sig-mstar) 35%,transparent);background:color-mix(in srgb,var(--sig-mstar) 7%,transparent)}
+.tsig.forming{border-style:dashed;background:transparent}
+.tsig.mixed{color:var(--sig-hammer);border-color:color-mix(in srgb,var(--sig-hammer) 45%,transparent);background:transparent}
+.tmore{border:0;background:var(--surface-2);color:var(--muted);font-size:11.5px;font-weight:600;border-radius:5px;padding:2px 6px;cursor:pointer;flex:none}
+.tmuted{color:var(--muted)}
+.tstar{border:0;background:none;cursor:pointer;color:var(--muted);font-size:16px;padding:0;width:26px}.tstar[aria-pressed="true"]{color:#e0a400}
+.texp{border:0;background:none;color:var(--muted);cursor:pointer;font-size:14px;width:26px}
+.tscore{border:0;background:none;cursor:pointer;padding:2px 0;display:inline-flex;flex-direction:column;align-items:flex-end;gap:3px;color:var(--ink);font-variant-numeric:tabular-nums}
+.tscore b{font-size:13.5px;font-weight:650}.tscore i{display:block;width:54px;height:4px;border-radius:2px;background:var(--surface-2);position:relative;overflow:hidden}
+.tscore i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--w);background:var(--muted)}
+.tscore.sb i::after,.tscore.b i::after{background:var(--bull)}.tscore.sb b{color:var(--bull)}.tscore.w i::after,.tscore.sw i::after{background:var(--bear)}.tscore.sw b{color:var(--bear)}.tscore.n i::after{background:var(--sig-hammer)}
+.score-pop{position:absolute;z-index:70;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 40px -12px rgba(10,20,40,.35);padding:12px 14px;max-height:70vh;overflow:auto;font-size:13px}
+.sp-h{font-weight:650;font-size:14px;margin-bottom:4px}.sp-part{border-top:1px solid var(--line);padding:7px 0}.sp-row{display:flex;justify-content:space-between}.sp-part ul{margin:4px 0 0;padding-left:16px;color:var(--muted);font-size:12.5px}
+.tsx{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:14px;padding:12px 14px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.tsx-charts{display:grid;gap:10px}.tsx-ch{height:210px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}.tsx-cl{font-size:12px;color:var(--muted);margin:0 0 4px}
+.tsx-info{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start}.tsx-b{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 11px;min-width:0}
+.tsx-b h4{margin:0 0 6px;font-size:12.5px;font-weight:600;color:var(--muted)}.tsx-b .kv{font-size:12.5px;padding:3px 0}.tsx-b p{margin:0;font-size:12.5px}
+.tsx-pat{display:flex;gap:6px;align-items:center;margin:3px 0;min-width:0}.tsx-pat .tsig{max-width:none;flex:none}.tsx-pat .pnote{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tsx-acts{grid-column:1/-1;display:flex;gap:8px}
+.tsx-b:nth-last-child(2){grid-column:1/-1}
+.tshow{margin:10px auto 0;display:block}
+.tsgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.tscard{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px;cursor:pointer;display:flex;flex-direction:column;gap:8px;min-width:0}
+.tscard:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.tsc-h{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center}.tsc-px{text-align:right}.tsc-px b{display:block}.tsc-px span{font-size:12px}
+.tsc-ch{height:170px}
+@media (max-width:1100px){.tsx{grid-template-columns:1fr}}
+@media (max-width:900px){.tsr,.tsr.det{grid-template-columns:28px minmax(0,1fr) 88px 70px 26px;grid-template-areas:"star name price score exp" ". sig sig sig sig";row-gap:4px;padding:8px}
+  .tsr>*:nth-child(1){grid-area:star}.tsr>*:nth-child(2){grid-area:name}.tsr>*:nth-child(3){grid-area:price}.tsr>*:nth-child(5){grid-area:sig}
+  .tsr>.tc:has(.tscore){grid-area:score}.tsr>.texp{grid-area:exp}
+  .tsr>*:nth-child(4),.tsr>*:nth-child(6),.tsr>*:nth-child(7),.tsr>*:nth-child(8),.tsr.det>*:nth-child(9),.tsr.det>*:nth-child(10),.tsr.det>*:nth-child(11),.tsr.det>*:nth-child(12){display:none}
+  .tsh{display:none}.tsx-info{grid-template-columns:1fr}}
 [hidden]{display:none !important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
@@ -701,37 +757,32 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
       <div class="small-seg" id="mvSeg" role="group" aria-label="Movers"><button type="button" data-mv="gain">Gainers</button><button type="button" data-mv="loss">Losers</button><button type="button" data-mv="vol">Volume</button><button type="button" data-mv="high">52W high</button></div></div>
     <div class="mv-scroll" id="mvList"></div>
   </section>
-  <section class="panel" aria-label="Scan controls">
-    <div class="tfrow">
-      <div class="tf" role="group" aria-label="Timeframe">
-        <button type="button" data-tf="D" title="Daily candles"><b>D</b><span>Daily</span></button>
-        <button type="button" data-tf="W" title="Weekly candles"><b>W</b><span>Weekly</span></button>
-        <button type="button" data-tf="M" title="Monthly candles"><b>M</b><span>Monthly</span></button>
-      </div>
-      <div class="chips" id="chips" role="group" aria-label="Signals to show"></div>
-    </div>
-    <div class="tools">
+  <section class="panel ts-panel" aria-label="Screener filters">
+    <div class="ts-bar">
+      <div class="small-seg" role="group" aria-label="Pattern timeframe" title="Timeframe used to detect patterns"><button type="button" data-tf="D">Daily</button><button type="button" data-tf="W">Weekly</button><button type="button" data-tf="M">Monthly</button></div>
       <select id="indexSel" class="btn" aria-label="What to scan"><option value="200">Nifty 200</option><option value="500">Nifty 500</option><option value="etf">ETFs (BeES)</option><option value="index">Indices</option><option value="sgb">SGBs (gold bonds)</option><option value="all">Everything</option></select>
-      <input type="search" id="q" placeholder="Search symbol or company" aria-label="Search symbol or company">
-      <div class="small-seg" role="group" aria-label="How signals combine">
-        <button type="button" data-match="any" title="Show stocks with at least one selected signal">Any</button>
-        <button type="button" data-match="all" title="Show stocks with every selected signal">All</button>
-      </div>
-      <select id="sector" class="btn" aria-label="Sector" hidden></select>
-      <button type="button" class="btn" id="starredBtn" aria-pressed="false">★ Watchlist only</button>
-      <select id="sortSel" class="btn" aria-label="Sort by">
-        <option value="best">Sort: best match</option>
-        <option value="gain">Sort: top gainers</option>
-        <option value="loss">Sort: top losers</option>
-        <option value="vol">Sort: volume surge</option>
-        <option value="near">Sort: closest to breakout</option>
-        <option value="rsi">Sort: RSI high to low</option>
-        <option value="az">Sort: A to Z</option>
-      </select>
-      <button type="button" class="btn" id="exportBtn" title="Download the current list as a CSV file">Export</button>
+      <select id="tsHz" class="btn" aria-label="Score horizon" title="Horizon for the technical score and trade setup"><option value="st">Short term</option><option value="mt">Medium term</option><option value="lt">Long term</option></select>
+      <div class="ts-search"><input type="search" id="q" placeholder="Search name or symbol" aria-label="Search name or symbol"></div>
+      <div class="small-seg" role="group" aria-label="View"><button type="button" data-tv="compact">Compact</button><button type="button" data-tv="detailed">Detailed</button><button type="button" data-tv="chart">Charts</button></div>
+      <button type="button" class="btn" id="exportBtn" title="Download the current list as CSV (opens in Excel)">Export</button>
       <button type="button" class="btn" id="shareBtn" hidden>Share</button>
-      <button type="button" class="btn" id="settingsBtn" aria-expanded="false" aria-controls="settings">Settings</button>
+      <button type="button" class="btn" id="settingsBtn" aria-expanded="false" aria-controls="settings" title="Pattern detection rules">Rules</button>
     </div>
+    <div class="ts-bar f2">
+      <select id="tsBias" class="btn" aria-label="Bias"><option value="">Any bias</option><option value="bull">Bullish (score 65+)</option><option value="neu">Neutral (45–64)</option><option value="bear">Bearish (below 45)</option></select>
+      <select id="tsPat" class="btn" aria-label="Pattern type"></select>
+      <div class="small-seg" id="tsMatch" role="group" aria-label="How library patterns combine" hidden><button type="button" data-match="any">Any</button><button type="button" data-match="all">All</button></div>
+      <label class="ts-rng">RSI<input id="tsRsiMin" type="number" min="0" max="100" placeholder="min" aria-label="RSI minimum"><span>–</span><input id="tsRsiMax" type="number" min="0" max="100" placeholder="max" aria-label="RSI maximum"></label>
+      <select id="tsVol" class="btn" aria-label="Volume surge"><option value="">Any volume</option><option value="1.5">Volume ≥ 1.5× (up day)</option><option value="2">Volume ≥ 2× (up day)</option><option value="3">Volume ≥ 3× (up day)</option></select>
+      <label class="ts-rng">Score<input id="tsScMin" type="number" min="0" max="100" placeholder="min" aria-label="Score minimum"><span>–</span><input id="tsScMax" type="number" min="0" max="100" placeholder="max" aria-label="Score maximum"></label>
+      <select id="sector" class="btn" aria-label="Sector" hidden></select>
+      <select id="tsCap" class="btn" aria-label="Market cap"><option value="">Any market cap</option><option value="large">Large (₹20,000 Cr+)</option><option value="mid">Mid (₹5,000–20,000 Cr)</option><option value="small">Small (below ₹5,000 Cr)</option></select>
+      <select id="tsSort" class="btn" aria-label="Sort"><option value="score">Sort: score</option><option value="vol">Sort: volume surge</option><option value="near">Sort: closest to breakout</option><option value="chg">Sort: change %</option><option value="rsi">Sort: RSI</option><option value="az">Sort: A to Z</option></select>
+      <button type="button" class="btn" id="starredBtn" aria-pressed="false">★ Watchlist</button>
+      <button type="button" class="btn" id="tsReset">Reset filters</button>
+    </div>
+    <div class="chips" id="chips" hidden></div>
+    <select id="sortSel" hidden aria-hidden="true"><option value="best">best</option></select>
     <div class="settings" id="settings" hidden>
       <label>Lookback for resistance and support (candles)<input type="number" id="s-lookback" min="5" max="120" step="1"></label>
       <label>“Near” distance (%)<input type="number" id="s-tol" min="0.5" max="15" step="0.5"></label>
@@ -1081,6 +1132,7 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
     <div class="prof-grid"><label>Your note<input id="nNote" maxlength="200" placeholder="e.g. Wait for results on 12 Feb"></label><label>Buy target<input id="nBuy" type="number" step="any" min="0"></label><label>Sell target<input id="nSell" type="number" step="any" min="0"></label></div>
     <button type="button" class="btn primary" id="noteSave">Save</button></div>
 </div>
+<div class="score-pop" id="scorePop" role="dialog" aria-label="Score calculation" hidden></div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <div class="sheet modal" id="profileDlg" role="dialog" aria-modal="true" aria-labelledby="profTitle" hidden>
   <div class="sheet-inner">
@@ -1442,7 +1494,8 @@ function render(){
   if(prefs.view==="watch"){renderWatch();state.flash=false;return;}
   renderRadar();
 }
-function renderRadar(){
+function renderRadar(){return renderRadarNew();}
+function renderRadarLegacy(){
   renderControls();
   const d=state.data[prefs.market];const list=$("#list"),status=$("#status"),notes=$("#notes"),chips=$("#chips");
   list.replaceChildren();status.replaceChildren();notes.replaceChildren();chips.replaceChildren();
@@ -1561,8 +1614,8 @@ function signalNames(r){return SIGNALS.filter(s=>r.sig[s.id]!==undefined).map(s=
 function exportCSV(){
   const rows=state.shown||[];if(!rows.length){alert("Nothing to export yet.");return;}
   const d=state.data[prefs.market];const q=v=>{v=String(v==null?"":v);return /[",\n]/.test(v)?`"${v.replace(/"/g,'""')}"`:v;};
-  const out=[["Symbol","Company","Sector","Close","Change %","Signals","RSI","Volume vs avg","Resistance","Support","Distance to high %","ST buy from","ST buy to","ST stop loss","ST target 1","ST target 2"].join(",")];
-  for(const r of rows){const info=infoOf(d,r.sym);out.push([r.sym,info.name,info.sector,r.close.toFixed(2),r.chg.toFixed(2),signalNames(r).join(" + "),r.rsi==null?"":r.rsi.toFixed(1),r.volRatio==null?"":r.volRatio.toFixed(2),r.res.toFixed(2),r.sup.toFixed(2),r.distRes.toFixed(2),...(()=>{const raw=d.series[r.sym];const pl=raw&&horizonPlan(raw,"st",profile(),KIND[r.sym]==="index");return pl?[pl.buyLow,pl.buyHigh,pl.stop,pl.t1,pl.t2].map(x=>x.toFixed(2)):["","","","",""];})()].map(q).join(","));}
+  const out=[["Symbol","Company","Sector","Close","Change %","Technical score","Signals","RSI","Volume vs avg","Resistance","Support","Distance to high %","ST buy from","ST buy to","ST stop loss","ST target 1","ST target 2"].join(",")];
+  for(const r of rows){const info=infoOf(d,r.sym);out.push([r.sym,info.name,info.sector,r.close.toFixed(2),r.chg.toFixed(2),r.score??"",(r.sl?r.sl.map(x=>x.label):signalNames(r)).join(" + "),r.rsi==null?"":r.rsi.toFixed(1),r.volRatio==null?"":r.volRatio.toFixed(2),r.res.toFixed(2),r.sup.toFixed(2),r.distRes.toFixed(2),...(()=>{const raw=d.series[r.sym];const pl=raw&&horizonPlan(raw,"st",profile(),KIND[r.sym]==="index");return pl?[pl.buyLow,pl.buyHigh,pl.stop,pl.t1,pl.t2].map(x=>x.toFixed(2)):["","","","",""];})()].map(q).join(","));}
   const blob=new Blob([out.join("\n")],{type:"text/csv"});const a=document.createElement("a");
   a.href=URL.createObjectURL(blob);a.download=`chartviewer-${prefs.market}-${prefs.tf}-${new Date().toISOString().slice(0,10)}.csv`;
   document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);
@@ -2422,6 +2475,12 @@ $("#wlSort").addEventListener("change",e=>{WL.sort=e.target.value;saveWL();rende
 $("#wlRename").addEventListener("click",()=>{const l=activeWL();const n=prompt("Rename watchlist:",l.name);if(n){l.name=n.slice(0,30);saveWL();render();}});
 $("#wlDelete").addEventListener("click",()=>{if(WL.lists.length<2)return;const l=activeWL();if(!confirm(`Delete “${l.name}” and its ${l.items.length} items?`))return;WL.lists=WL.lists.filter(x=>x!==l);WL.active=WL.lists[0].id;saveWL();render();});
 $("#profileBtn").addEventListener("click",openProfile);
+for(const [id,k] of [["#tsHz","hz"],["#tsBias","bias"],["#tsPat","pat"],["#tsVol","vol"],["#tsCap","cap"],["#tsSort","sort"],["#tsRsiMin","rsiMin"],["#tsRsiMax","rsiMax"],["#tsScMin","scMin"],["#tsScMax","scMax"]])
+  $(id).addEventListener("change",e=>{TS[k]=e.target.value;TS.limit=50;saveTS();if(k==="pat"&&e.target.value==="custom"){prefs.active=prefs.active.filter(id=>SIGMAP[id]&&SIGMAP[id].extra);savePrefs();const x=$("#patExplorer");if(x)x.open=true;}render();});
+document.querySelectorAll("[data-tv]").forEach(b=>b.addEventListener("click",()=>{TS.view=b.dataset.tv;TS.limit=50;saveTS();render();}));
+$("#tsReset").addEventListener("click",()=>{Object.assign(TS,{bias:"",pat:"",rsiMin:"",rsiMax:"",vol:"",scMin:"",scMax:"",cap:"",sort:"score",limit:50});state.sector="";state.query="";$("#q").value="";prefs.starredOnly=false;saveTS();savePrefs();render();});
+document.addEventListener("click",e=>{const p=$("#scorePop");if(!p.hidden&&!e.target.closest("#scorePop")&&!e.target.closest(".tscore"))p.hidden=true;});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")$("#scorePop").hidden=true;});
 $("#typeSel").addEventListener("change",e=>{chartState.type=e.target.value;if(currentRow)renderChart(currentRow,sheetMarket);});
 $("#layoutSel").addEventListener("change",e=>{const v=e.target.value;if(v==="__save")saveLayout();else if(v)applyLayout(v);paintLayouts();});
 $("#crApply").addEventListener("click",()=>{if(currentRow)renderChart(currentRow,sheetMarket);});
@@ -3241,7 +3300,7 @@ function renderPatternExplorer(base){
   for(const [g,gl] of PAT_GROUPS){const row=el("div","pat-grp");row.append(el("div","pat-gh",gl));const wrap=el("div","pat-chips");
     for(const s of SIGNALS.filter(x=>x.extra&&x.group===g)){const b=el("button","pchip "+s.bias);b.type="button";b.title=s.desc;b.setAttribute("aria-pressed",String(prefs.active.includes(s.id)));
       b.append(el("span",null,s.label),el("b",null,String(base.filter(r=>r.sig[s.id]!==undefined).length)));
-      b.addEventListener("click",()=>{const i=prefs.active.indexOf(s.id);if(i>=0)prefs.active.splice(i,1);else prefs.active.push(s.id);savePrefs();render();});wrap.append(b);}
+      b.addEventListener("click",()=>{const i=prefs.active.indexOf(s.id);if(typeof TS!=="undefined"&&TS.pat!=="custom")prefs.active=prefs.active.filter(id=>SIGMAP[id]&&SIGMAP[id].extra);const j=prefs.active.indexOf(s.id);if(j>=0)prefs.active.splice(j,1);else prefs.active.push(s.id);if(typeof TS!=="undefined"){TS.pat="custom";saveTS();}savePrefs();render();});wrap.append(b);}
     row.append(wrap);body.append(row);}
   const ctl=el("div","pat-ctl");const clr=el("button","btn","Clear library selections");clr.type="button";clr.addEventListener("click",()=>{prefs.active=prefs.active.filter(id=>!SIGMAP[id]||!SIGMAP[id].extra);savePrefs();render();});
   ctl.append(clr,el("span","pnote","Tap a pattern to add it to the scan. Hover for its definition. Bearish candles must form at resistance and bullish ones at support (change this in Settings)."));body.append(ctl);
@@ -3776,6 +3835,191 @@ function saveLayout(){const name=prompt("Name this chart layout:",`Layout ${Obje
 function paintLayouts(){const s=$("#layoutSel");if(!s)return;s.replaceChildren();const o=el("option",null,"Layouts…");o.value="";s.append(o);for(const k of Object.keys(prefs.layouts||{})){const x=el("option",null,k);x.value=k;s.append(x);}const sv=el("option",null,"＋ Save current layout");sv.value="__save";s.append(sv);s.value="";}
 function applyLayout(k){const L=(prefs.layouts||{})[k];if(!L)return;chartState.ind=new Set(L.ind);prefs.ind=L.ind;chartState.type=L.type||"candle";$("#scaleSel").value=L.scale||"0";savePrefs();
   $("#indPop").replaceChildren();if(currentRow)renderChart(currentRow,sheetMarket);}
+
+/* =====================================================================
+   TECHNICAL SCREENER: score, compact table, expandable analysis
+   ===================================================================== */
+const TS=Object.assign({hz:"st",bias:"",pat:"",rsiMin:"",rsiMax:"",vol:"",scMin:"",scMax:"",cap:"",sort:"score",view:"compact",limit:50},prefs.ts||{});
+TS.limit=50;
+function saveTS(){prefs.ts=Object.assign({},TS,{limit:undefined});savePrefs();}
+const SCORE_CACHE={};
+const BAND=s=>s>=80?["Strong bullish","sb"]:s>=65?["Bullish","b"]:s>=45?["Neutral","n"]:s>=30?["Weak","w"]:["Strong bearish","sw"];
+const lin=(x,a,b)=>Math.max(0,Math.min(1,(x-a)/(b-a)));
+/* Technical strength score 0-100 for a horizon, from daily data. Every part is listed so it can be explained. */
+function techScore(sym,market,hz,sig){
+  const d=state.data[market];const s=d&&d.series[sym];if(!s||s.c.length<60)return null;
+  const key=[sym,market,hz,d.version,s.c.length,JSON.stringify(Object.keys(sig||{}))].join("|");if(SCORE_CACHE[key])return SCORE_CACHE[key];
+  const n=s.c.length,c=s.c[n-1],B={t:s.t,o:s.o,h:s.h,l:s.l,c:s.c,v:s.v};const parts=[];const add=(name,max,pts,lines)=>parts.push({name,max,pts:pts==null?null:Math.max(0,Math.min(max,pts)),lines});
+  const nifty=seriesOf("NIFTY50","GLB")||seriesOf("NIFTY50","NSE");const rsi=rsiSeries(s.c,14),rv=rsi[n-1];const at=atrA(B,14),atp=at[n-1]/c*100;
+  const rsiPts=(r,max)=>r==null?null:max*(r>=55&&r<=70?1:r>=50&&r<55?0.7:r>70&&r<=78?0.6:r>=45&&r<50?0.3:0);
+  const bull=Object.keys(sig||{}).filter(k=>SIGMAP[k]&&SIGMAP[k].bias==="bull"),bear=Object.keys(sig||{}).filter(k=>SIGMAP[k]&&SIGMAP[k].bias==="bear");
+  const patIds=hz==="st"?null:hz==="mt"?["stage2","vcp","flatbase","cup","dbottom","ihs","asctri","flag","range","hi52","darvas","tbottom","fwedge","rbottom","trendtpl","pocket","hs","dtop","desctri","dcross","breakdown","ttop","rwedge","chanbd"]:["trendtpl","stage2","hi52","gcross","dcross","flatbase","cup","rbottom"];
+  const pb=(patIds?bull.filter(k=>patIds.includes(k)):bull),pr=(patIds?bear.filter(k=>patIds.includes(k)):bear);
+  const patPts=max=>max/2+Math.min(max/2,pb.length*max*0.27)-Math.min(max/2,pr.length*max*0.27);
+  const patLines=[pb.length?`Bullish: ${pb.map(k=>SIGMAP[k].label).join(", ")}`:"No bullish patterns",pr.length?`Bearish: ${pr.map(k=>SIGMAP[k].label).join(", ")}`:"No bearish patterns"];
+  if(hz==="st"){
+    const e20=emaA(s.c,20),e50=emaA(s.c,50);let t=0;const tl=[];if(c>e20[n-1]){t+=8;tl.push("Price above 20 EMA (+8)");}else tl.push("Price below 20 EMA (0)");
+    if(e20[n-1]>e50[n-1]){t+=6;tl.push("20 EMA above 50 EMA (+6)");}else tl.push("20 EMA below 50 EMA (0)");if(e20[n-1]>e20[n-6]){t+=6;tl.push("20 EMA rising (+6)");}else tl.push("20 EMA falling (0)");add("Trend",20,t,tl);
+    const {m,sig:sg,h}=macdA(s.c);let mo=rsiPts(rv,10);const ml=[`RSI ${nf(rv,1)} (+${nf(mo,1)} of 10; best 55 to 70)`];if(m[n-1]>sg[n-1]){mo+=6;ml.push("MACD above signal (+6)");}else ml.push("MACD below signal (0)");if(h[n-1]>h[n-2]){mo+=4;ml.push("MACD histogram rising (+4)");}else ml.push("MACD histogram falling (0)");add("Momentum",20,mo,ml);
+    let va=0;for(let i=n-21;i<n-1;i++)va+=s.v[i];va/=20;const vr=va?s.v[n-1]/va:null;const ob=obvA(B);let vp=null;const vl=[];
+    if(vr!=null&&va>0){vp=(s.c[n-1]>s.c[n-2]?lin(vr,0.8,2)*8:0);vl.push(`Volume ${nf(vr,1)}× the 20-day average on an ${s.c[n-1]>s.c[n-2]?"up":"down"} day (+${nf(vp,1)} of 8)`);if(ob[n-1]>ob[n-21]){vp+=7;vl.push("On-balance volume rising over 20 sessions (+7)");}else vl.push("On-balance volume falling over 20 sessions (0)");}else vl.push("No volume data");add("Volume",15,vp,vl);
+    const r1=retOver(s,30),n1=retOver(nifty,30);add("Relative strength",15,r1!=null&&n1!=null?lin(r1-n1,-10,10)*15:null,[r1!=null&&n1!=null?`1-month return ${fmtPct(r1,true)} vs Nifty 50 ${fmtPct(n1,true)} (scaled −10 to +10 points)`:"Nifty 50 data not available"]);
+    add("Patterns",15,patPts(15),patLines);
+    let sup=Infinity;for(let i=n-20;i<n;i++)sup=Math.min(sup,s.l[i]);const ds=(c-sup)/c*100;const rk=(atp<=2?8:atp<=4?5:2)+(ds<=5?7:ds<=10?4:1);add("Risk",15,rk,[`Daily range (ATR) ${nf(atp,1)}% of price (${atp<=2?8:atp<=4?5:2} of 8)`,`${nf(ds,1)}% above the 20-day low, a natural stop (${ds<=5?7:ds<=10?4:1} of 7)`]);
+  }else if(hz==="mt"){
+    const s50=smaA(s.c,50),s100=smaA(s.c,100),s200=smaA(s.c,200);let t=0;const tl=[];if(c>s50[n-1]){t+=8;tl.push("Price above 50 DMA (+8)");}else tl.push("Price below 50 DMA (0)");
+    const lt=s200[n-1]??s100[n-1];if(lt!=null){if(s50[n-1]>lt){t+=6;tl.push(`50 DMA above ${s200[n-1]!=null?200:100} DMA (+6)`);}else tl.push(`50 DMA below ${s200[n-1]!=null?200:100} DMA (0)`);}
+    if(s50[n-1]>s50[n-21]){t+=6;tl.push("50 DMA rising over a month (+6)");}else tl.push("50 DMA falling over a month (0)");add("Trend",20,t,tl);
+    const r3=retOver(s,91);let mo=r3!=null?lin(r3,-15,25)*10:null;const ml=[r3!=null?`3-month return ${fmtPct(r3,true)} (+${nf(mo,1)} of 10)`:"Not enough history"];const rp=rsiPts(rv,10);mo=(mo||0)+rp;ml.push(`RSI ${nf(rv,1)} (+${nf(rp,1)} of 10)`);add("Momentum",20,mo,ml);
+    let v20=0,v100=0;for(let i=n-20;i<n;i++)v20+=s.v[i];for(let i=Math.max(0,n-100);i<n;i++)v100+=s.v[i];v20/=20;v100/=Math.min(100,n);const r1=retOver(s,30);
+    add("Volume",15,v100>0?lin(v20/v100,0.7,1.4)*(r1>0?15:8):null,[v100>0?`20-day volume ${nf(v20/v100,2)}× the 100-day average, price ${r1>0?"rising":"falling"} over a month`:"No volume data"]);
+    const n3=retOver(nifty,91);add("Relative strength",15,r3!=null&&n3!=null?lin(r3-n3,-15,15)*15:null,[r3!=null&&n3!=null?`3-month return ${fmtPct(r3,true)} vs Nifty 50 ${fmtPct(n3,true)}`:"Nifty 50 data not available"]);
+    add("Patterns",15,patPts(15),patLines);
+    let hi=-Infinity;for(let i=Math.max(0,n-252);i<n;i++)hi=Math.max(hi,s.h[i]);const dd=(hi-c)/hi*100;add("Risk",15,(atp<=2.5?8:atp<=4.5?5:2)+(dd<=10?7:dd<=25?4:1),[`ATR ${nf(atp,1)}% of price`,`${nf(dd,1)}% below the 52-week high`]);
+  }else{
+    const s50=smaA(s.c,50),s200=smaA(s.c,200);let t=null;const tl=[];if(s200[n-1]!=null){t=0;if(c>s200[n-1]){t+=8;tl.push("Price above 200 DMA (+8)");}else tl.push("Price below 200 DMA (0)");
+      if(s200[n-1]>s200[Math.max(0,n-64)]??0){t+=6;tl.push("200 DMA rising over 3 months (+6)");}else tl.push("200 DMA falling over 3 months (0)");if(s50[n-1]>s200[n-1]){t+=6;tl.push("50 DMA above 200 DMA (+6)");}else tl.push("50 DMA below 200 DMA (0)");}else tl.push("Needs about 200 sessions of history");add("Trend",20,t,tl);
+    const r12=retOver(s,365),r6=retOver(s,182);let mo=null;const ml=[];if(r12!=null){mo=lin(r12,-20,50)*12;ml.push(`1-year return ${fmtPct(r12,true)} (+${nf(mo,1)} of 12)`);}if(r6!=null){const x=r6>0?8:0;mo=(mo||0)+x;ml.push(`6-month return ${fmtPct(r6,true)} (+${x} of 8)`);}if(mo==null)ml.push("Not enough history");add("Momentum",20,mo,ml);
+    let v50=0,v250=0;for(let i=n-50;i<n;i++)v50+=s.v[i];for(let i=Math.max(0,n-250);i<n;i++)v250+=s.v[i];v50/=50;v250/=Math.min(250,n);add("Volume",15,v250>0?lin(v50/v250,0.7,1.3)*(r12>0?15:8):null,[v250>0?`50-day volume ${nf(v50/v250,2)}× the 1-year average`:"No volume data"]);
+    const n12=retOver(nifty,365);add("Relative strength",15,r12!=null&&n12!=null?lin(r12-n12,-20,20)*15:null,[r12!=null&&n12!=null?`1-year return ${fmtPct(r12,true)} vs Nifty 50 ${fmtPct(n12,true)}`:"Not enough history"]);
+    add("Patterns",15,patPts(15),patLines);
+    const rets=[];for(let i=Math.max(1,n-252);i<n;i++)rets.push(Math.log(s.c[i]/s.c[i-1]));const mu=rets.reduce((a,b)=>a+b,0)/rets.length;const av=Math.sqrt(rets.reduce((a,b)=>a+(b-mu)**2,0)/rets.length)*Math.sqrt(252)*100;
+    let pk=-Infinity,mdd=0;for(let i=Math.max(0,n-252);i<n;i++){pk=Math.max(pk,s.c[i]);mdd=Math.max(mdd,(pk-s.c[i])/pk*100);}add("Risk",15,(av<=25?8:av<=40?5:2)+(mdd<=20?7:mdd<=35?4:1),[`Annualised volatility ${nf(av,0)}%`,`Largest fall from a peak in the last year ${nf(mdd,0)}%`]);
+  }
+  const avail=parts.filter(p=>p.pts!=null);const maxA=avail.reduce((a,p)=>a+p.max,0);const raw=avail.reduce((a,p)=>a+p.pts,0);
+  const out={score:maxA?Math.round(raw/maxA*100):null,parts,partial:maxA<100};SCORE_CACHE[key]=out;return out;
+}
+/* signal ordering: confirmed chart/setups > fresh candles > forming > neutral */
+function sigList(r){const out=[];for(const id in r.sig){const S=SIGMAP[id];if(!S)continue;const v=r.sig[id];
+    const conf=(v&&typeof v==="object"&&v.state==="confirmed")||v==="above"||v===true||(typeof v==="number"&&CANDLE_LEN[id]&&v===0)||(S.core&&typeof v==="number"&&v===0);
+    const rank=(conf?0:2)+(S.bias==="neu"?3:0)+(S.group==="setup"||S.group==="chart"?0:1)*0.5;
+    out.push({id,S,v,conf,rank,label:id==="breakout"&&v==="above"?"Breakout":S.label,tip:`${id==="breakout"&&v==="above"?"Breakout":S.label}: ${conf?"confirmed":"forming"}. ${S.desc||""} ${patBadgeText(id,v,prefs.tf,r)||""}`.trim()});}
+  return out.sort((a,b)=>a.rank-b.rank);}
+function sigChip(x){const c=el("span","tsig "+x.S.bias+(x.conf?"":" forming"),x.label.replace(/ \((Minervini|Weinstein|O’Neil|BE|volatility contraction|narrowest range)\)/,""));c.title=x.tip;return c;}
+
+/* ---------- toolbar ---------- */
+function buildTsToolbar(){
+  const ps=$("#tsPat");if(!ps.options.length){const add=(v,t,g)=>{const o=el("option",null,t);o.value=v;(g||ps).append(o);};add("","All stocks");add("bull","Any bullish signal");add("bear","Any bearish signal");add("any","Any signal");add("custom","My library selection");
+    for(const [g,gl] of PAT_GROUPS){const og=document.createElement("optgroup");og.label=gl;for(const S of SIGNALS.filter(x=>(x.extra?x.group:x.group)===g))add(S.id,S.label,og);ps.append(og);}}
+  const set=(id,v)=>{const e=$(id);if(e&&e.value!==String(v??""))e.value=v??"";};
+  set("#tsHz",TS.hz);set("#tsBias",TS.bias);set("#tsPat",TS.pat);set("#tsRsiMin",TS.rsiMin);set("#tsRsiMax",TS.rsiMax);set("#tsVol",TS.vol);set("#tsScMin",TS.scMin);set("#tsScMax",TS.scMax);set("#tsCap",TS.cap);set("#tsSort",TS.sort);
+  document.querySelectorAll("[data-tv]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.tv===TS.view)));$("#tsMatch").hidden=TS.pat!=="custom";
+}
+const TS_OPEN=new Set(),TS_MORE=new Set();let tsCharts=[];
+/* ---------- main render (replaces the old card list) ---------- */
+function renderRadarNew(){
+  renderControls();buildTsToolbar();
+  const d=state.data[prefs.market];const list=$("#list"),status=$("#status"),notes=$("#notes");list.replaceChildren();status.replaceChildren();notes.replaceChildren();renderDataSummary();
+  const res=d&&Object.keys(d.series).length?scan():null;
+  // library explorer (custom multi-select)
+  let base0=res?res.rows:[];renderPatternExplorer(base0);
+  if(!res){if(state.loading){for(let i=0;i<8;i++)list.append(el("div","skel"));return;}
+    const e=el("div","empty");e.append(el("b",null,`No ${prefs.market} price data yet`),el("span",null,state.live?"Prices appear after the next automatic update.":"Load price files in Settings, or try the demo."));list.append(e);return;}
+  if(d.demo)notes.append(el("div","note demo","Demo data: simulated prices for made-up symbols, not real stocks."));
+  if(res.short)notes.append(el("div","note",`${res.short} stock${res.short>1?"s have":" has"} too little history for this timeframe and ${res.short>1?"were":"was"} skipped.`));
+  // filters
+  const stars=new Set(activeWL().items.filter(i=>i.market===prefs.market).map(i=>i.sym));let rows=base0;
+  if(prefs.starredOnly)rows=rows.filter(r=>stars.has(r.sym));
+  const q=state.query.trim().toUpperCase();if(q)rows=rows.filter(r=>r.sym.includes(q)||(infoOf(d,r.sym).name||"").toUpperCase().includes(q));
+  const secs=[...new Set(res.rows.map(r=>infoOf(d,r.sym).sector).filter(Boolean))].sort();const sel=$("#sector");const cur=state.sector;sel.replaceChildren(el("option",null,"All sectors"));sel.firstChild.value="";
+  for(const x of secs){const o=el("option",null,x);o.value=x;sel.append(o);}sel.value=secs.includes(cur)?cur:"";sel.hidden=!secs.length;if(state.sector)rows=rows.filter(r=>infoOf(d,r.sym).sector===state.sector);
+  if(TS.cap&&prefs.market==="NSE"){rows=rows.filter(r=>{const f=fundOf(r.sym,"NSE");if(!f||!f.mcap)return false;const cr=f.mcap/1e7;return TS.cap==="large"?cr>=20000:TS.cap==="mid"?cr>=5000&&cr<20000:cr<5000;});}
+  for(const r of rows){const ts=techScore(r.sym,prefs.market,TS.hz,r.sig);r.score=ts?ts.score:null;r.ts=ts;r.sl=sigList(r);}
+  const P=TS.pat;if(P==="bull")rows=rows.filter(r=>r.sl.some(x=>x.S.bias==="bull"));else if(P==="bear")rows=rows.filter(r=>r.sl.some(x=>x.S.bias==="bear"));else if(P==="any")rows=rows.filter(r=>r.sl.length);
+  else if(P==="custom"){const act=prefs.active.filter(id=>SIGMAP[id]);if(act.length)rows=rows.filter(r=>prefs.match==="all"?act.every(id=>r.sig[id]!==undefined):act.some(id=>r.sig[id]!==undefined));}
+  else if(P)rows=rows.filter(r=>r.sig[P]!==undefined);
+  if(TS.bias)rows=rows.filter(r=>r.score!=null&&(TS.bias==="bull"?r.score>=65:TS.bias==="bear"?r.score<45:r.score>=45&&r.score<65));
+  const num=x=>x===""||x==null?null:+x;const rmn=num(TS.rsiMin),rmx=num(TS.rsiMax),smn=num(TS.scMin),smx=num(TS.scMax),vm=num(TS.vol);
+  if(rmn!=null)rows=rows.filter(r=>r.rsi!=null&&r.rsi>=rmn);if(rmx!=null)rows=rows.filter(r=>r.rsi!=null&&r.rsi<=rmx);
+  if(smn!=null)rows=rows.filter(r=>r.score!=null&&r.score>=smn);if(smx!=null)rows=rows.filter(r=>r.score!=null&&r.score<=smx);if(vm!=null)rows=rows.filter(r=>r.volRatio!=null&&r.volRatio>=vm&&r.chg>0);
+  const SO={score:(a,b)=>(b.score??-1)-(a.score??-1),vol:(a,b)=>(b.volRatio||0)-(a.volRatio||0),near:(a,b)=>Math.abs(a.distRes)-Math.abs(b.distRes),chg:(a,b)=>b.chg-a.chg,rsi:(a,b)=>(b.rsi||0)-(a.rsi||0),az:(a,b)=>a.sym.localeCompare(b.sym)};
+  rows.sort((a,b)=>(SO[TS.sort]||SO.score)(a,b)||a.sym.localeCompare(b.sym));state.shown=rows;
+  // header text
+  $("#heroTitle").textContent="Technical screener";
+  $("#heroSub").textContent=`${prefs.market==="NSE"?indexName():"US watchlist"}, ${({D:"daily",W:"weekly",M:"monthly"})[prefs.tf]} patterns, ${({st:"short-term",mt:"medium-term",lt:"long-term"})[TS.hz]} score.`;
+  renderBreadth(res.rows);
+  status.append(el("strong",null,`${rows.length} of ${res.rows.length} stocks`),el("span",null,`Latest candle ${candleLabel(res.lastT)}${prefs.tf!=="D"?" (may still be forming)":""}`));
+  tsCharts.forEach(c=>{try{c.remove();}catch(e){}});tsCharts=[];
+  if(!rows.length){const e=el("div","empty");e.append(el("b",null,"No stocks match"),el("span",null,"Loosen a filter or press Reset filters."));list.append(e);return;}
+  if(TS.view==="chart")renderTsCharts(rows,list,stars);else renderTsTable(rows,list,stars);
+}
+function tsHeader(det){const h=el("div","tsr tsh"+(det?" det":""));const cols=[["",""],["Stock","l"],["Price",""],["Trend","c"],["Technical signals","l"],["RSI",""],["Volume",""],["To 52W high",""],...(det?[["ADX",""],["MACD","c"],["1M",""],["3M vs Nifty",""]]:[]),["Score",""],["",""]];
+  const keys={"Price":"chg","RSI":"rsi","Volume":"vol","To 52W high":"near","Score":"score"};
+  for(const [t,cls] of cols){const c=el("div","tc "+cls,t);if(keys[t]){c.classList.add("srt");if(TS.sort===keys[t])c.append(el("span","arr"," ▼"));c.addEventListener("click",()=>{TS.sort=keys[t];saveTS();render();});}h.append(c);}return h;}
+function renderTsTable(rows,list,stars){
+  const det=TS.view==="detailed";const wrap=el("div","tst"+(det?" det":""));wrap.append(tsHeader(det));const maxSig=det?4:2;
+  for(const r of rows.slice(0,TS.limit)){const info=infoOf(state.data[prefs.market],r.sym);const row=el("div","tsr"+(det?" det":""));row.dataset.sym=r.sym;
+    const on=stars.has(r.sym);const st=el("button","tstar",on?"★":"☆");st.type="button";st.setAttribute("aria-pressed",String(on));st.setAttribute("aria-label",(on?"Remove ":"Add ")+r.sym+(on?" from":" to")+" watchlist");st.addEventListener("click",e=>{e.stopPropagation();toggleStar(r.sym);});
+    const nm=el("div","tc l tname");nm.append(el("b",null,r.sym),el("span",null,info.name||info.sector||""));nm.title=[info.name,info.sector].filter(Boolean).join(", ");
+    const px=el("div","tc num");px.append(el("b",null,fmtP(r.close)),el("span",r.chg>=0?"up":"dn",fmtPct(r.chg,true)));flashCell(px,prefs.market+":"+r.sym+":"+prefs.tf,r.close);
+    const sp=el("div","tc c");const spk=sparkline(r.series);if(det)spk.classList.add("big");sp.append(spk);
+    const sg=el("div","tc l tsigs");const L=r.sl;const showAll=TS_MORE.has(r.sym);for(const x of (showAll?L:L.slice(0,maxSig)))sg.append(sigChip(x));
+    if(L.length>maxSig){const m=el("button","tmore",showAll?"less":`+${L.length-maxSig}`);m.type="button";m.title=showAll?"Show fewer":L.slice(maxSig).map(x=>x.label).join(", ");m.addEventListener("click",e=>{e.stopPropagation();if(TS_MORE.has(r.sym))TS_MORE.delete(r.sym);else TS_MORE.add(r.sym);render();});sg.append(m);}
+    const hasB=L.some(x=>x.S.bias==="bull"),hasR=L.some(x=>x.S.bias==="bear");if(hasB&&hasR){const mx=el("span","tsig mixed","Mixed");mx.title="This stock shows both bullish and bearish signals. Check the trend and score before acting: signals on different timeframes or a reversal in progress can conflict.";sg.append(mx);}
+    if(!L.length)sg.append(el("span","tmuted","–"));
+    const rsi=el("div","tc num",r.rsi==null?"–":nf(r.rsi,0));if(r.rsi>70)rsi.classList.add("hot");else if(r.rsi<30)rsi.classList.add("cold");
+    const vol=el("div","tc num"+(r.volRatio>=2?" strong":""),r.volRatio==null?"–":nf(r.volRatio,1)+"×");
+    const hi=el("div","tc num",fmtPct(-r.offHigh));
+    const cells=[st,nm,px,sp,sg,rsi,vol,hi];
+    if(det){const s=state.data[prefs.market].series[r.sym];const b={t:s.t,o:s.o,h:s.h,l:s.l,c:s.c,v:s.v};const ad=adxA(b,14).adx;const {m,sig}=macdA(s.c);const nN=s.c.length;
+      cells.push(el("div","tc num",nf(ad[nN-1],0)),el("div","tc c "+(m[nN-1]>sig[nN-1]?"up":"dn"),m[nN-1]>sig[nN-1]?"Bull":"Bear"));const r1=retOver(s,30);const p1=el("div","tc num");p1.append(pctCell(r1));cells.push(p1);
+      const nifty=seriesOf("NIFTY50","GLB")||seriesOf("NIFTY50","NSE");const r3=retOver(s,91),n3=retOver(nifty,91);const rs=el("div","tc num");rs.append(r3!=null&&n3!=null?pctCell(r3-n3):document.createTextNode("–"));cells.push(rs);}
+    const sc=el("div","tc num");sc.append(scoreCell(r));cells.push(sc);
+    const ex=el("button","texp",TS_OPEN.has(r.sym)?"▾":"▸");ex.type="button";ex.setAttribute("aria-expanded",String(TS_OPEN.has(r.sym)));ex.setAttribute("aria-label","Expand analysis for "+r.sym);cells.push(ex);
+    row.append(...cells);const toggle=()=>{if(TS_OPEN.has(r.sym))TS_OPEN.delete(r.sym);else TS_OPEN.add(r.sym);render();};row.addEventListener("click",e=>{if(e.target.closest(".tstar,.tmore,.tscore"))return;toggle();});
+    wrap.append(row);if(TS_OPEN.has(r.sym))wrap.append(expandPanel(r));}
+  list.append(wrap);
+  if(rows.length>TS.limit){const more=el("button","btn tshow",`Show ${Math.min(50,rows.length-TS.limit)} more (${rows.length-TS.limit} left)`);more.type="button";more.addEventListener("click",()=>{TS.limit+=50;render();});list.append(more);}
+}
+function scoreCell(r){const b=el("button","tscore");b.type="button";if(r.score==null){b.textContent="–";b.disabled=true;return b;}const [lab,k]=BAND(r.score);b.classList.add(k);
+  b.append(el("b",null,String(r.score)));const bar=el("i");bar.style.setProperty("--w",r.score+"%");b.append(bar);b.title=`${lab}. Click for the calculation.`;b.addEventListener("click",e=>{e.stopPropagation();showScorePop(b,r);});return b;}
+function showScorePop(anchor,r){const pop=$("#scorePop");pop.replaceChildren();const [lab]=BAND(r.score);
+  pop.append(el("div","sp-h",`${r.sym}: ${r.score} / 100, ${lab}`),el("div","pnote",`${({st:"Short term (days to weeks)",mt:"Medium term (1 to 6 months)",lt:"Long term (a year or more)"})[TS.hz]}. Technical only, from daily prices.${r.ts.partial?" Some parts had no data, so the score is scaled to the parts available.":""}`));
+  for(const p of r.ts.parts){const d=el("div","sp-part");d.append(el("div","sp-row",""));d.firstChild.append(el("b",null,p.name),el("span","num",p.pts==null?"no data":`${nf(p.pts,1)} / ${p.max}`));const ul=el("ul");for(const l of p.lines)ul.append(el("li",null,l));d.append(ul);pop.append(d);}
+  pop.append(el("div","pnote","80+ strong bullish, 65–79 bullish, 45–64 neutral, 30–44 weak, below 30 strong bearish. Not a recommendation."));
+  const rc=anchor.getBoundingClientRect();pop.hidden=false;const w=Math.min(380,window.innerWidth-20);pop.style.width=w+"px";pop.style.left=Math.max(10,Math.min(window.innerWidth-w-10,rc.right-w))+"px";
+  const top=rc.bottom+6+window.scrollY;pop.style.top=top+"px";}
+/* ---------- expandable analysis ---------- */
+function expandPanel(r){
+  const m=prefs.market,s=state.data[m].series[r.sym];const p=el("div","tsx");const n=s.c.length,c=s.c[n-1];const B={t:s.t,o:s.o,h:s.h,l:s.l,c:s.c,v:s.v};
+  const charts=el("div","tsx-charts");const c1=el("div","tsx-ch"),c2=el("div","tsx-ch");const l1=el("div","tsx-cl","Daily, 6 months"),l2=el("div","tsx-cl","Weekly, 2 years");const w1=el("div");w1.append(l1,c1);const w2=el("div");w2.append(l2,c2);charts.append(w1,w2);
+  const info=el("div","tsx-info");const blk=(t)=>{const b=el("div","tsx-b");b.append(el("h4",null,t));info.append(b);return b;};
+  const pb=blk("Detected patterns");if(!r.sl.length)pb.append(el("p","pnote","No patterns on this timeframe."));for(const x of r.sl){const li=el("div","tsx-pat");li.append(sigChip(x),el("span","pnote",patBadgeText(x.id,x.v,prefs.tf,r)||(x.conf?"confirmed":"forming")));pb.append(li);}
+  const lv=blk("Levels");const pv=pivots(s,120);const sups=[...new Set(pv.lows.filter(x=>x<c).sort((a,b)=>b-a))].slice(0,2),ress=[...new Set(pv.highs.filter(x=>x>c).sort((a,b)=>a-b))].slice(0,2);
+  lv.append(kv("Support",sups.length?sups.map(x=>fmtP(x)).join(", "):"none below"),kv("Resistance",ress.length?ress.map(x=>fmtP(x)).join(", "):"at highs"),kv("52-week high / low",`${fmtP(r.hi52)} / ${fmtP(Math.min(...s.l.slice(-252)))}`));
+  const ib=blk("Indicators");const {m:md,sig:ms}=macdA(s.c);const {st:stv,dir}=supertrendA(B,10,3);const ad=adxA(B,14).adx;const rsi=rsiSeries(s.c,14);
+  ib.append(kv("RSI (14)",`${nf(rsi[n-1],1)} ${rsi[n-1]>70?"overbought":rsi[n-1]<30?"oversold":rsi[n-1]>=50?"bullish zone":"bearish zone"}`),kv("MACD",md[n-1]>ms[n-1]?"above signal (bullish)":"below signal (bearish)"),
+    kv("Supertrend (10,3)",`${dir[n-1]===1?"buy":"sell"}, line ${fmtP(stv[n-1])}`),kv("ADX (14)",`${nf(ad[n-1],1)} ${ad[n-1]>=25?"strong trend":ad[n-1]>=20?"developing":"weak / range"}`));
+  const vb=blk("Volume");let v20=0;for(let i=n-21;i<n-1;i++)v20+=s.v[i];v20/=20;const ob=obvA(B);const dl=m==="NSE"&&FEEDS&&FEEDS.delivery&&FEEDS.delivery.items?FEEDS.delivery.items[r.sym]:null;
+  vb.append(kv("Today vs 20-day average",v20?nf(s.v[n-1]/v20,2)+"×":"–"),kv("20-day average",fmtVol(v20,m)),kv("On-balance volume (20 days)",ob[n-1]>ob[n-21]?"rising":"falling"));if(dl!=null)vb.append(kv("Delivery %",nf(dl,1)+"%"));
+  const tb=blk("Trade setup ("+({st:"short term",mt:"medium term",lt:"long term"})[TS.hz]+")");const tp=tradePlans(r.sym,m);const pl=tp&&tp.plans[TS.hz];
+  if(pl){const brk=pl.res||r.res;tb.append(kv("Breakout price",brk?fmtP(brk):"at highs"),kv("Buy range",`${fmtP(pl.buyLow)} – ${fmtP(pl.buyHigh)}`),kv("Target 1 / 2",`${fmtP(pl.t1)} / ${fmtP(pl.t2)}`),kv("Stop-loss reference",fmtP(pl.stop)),kv("Risk : reward",`1 : ${nf(pl.rr1,1)}`));}
+  else tb.append(el("p","pnote","Not enough history for a plan on this horizon."));
+  const xb=blk("Explanation");const ts=r.ts;if(ts){const best=ts.parts.filter(q=>q.pts!=null).sort((a,b)=>b.pts/b.max-a.pts/a.max);const top=best[0],low=best[best.length-1];
+    xb.append(el("p",null,`Score ${ts.score} (${BAND(ts.score)[0].toLowerCase()}). Strongest part: ${top.name.toLowerCase()} (${nf(top.pts,1)} of ${top.max}); weakest: ${low.name.toLowerCase()} (${nf(low.pts,1)} of ${low.max}). ${r.sl.filter(x=>x.conf).length?`Confirmed signals: ${r.sl.filter(x=>x.conf).map(x=>x.label).join(", ")}.`:"No confirmed signals yet."}`));}
+  const acts=el("div","tsx-acts");const full=el("button","btn primary","Open full analysis");full.type="button";full.addEventListener("click",()=>openSheet(r));const al=el("button","btn","Set alert");al.type="button";al.addEventListener("click",()=>{openSheet(r);setTimeout(()=>{const b=$("#alertBox");if(b)b.scrollIntoView({behavior:"smooth",block:"center"});},700);});acts.append(full,al);info.append(acts);
+  p.append(charts,info);
+  requestAnimationFrame(()=>{miniChart(c1,s,183,"D",r);miniChart(c2,s,730,"W",r);});
+  return p;
+}
+async function miniChart(box,s,days,iv,r){const ok=await ensureLWC();if(!ok){box.replaceChildren(el("div","lwc-msg","Chart library couldn’t load."));return;}
+  const cut=s.t[s.t.length-1]-days*864e5;let k=s.t.findIndex(t=>t>=cut);if(k<0)k=0;let sl={t:s.t.slice(k),o:s.o.slice(k),h:s.h.slice(k),l:s.l.slice(k),c:s.c.slice(k),v:s.v.slice(k)};if(iv==="W")sl=resample(sl,"W");
+  const L=window.LightweightCharts;const ch=L.createChart(box,Object.assign(chartBaseOpts(false),{handleScroll:false,handleScale:false}));tsCharts.push(ch);
+  const m=ch.addSeries(L.CandlestickSeries,{upColor:cssv("--bull"),downColor:cssv("--bear"),borderVisible:false,wickUpColor:cssv("--bull"),wickDownColor:cssv("--bear")});
+  m.setData(sl.t.map((t,i)=>({time:new Date(t).toISOString().slice(0,10),open:sl.o[i],high:sl.h[i],low:sl.l[i],close:sl.c[i]})));
+  const vs=ch.addSeries(L.HistogramSeries,{priceFormat:{type:"volume"},priceScaleId:"v",lastValueVisible:false,priceLineVisible:false});ch.priceScale("v").applyOptions({scaleMargins:{top:0.82,bottom:0}});
+  vs.setData(sl.t.map((t,i)=>({time:new Date(t).toISOString().slice(0,10),value:sl.v[i],color:(sl.c[i]>=sl.o[i]?cssv("--bull"):cssv("--bear"))+"55"})));
+  const e=emaA(sl.c,iv==="W"?10:20);const ls=ch.addSeries(L.LineSeries,{color:cssv("--accent"),lineWidth:1,priceLineVisible:false,lastValueVisible:false,crosshairMarkerVisible:false});ls.setData(e.map((x,i)=>x==null?null:{time:new Date(sl.t[i]).toISOString().slice(0,10),value:x}).filter(Boolean));
+  if(iv==="D"&&r.res){m.createPriceLine({price:r.res,color:cssv("--sig-breakout"),lineStyle:2,lineWidth:1,title:"Resistance"});m.createPriceLine({price:r.sup,color:cssv("--sig-support"),lineStyle:2,lineWidth:1,title:"Support"});}
+  ch.timeScale().fitContent();}
+/* ---------- chart view ---------- */
+function renderTsCharts(rows,list,stars){const g=el("div","tsgrid");const show=rows.slice(0,Math.min(TS.limit,24));
+  for(const r of show){const info=infoOf(state.data[prefs.market],r.sym);const c=el("div","tscard");const h=el("div","tsc-h");const nm=el("div","tname");nm.append(el("b",null,r.sym),el("span",null,info.name||""));
+    const px=el("div","num tsc-px");px.append(el("b",null,fmtP(r.close)),el("span",r.chg>=0?"up":"dn",fmtPct(r.chg,true)));h.append(nm,px,scoreCell(r));
+    const ch=el("div","tsc-ch");const sg=el("div","tsigs");for(const x of r.sl.slice(0,3))sg.append(sigChip(x));if(r.sl.length>3)sg.append(el("span","tmuted",`+${r.sl.length-3}`));
+    c.append(h,ch,sg);c.addEventListener("click",e=>{if(e.target.closest(".tscore"))return;openSheet(r);});g.append(c);
+    const s=state.data[prefs.market].series[r.sym];requestAnimationFrame(()=>miniChart(ch,s,92,"D",r));}
+  list.append(g);if(rows.length>show.length){const more=el("button","btn tshow",`Show more charts (${rows.length-show.length} left)`);more.type="button";more.addEventListener("click",()=>{TS.limit=Math.max(TS.limit,show.length)+24;render();});list.append(more);}}
 
 /* ---------- start ---------- */
 (async()=>{
