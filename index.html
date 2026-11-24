@@ -698,6 +698,10 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
   .tsr>.tc:has(.tscore){grid-area:score}.tsr>.texp{grid-area:exp}
   .tsr>*:nth-child(4),.tsr>*:nth-child(6),.tsr>*:nth-child(7),.tsr>*:nth-child(8),.tsr.det>*:nth-child(9),.tsr.det>*:nth-child(10),.tsr.det>*:nth-child(11),.tsr.det>*:nth-child(12){display:none}
   .tsh{display:none}.tsx-info{grid-template-columns:1fr}}
+.pf-q{margin-bottom:12px}.pf-q summary{cursor:pointer;font-size:14px}.pf-q summary .dn{color:var(--bear);font-weight:600}.pf-q summary .up{color:var(--bull);font-weight:600}
+.pfq-body{margin-top:10px;display:grid;gap:10px}.pfq-item{border-left:3px solid var(--muted);padding:4px 0 4px 12px}.pfq-item.warn{border-color:var(--sig-hammer)}.pfq-item h4{margin:0 0 4px;font-size:13.5px}
+.pfq-item ul{margin:0;padding-left:18px;font-size:13px}.pfq-item li{margin:3px 0}.pfq-in{width:130px;padding:4px 8px;border-radius:6px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);margin:0 4px}
+.pfq-item .btn{padding:3px 9px;font-size:12px}.pfq-body>.btn.primary{justify-self:start}
 [hidden]{display:none !important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
@@ -1032,7 +1036,7 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
     </dl>
     <h3 class="g-h">Portfolio</h3>
     <dl class="g-list">
-      <div><dt>Add more, Hold, Review</dt><dd>Signals from each holding’s trend, momentum and support, explained in “How the signals work” on the portfolio tab. Review means “look closer”, not an automatic sell.</dd></div>
+      <div><dt>Trend strengthening, Stable, Needs a look</dt><dd>Signals from each holding’s trend, momentum and support, explained in “How the signals work” on the portfolio tab. Review means “look closer”, not an automatic sell.</dd></div>
       <div><dt>Portfolio health</dt><dd>A 0 to 100 score: the value-weighted average of your holdings’ signals, reduced if one stock or sector is too large or you hold fewer than 5 stocks.</dd></div>
     </dl>
     <h3 class="g-h">ETFs, BeES and indices</h3>
@@ -1069,13 +1073,13 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
     <div id="pfBody" hidden>
       <div class="pf-cards" id="pfCards"></div>
       <div class="pf-grid">
-        <section class="panel"><h3>Signals</h3><div id="pfActions"></div></section>
+        <section class="panel"><h3>Trend status</h3><div id="pfActions"></div></section>
         <section class="panel"><h3>Sector allocation</h3><div id="pfSectors"></div></section>
         <section class="panel"><h3>Things to watch</h3><ul class="pf-warn" id="pfWarn"></ul></section>
       </div>
       <div class="tools pf-filter" role="group" aria-label="Filter holdings">
         <div class="small-seg" id="pfFilter">
-          <button type="button" data-f="all">All</button><button type="button" data-f="add">Add more</button><button type="button" data-f="hold">Hold</button><button type="button" data-f="review">Review</button>
+          <button type="button" data-f="all">All</button><button type="button" data-f="add">Strengthening</button><button type="button" data-f="hold">Stable</button><button type="button" data-f="review">Needs a look</button>
         </div>
         <select id="pfSort" class="btn" aria-label="Sort holdings">
           <option value="value">Sort: largest holding</option><option value="pnl">Sort: best return</option><option value="pnlLow">Sort: worst return</option><option value="score">Sort: strongest signal</option><option value="az">Sort: A to Z</option>
@@ -1083,9 +1087,9 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
       </div>
       <div class="list" id="pfList"></div>
       <details class="pf-how">
-        <summary>How the signals work</summary>
+        <summary>How the trend statuses work</summary>
         <p>Each stock gets points from its daily chart: above its 200-day average +2 (below −2), above its 50-day average +1 (below −1), 50-day above 200-day +1 (below −1), RSI 50 to 75 +1, RSI under 35 −1, RSI over 75 −1 (overbought), bullish reversal pattern at support +1, breakout above the 20-day high +1, close below 20-day support −2, more than 30% below its 52-week high −1.</p>
-        <p><b>Add more</b>: 4 points or more and not overbought. <b>Review</b>: −3 or lower. <b>Hold</b>: everything in between. Portfolio health is the value-weighted average of stock scores, reduced if one stock is over 25% of the portfolio, one sector is over 40%, or there are fewer than 5 stocks.</p>
+        <p><b>Trend strengthening</b>: 4 points or more and not overbought. <b>Needs a look</b>: −3 or lower. <b>Stable</b>: everything in between. These describe each chart’s trend; they are not instructions to buy or sell. Portfolio health is the value-weighted average of stock scores, reduced if one stock is over 25% of the portfolio, one sector is over 40%, or there are fewer than 5 stocks.</p>
         <p>These are automatic technical signals from price charts only. They don’t look at company results, valuation or your goals, so treat them as a starting point for your own research, not as financial advice.</p>
       </details>
       <p class="pf-fine">Your portfolio is saved only in this browser on this device. It is never uploaded to GitHub or anywhere else. <button type="button" class="linkbtn" id="pfClear">Clear portfolio</button></p>
@@ -2148,7 +2152,7 @@ const pfState={filter:"all",sort:"value",rows:[]};
 function savePF(){try{localStorage.setItem("radar.portfolio",JSON.stringify(PF));}catch(e){}}
 function pfMsg(t,kind){const m=$("#pfMsg");if(!t){m.hidden=true;return;}m.hidden=false;m.className="note"+(kind==="warn"?" demo":"");m.textContent=t;}
 const normName=x=>String(x||"").toLowerCase().replace(/&/g,"and").replace(/\b(limited|ltd|the|india|co|company|corporation|corp|inc)\b/g,"").replace(/[^a-z0-9]/g,"");
-function resolveSym(raw,isin){
+function resolveSymOld(raw,isin){
   if(isin){const s=ISIN_MAP[String(isin).trim().toUpperCase()];if(s)return s;}
   let s=cleanSym(raw).replace(/-(EQ|BE|BL|BZ|SM|ST)$/,"").replace(/\s+/g,"");
   const series=(state.data.NSE&&state.data.NSE.series)||{};
@@ -2183,7 +2187,7 @@ async function readHoldingsFile(file){
   }
   return csvRows(await file.text());
 }
-async function importHoldings(file){
+async function importHoldingsOld(file){
   pfMsg("Reading "+file.name+"…");
   let rows;try{rows=await readHoldingsFile(file);}catch(e){pfMsg("Couldn’t read this file. Save it as CSV or Excel (.xlsx) and try again.","warn");return;}
   const hd=findHeader(rows);
@@ -2217,8 +2221,8 @@ function scoreHolding(a){
   const action=sc>=4&&!overbought?"add":sc<=-3?"review":"hold";
   return {score:sc,pts,action,health:Math.max(0,Math.min(100,(sc+8)/15*100))};
 }
-const ACT_LABEL={add:"Add more",hold:"Hold",review:"Review",na:"No price data"};
-function analyzeHoldings(){
+const ACT_LABEL={add:"Trend strengthening",hold:"Stable",review:"Needs a look",na:"No price data"};
+function analyzeHoldingsOld(){
   const d=state.data.NSE;const out=[];
   const miss=PF.filter(h=>!hasSeries(h.sym)&&OTHERS[h.sym]).map(h=>h.sym);if(miss.length)ensureMany(miss);
   for(const h of PF){
@@ -2248,24 +2252,26 @@ function renderPortfolio(){
   const noPrices=!state.data.NSE;
   const {rows,total}=analyzeHoldings();pfState.rows=rows;
   const priced=rows.filter(r=>r.action!=="na");
-  const inv=rows.reduce((x,r)=>x+(r.invested||0),0),val=rows.reduce((x,r)=>x+r.value,0);
+  const inv=rows.reduce((x,r)=>x+(r.value!=null&&r.invested!=null?r.invested:0),0),val=rows.reduce((x,r)=>x+(r.value||0),0);
+  const unp=rows.filter(r=>r.value==null),unpCost=unp.reduce((x,r)=>x+(r.invested||0),0);
   const pnl=rows.reduce((x,r)=>x+(r.pnl||0),0),invP=rows.reduce((x,r)=>x+(r.pnl!=null?r.invested:0),0);
   const day=rows.reduce((x,r)=>x+r.day,0);
   // sectors
-  const sec={};for(const r of rows)sec[r.sector]=(sec[r.sector]||0)+r.value;
+  const sec={};for(const r of rows)if(r.value!=null)sec[r.sector]=(sec[r.sector]||0)+r.value;
   const secArr=Object.entries(sec).sort((a,b)=>b[1]-a[1]);
   const maxW=rows.reduce((m,r)=>r.weight>m.weight?r:m,{weight:0});
   // health
   let health=null;const pw=priced.reduce((x,r)=>x+r.value,0);
   if(pw>0){health=priced.reduce((x,r)=>x+r.health*r.value,0)/pw;
-    if(maxW.weight>25)health-=10;if(secArr.length&&secArr[0][1]/val*100>40)health-=10;if(rows.length<5)health-=5;health=Math.max(0,Math.min(100,Math.round(health)));}
+    if(maxW.weight>25)health-=10;if(secArr.length&&secArr[0][1]/val*100>40)health-=10;health=Math.max(0,Math.min(100,Math.round(health)));}
   const cards=$("#pfCards");cards.replaceChildren();
   const card=(label,valueNode)=>{const c=el("dl","pf-card");const w=el("div");w.append(el("dt",null,label));const dd=el("dd");dd.append(valueNode);w.append(dd);c.append(w);cards.append(c);};
-  card("Invested",document.createTextNode(inr(inv)));
+  card(unp.length?"Invested (priced holdings)":"Invested",document.createTextNode(inr(inv)));
   card("Current value",document.createTextNode(inr(val)));
+  if(unp.length){const f=document.createDocumentFragment();f.append(el("span",null,inr(unpCost)),el("small",null,`${unp.length} holding${unp.length>1?"s":""} without a price, not counted`));card("Not priced",f);}
   {const f=document.createDocumentFragment();const sp=el("span",pnl>=0?"up":"dn",inrSigned(pnl));f.append(sp);if(invP>0)f.append(el("small",pnl>=0?"up":"dn",fmtPct(pnl/invP*100,true)));card("Total return",f);}
   {const f=document.createDocumentFragment();f.append(el("span",day>=0?"up":"dn",inrSigned(day)));if(val-day>0)f.append(el("small",day>=0?"up":"dn",fmtPct(day/(val-day)*100,true)));card("Today",f);}
-  if(health!=null){const g=el("div","gauge");g.innerHTML=gaugeSvg(health);const t=el("div");t.append(el("span",null,String(health)),el("small",null,health>=70?"Strong":health>=50?"Fair":"Weak"));g.append(t);card("Portfolio health",g);}
+  if(health!=null){const g=el("div","gauge");g.innerHTML=gaugeSvg(health);const t=el("div");t.append(el("span",null,String(health)),el("small",null,health>=70?"Strong":health>=50?"Fair":"Weak"));g.append(t);card("Trend score (technical)",g);}
   // actions
   const acts=$("#pfActions");acts.replaceChildren();
   const cnt=k=>rows.filter(r=>r.action===k).length;
@@ -2279,16 +2285,17 @@ function renderPortfolio(){
   if(noPrices)W("Prices haven’t loaded yet, so signals can’t be calculated. Open the Radar tab to check the data status.");
   if(maxW.weight>25)W(`${maxW.sym} is ${maxW.weight.toFixed(0)}% of your portfolio. A single stock above 20 to 25% adds a lot of risk.`);
   if(secArr.length&&secArr[0][1]/val*100>40)W(`${secArr[0][0]} is ${(secArr[0][1]/val*100).toFixed(0)}% of your portfolio. Consider spreading across more sectors.`);
-  if(rows.length<5)W(`Only ${rows.length} stock${rows.length>1?"s":""}. Five or more usually spreads risk better.`);
+  if(rows.length<5)W(`${rows.length} holding${rows.length>1?"s":""}: a concentrated portfolio. Fine if intended; each stock’s own news will move your total a lot.`);
   if(rows.length>30)W(`${rows.length} stocks is a lot to track. Small positions barely move your returns.`);
   const below=priced.filter(r=>r.a.ema200!=null&&r.ltp<r.a.ema200);if(below.length)W(`${below.length} stock${below.length>1?"s are":" is"} below the 200-day average: ${below.slice(0,6).map(r=>r.sym).join(", ")}${below.length>6?"…":""}.`);
   const big=priced.filter(r=>r.pnlPct!=null&&r.pnlPct<-25);if(big.length)W(`Down more than 25% from your buy price: ${big.map(r=>r.sym).join(", ")}.`);
   const na=rows.filter(r=>r.action==="na");
   if(!warn.children.length)W("Nothing stands out. Your portfolio looks well spread.");
   renderFixPanel(na,noPrices);
+  try{renderPfQuality(rows);}catch(e){console.warn(e);}
   // list
   let list=rows.filter(r=>pfState.filter==="all"||r.action===pfState.filter);
-  const sorts={value:(a,b)=>b.value-a.value,pnl:(a,b)=>(b.pnlPct??-1e9)-(a.pnlPct??-1e9),pnlLow:(a,b)=>(a.pnlPct??1e9)-(b.pnlPct??1e9),score:(a,b)=>(b.score??-99)-(a.score??-99),az:(a,b)=>a.sym.localeCompare(b.sym)};
+  const sorts={value:(a,b)=>(b.value??-1)-(a.value??-1),pnl:(a,b)=>(b.pnlPct??-1e9)-(a.pnlPct??-1e9),pnlLow:(a,b)=>(a.pnlPct??1e9)-(b.pnlPct??1e9),score:(a,b)=>(b.score??-99)-(a.score??-99),az:(a,b)=>a.sym.localeCompare(b.sym)};
   list.sort(sorts[pfState.sort]||sorts.value);
   const box=$("#pfList");box.replaceChildren();const frag=document.createDocumentFragment();
   for(const r of list){
@@ -2297,7 +2304,7 @@ function renderPortfolio(){
     const sp=r.a?sparkline(state.data.NSE.series[r.sym]):el("span","spark");
     const c2=el("div","cell c-px num");c2.append(el("b",null,r.ltp!=null?fmtP(r.ltp):"–"),el("span",r.a?(r.a.chg>=0?"up":"dn"):null,r.a?fmtPct(r.a.chg,true)+" today":"no price"));
     const c3=el("div","cell c-pnl num");c3.append(el("b",r.pnl==null?null:r.pnl>=0?"up":"dn",inrSigned(r.pnl)),el("span",r.pnl==null?null:r.pnl>=0?"up":"dn",r.pnlPct==null?"":fmtPct(r.pnlPct,true)));
-    const c4=el("div","cell c-wt num");c4.append(el("b",null,r.weight.toFixed(1)+"%"),el("span",null,"of portfolio"));
+    const c4=el("div","cell c-wt num");c4.append(el("b",null,r.weight==null?"–":r.weight.toFixed(1)+"%"),el("span",null,r.weight==null?"not priced":`of portfolio${r.lots&&r.lots.length>1?` · ${r.lots.length} lots`:""}`));
     const act=el("span","act "+r.action,ACT_LABEL[r.action]+(r.score!=null?` (${r.score>0?"+":""}${r.score})`:""));
     const del=el("button","del","×");del.type="button";del.setAttribute("aria-label","Remove "+r.sym);
     del.addEventListener("click",e=>{e.stopPropagation();PF=PF.filter(x=>x.sym!==r.sym);savePF();render();});
@@ -2336,7 +2343,7 @@ function renderFixPanel(na,noPrices){
   box.append(dl,p);
 }
 function pfTemplate(){
-  const csv="Symbol,Quantity,Average price,Buy date\nRELIANCE,10,2450,2024-03-15\nTCS,5,3500,2025-08-01\nHDFCBANK,20,1600,2023-11-20\n";
+  const csv="Symbol,Quantity,Average price,Buy date\nRELIANCE,10,2450,2024-03-15\nRELIANCE,5,2900,2025-09-10\nTCS,5,3500,2025-08-01\nHDFCBANK,20,1600,2023-11-20\n";
   const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"}));a.download="portfolio-template.csv";document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);
 }
 
@@ -2457,10 +2464,7 @@ $("#pfAddBtn").addEventListener("click",()=>{$("#pfForm").hidden=false;$("#pfSym
 $("#pfCancel").addEventListener("click",()=>{$("#pfForm").hidden=true;});
 $("#pfTemplate").addEventListener("click",pfTemplate);
 $("#pfForm").addEventListener("submit",e=>{e.preventDefault();const sym=resolveSym($("#pfSym").value,"");const qty=toNum($("#pfQty").value),avg=toNum($("#pfAvg").value);
-  if(!sym||!(qty>0)||!(avg>=0))return;const ex=PF.find(x=>x.sym===sym);
-  const bd=$("#pfDate").value||undefined;
-  if(ex){const cost=ex.qty*ex.avg+qty*avg;ex.qty+=qty;ex.avg=cost/ex.qty;if(bd&&(!ex.date||bd<ex.date))ex.date=bd;}else PF.push({sym,qty,avg,date:bd});
-  savePF();e.target.reset();$("#pfForm").hidden=true;pfMsg(`Added ${sym}.`);render();});
+  if(!sym||!(qty>0)||!(avg>=0))return;addLotManually(sym,qty,avg,$("#pfDate").value||null);e.target.reset();$("#pfForm").hidden=true;pfMsg(`Added ${sym} as a separate purchase lot.`);render();});
 $("#pfClear").addEventListener("click",()=>{if(confirm("Remove all holdings from this device?")){PF=[];savePF();pfMsg("");render();}});
 document.querySelectorAll("#pfFilter [data-f]").forEach(b=>b.addEventListener("click",()=>{pfState.filter=b.dataset.f;render();}));
 $("#pfSort").addEventListener("change",e=>{pfState.sort=e.target.value;render();});
@@ -3490,7 +3494,7 @@ function alertLabel(a){if(a.cond==="above")return `≥ ${fmtP(a.price)}`;if(a.co
 function xirr(flows){if(flows.length<2)return null;const t0=flows[0].t;const f=r=>flows.reduce((s,x)=>s+x.v/Math.pow(1+r,(x.t-t0)/31557600000),0);
   let lo=-0.99,hi=10;let flo=f(lo),fhi=f(hi);if(flo*fhi>0)return null;for(let k=0;k<200;k++){const mid=(lo+hi)/2,fm=f(mid);if(Math.abs(fm)<1e-6)return mid;if(flo*fm<0){hi=mid;fhi=fm;}else{lo=mid;flo=fm;}}return (lo+hi)/2;}
 function priceOn(s,t){if(!s)return null;let i=s.t.findIndex(x=>x>=t);if(i<0)return null;return s.c[i];}
-function renderPfAnalytics(rows){
+function renderPfAnalyticsOld(rows){
   let box=$("#pfAnalytics");if(!box){box=el("section","panel pf-an");box.id="pfAnalytics";$("#pfList").closest("#pfBody").insertBefore(box,$("#pfList").previousElementSibling);}
   box.replaceChildren(el("h3",null,"Portfolio analytics"));const grid=el("div","an-grid");box.append(grid);
   const priced=rows.filter(r=>r.ltp!=null);const dated=priced.filter(r=>r.date&&r.avg>0);const now=Date.now();
@@ -4020,6 +4024,171 @@ function renderTsCharts(rows,list,stars){const g=el("div","tsgrid");const show=r
     c.append(h,ch,sg);c.addEventListener("click",e=>{if(e.target.closest(".tscore"))return;openSheet(r);});g.append(c);
     const s=state.data[prefs.market].series[r.sym];requestAnimationFrame(()=>miniChart(ch,s,92,"D",r));}
   list.append(g);if(rows.length>show.length){const more=el("button","btn tshow",`Show more charts (${rows.length-show.length} left)`);more.type="button";more.addEventListener("click",()=>{TS.limit=Math.max(TS.limit,show.length)+24;render();});list.append(more);}}
+
+/* =====================================================================
+   PORTFOLIO CORE: pure calculations (lots, XIRR, capital gains, checks)
+   Every function is deterministic and covered by tests (pcore.test.js).
+   ===================================================================== */
+const PC={};
+const DAY=864e5;
+/* lots: each purchase kept separately {qty, price, date:"YYYY-MM-DD"|null} */
+PC.lotsOf=h=>Array.isArray(h.lots)&&h.lots.length?h.lots:[{qty:+h.qty||0,price:+h.avg||0,date:h.date||null}];
+PC.summarise=lots=>{let qty=0,cost=0,allPriced=true,first=null;for(const l of lots){qty+=l.qty;if(l.price>0)cost+=l.qty*l.price;else allPriced=false;if(l.date&&(!first||l.date<first))first=l.date;}
+  return {qty,avg:allPriced&&qty>0?cost/qty:0,cost:allPriced?cost:null,firstDate:first,allPriced,allDated:lots.every(l=>!!l.date)};};
+/* XIRR on dated cash flows [{t:ms, v}] (negative = money in, positive = money out) */
+PC.xirr=flows=>{if(flows.length<2)return null;const f=flows.slice().sort((a,b)=>a.t-b.t);const t0=f[0].t;
+  if(!f.some(x=>x.v<0)||!f.some(x=>x.v>0))return null;
+  const npv=r=>f.reduce((s,x)=>s+x.v/Math.pow(1+r,(x.t-t0)/(365*DAY)),0);
+  let lo=-0.9999,hi=100,flo=npv(lo),fhi=npv(hi);if(!isFinite(flo)||!isFinite(fhi)||flo*fhi>0)return null;
+  for(let k=0;k<300;k++){const m=(lo+hi)/2,fm=npv(m);if(Math.abs(fm)<1e-7)return m;if(flo*fm<0){hi=m;fhi=fm;}else{lo=m;flo=fm;}}return (lo+hi)/2;};
+/* portfolio cash flows: every dated, priced lot is an outflow on its date; today's value is the inflow */
+PC.flows=(rows,now)=>{const flows=[],excluded=[];let value=0;
+  for(const r of rows){if(r.ltp==null){excluded.push({sym:r.sym,reason:"no current price"});continue;}
+    const lots=PC.lotsOf(r);if(!lots.every(l=>l.date&&l.price>0)){excluded.push({sym:r.sym,reason:!lots.every(l=>l.date)?"buy date missing":"buy price missing"});continue;}
+    for(const l of lots)flows.push({t:Date.parse(l.date+"T00:00:00Z"),v:-l.qty*l.price});value+=r.qty*r.ltp;}
+  if(flows.length)flows.push({t:now,v:value});return {flows,excluded,value};};
+/* Indian tax treatment for "if sold today" (listed equity shares and equity-oriented ETFs only) */
+PC.taxType=(sym,kind)=>{const s=String(sym||"").toUpperCase();
+  if(kind==="sgb"||/^SGB/.test(s))return {type:"other",why:"Sovereign Gold Bond (special rules; redemption at maturity is tax-free)"};
+  if(kind==="bond"||kind==="gsec"||kind==="tbill")return {type:"other",why:"bond / government security (different rules)"};
+  if(kind==="etf"||/BEES$|ETF|IETF/.test(s)){
+    if(/MON100|MAFANG|MASPTOP|MAHKTECH|HNGSNG|HANGSENG|NASDAQ|NAS100|SP500|USTECH|MSCIUS|GLOBAL|INTL/.test(s))return {type:"other",why:"international ETF (not equity-oriented for tax)"};
+    if(/GOLD|SILVER/.test(s))return {type:"other",why:"gold / silver ETF (different rules)"};
+    if(/LIQUID|LIQ|GILT|BOND|BBETF|SDL|GSEC|CASH|MONEY|DEBT|LTGILT/.test(s))return {type:"other",why:"debt / liquid ETF (taxed at slab rates)"};
+    return {type:"equity",why:"equity ETF"};}
+  return {type:"equity",why:"listed equity share"};};
+PC.RULES={stRate:0.20,ltRate:0.125,ltExempt:125000,cess:0.04,ltDays:365,gfDate:"2018-02-01"};
+/* long term = held for MORE than 12 months (calendar), not 365 days */
+PC.isLongTerm=(dateStr,nowMs)=>{const [y,m,d]=dateStr.split("-").map(Number);return nowMs>Date.UTC(y+1,m-1,d);};
+/* gains if all lots were sold today at ltp. fmv18: {sym: highest price on 31-Jan-2018} for grandfathering */
+PC.gainsIfSold=(rows,nowMs,fmv18)=>{const R=PC.RULES;const lots=[],skipped=[];let st=0,lt=0;
+  for(const r of rows){if(r.ltp==null){skipped.push({sym:r.sym,reason:"no current price"});continue;}const tt=PC.taxType(r.sym,r.kind);if(tt.type!=="equity"){skipped.push({sym:r.sym,reason:tt.why});continue;}
+    for(const l of PC.lotsOf(r)){if(!l.date){skipped.push({sym:r.sym,reason:"buy date missing for "+l.qty+" shares"});continue;}if(!(l.price>0)){skipped.push({sym:r.sym,reason:"buy price missing"});continue;}
+      const days=Math.floor((nowMs-Date.parse(l.date+"T00:00:00Z"))/DAY);const isLT=PC.isLongTerm(l.date,nowMs);let cost=l.price,note="";
+      if(isLT&&l.date<R.gfDate){const f=fmv18&&fmv18[r.sym];if(f>0){cost=Math.max(l.price,Math.min(f,r.ltp));note=`grandfathered: cost = higher of buy price and lower of 31-Jan-2018 value (${f}) and sale price`;}else note="bought before Feb-2018: grandfathering NOT applied (no 31-Jan-2018 price)";}
+      const g=l.qty*(r.ltp-cost);if(isLT)lt+=g;else st+=g;lots.push({sym:r.sym,date:l.date,qty:l.qty,buy:l.price,cost,sell:r.ltp,days,type:isLT?"LT":"ST",gain:g,note});}}
+  // set-off: ST loss against ST gain, then LT gain; LT loss only against LT gain
+  let netST=st,netLT=lt;if(netST<0&&netLT>0){const u=Math.min(-netST,netLT);netLT-=u;netST+=u;}
+  const taxableST=Math.max(0,netST),taxableLT=Math.max(0,netLT-R.ltExempt);
+  const tax=(taxableST*R.stRate+taxableLT*R.ltRate)*(1+R.cess);
+  return {lots,skipped,st,lt,netST,netLT,taxableST,taxableLT,tax,carryST:Math.min(0,netST),carryLT:Math.min(0,netLT)};};
+/* sanity of a lot's buy price against market prices (detects unadjusted split / bonus) */
+PC.priceOn=(s,dateStr)=>{if(!s||!s.t||!s.t.length)return null;const t=Date.parse(dateStr+"T00:00:00Z");let i=s.t.findIndex(x=>x>=t);if(i<0)return null;if(s.t[i]-t>10*DAY)return null;return {c:s.c[i],h:s.h[i],l:s.l[i]};};
+PC.lotSanity=(lot,s)=>{if(!(lot.price>0)||!s)return null;const K=[2,3,4,5,10,20];
+  if(lot.date){const p=PC.priceOn(s,lot.date);if(!p)return null;const lo=p.l*0.85,hi=p.h*1.15;if(lot.price>=lo&&lot.price<=hi)return null;const ratio=lot.price/p.c;
+    const k=K.find(k=>Math.abs(ratio/k-1)<=0.12);return {level:"warn",ratio,k:k||null,msg:k?`Buy price ${lot.price} is about ${k}× the market price on ${lot.date} (${p.c.toFixed(2)}): likely a 1:${k} split or bonus not adjusted in your broker file.`:`Buy price ${lot.price} is outside the traded range on ${lot.date} (${p.l.toFixed(2)}–${p.h.toFixed(2)}). Check the price or date.`};}
+  let mx=-Infinity;for(const x of s.h)mx=Math.max(mx,x);if(lot.price>mx*1.6){const ratio=lot.price/mx;const k=K.find(k=>ratio>=k*0.85);
+    return {level:"info",ratio,k:null,msg:`Buy price ${lot.price} is ${ratio.toFixed(1)}× the highest price in the available history. Right if you bought long ago; otherwise a split or bonus may not be adjusted.`};}
+  return null;};
+if(typeof module!=="undefined")module.exports=PC;
+
+/* =====================================================================
+   PORTFOLIO STAGE 1: lots, honest totals, data-quality report
+   ===================================================================== */
+let PFMETA={};try{PFMETA=JSON.parse(localStorage.getItem("radar.pfmeta")||"{}")||{};}catch(e){PFMETA={};}
+function savePFMeta(){try{localStorage.setItem("radar.pfmeta",JSON.stringify(PFMETA));}catch(e){}}
+function syncHolding(h){h.lots=PC.lotsOf(h).map(l=>({qty:+l.qty,price:+l.price||0,date:l.date||null}));const s=PC.summarise(h.lots);h.qty=s.qty;h.avg=s.avg;h.date=s.firstDate||undefined;return h;}
+function resolveSymInfo(raw,isin){
+  if(isin){const s=ISIN_MAP[String(isin).trim().toUpperCase()];if(s)return {sym:s,how:"ISIN"};}
+  const s=cleanSym(raw).replace(/-(EQ|BE|BL|BZ|SM|ST)$/,"").replace(/\s+/g,"");const series=(state.data.NSE&&state.data.NSE.series)||{};
+  if(series[s]||NSE_INFO[s]||OTHERS[s])return {sym:s,how:"symbol"};
+  const n=normName(raw);if(n.length>=3){for(const k in NSE_INFO){if(normName(NSE_INFO[k].name)===n)return {sym:k,how:"company name"};}
+    for(const k in NSE_INFO){const nn=normName(NSE_INFO[k].name);if(nn&&(nn.startsWith(n)||n.startsWith(nn)))return {sym:k,how:"closest name"};}}
+  return {sym:s,how:"unrecognised"};}
+function resolveSym(raw,isin){return resolveSymInfo(raw,isin).sym;}
+async function importHoldings(file){
+  pfMsg("Reading "+file.name+"…");let rows;try{rows=await readHoldingsFile(file);}catch(e){pfMsg("Couldn’t read this file. Save it as CSV or Excel (.xlsx) and try again.","warn");return;}
+  const hd=findHeader(rows);if(!hd){pfMsg("Couldn’t find stock and quantity columns. The file needs a column for the stock (symbol, instrument or name) and one for quantity. Download the template to see the format.","warn");return;}
+  const map={},seen={},dups=[],bad=[];let skipped=0,read=0;
+  for(let r=hd.row+1;r<rows.length;r++){const row=rows[r]||[];const raw=hd.sym>=0?row[hd.sym]:"",isin=hd.isin>=0?row[hd.isin]:"";const label=String(raw||isin||"").trim();
+    if(!label){if(row.some(c=>String(c).trim()))skipped++;continue;}if(/^total/i.test(label))continue;read++;
+    const qty=toNum(row[hd.qty]);const avg=hd.avg>=0?toNum(row[hd.avg]):NaN;
+    if(!(qty>0)){bad.push({row:r+1,raw:label,why:qty<0?"negative quantity (row skipped)":"zero or missing quantity (row skipped)"});continue;}
+    const R=resolveSymInfo(raw,isin);let dStr=null;const dRaw=hd.date>=0?String(row[hd.date]||"").trim():"";
+    if(dRaw){const dT=parseDate(dRaw,"NSE");if(dT&&isFinite(dT)){if(dT>Date.now())bad.push({row:r+1,raw:label,why:`buy date ${dRaw} is in the future, so the date was ignored`});else dStr=new Date(dT).toISOString().slice(0,10);}else bad.push({row:r+1,raw:label,why:`couldn’t read the date “${dRaw}”, so it was ignored`});}
+    const price=isFinite(avg)&&avg>0?avg:0;const dk=[R.sym,qty,price,dStr].join("|");if(seen[dk])dups.push({row:r+1,first:seen[dk],raw:label,sym:R.sym});else seen[dk]=r+1;
+    const m=map[R.sym]||(map[R.sym]={sym:R.sym,raw:label,isin:String(isin||"").trim()||undefined,how:R.how,lots:[]});m.lots.push({qty,price,date:dStr});}
+  const list=Object.values(map).map(syncHolding);if(!list.length){pfMsg("No holdings found in this file.","warn");return;}
+  PF=list;savePF();PFMETA={file:file.name,at:Date.now(),read,skipped,bad,dups,reviewed:false};savePFMeta();
+  const nl=list.reduce((a,h)=>a+h.lots.length,0);
+  pfMsg(`Loaded ${list.length} holding${list.length>1?"s":""} (${nl} purchase lot${nl>1?"s":""}) from ${file.name}. Please check the data report below before relying on the analysis.`);render();}
+function addLotManually(sym,qty,avg,date){const ex=PF.find(x=>x.sym===sym);const lot={qty,price:avg>0?avg:0,date:date||null};
+  if(ex){ex.lots=PC.lotsOf(ex);ex.lots.push(lot);syncHolding(ex);}else PF.push(syncHolding({sym,how:"entered by you",raw:sym,lots:[lot]}));savePF();}
+function analyzeHoldings(){
+  const d=state.data.NSE;const out=[];const miss=PF.filter(h=>!hasSeries(h.sym)&&OTHERS[h.sym]).map(h=>h.sym);if(miss.length)ensureMany(miss);
+  for(const h0 of PF){const h=syncHolding(h0);const s=d&&d.series[h.sym];const info=NSE_INFO[h.sym]||{};
+    const row={...h,lots:h.lots,name:info.name||(OTHERS[h.sym]&&OTHERS[h.sym].name)||"",kind:OTHERS[h.sym]?OTHERS[h.sym].kind:(KIND[h.sym]||"eq"),sector:info.sector||(s?"Unclassified":OTHERS[h.sym]?"Loading…":"No price data")};
+    if(s&&s.t.length>=30){const a=analyze(s,Object.assign({},prefs.settings,{recent:3}));if(!a.short){Object.assign(row,{a,ltp:a.close,...scoreHolding(a)});row.lastBar=s.t[s.t.length-1];}}
+    if(row.ltp==null){row.action="na";row.ltp=null;}
+    const sm=PC.summarise(h.lots);row.invested=sm.cost;row.value=row.ltp!=null?h.qty*row.ltp:null;
+    row.pnl=row.value!=null&&row.invested!=null?row.value-row.invested:null;row.pnlPct=row.pnl!=null&&row.invested?row.pnl/row.invested*100:null;row.day=row.a?row.a.dayAbs*h.qty:0;out.push(row);}
+  const total=out.reduce((x,r)=>x+(r.value||0),0)||1;out.forEach(r=>r.weight=r.value!=null?r.value/total*100:null);return {rows:out,total};}
+/* ---------- data-quality report ---------- */
+function pfQualityItems(rows){const I=[];const add=(level,title,items,act)=>I.push({level,title,items,act});const d=state.data.NSE;
+  const M=PFMETA||{};
+  if(M.bad&&M.bad.length)add("warn",`${M.bad.length} row${M.bad.length>1?"s":""} in the file had problems`,M.bad.map(b=>`Row ${b.row} (${b.raw}): ${b.why}`));
+  if(M.dups&&M.dups.length)add("warn",`${M.dups.length} possible duplicate purchase${M.dups.length>1?"s":""}`,M.dups.map(x=>`Row ${x.row} repeats row ${x.first}: ${x.raw}, same quantity, price and date`),{label:"Remove duplicates",fn:()=>{for(const h of PF){const seen=new Set();h.lots=PC.lotsOf(h).filter(l=>{const k=[l.qty,l.price,l.date].join("|");if(seen.has(k))return false;seen.add(k);return true;});syncHolding(h);}PFMETA.dups=[];savePF();savePFMeta();render();}});
+  const fuzzy=rows.filter(r=>r.how==="closest name"||r.how==="company name");if(fuzzy.length)add(fuzzy.some(r=>r.how==="closest name")?"warn":"info",`${fuzzy.length} holding${fuzzy.length>1?"s were":" was"} matched by company name; please confirm`,fuzzy.map(r=>({sym:r.sym,text:`“${r.raw}” → ${r.sym}${r.name?" ("+r.name+")":""}, matched by ${r.how}`})),{fix:true});
+  const unrec=rows.filter(r=>r.ltp==null&&!OTHERS[r.sym]);if(unrec.length)add("warn",`${unrec.length} holding${unrec.length>1?"s have":" has"} no price, so ${unrec.length>1?"they are":"it is"} left out of value and returns`,unrec.map(r=>({sym:r.sym,text:`${r.raw||r.sym}: not recognised or no price data. Invested ${r.invested!=null?inr(r.invested):"unknown"} is excluded.`})),{fix:true});
+  const sanity=[];for(const r of rows){const s=d&&d.series[r.sym];if(!s)continue;for(const l of r.lots){const z=PC.lotSanity(l,s);if(z)sanity.push({level:z.level,text:`${r.sym}: ${z.msg}`});}}
+  if(sanity.length)add(sanity.some(x=>x.level==="warn")?"warn":"info",`${sanity.length} buy price${sanity.length>1?"s look":" looks"} unusual`,sanity.map(x=>x.text));
+  const frac=rows.filter(r=>r.kind==="eq"&&!OTHERS[r.sym]&&r.lots.some(l=>!Number.isInteger(l.qty)));if(frac.length)add("warn","Fractional quantity on shares",frac.map(r=>`${r.sym}: ${r.qty} shares. Listed shares trade in whole numbers; check the file.`));
+  const noPx=rows.filter(r=>r.lots.some(l=>!(l.price>0)));if(noPx.length)add("info",`${noPx.length} holding${noPx.length>1?"s have":" has"} no buy price`,noPx.map(r=>`${r.sym}: left out of invested amount, P&L, XIRR and tax estimates.`));
+  const noDt=rows.filter(r=>r.lots.some(l=>!l.date));if(noDt.length)add("info",`${noDt.length} holding${noDt.length>1?"s have":" has"} no buy date`,[`${noDt.map(r=>r.sym).slice(0,12).join(", ")}${noDt.length>12?"…":""}: XIRR, the Nifty comparison and capital gains need a buy date for every purchase. Add a “Buy date” column (one row per purchase) to include them.`]);
+  const stale=rows.filter(r=>r.lastBar&&Date.now()-r.lastBar>9*864e5);if(stale.length)add("info","Old prices",stale.map(r=>`${r.sym}: last price is from ${fmtD(r.lastBar)} (suspended, illiquid or end-of-day data).`));
+  return I;}
+function renderPfQuality(rows){let box=$("#pfQuality");if(!box){box=el("details","panel pf-q");box.id="pfQuality";$("#pfBody").prepend(box);}
+  const I=pfQualityItems(rows);const w=I.filter(x=>x.level==="warn").length,inf=I.filter(x=>x.level==="info").length;const lots=rows.reduce((a,r)=>a+r.lots.length,0);
+  const M=PFMETA||{};box.open=!M.reviewed&&w>0||box.dataset.forceOpen==="1";box.replaceChildren();
+  const sm=el("summary");sm.append(el("b",null,"Data check: "),el("span",w?"dn":"up",w?`${w} warning${w>1?"s":""}`:"no warnings"),document.createTextNode(`${inf?`, ${inf} note${inf>1?"s":""}`:""} · ${rows.length} holdings, ${lots} purchase lots${M.file?` from ${M.file}`:""}${M.reviewed?" · reviewed":""}`));box.append(sm);
+  const body=el("div","pfq-body");if(M.file)body.append(el("p","pnote",`${M.read||0} rows read${M.skipped?`, ${M.skipped} blank or unreadable rows skipped`:""}. Each row is kept as a separate purchase lot, so dates and prices are not merged.`));
+  if(!I.length)body.append(el("p",null,"Everything checks out: every holding is recognised and priced, and buy prices fit the market prices on their dates."));
+  for(const it of I){const sec=el("div","pfq-item "+it.level);sec.append(el("h4",null,(it.level==="warn"?"⚠ ":"ⓘ ")+it.title));const ul=el("ul");
+    for(const x of it.items.slice(0,40)){const li=el("li");if(typeof x==="string")li.textContent=x;else{li.append(el("span",null,x.text+" "));if(it.act&&it.act.fix){const inp=el("input");inp.setAttribute("list","pfSyms");inp.placeholder="Correct symbol";inp.className="pfq-in";const b=el("button","btn","Change");b.type="button";
+          b.addEventListener("click",()=>{const v=cleanSym(inp.value);if(!v)return;const h=PF.find(q=>q.sym===x.sym);if(!h)return;const ex=PF.find(q=>q.sym===v&&q!==h);if(ex){ex.lots=PC.lotsOf(ex).concat(PC.lotsOf(h));syncHolding(ex);PF=PF.filter(q=>q!==h);}else{h.sym=v;h.how="corrected by you";}savePF();box.dataset.forceOpen="1";render();});li.append(inp,b);
+          if(x.sym&&(it.title.includes("matched"))){const ok=el("button","btn","Looks right");ok.type="button";ok.addEventListener("click",()=>{const h=PF.find(q=>q.sym===x.sym);if(h){h.how="confirmed by you";savePF();box.dataset.forceOpen="1";render();}});li.append(ok);}}}ul.append(li);}
+    if(it.items.length>40)ul.append(el("li",null,`…and ${it.items.length-40} more`));sec.append(ul);if(it.act&&it.act.label){const b=el("button","btn",it.act.label);b.type="button";b.addEventListener("click",it.act.fn);sec.append(b);}body.append(sec);}
+  const done=el("button","btn primary",M.reviewed?"Reviewed ✓":"I’ve checked this data");done.type="button";done.disabled=!!M.reviewed;done.addEventListener("click",()=>{PFMETA.reviewed=true;savePFMeta();box.dataset.forceOpen="";render();});body.append(done);box.append(body);
+  box.addEventListener("toggle",()=>{box.dataset.forceOpen=box.open?"1":"";});}
+/* ---------- grandfathering prices (31-Jan-2018) ---------- */
+const FMV18={};let fmvLoading=false;
+async function loadFMV(rows){const need=rows.filter(r=>FMV18[r.sym]===undefined&&r.lots.some(l=>l.date&&l.date<"2018-02-01"));if(!need.length||fmvLoading)return;fmvLoading=true;
+  for(const r of need){FMV18[r.sym]=0;try{const s=await fetchCsvSeries(longPath(r.sym,"NSE"),r.sym,false);if(s){const t=Date.parse("2018-01-31T00:00:00Z");let i=-1;for(let k=0;k<s.t.length;k++){if(s.t[k]<=t)i=k;else break;}if(i>=0&&t-s.t[i]<=7*864e5)FMV18[r.sym]=s.h[i];}}catch(e){}}
+  fmvLoading=false;if(prefs.view==="portfolio")render();}
+/* ---------- analytics (per lot) ---------- */
+function renderPfAnalytics(rows){
+  let box=$("#pfAnalytics");if(!box){box=el("section","panel pf-an");box.id="pfAnalytics";$("#pfList").closest("#pfBody").insertBefore(box,$("#pfList").previousElementSibling);}
+  box.replaceChildren(el("h3",null,"Portfolio analytics"));const grid=el("div","an-grid");box.append(grid);const now=Date.now();const priced=rows.filter(r=>r.ltp!=null);
+  // returns
+  const c1=el("div","an-card");c1.append(el("h4",null,"Returns (from your buy dates)"));const F=PC.flows(rows,now);
+  if(F.flows.length>1){const x=PC.xirr(F.flows);const N=seriesOf("NIFTY50","GLB")||seriesOf("NIFTY50","NSE");let nv=0,ok=!!N;
+    if(N)for(const f of F.flows.slice(0,-1)){const p=PC.priceOn(N,new Date(f.t).toISOString().slice(0,10));if(!p){ok=false;break;}nv+=(-f.v)/p.c*N.c[N.c.length-1];}
+    const nx=ok?PC.xirr(F.flows.slice(0,-1).concat([{t:now,v:nv}])):null;const inv=-F.flows.slice(0,-1).reduce((a,f)=>a+f.v,0);
+    c1.append(kv("Invested (dated purchases)",inr(inv)),kv("Value today",inr(F.value)),kv("Your XIRR",x==null?"–":fmtPct(x*100,true)),kv("Same cash in Nifty 50",ok?inr(nv):"not enough Nifty history"),kv("Nifty 50 XIRR, same dates",nx==null?"–":fmtPct(nx*100,true)));
+    c1.append(el("p","pnote","Nifty 50 here is the price index, which leaves out dividends (roughly 1 to 1.5% a year), so it slightly understates the benchmark. A total-return (TRI) comparison comes in the next stage."));
+    if(F.excluded.length)c1.append(el("p","pnote",`Not included: ${F.excluded.map(e=>`${e.sym} (${e.reason})`).join(", ")}.`));}
+  else c1.append(el("p","pnote","XIRR needs a buy date and price for every purchase. Add a “Buy date” column to your file (one row per purchase) or use Add a stock with a date. Nothing is estimated for missing dates."));
+  grid.append(c1);
+  // sector exposure
+  const c2=el("div","an-card");c2.append(el("h4",null,"Sector exposure vs Nifty 500"));const tot=priced.reduce((s,r)=>s+r.value,0);const mine={};for(const r of priced)mine[r.sector]=(mine[r.sector]||0)+r.value/tot*100;
+  const bench={};let bt=0;const U=universeRows("500");const capOK=U.filter(r=>r.mcap).length>=U.length*0.6;for(const r of U){const w=capOK?(r.mcap||0):1;bench[r.sector||"Other"]=(bench[r.sector||"Other"]||0)+w;bt+=w;}
+  for(const k of Object.keys(mine).sort((a,b)=>mine[b]-mine[a]).slice(0,8)){const b=bt?(bench[k]||0)/bt*100:0;const row=el("div","exp-row");const dd=mine[k]-b;row.append(el("span",null,k),el("span","num",`${nf(mine[k],1)}%`),el("span","num pnote",`Nifty ${nf(b,1)}%`),el("span","num "+(Math.abs(dd)<3?"":dd>0?"up":"dn"),Math.abs(dd)<3?"in line":dd>0?`+${nf(dd,0)} pts over`:`${nf(dd,0)} pts under`));c2.append(row);}
+  c2.append(el("p","pnote",`Priced holdings only. Nifty 500 weights by ${capOK?"market cap":"number of stocks (market caps not loaded yet)"}.`));grid.append(c2);
+  // dividends
+  const c3=el("div","an-card");c3.append(el("h4",null,"Dividend estimate"));let dv=0,cov=0;const dl=[];for(const r of priced){const f=fundOf(r.sym,"NSE");if(f&&f.dy!=null){cov++;const x=r.value*f.dy/100;dv+=x;dl.push([r.sym,x,f.dy]);}}
+  c3.append(kv("Estimated yearly dividends",inr(dv)),kv("Portfolio yield",tot?fmtPct(dv/tot*100):"–"));for(const [s,x,y] of dl.sort((a,b)=>b[1]-a[1]).slice(0,5))c3.append(kv(s,`${inr(x)} (${nf(y,2)}%)`));
+  c3.append(el("p","pnote",`An estimate from each company’s trailing dividend yield (Yahoo Finance) for ${cov} of ${priced.length} holdings, not dividends you actually received.`));grid.append(c3);
+  // capital gains per lot
+  const c4=el("div","an-card wide");c4.append(el("h4",null,"Capital gains if you sold everything today (estimate)"));loadFMV(rows);
+  const G=PC.gainsIfSold(rows,now,FMV18);
+  c4.append(kv("Short-term gains (held 12 months or less)",inrSigned(G.st)),kv("Long-term gains (held more than 12 months)",inrSigned(G.lt)),kv("Taxable short term after set-off",inr(G.taxableST)),kv("Taxable long term after ₹1.25 lakh exemption",inr(G.taxableLT)),kv("Estimated tax incl. 4% cess",inr(G.tax)));
+  if(G.carryST<0||G.carryLT<0)c4.append(el("p","pnote",`Losses left to carry forward: ${G.carryST<0?"short term "+inr(-G.carryST):""}${G.carryST<0&&G.carryLT<0?", ":""}${G.carryLT<0?"long term "+inr(-G.carryLT):""}.`));
+  if(G.lots.length){const t=el("div","tbl-wrap");t.id="cgT";c4.append(t);dataTable(t,[{k:"s",label:"Holding",cls:"l",f:r=>r.sym,v:r=>r.sym,asc:true},{k:"d",label:"Bought",f:r=>r.date,v:r=>r.date},{k:"q",label:"Qty",f:r=>nf(r.qty,0),v:r=>r.qty},{k:"b",label:"Buy price",f:r=>nf(r.buy),v:r=>r.buy},{k:"c",label:"Cost used",f:r=>{const s=el("span",null,nf(r.cost));if(r.note)s.title=r.note;return s;},v:r=>r.cost},{k:"t",label:"Type",f:r=>r.type==="LT"?"Long term":"Short term",v:r=>r.type},{k:"g",label:"Gain / loss",f:r=>pctLike(r.g??r.gain),v:r=>r.gain},{k:"n",label:"Note",cls:"l",f:r=>r.note?el("span","pnote",r.note):""}],G.lots.map(l=>Object.assign({},l,{g:l.gain})),{sortKey:"g"});
+    const ex=el("button","btn","Download capital gains CSV");ex.type="button";ex.addEventListener("click",()=>{const lines=["Symbol,Buy date,Quantity,Buy price,Cost used,Sale price (today),Days held,Type,Gain,Note"].concat(G.lots.map(l=>[l.sym,l.date,l.qty,l.buy,l.cost,l.sell,l.days,l.type==="LT"?"LTCG":"STCG",l.gain.toFixed(2),`"${(l.note||"").replace(/"/g,"'")}"`].join(",")));
+      const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([lines.join("\n")],{type:"text/csv"}));a.download="capital-gains-estimate.csv";document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);});c4.append(ex);}
+  if(G.skipped.length){const g={};for(const s of G.skipped)(g[s.reason]||(g[s.reason]=new Set())).add(s.sym);c4.append(el("p","pnote","Left out: "+Object.entries(g).map(([k,v])=>`${[...v].join(", ")} (${k})`).join("; ")+"."));}
+  c4.append(el("p","pnote","Rules: listed equity shares and equity ETFs; each purchase lot is treated separately. Long term = held more than 12 months. Short term 20%, long term 12.5% above ₹1.25 lakh a year (rates from 23 July 2024). Short-term losses are set off against short-term then long-term gains; long-term losses only against long-term gains. Lots bought before 1 Feb 2018 use the grandfathered cost (31 Jan 2018 highest price). 4% cess, no surcharge, no other income or brought-forward losses. Confirm with your tax adviser."));
+  grid.append(c4);}
 
 /* ---------- start ---------- */
 (async()=>{
