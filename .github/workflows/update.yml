@@ -2,8 +2,8 @@ name: Update stock radar
 
 on:
   schedule:
-    - cron: "*/15 3-10 * * 1-5"    # NSE hours (IST 08:30-16:30)
-    - cron: "*/15 13-21 * * 1-5"   # US hours
+    - cron: "*/15 * * * 1-5"       # every 15 minutes on weekdays (India, US and global markets)
+    - cron: "0 */3 * * 0,6"        # every 3 hours at weekends (crypto)
   workflow_dispatch:                # "Run workflow" button
   push:
     branches: [main]
@@ -12,28 +12,27 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: read
 
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
-  update:
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Show repository files
-        run: ls -la
       - name: Install Python packages
         run: pip install yfinance pandas requests
       - name: Fetch prices
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           export SITE_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}"
           if [ "${{ github.event_name }}" = "schedule" ]; then MODE=auto; else MODE=all; fi
@@ -42,10 +41,25 @@ jobs:
         run: |
           mkdir -p site/data
           cp index.html site/
-          cp -r data/. site/data/
+          if [ -f config.js ]; then cp config.js site/; fi
+          if [ -f logo.svg ]; then cp logo.svg site/; fi
+          if [ -d data ]; then cp -r data/. site/data/; fi
+      - name: Site size
+        run: |
+          echo "Total size:"; du -sh site
+          echo "Number of files:"; find site -type f | wc -l
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - id: deployment
         uses: actions/deploy-pages@v4
