@@ -702,6 +702,9 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
 .pfq-body{margin-top:10px;display:grid;gap:10px}.pfq-item{border-left:3px solid var(--muted);padding:4px 0 4px 12px}.pfq-item.warn{border-color:var(--sig-hammer)}.pfq-item h4{margin:0 0 4px;font-size:13.5px}
 .pfq-item ul{margin:0;padding-left:18px;font-size:13px}.pfq-item li{margin:3px 0}.pfq-in{width:130px;padding:4px 8px;border-radius:6px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);margin:0 4px}
 .pfq-item .btn{padding:3px 9px;font-size:12px}.pfq-body>.btn.primary{justify-self:start}
+.mc-banner{border:1px solid var(--line);border-left:4px solid var(--muted);background:var(--surface);border-radius:10px;padding:9px 12px;font-size:13.5px;margin-bottom:10px;line-height:1.5}
+.mc-banner.full{border-left-color:var(--bull)}.mc-banner.caution{border-left-color:var(--sig-hammer)}.mc-banner.avoid{border-left-color:var(--bear)}.mc-banner .pnote{display:block}
+.pm-plan{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.pm-plan h4{margin:0 0 6px;font-size:13.5px}
 [hidden]{display:none !important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
@@ -792,6 +795,9 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
       <label>“Near” distance (%)<input type="number" id="s-tol" min="0.5" max="15" step="0.5"></label>
       <label>Pattern on the last … candles<input type="number" id="s-recent" min="1" max="3" step="1"></label>
       <label class="check"><input type="checkbox" id="s-down"> Hammer and morning star need a prior fall</label>
+      <label class="check"><input type="checkbox" id="s-volc"> Reversal candles need higher volume than the previous day (course rule)</label>
+      <label class="check">Minimum prior fall / rise before a reversal candle <input type="number" id="s-move" min="0" max="30" step="1" style="width:60px"> %</label>
+      <label class="check">RSI zones <select id="s-rsiz"><option value="pm">40 / 65 (Market Paathshaala)</option><option value="classic">30 / 70 (classic Wilder)</option></select></label>
       <label class="check"><input type="checkbox" id="s-atres"> Bearish reversal candles must form at resistance</label>
       <label class="check"><input type="checkbox" id="s-atsup"> Hammer, morning star and engulfing must form at support</label>
       <label class="check"><input type="checkbox" id="s-vol"> Only stocks with volume above their 20-candle average</label>
@@ -828,6 +834,7 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
     <div class="hero"><div class="hero-main"><h2 id="ovTitle">Market overview</h2><p id="ovSub">India and world markets at a glance.</p></div>
       <div class="pf-actions"><div class="ind-menu"><button type="button" class="btn" id="wBtn" aria-expanded="false" aria-controls="wPop">Customise</button><div class="ind-pop w-pop" id="wPop" hidden></div></div></div></div>
     <div class="sentiment" id="ovSentiment" data-w="summary"></div>
+    <div id="ovMcond" data-w="mcond"></div>
     <section class="panel ov-sum" data-w="summary"><div class="sum-head"><h3>Market summary</h3><button type="button" class="btn" id="sumCopy">Copy</button></div><p id="ovSummary" class="sum-text"></p></section>
     <div class="ov-cards" id="ovCards" data-w="cards"></div>
     <div class="ov-grid">
@@ -927,7 +934,7 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
       <div class="al-form">
         <div class="wl-add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="alq" type="search" autocomplete="off" placeholder="Search a stock, index or commodity" aria-label="Alert symbol" role="combobox" aria-expanded="false" aria-controls="alres"><div class="sres" id="alres" role="listbox" hidden></div></div>
         <b id="alPick" class="al-pick"></b>
-        <select id="alCond" class="btn" aria-label="Condition"><option value="above">Price at or above</option><option value="below">Price at or below</option><option value="rsi_above">RSI rises above</option><option value="rsi_below">RSI falls below</option><option value="breakout20">Breaks 20-day high</option><option value="golden_cross">Golden cross</option><option value="pattern">New bullish pattern (site only)</option></select>
+        <select id="alCond" class="btn" aria-label="Condition"><option value="above">Price at or above</option><option value="below">Price at or below</option><option value="rsi_above">RSI rises above</option><option value="rsi_below">RSI falls below</option><option value="breakout20">Breaks 20-day high</option><option value="golden_cross">Golden cross</option><option value="below20sma">Closes below 20 SMA</option><option value="below50sma">Closes below 50 SMA</option><option value="pattern">New bullish pattern (site only)</option></select>
         <input id="alVal" type="number" step="any" placeholder="Value" aria-label="Alert value" class="al-in">
         <input id="alNote" placeholder="Note (optional)" aria-label="Note" class="al-in">
         <button type="button" class="btn primary" id="alCreate">Create alert</button>
@@ -989,6 +996,18 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
       <article class="g-card"><svg viewBox="0 0 260 110" class="ill" aria-hidden="true"><line x1="4" x2="256" y1="96.7" y2="96.7" class="sup-l" stroke-dasharray="5 4" stroke-width="1.5"/><text x="254" y="109.7" text-anchor="end" class="ill-t sup-l-t">support</text><line x1="48.0" x2="48.0" y1="13.3" y2="31.8" class="c-bear" stroke-width="2"/><rect x="39.0" y="16.4" width="18.0" height="12.4" rx="2" class="c-bear"/><line x1="84.0" x2="84.0" y1="25.6" y2="50.4" class="c-bear" stroke-width="2"/><rect x="75.0" y="28.7" width="18.0" height="18.5" rx="2" class="c-bear"/><line x1="120.0" x2="120.0" y1="44.2" y2="84.4" class="c-bear" stroke-width="2"/><rect x="111.0" y="47.3" width="18.0" height="34.0" rx="2" class="c-bear"/><line x1="156.0" x2="156.0" y1="82.8" y2="96.7" class="c-bear" stroke-width="2"/><rect x="147.0" y="87.5" width="18.0" height="3.1" rx="2" class="c-bear"/><line x1="192.0" x2="192.0" y1="50.4" y2="85.9" class="c-bull" stroke-width="2"/><rect x="183.0" y="53.5" width="18.0" height="30.9" rx="2" class="c-bull"/></svg><h4>Morning star</h4><p>Three candles: a big red candle, then a small candle that shows indecision, then a strong green candle closing above the middle of the first one. It marks a shift from selling to buying.</p></article>
       <article class="g-card"><svg viewBox="0 0 260 110" class="ill" aria-hidden="true"><line x1="4" x2="256" y1="95.3" y2="95.3" class="sup-l" stroke-dasharray="5 4" stroke-width="1.5"/><text x="254" y="108.3" text-anchor="end" class="ill-t sup-l-t">support</text><line x1="52.5" x2="52.5" y1="14.7" y2="43.4" class="c-bear" stroke-width="2"/><rect x="43.5" y="18.3" width="18.0" height="21.5" rx="2" class="c-bear"/><line x1="97.5" x2="97.5" y1="36.2" y2="68.4" class="c-bear" stroke-width="2"/><rect x="88.5" y="39.8" width="18.0" height="25.1" rx="2" class="c-bear"/><line x1="142.5" x2="142.5" y1="68.4" y2="89.9" class="c-bear" stroke-width="2"/><rect x="133.5" y="72.0" width="18.0" height="14.3" rx="2" class="c-bear"/><line x1="187.5" x2="187.5" y1="50.5" y2="95.3" class="c-bull" stroke-width="2"/><rect x="178.5" y="54.1" width="18.0" height="37.6" rx="2" class="c-bull"/></svg><h4>Bullish engulfing (BE)</h4><p>Two candles: a red candle, then a bigger green candle whose body completely covers (engulfs) the red one’s body. Buyers overpowered the sellers in a single session.</p></article>
     </div>
+    <h3 class="g-h">Market Paathshaala rules used here</h3>
+    <p class="g-intro">Rules from the Market Paathshaala course (CA Rahul Ranka) that the radar now applies, summarised in our own words. They are a trading method, not a guarantee; test them on Pattern backtest.</p>
+    <dl class="g-pat">
+      <div><dt>Market condition</dt><dd>Nifty 500 above both its 20 and 50-day SMA: normal size. Below one: reduced size and a strict stop-loss. Below both: stay out or use about 30% size. Shown on the dashboard, screener and trade plan.</dd></div>
+      <div><dt>Reversal buying checklist</dt><dd>A visible fall first (5%+), a support line with clear swings, a bullish engulfing, hammer or morning star, higher volume on that candle, liquid Nifty 200 stocks, and preferably Nifty 500 above its 20 and 50 SMA.</dd></div>
+      <div><dt>RSI 40 / 65</dt><dd>RSI above 65 and holding: strong momentum. Below 40: weak. In between: sideways. 82 to 85: overheated, so avoid fresh buying and book part profits.</dd></div>
+      <div><dt>Stop-loss and target</dt><dd>Stop at the most recent clear swing low, one stop per trade and never moved lower. Target at the nearest swing high that hasn’t been broken yet.</dd></div>
+      <div><dt>20 / 50 SMA trailing</dt><dd>Hold while price is above the 20 SMA. A bearish close below the 20 SMA reduces half; a bearish close below the 50 SMA exits the rest.</dd></div>
+      <div><dt>Breakouts</dt><dd>Only when price is above the 20, 50 and 200 SMA. Best setups: resistance of up to 6 months with all SMAs rising. Be careful with gap-up breakouts that have no news.</dd></div>
+      <div><dt>Trendlines and supports</dt><dd>Trendlines need at least 3 touches and shouldn’t be steep. A horizontal support needs 2 or more touches; a close below it is a breakdown.</dd></div>
+      <div><dt>Pattern details</dt><dd>Double bottom/top: second low or high within about 1.5% of the first, with a 10%+ move in between. Morning/evening star: third candle closes past 50% of the first. Doji traded only as a doji star. Cup &amp; handle: handle retraces no more than a third of the cup; best on weekly charts. Head &amp; shoulders is rated lower accuracy.</dd></div>
+    </dl>
     <h3 class="g-h">Pattern library</h3>
     <p class="g-intro">Every pattern the radar can scan for. Pick them under Technical analysis → Pattern library, and see how often each one worked under Pattern backtest.</p>
     <div id="gPatterns"></div>
@@ -1237,7 +1256,7 @@ async function loadIndexLists(){
     OTHERS_N=Object.keys(OTHERS).length;INDEX_LISTS.sgb=Object.values(OTHERS).filter(x=>x.kind==="sgb").map(x=>x.sym);if(!INDEX_LISTS.sgb.length)INDEX_LISTS.sgb=null;}}catch(e){}
 }
 const DEFAULTS={market:"NSE",tf:"D",active:["mstar","hammer","engulf","breakout","support"],sort:"best",theme:"auto",index:"200",view:"overview",match:"any",starredOnly:false,
-  settings:{lookback:20,tol:3,recent:1,downtrend:true,volume:false,atSupport:true,atResistance:true},stars:{NSE:[],US:[]}};
+  settings:{lookback:20,tol:3,recent:1,downtrend:true,volume:false,atSupport:true,atResistance:true,volConfirm:true,minMove:5,rsiZones:"pm"},stars:{NSE:[],US:[]}};
 
 /* ---------- preferences (per-device) ---------- */
 let prefs;
@@ -1474,7 +1493,7 @@ function renderControls(){
   for(const [k,lab] of [["500","Nifty 500"],["etf","ETFs (BeES)"],["index","Indices"],["sgb","SGBs (gold bonds)"]]){const o=isel.querySelector(`option[value="${k}"]`);o.disabled=!INDEX_LISTS[k];o.textContent=INDEX_LISTS[k]?lab:lab+" (not loaded yet)";}
   isel.value=(prefs.index==="all"||INDEX_LISTS[prefs.index])?prefs.index:"200";
   $("#s-lookback").value=prefs.settings.lookback;$("#s-tol").value=prefs.settings.tol;$("#s-recent").value=prefs.settings.recent;
-  $("#s-down").checked=!!prefs.settings.downtrend;$("#s-atsup").checked=!!prefs.settings.atSupport;$("#s-atres").checked=prefs.settings.atResistance!==false;$("#s-vol").checked=!!prefs.settings.volume;
+  $("#s-down").checked=!!prefs.settings.downtrend;$("#s-atsup").checked=!!prefs.settings.atSupport;$("#s-atres").checked=prefs.settings.atResistance!==false;$("#s-volc").checked=prefs.settings.volConfirm!==false;$("#s-move").value=prefs.settings.minMove??5;$("#s-rsiz").value=prefs.settings.rsiZones||"pm";$("#s-vol").checked=!!prefs.settings.volume;
   $("#uniBtn").hidden=prefs.market!=="NSE";
 }
 
@@ -2046,7 +2065,7 @@ function renderAlertBox(sym,market){
   const add=el("button","btn primary","Add alert");add.type="button";add.addEventListener("click",()=>{const v=toNum(inp.value);if(v>0){addAlert(sym,market,sel.value,v,"Custom");inp.value="";}});
   cu.append(sel,inp,add);box.append(cu);
   const sm=el("div","al-quick");sm.style.marginTop="8px";sm.append(el("span","pnote","Smart alerts: "));
-  for(const [cond,lab,val] of [["rsi_below","RSI below 30",30],["rsi_above","RSI above 70",70],["breakout20","20-day breakout",0],["golden_cross","Golden cross",0],["pattern","New bullish pattern",0]]){const b=el("button","btn",lab);b.type="button";b.addEventListener("click",()=>{ALERTS.push({id:Date.now()+Math.random().toString(36).slice(2,6),sym,market,cond,price:val,note:lab,created:Date.now()});saveAlerts();toast(`Smart alert set: ${sym}, ${lab}`);renderAlertBox(sym,market);});sm.append(b);}
+  for(const [cond,lab,val] of [["rsi_below","RSI below 30",30],["rsi_above","RSI above 70",70],["breakout20","20-day breakout",0],["golden_cross","Golden cross",0],["below20sma","Below 20 SMA",0],["below50sma","Below 50 SMA",0],["pattern","New bullish pattern",0]]){const b=el("button","btn",lab);b.type="button";b.addEventListener("click",()=>{ALERTS.push({id:Date.now()+Math.random().toString(36).slice(2,6),sym,market,cond,price:val,note:lab,created:Date.now()});saveAlerts();toast(`Smart alert set: ${sym}, ${lab}`);renderAlertBox(sym,market);});sm.append(b);}
   box.append(sm);
   const mine=ALERTS.filter(a=>a.sym===sym&&!a.firedAt);if(mine.length)box.append(el("p","pnote",`Active alerts: ${mine.map(a=>alertLabel(a)).join(", ")}. Manage them with the bell icon.`));
 }
@@ -2288,6 +2307,12 @@ function renderPortfolio(){
   if(rows.length<5)W(`${rows.length} holding${rows.length>1?"s":""}: a concentrated portfolio. Fine if intended; each stock’s own news will move your total a lot.`);
   if(rows.length>30)W(`${rows.length} stocks is a lot to track. Small positions barely move your returns.`);
   const below=priced.filter(r=>r.a.ema200!=null&&r.ltp<r.a.ema200);if(below.length)W(`${below.length} stock${below.length>1?"s are":" is"} below the 200-day average: ${below.slice(0,6).map(r=>r.sym).join(", ")}${below.length>6?"…":""}.`);
+  {const t20=[],t50=[],hot=[];for(const r of priced){const s=state.data.NSE&&state.data.NSE.series[r.sym];if(!s||s.c.length<60)continue;const n=s.c.length,c=s.c[n-1],a20=smaA(s.c,20)[n-1],a50=smaA(s.c,50)[n-1],rs=rsiSeries(s.c,14)[n-1];
+    if(c<a50)t50.push(r.sym);else if(c<a20)t20.push(r.sym);if(rs>=82)hot.push(r.sym);}
+    if(t20.length)W(`Closed below the 20-day SMA (course trailing rule: first warning, it reduces half): ${t20.slice(0,8).join(", ")}${t20.length>8?"…":""}.`);
+    if(t50.length)W(`Below the 50-day SMA (course trailing rule: medium-term trend broken): ${t50.slice(0,8).join(", ")}${t50.length>8?"…":""}.`);
+    if(hot.length)W(`RSI 82 or higher, momentum overheated (the course books 30–50% and avoids adding): ${hot.join(", ")}.`);
+    const m=marketCondition();if(m&&m.lvl!=="full")W(`${m.title}: ${m.text} ${m.hint}`);}
   const big=priced.filter(r=>r.pnlPct!=null&&r.pnlPct<-25);if(big.length)W(`Down more than 25% from your buy price: ${big.map(r=>r.sym).join(", ")}.`);
   const na=rows.filter(r=>r.action==="na");
   if(!warn.children.length)W("Nothing stands out. Your portfolio looks well spread.");
@@ -2447,6 +2472,7 @@ let qt;$("#q").addEventListener("input",e=>{clearTimeout(qt);qt=setTimeout(()=>{
 const numSet=(id,key,min,max)=>$(id).addEventListener("change",e=>{let v=parseFloat(e.target.value);if(!isFinite(v))v=DEFAULTS.settings[key];prefs.settings[key]=Math.min(max,Math.max(min,v));savePrefs();render();});
 numSet("#s-lookback","lookback",5,120);numSet("#s-tol","tol",0.5,15);numSet("#s-recent","recent",1,3);
 $("#s-down").addEventListener("change",e=>{prefs.settings.downtrend=e.target.checked;savePrefs();render();});
+$("#s-volc").addEventListener("change",e=>{prefs.settings.volConfirm=e.target.checked;savePrefs();render();});$("#s-move").addEventListener("change",e=>{prefs.settings.minMove=Math.max(0,Math.min(30,+e.target.value||0));savePrefs();render();});$("#s-rsiz").addEventListener("change",e=>{prefs.settings.rsiZones=e.target.value;savePrefs();if(currentRow&&!$("#sheet").hidden)renderChart(currentRow,sheetMarket);render();});
 $("#s-atres").addEventListener("change",e=>{prefs.settings.atResistance=e.target.checked;savePrefs();render();});
 $("#s-atsup").addEventListener("change",e=>{prefs.settings.atSupport=e.target.checked;savePrefs();render();});
 $("#s-vol").addEventListener("change",e=>{prefs.settings.volume=e.target.checked;savePrefs();render();});
@@ -3049,7 +3075,7 @@ async function renderChart(r,market){
   let p=1;const paneSeries=[];
   for(const [k] of panes){
     extraPane(k,{b,line},p);
-    if(k==="RSI"){const a=rsiSeries(b.c,14);const s=line(a,"#8b5cf6","RSI 14",p,1.5,{lastValueVisible:true});s.createPriceLine({price:70,color:bear,lineStyle:2,lineWidth:1,axisLabelVisible:false});s.createPriceLine({price:30,color:bull,lineStyle:2,lineWidth:1,axisLabelVisible:false});legendVals.push(["RSI",a,"#8b5cf6"]);}
+    if(k==="RSI"){const a=rsiSeries(b.c,14);const s=line(a,"#8b5cf6","RSI 14",p,1.5,{lastValueVisible:true});const [rz1,rz2]=rsiZones();s.createPriceLine({price:rz1,color:bear,lineStyle:2,lineWidth:1,axisLabelVisible:true});s.createPriceLine({price:rz2,color:bull,lineStyle:2,lineWidth:1,axisLabelVisible:true});s.createPriceLine({price:82,color:"#d08a12",lineStyle:3,lineWidth:1,axisLabelVisible:false,title:"overheated"});legendVals.push(["RSI",a,"#8b5cf6"]);}
     if(k==="MACD"){const {m,sig,h}=macdA(b.c);const hs=ch.addSeries(L.HistogramSeries,{priceLineVisible:false,lastValueVisible:false,title:"MACD hist"},p);const d=[];for(let i=startIdx;i<n;i++)if(h[i]!=null)d.push({time:T(i),value:h[i],color:(h[i]>=0?bull:bear)+"99"});hs.setData(d);
       line(m,"#2f6fe0","MACD",p,1.5,{lastValueVisible:true});line(sig,"#d08a12","Signal",p);legendVals.push(["MACD",m,"#2f6fe0"]);}
     if(k==="ADX"){const {adx,pdi,ndi}=adxA(b,14);line(adx,cssv("--ink"),"ADX",p,2,{lastValueVisible:true});line(pdi,bull,"+DI",p,1);line(ndi,bear,"−DI",p,1);legendVals.push(["ADX",adx,cssv("--ink")]);}
@@ -3235,12 +3261,12 @@ function chartPatternsBase(A,tol){
   const P=pivK(A,n-150,n-1,4);const L=P.L,H=P.H;
   const near=(lv,dir)=>dir>0?(c<=lv&&c>=lv*(1-tol/100)):(c>=lv&&c<=lv*(1+tol/100));
   // double bottom / top
-  if(L.length>=2){const [i1,l1]=L[L.length-2],[i2,l2]=L[L.length-1];if(i2-i1>=10&&Math.abs(l2/l1-1)<=0.03&&n-1>i2+2){let nk=-Infinity;for(let j=i1;j<=i2;j++)nk=Math.max(nk,A.h[j]);
+  if(L.length>=2){const [i1,l1]=L[L.length-2],[i2,l2]=L[L.length-1];if(i2-i1>=15&&Math.abs(l2/l1-1)<=0.015&&n-1>i2+2){let nk=-Infinity;for(let j=i1;j<=i2;j++)nk=Math.max(nk,A.h[j]);
     let broke=false;for(let j=i2+1;j<n;j++)if(A.c[j]<Math.min(l1,l2)*0.98)broke=true;
-    if(!broke&&nk>=Math.max(l1,l2)*1.05){if(c>nk&&crossedUp(A,nk,n,5))out.dbottom={state:"confirmed",level:nk};else if(near(nk,1))out.dbottom={state:"near",level:nk};}}}
-  if(H.length>=2){const [i1,h1]=H[H.length-2],[i2,h2]=H[H.length-1];if(i2-i1>=10&&Math.abs(h2/h1-1)<=0.03&&n-1>i2+2){let nk=Infinity;for(let j=i1;j<=i2;j++)nk=Math.min(nk,A.l[j]);
+    if(!broke&&nk>=Math.max(l1,l2)*1.10){if(c>nk&&crossedUp(A,nk,n,5))out.dbottom={state:"confirmed",level:nk};else if(near(nk,1))out.dbottom={state:"near",level:nk};}}}
+  if(H.length>=2){const [i1,h1]=H[H.length-2],[i2,h2]=H[H.length-1];if(i2-i1>=15&&Math.abs(h2/h1-1)<=0.015&&n-1>i2+2){let nk=Infinity;for(let j=i1;j<=i2;j++)nk=Math.min(nk,A.l[j]);
     let broke=false;for(let j=i2+1;j<n;j++)if(A.c[j]>Math.max(h1,h2)*1.02)broke=true;
-    if(!broke&&nk<=Math.min(h1,h2)*0.95){if(c<nk&&crossedDn(A,nk,n,5))out.dtop={state:"confirmed",level:nk};else if(near(nk,-1))out.dtop={state:"near",level:nk};}}}
+    if(!broke&&nk<=Math.min(h1,h2)*0.90){if(c<nk&&crossedDn(A,nk,n,5))out.dtop={state:"confirmed",level:nk};else if(near(nk,-1))out.dtop={state:"near",level:nk};}}}
   // head & shoulders / inverse
   if(H.length>=3){const [a,A1]=H[H.length-3],[b,B1]=H[H.length-2],[d,C1]=H[H.length-1];if(B1>A1*1.03&&B1>C1*1.03&&Math.abs(A1/C1-1)<=0.06&&n-1>d){let t1=Infinity,t2=Infinity;for(let j=a;j<=b;j++)t1=Math.min(t1,A.l[j]);for(let j=b;j<=d;j++)t2=Math.min(t2,A.l[j]);const nk=(t1+t2)/2;
     if(c<nk&&crossedDn(A,nk,n,5))out.hs={state:"confirmed",level:nk};else if(near(nk,-1))out.hs={state:"near",level:nk};}}
@@ -3262,7 +3288,7 @@ function chartPatternsBase(A,tol){
     if(a>=0){let b=-1,BL=Infinity;for(let j=a+1;j<=n-10;j++)if(A.l[j]<BL){BL=A.l[j];b=j;}const depth=(LH-BL)/LH;
       if(b>0&&depth>=0.12&&depth<=0.40&&b-a>=15){let r=-1,RH=-Infinity;for(let j=b+1;j<=n-3;j++)if(A.h[j]>RH){RH=A.h[j];r=j;}
         if(r>0&&RH>=0.92*LH&&r-b>=10&&n-1-r>=3&&n-1-r<=25){let hl=Infinity;for(let j=r;j<n;j++)hl=Math.min(hl,A.l[j]);
-          if(hl>=RH*0.88&&hl>BL+0.5*(RH-BL)){const rim=Math.max(LH,RH);if(c>rim&&crossedUp(A,rim,n,3))out.cup={state:"confirmed",level:rim};else if(near(rim,1))out.cup={state:"near",level:rim};}}}}}
+          let ub=0;for(let j=a;j<=r;j++)if(A.l[j]<=BL*1.05)ub++;if(hl>=RH-(RH-BL)/3&&ub>=5){const rim=Math.max(LH,RH);if(c>rim&&crossedUp(A,rim,n,3))out.cup={state:"confirmed",level:rim};else if(near(rim,1))out.cup={state:"near",level:rim};}}}}}
   // breakouts and trend
   let rh=-Infinity,rl=Infinity;for(let j=n-26;j<n-1;j++){rh=Math.max(rh,A.h[j]);rl=Math.min(rl,A.l[j]);}if((rh-rl)/rl<=0.10&&c>rh)out.range={state:"confirmed",level:rh};
   if(n>=200){let h52=-Infinity;for(let j=Math.max(0,n-253);j<n-1;j++)h52=Math.max(h52,A.h[j]);if(c>h52)out.hi52={state:"confirmed",level:h52};}
@@ -3479,9 +3505,10 @@ function compareChoices(sym,market){const out=[["","No comparison"]];if(market==
 /* =====================================================================
    SMART ALERTS (extra conditions)
    ===================================================================== */
-const SMART_COND={rsi_below:"RSI falls below",rsi_above:"RSI rises above",breakout20:"Breaks above its 20-day high",golden_cross:"Golden cross (50 above 200 DMA)",pattern:"Any new bullish pattern (site only)"};
+const SMART_COND={below20sma:"Closes below 20-day SMA",below50sma:"Closes below 50-day SMA",rsi_below:"RSI falls below",rsi_above:"RSI rises above",breakout20:"Breaks above its 20-day high",golden_cross:"Golden cross (50 above 200 DMA)",pattern:"Any new bullish pattern (site only)"};
 function smartCheck(a,s){const n=s.c.length;if(n<30)return null;
   if(a.cond==="rsi_below"||a.cond==="rsi_above"){const r=rsiSeries(s.c,14);const x=r[n-1],p=r[n-2];if(a.cond==="rsi_below"&&x<a.price&&p>=a.price)return `RSI fell below ${a.price} (now ${nf(x,1)})`;if(a.cond==="rsi_above"&&x>a.price&&p<=a.price)return `RSI rose above ${a.price} (now ${nf(x,1)})`;return null;}
+  if(a.cond==="below20sma"||a.cond==="below50sma"){const p=a.cond==="below20sma"?20:50;const m=smaA(s.c,p);return s.c[n-1]<m[n-1]&&s.c[n-2]>=m[n-2]?`closed below its ${p}-day SMA (${fmtP(m[n-1])})`:null;}
   if(a.cond==="breakout20"){let h=-Infinity;for(let i=n-21;i<n-1;i++)h=Math.max(h,s.h[i]);return s.c[n-1]>h?`closed above its 20-day high of ${fmtP(h)}`:null;}
   if(a.cond==="golden_cross"&&n>205){const s50=smaA(s.c,50),s200=smaA(s.c,200);return s50[n-1]>s200[n-1]&&s50[n-2]<=s200[n-2]?"50-day average crossed above the 200-day average":null;}
   if(a.cond==="pattern"){const r=analyze(s,prefs.settings);if(r.short)return null;const hits=SIGNALS.filter(x=>x.bias==="bull"&&r.sig[x.id]===0).map(x=>x.label);return hits.length?`new bullish pattern: ${hits.join(", ")}`:null;}
@@ -3546,6 +3573,7 @@ function marketSummary(){
   const U=universeRows("500");if(U.length){const up=U.filter(r=>r.chp>0).length;p.push(`Breadth: ${up} of ${U.length} Nifty ${INDEX_LISTS["500"]?"500":"200"} stocks advanced.`);
     const top=U.slice().sort((a,b)=>b.chp-a.chp).slice(0,3),bot=U.slice().sort((a,b)=>a.chp-b.chp).slice(0,3);p.push(`Top gainers: ${top.map(r=>`${r.sym} (${fmtPct(r.chp,true)})`).join(", ")}. Top losers: ${bot.map(r=>`${r.sym} (${fmtPct(r.chp,true)})`).join(", ")}.`);}
   try{const S=buildSectors();if(S){const day=S.sectors.map(x=>({sec:x.sec,r:(x.idx[x.idx.length-1]/x.idx[x.idx.length-2]-1)*100})).sort((a,b)=>b.r-a.r);p.push(`Strongest sector: ${day[0].sec} (${fmtPct(day[0].r,true)}); weakest: ${day[day.length-1].sec} (${fmtPct(day[day.length-1].r,true)}).`);}}catch(e){}
+  {const m=marketCondition();if(m)p.push(`Market condition: ${m.title.toLowerCase()} (${m.text.replace(/\.$/,"")}).`);}
   const fd=fiiDays();if(fd.length&&fd[0].fii!=null)p.push(`FIIs were net ${fd[0].fii>=0?"buyers":"sellers"} of ₹${nf(Math.abs(fd[0].fii),0)} crore${fd[0].dii!=null?` and DIIs net ${fd[0].dii>=0?"buyers":"sellers"} of ₹${nf(Math.abs(fd[0].dii),0)} crore`:""} (${fd[0].date}, provisional).`);
   const sp=g("SPX"),gold=g("GOLD"),br=g("BRENT"),inr_=g("USDINR");const gl=[];if(sp)gl.push(`S&P 500 ${fmtPct(sp.chp,true)}`);if(gold)gl.push(`gold ${fmtPct(gold.chp,true)}`);if(br)gl.push(`Brent ${fmtPct(br.chp,true)}`);if(inr_)gl.push(`USD/INR ${nf(inr_.c,2)}`);if(gl.length)p.push(`Globally: ${gl.join(", ")}.`);
   const wl=activeWL().items.filter(i=>i.market==="NSE");const hits=[];for(const it of wl){const s=seriesOf(it.sym,"NSE");if(!s)continue;const a=analyze(s,prefs.settings);if(a.short)continue;const ids=Object.keys(a.sig).filter(k=>a.sig[k]===0||(a.sig[k]&&a.sig[k].state==="confirmed"));if(ids.length)hits.push(`${it.sym}: ${ids.map(k=>(SIGMAP[k]||{}).label||k).join(", ")}`);}
@@ -3747,11 +3775,12 @@ function renderSettings(){
 /* =====================================================================
    DASHBOARD WIDGETS (customisable)
    ===================================================================== */
-const WIDGETS=[["summary","Market summary"],["cards","Key markets"],["sectors","Sector performance"],["breadth","Market breadth"],["movers","Top bullish and bearish"],["fii","FII / DII"],["status","Market status"],["alerts","Triggered alerts"],["news","Headlines"]];
+const WIDGETS=[["mcond","Market condition (20 & 50 SMA)"],["summary","Market summary"],["cards","Key markets"],["sectors","Sector performance"],["breadth","Market breadth"],["movers","Top bullish and bearish"],["fii","FII / DII"],["status","Market status"],["alerts","Triggered alerts"],["news","Headlines"]];
 function widgetOn(k){return !(prefs.wOff||[]).includes(k);}
 function renderWidgets(){
   for(const [k] of WIDGETS){const e=document.querySelector(`[data-w="${k}"]`);if(e)e.hidden=!widgetOn(k);}
   const pop=$("#wPop");if(!pop.children.length)for(const [k,lab] of WIDGETS){const l=el("label");const c=el("input");c.type="checkbox";c.checked=widgetOn(k);c.addEventListener("change",()=>{const s=new Set(prefs.wOff||[]);if(c.checked)s.delete(k);else s.add(k);prefs.wOff=[...s];savePrefs();renderWidgets();});l.append(c,document.createTextNode(lab));pop.append(l);}
+  {const mc=$("#ovMcond");if(mc){mc.replaceChildren();const b=mcBanner();if(b)mc.append(b);}}
   // sectors widget
   const sb=$("#ovSectors");if(sb&&widgetOn("sectors")){sb.replaceChildren();let S=null;try{S=buildSectors();}catch(e){}
     if(!S)sb.append(el("div","empty-note","Appears once prices load."));else{const d=S.sectors.map(x=>({sec:x.sec,r:(x.idx[x.idx.length-1]/x.idx[x.idx.length-2]-1)*100})).sort((a,b)=>b.r-a.r);const mx=Math.max(...d.map(x=>Math.abs(x.r)),0.5);
@@ -3919,6 +3948,7 @@ function renderRadarNew(){
   let base0=res?res.rows:[];renderPatternExplorer(base0);
   if(!res){if(state.loading){for(let i=0;i<8;i++)list.append(el("div","skel"));return;}
     const e=el("div","empty");e.append(el("b",null,`No ${prefs.market} price data yet`),el("span",null,state.live?"Prices appear after the next automatic update.":"Load price files in Settings, or try the demo."));list.append(e);return;}
+  if(prefs.market==="NSE"){const mb=mcBanner();if(mb)notes.append(mb);}
   if(d.demo)notes.append(el("div","note demo","Demo data: simulated prices for made-up symbols, not real stocks."));
   if(res.short)notes.append(el("div","note",`${res.short} stock${res.short>1?"s have":" has"} too little history for this timeframe and ${res.short>1?"were":"was"} skipped.`));
   // filters
@@ -3999,6 +4029,7 @@ function expandPanel(r){
   const tb=blk("Trade setup ("+({st:"short term",mt:"medium term",lt:"long term"})[TS.hz]+")");const tp=tradePlans(r.sym,m);const pl=tp&&tp.plans[TS.hz];
   if(pl){const brk=pl.res||r.res;tb.append(kv("Breakout price",brk?fmtP(brk):"at highs"),kv("Buy range",`${fmtP(pl.buyLow)} – ${fmtP(pl.buyHigh)}`),kv("Target 1 / 2",`${fmtP(pl.t1)} / ${fmtP(pl.t2)}`),kv("Stop-loss reference",fmtP(pl.stop)),kv("Risk : reward",`1 : ${nf(pl.rr1,1)}`));}
   else tb.append(el("p","pnote","Not enough history for a plan on this horizon."));
+  {const L=swingLevels(s);tb.append(kv("Course stop (recent swing low)",L.sl!=null?fmtP(L.sl):"–"),kv("Course target (unbroken swing high)",L.tgt!=null?fmtP(L.tgt):"at highs"));}
   const xb=blk("Explanation");const ts=r.ts;if(ts){const best=ts.parts.filter(q=>q.pts!=null).sort((a,b)=>b.pts/b.max-a.pts/a.max);const top=best[0],low=best[best.length-1];
     xb.append(el("p",null,`Score ${ts.score} (${BAND(ts.score)[0].toLowerCase()}). Strongest part: ${top.name.toLowerCase()} (${nf(top.pts,1)} of ${top.max}); weakest: ${low.name.toLowerCase()} (${nf(low.pts,1)} of ${low.max}). ${r.sl.filter(x=>x.conf).length?`Confirmed signals: ${r.sl.filter(x=>x.conf).map(x=>x.label).join(", ")}.`:"No confirmed signals yet."}`));}
   const acts=el("div","tsx-acts");const full=el("button","btn primary","Open full analysis");full.type="button";full.addEventListener("click",()=>openSheet(r));const al=el("button","btn","Set alert");al.type="button";al.addEventListener("click",()=>{openSheet(r);setTimeout(()=>{const b=$("#alertBox");if(b)b.scrollIntoView({behavior:"smooth",block:"center"});},700);});acts.append(full,al);info.append(acts);
@@ -4189,6 +4220,91 @@ function renderPfAnalytics(rows){
   if(G.skipped.length){const g={};for(const s of G.skipped)(g[s.reason]||(g[s.reason]=new Set())).add(s.sym);c4.append(el("p","pnote","Left out: "+Object.entries(g).map(([k,v])=>`${[...v].join(", ")} (${k})`).join("; ")+"."));}
   c4.append(el("p","pnote","Rules: listed equity shares and equity ETFs; each purchase lot is treated separately. Long term = held more than 12 months. Short term 20%, long term 12.5% above ₹1.25 lakh a year (rates from 23 July 2024). Short-term losses are set off against short-term then long-term gains; long-term losses only against long-term gains. Lots bought before 1 Feb 2018 use the grandfathered cost (31 Jan 2018 highest price). 4% cess, no surcharge, no other income or brought-forward losses. Confirm with your tax adviser."));
   grid.append(c4);}
+
+/* =====================================================================
+   MARKET PAATHSHAALA RULES (from the course notes you shared)
+   ===================================================================== */
+const PM_META=[
+  ["pmrev","Support reversal + RSI 40 + volume","pm","bull","Course rank-1 setup: a bullish reversal candle (engulfing, hammer, morning star) at support, RSI moving back above 40 from below, and volume higher than the previous day and the 20-day average."],
+  ["pmbo","SMA-aligned breakout","pm","bull","Course rank-3 setup: close above resistance of up to 6 months, with price above the 20, 50 and 200-day SMA and all three rising."],
+  ["mdstar","Morning doji star","bullc","bull","A long red candle, a doji below it, then a green candle closing above 50% of the red body. The course trades a doji only in this form."],
+  ["edstar","Evening doji star","bearc","bear","A long green candle, a doji above it, then a red candle closing below 50% of the green body."],
+  ["husband","Horizontal support breakdown","brk","bear","Close below a horizontal support that held at least twice (the course’s “HUSBAND”). An exit or caution signal for holders."],
+  ["rtlbd","Rising trendline breakdown","brk","bear","Close below an uptrend line touched at least 3 times (not too steep). The uptrend may be weakening."],
+  ["ftlbo","Falling trendline breakout","brk","bull","Close above a downtrend line touched at least 3 times (not too steep). Selling pressure may be easing."],
+  ["sma20x","Closed below 20 SMA","brk","bear","Bearish candle closing below the 20-day SMA. Course trailing rule: first warning (it suggests reducing half)."],
+  ["sma50x","Closed below 50 SMA","brk","bear","Bearish candle closing below the 50-day SMA. Course trailing rule: medium-term trend broken."],
+  ["rsihot","RSI overheated (82+)","brk","neu","RSI at 82 or above: momentum stretched. The course avoids new buying here and books part profits."]];
+PAT_GROUPS.splice(1,0,["pm","Market Paathshaala setups"]);
+for(const [id,label,group,bias,desc] of PM_META){const s={id,label,group,bias,desc,color:BIAS_COLOR[bias],extra:true};SIGNALS.push(s);SIGMAP[id]=s;}
+Object.assign(CANDLE_LEN,{mdstar:3,edstar:3});NEEDS_SUP.add("mdstar");NEEDS_RES.add("edstar");
+SIGMAP.hs.desc+=" The course rates head & shoulders as lower accuracy.";SIGMAP.ihs.desc+=" The course rates this as lower accuracy; it books half at the first resistance.";SIGMAP.doji.desc+=" The course trades a doji only as a morning or evening doji star.";
+const _cf2=candleFns;
+candleFns=function(A,tr){const F=_cf2(A,tr);const {o,h,l,c}=A;const B=i=>Math.abs(c[i]-o[i]),R=i=>h[i]-l[i];const avgB=i=>{let s=0,k=0;for(let j=Math.max(0,i-10);j<i;j++){s+=B(j);k++;}return k?s/k:B(i);};
+  const down=j=>!tr||(j>=5&&c[j]<c[j-5]),rise=j=>!tr||(j>=5&&c[j]>c[j-5]);
+  F.mdstar=i=>{const a=i-2,b=i-1;if(a<11)return false;return c[a]<o[a]&&B(a)>=0.8*avgB(a)&&R(b)>0&&B(b)<=0.1*R(b)&&Math.max(o[b],c[b])<=c[a]+0.1*B(a)&&c[i]>o[i]&&c[i]>=(o[a]+c[a])/2&&down(a-1);};
+  F.edstar=i=>{const a=i-2,b=i-1;if(a<11)return false;return c[a]>o[a]&&B(a)>=0.8*avgB(a)&&R(b)>0&&B(b)<=0.1*R(b)&&Math.min(o[b],c[b])>=c[a]-0.1*B(a)&&c[i]<o[i]&&c[i]<=(o[a]+c[a])/2&&rise(a-1);};
+  return F;};
+/* trendlines from 3 swing points, rejecting steep lines */
+function trendline3(P,rising){if(P.length<3)return null;const [p1,p2,p3]=P.slice(-3);
+  if(rising?!(p1[1]<p2[1]&&p2[1]<p3[1]):!(p1[1]>p2[1]&&p2[1]>p3[1]))return null;const sl=(p3[1]-p1[1])/(p3[0]-p1[0]);const mid=p1[1]+sl*(p2[0]-p1[0]);
+  if(Math.abs(p2[1]/mid-1)>0.015)return null;if(Math.abs(sl/p1[1])*100>0.6)return null;return {at:x=>p1[1]+sl*(x-p1[0])};}
+function pmPatterns(A,tol,st){const n=A.c.length,c=A.c[n-1],out={};if(n<60)return out;const v=A.v||[];
+  const s20=smaA(A.c,20),s50=smaA(A.c,50),s200=n>=205?smaA(A.c,200):null;
+  // HUSBAND
+  {const P=pivK(A,n-120,n-4,3).L;let best=null;for(let i=P.length-1;i>=0&&!best;i--){const lv=P[i][1];const cl=P.filter(x=>Math.abs(x[1]/lv-1)<=0.015);if(cl.length>=2)best=Math.min(...cl.map(x=>x[1]));}
+    if(best&&c<best&&A.c[n-2]>=best)out.husband={state:"confirmed",level:best};}
+  // trendlines
+  {const Q=pivK(A,n-150,n-4,3);const up=trendline3(Q.L,true),dn=trendline3(Q.H,false);
+    if(up){const lv=up.at(n-1);if(c<lv&&A.c[n-2]>=up.at(n-2))out.rtlbd={state:"confirmed",level:lv};}
+    if(dn){const lv=dn.at(n-1);if(c>lv&&A.c[n-2]<=dn.at(n-2))out.ftlbo={state:"confirmed",level:lv};}}
+  // SMA trailing breaks
+  if(s20[n-1]!=null&&c<s20[n-1]&&A.c[n-2]>=s20[n-2]&&c<A.o[n-1])out.sma20x={state:"confirmed",level:s20[n-1]};
+  if(s50[n-1]!=null&&c<s50[n-1]&&A.c[n-2]>=s50[n-2]&&c<A.o[n-1])out.sma50x={state:"confirmed",level:s50[n-1]};
+  // RSI overheated
+  const r=rsiSeries(A.c,14);if(r[n-1]>=82)out.rsihot={state:"confirmed",level:c};
+  // rank-3 breakout
+  if(s200&&s200[n-6]!=null){let res=-Infinity;for(let j=Math.max(0,n-127);j<n-1;j++)res=Math.max(res,A.h[j]);
+    if(c>res&&A.c[n-2]<=res&&c>s20[n-1]&&c>s50[n-1]&&c>s200[n-1]&&s20[n-1]>s20[n-6]&&s50[n-1]>s50[n-6]&&s200[n-1]>s200[n-6])out.pmbo={state:"confirmed",level:res};}
+  return out;}
+const _cp2=chartPatterns;
+chartPatterns=function(A,tol){return Object.assign(_cp2(A,tol),pmPatterns(A,tol));};
+/* post-filters on analyze(): volume confirmation, prior move, rank-1 composite */
+const REV_BULL=new Set(["hammer","mstar","engulf","piercing","bharami","ihammer","dragonfly","tweezb","mdstar","kickerb","ababyb"]),REV_BEAR=new Set(["shoot","hangman","bengulf","estar","darkcloud","bearharami","gravestone","tweezt","edstar","kickers","ababys"]);
+function pmFilter(s,st,r){const n=s.c.length;if(r.short||n<30)return r;const sig=r.sig;const minMove=st.minMove==null?5:+st.minMove;const vc=st.volConfirm!==false;
+  for(const id of Object.keys(sig)){const k=sig[id];if(typeof k!=="number"||!(REV_BULL.has(id)||REV_BEAR.has(id)))continue;const i=n-1-k,len=CANDLE_LEN[id]||(id==="mstar"?3:id==="engulf"?2:1),first=i-len+1;
+    if(vc&&s.v[i]>0&&s.v[i-1]>0&&!(s.v[i]>s.v[i-1])){delete sig[id];continue;}
+    if(st.downtrend!==false&&minMove>0&&first>16){let hi=-Infinity,lo=Infinity;
+      if(REV_BULL.has(id)){for(let j=first-15;j<first;j++)hi=Math.max(hi,s.h[j]);for(let j=first;j<=i;j++)lo=Math.min(lo,s.l[j]);if((hi/lo-1)*100<minMove){delete sig[id];continue;}}
+      else{for(let j=first-15;j<first;j++)lo=Math.min(lo,s.l[j]);for(let j=first;j<=i;j++)hi=Math.max(hi,s.h[j]);if((hi/lo-1)*100<minMove){delete sig[id];continue;}}}}
+  // rank-1 composite: bullish reversal at support (fresh) + RSI back above 40 + volume above prev and 20-day average
+  const rev=["engulf","hammer","mstar","mdstar"].find(id=>typeof sig[id]==="number"&&sig[id]<=1&&((r.patSup&&r.patSup[id]!=null)||(r.patLv&&r.patLv[id]!=null)));
+  if(rev){const rs=rsiSeries(s.c,14);let mn=Infinity;for(let j=n-6;j<n;j++)mn=Math.min(mn,rs[j]);const i=n-1-sig[rev];let va=0;for(let j=i-20;j<i;j++)va+=s.v[j];va/=20;
+    if(mn<40&&rs[n-1]>=40&&s.v[i]>s.v[i-1]&&(!va||s.v[i]>va))sig.pmrev={state:"confirmed",level:(r.patSup&&r.patSup[rev])||(r.patLv&&r.patLv[rev])||r.sup};}
+  return r;}
+const _an2=analyze;
+analyze=function(s,st){const r=_an2(s,st);return pmFilter(s,st,r);};
+/* ---------- market condition (Nifty 500 vs 20 & 50 SMA) ---------- */
+function marketCondition(){let nm="Nifty 500",s=seriesOf("NIFTY500","NSE");if(!s||s.c.length<60){nm="Nifty 50";s=seriesOf("NIFTY50","GLB")||seriesOf("NIFTY50","NSE");}if(!s||s.c.length<60)return null;
+  const n=s.c.length,c=s.c[n-1],s20=smaA(s.c,20)[n-1],s50=smaA(s.c,50)[n-1],a20=c>s20,a50=c>s50;const lvl=a20&&a50?"full":(!a20&&!a50)?"avoid":"caution";
+  return {nm,c,s20,s50,a20,a50,lvl,size:lvl==="full"?100:lvl==="caution"?50:30,
+    title:{full:"Strong market",caution:"Cautious market",avoid:"Weak market"}[lvl],
+    text:`${nm} ${fmtP(c)} is ${a20?"above":"below"} its 20 SMA (${fmtP(s20)}) and ${a50?"above":"below"} its 50 SMA (${fmtP(s50)}).`,
+    hint:{full:"Course rule: “jam ke kaam karna hai”: trend is strong, normal position size.",caution:"Course rule: “tham ke kaam karna hai”: reduce quantity and keep a strict stop-loss.",avoid:"Course rule: stay out, or use about 30% of your normal size."}[lvl]};}
+function mcBanner(){const m=marketCondition();if(!m)return null;const b=el("div","mc-banner "+m.lvl);b.append(el("b",null,m.title+": "),el("span",null,m.text+" "),el("span","pnote",m.hint));return b;}
+/* swing-based stop and target (course method) */
+function swingLevels(s){const n=s.c.length,c=s.c[n-1];const P=pivK({o:s.o,h:s.h,l:s.l,c:s.c},Math.max(3,n-150),n-1,3);
+  const lows=P.L.filter(x=>x[1]<c);const sl=lows.length?lows[lows.length-1][1]:null;
+  const ub=P.H.filter(([i,v])=>{if(v<=c*1.003)return false;for(let j=i+1;j<n;j++)if(s.h[j]>v)return false;return true;}).sort((a,b)=>a[1]-b[1]);
+  const tgt=ub.length?ub[0][1]:null;return {sl,tgt,rr:sl!=null&&tgt!=null&&c>sl?(tgt-c)/(c-sl):null};}
+const _rp2=renderPlan;
+renderPlan=function(sym,market){_rp2(sym,market);const box=$("#plan");const d=state.data[market];const s=d&&d.series[sym];if(!s||s.c.length<60)return;
+  const L=swingLevels(s);const w=el("div","pm-plan");w.append(el("h4",null,"Course method (Market Paathshaala)"));
+  w.append(kv("Stop-loss: most recent swing low",L.sl!=null?fmtP(L.sl):"no swing low below price"),kv("Target: nearest unbroken swing high",L.tgt!=null?fmtP(L.tgt):"none above: price is at highs"),kv("Risk : reward",L.rr!=null?`1 : ${nf(L.rr,1)}`:"–"));
+  const m=market==="NSE"?marketCondition():null;if(m)w.append(el("p","pnote",`${m.title} (${m.nm} vs 20 & 50 SMA): course sizing ${m.size}% of normal. ${m.hint}`));
+  w.append(el("p","pnote","One trade, one stop-loss: the course keeps a single swing-low stop and does not move it lower. Swing highs already broken don’t count as targets."));box.append(w);};
+/* RSI pane lines follow the chosen zones */
+function rsiZones(){return prefs.settings.rsiZones==="classic"?[70,30]:[65,40];}
 
 /* ---------- start ---------- */
 (async()=>{

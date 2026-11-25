@@ -461,6 +461,10 @@ def check_alerts():
             elif cond == "breakout20":
                 hi = g["High"].astype(float).reset_index(drop=True).iloc[-21:-1].max()
                 met, what = close > hi, f"closed above its 20-day high of {hi:,.2f}"
+            elif cond in ("below20sma", "below50sma"):
+                per = 20 if cond == "below20sma" else 50
+                m = c.rolling(per).mean()
+                met, what = c.iloc[-1] < m.iloc[-1] and c.iloc[-2] >= m.iloc[-2], f"closed below its {per}-day SMA ({m.iloc[-1]:,.2f})"
             elif cond == "golden_cross" and len(c) > 205:
                 s50, s200 = c.rolling(50).mean(), c.rolling(200).mean()
                 met, what = s50.iloc[-1] > s200.iloc[-1] and s50.iloc[-2] <= s200.iloc[-2], "50-day average crossed above the 200-day average"
