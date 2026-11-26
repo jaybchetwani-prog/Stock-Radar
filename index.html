@@ -712,6 +712,14 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
 .pi-row:hover{background:var(--surface-2)}.pi-pts{font-weight:650;color:var(--bear);font-variant-numeric:tabular-nums}
 .pi-corr{border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums}.pi-corr th,.pi-corr td{padding:5px 7px;border:1px solid var(--line);text-align:center;white-space:nowrap}.pi-corr th{background:var(--surface-2);font-weight:600}
 @media (max-width:700px){.pi-row{grid-template-columns:90px minmax(0,1fr);}}
+.rp-form{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:flex-end;margin:8px 0}
+.rp-form label{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--muted)}.rp-form label.check{flex-direction:row;align-items:center;gap:6px;padding-bottom:8px}
+.rp-form input[type=number]{width:110px;padding:7px 9px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink)}
+.rp-form select{max-width:330px}.rp-cost{font-size:12.5px}.rp-cost summary{cursor:pointer;color:var(--muted);padding-bottom:8px}.rp-cost label{margin-top:4px}
+#rpStatus,#stStatus{font-size:13px;color:var(--muted);margin:6px 0}
+.rp-verdict{background:var(--surface-2);border-radius:10px;padding:12px 14px;margin:8px 0;display:grid;gap:4px}.rp-verdict b{font-size:22px;font-weight:650}
+.rp-ch{height:340px;border:1px solid var(--line);border-radius:10px;overflow:hidden}.rp-ch.small{height:220px}.rp-h{margin:14px 0 6px;font-size:13.5px}
+.st-panel{margin:14px 0}
 [hidden]{display:none !important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
@@ -920,6 +928,14 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
       <div class="pf-actions"><select id="btUni" class="btn" aria-label="Universe"><option value="200">Nifty 200</option><option value="500">Nifty 500</option></select><select id="btHz" class="btn" aria-label="Holding period"><option value="0">After 5 sessions</option><option value="1" selected>After 10 sessions</option><option value="2">After 20 sessions</option></select><button type="button" class="btn primary" id="btRun">Run backtest</button></div></div>
     <p class="pnote" id="btStatus"></p>
     <div class="tbl-wrap" id="btTable"></div>
+    <section class="panel st-panel"><h3>Strategy simulation: all stocks</h3>
+      <p class="pnote">“What if I had bought every stock in the list whenever this signal appeared, and sold by this rule?” Each stock starts with ₹1 lakh.</p>
+      <div class="rp-form"><label>Buy when<select id="stEntry" class="btn"></select></label>
+        <label>Sell using<select id="stExit" class="btn"><option value="course">Course method (swing-low stop, swing-high target)</option><option value="sma">20 / 50 SMA trail</option><option value="hold">Hold fixed days</option><option value="fixed">Fixed target / stop %</option></select></label>
+        <label id="stHoldL" hidden>Days<input id="stHold" type="number" min="1" value="20"></label><label id="stTgtL" hidden>Target %<input id="stTgt" type="number" value="10"></label><label id="stSlL" hidden>Stop %<input id="stSl" type="number" value="5"></label>
+        <label>Market filter<select id="stMkt" class="btn"><option value="any">Any market</option><option value="1">Not weak</option><option value="2">Strong only</option></select></label>
+        <button type="button" class="btn primary" id="stRun">Run simulation</button></div>
+      <p class="pnote" id="stStatus"></p><div id="stOut"></div></section>
     <p class="src">“Worked” means the price was higher after the period for bullish and neutral patterns, and lower for bearish ones. Green when it beat a random day. Uses your current Settings (at support or resistance, prior trend, “near” distance). Past results don’t guarantee future results, and costs, slippage and taxes are ignored.</p>
   </section>
   <section id="ipoView" hidden aria-labelledby="ipTitle">
@@ -1192,7 +1208,7 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
     </div>
     <div class="quote" id="quote"></div>
     <div class="badges" id="sheetBadges" style="margin-top:10px"></div>
-    <div class="small-seg sheet-tabs" id="sheetTabs" role="tablist" aria-label="Stock sections"><button type="button" data-st="chart">Chart &amp; plan</button><button type="button" data-st="tech">Technicals</button><button type="button" data-st="fund">Fundamentals</button></div>
+    <div class="small-seg sheet-tabs" id="sheetTabs" role="tablist" aria-label="Stock sections"><button type="button" data-st="chart">Chart &amp; plan</button><button type="button" data-st="tech">Technicals</button><button type="button" data-st="fund">Fundamentals</button><button type="button" data-st="replay">Signal replay</button></div>
     <div id="stChart">
       <div class="chart-tools">
         <div class="small-seg" id="rangeSeg" role="group" aria-label="Chart range"></div>
@@ -1221,6 +1237,7 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
     </div>
     <div id="stTech" hidden></div>
     <div id="stFund" hidden></div>
+    <div id="stReplay" hidden></div>
   </div>
 </div>
 
@@ -2537,6 +2554,9 @@ $("#setInstall").addEventListener("click",()=>$("#installBtn").click());
 $("#setReset").addEventListener("click",()=>{if(!confirm("Remove all your watchlists, portfolio, alerts, drawings and settings from this browser?"))return;for(const k of ["radar.prefs","radar.watchlists","radar.portfolio","radar.alerts","radar.draw"])try{localStorage.removeItem(k);}catch(e){}location.reload();});
 document.querySelectorAll("[data-hp]").forEach(b=>b.addEventListener("click",()=>{hmPeriod=b.dataset.hp;renderHeatmap();}));$("#hmUni").addEventListener("change",renderHeatmap);
 let hmT;window.addEventListener("resize",()=>{clearTimeout(hmT);hmT=setTimeout(()=>{if(prefs.view==="heatmap")renderHeatmap();},250);});
+setTimeout(()=>{const se=$("#stEntry");for(const id of ST_IDS){const S=SIGMAP[id];if(!S)continue;const o=el("option",null,S.label);o.value=id;se.append(o);}se.value="engulf";},0);
+$("#stExit").addEventListener("change",()=>{const e=$("#stExit").value;$("#stHoldL").hidden=e!=="hold";$("#stTgtL").hidden=e!=="fixed";$("#stSlL").hidden=e!=="fixed";});
+$("#stRun").addEventListener("click",()=>{$("#stStatus").textContent="Starting…";runStrategyAll();});
 $("#btRun").addEventListener("click",()=>{BT.res=null;runBacktest($("#btUni").value);});$("#btHz").addEventListener("change",renderBacktest);
 document.querySelectorAll("[data-ml]").forEach(b=>b.addEventListener("click",()=>{mcLayout=+b.dataset.ml;prefs.mcLayout=mcLayout;savePrefs();renderMulti();}));
 $("#scaleSel").addEventListener("change",()=>{if(currentRow)renderChart(currentRow,sheetMarket);});$("#cmpSel").addEventListener("change",()=>{if(!$("#cmpSel").value)$("#scaleSel").value="0";if(currentRow)renderChart(currentRow,sheetMarket);});
@@ -3171,8 +3191,8 @@ function renderTechTab(r,market){
 }
 let sheetTab="chart";
 function setSheetTab(t){sheetTab=t;document.querySelectorAll("[data-st]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.st===t)));
-  $("#stChart").hidden=t!=="chart";$("#stTech").hidden=t!=="tech";$("#stFund").hidden=t!=="fund";
-  if(!currentRow)return;if(t==="tech")renderTechTab(currentRow,sheetMarket);if(t==="fund")renderFundTab(currentRow.sym,sheetMarket);}
+  $("#stChart").hidden=t!=="chart";$("#stTech").hidden=t!=="tech";$("#stFund").hidden=t!=="fund";$("#stReplay").hidden=t!=="replay";
+  if(!currentRow)return;if(t==="tech")renderTechTab(currentRow,sheetMarket);if(t==="fund")renderFundTab(currentRow.sym,sheetMarket);if(t==="replay")renderReplayTab(currentRow,sheetMarket);}
 
 /* ---------- sidebar (mobile drawer) ---------- */
 function openSide(){$("#side").classList.add("open");$("#sideScrim").hidden=false;$("#moreBtn").setAttribute("aria-expanded","true");}
@@ -3331,7 +3351,7 @@ function ipoBase(sym,market,s,tol){
 
 /* ---------- pattern badges & explorer ---------- */
 function patBadgeText(id,v,tf,a){const s=SIGMAP[id];if(!s)return "";if(v&&typeof v==="object"){const conf=v.state==="confirmed";
-    return ["trendtpl","pocket","islandb","islandt"].includes(id)?"":s.bias==="bear"?(conf?"breakdown below "+fmtP(v.level):"near breakdown level "+fmtP(v.level)):s.group==="brk"?"":conf?"breakout above "+fmtP(v.level):"forming, pivot "+fmtP(v.level);}
+    return ["trendtpl","pocket","islandb","islandt","pb20","pb50","mtf","qualset","accum","distrib","deliv","rsline","rsidivb","rsidivs","resgap","pmrev","rsihot"].includes(id)?"":s.bias==="bear"?(conf?"breakdown below "+fmtP(v.level):"near breakdown level "+fmtP(v.level)):s.group==="brk"?"":conf?"breakout above "+fmtP(v.level):"forming, pivot "+fmtP(v.level);}
   if(typeof v==="number"&&CANDLE_LEN[id])return agoText(v,tf)+(a&&a.patLv&&a.patLv[id]!=null?(NEEDS_SUP.has(id)?", at support":", at resistance"):"");return "";}
 function renderPatternExplorer(base){
   let box=$("#patExplorer");if(!box){box=el("details","pat-ex");box.id="patExplorer";const sm=el("summary",null,"Pattern library");box.append(sm,el("div","pat-ex-body"));$("#chips").closest(".panel").append(box);if(prefs.patOpen)box.open=true;box.addEventListener("toggle",()=>{prefs.patOpen=box.open;savePrefs();});}
@@ -4463,6 +4483,177 @@ function renderPfInsights(rows){
       else body.append(el("p","pnote","Enter a target, date and monthly amount to see the yearly return your goal needs. Saved on this device."));}})[PI_TAB]();
 }
 function r_pct(r){return r.pnlPct==null?0:r.pnlPct;}
+
+/* =====================================================================
+   SIGNAL REPLAY ENGINE: "what if I had traded this rule?"
+   Rules: signal checked at the day's close -> buy at the NEXT day's open.
+   Stops/targets checked on each day's high/low; if both are hit on the same
+   day the stop is assumed first. Rule exits (SMA, holding period) decided at
+   the close and executed at the next open (holding period: at that close).
+   Costs: round-trip % split half on buy and half on sell, plus slippage per side.
+   ===================================================================== */
+const RP={};
+RP.sma=(a,p)=>{const o=new Array(a.length).fill(null);let s=0;for(let i=0;i<a.length;i++){s+=a[i];if(i>=p)s-=a[i-p];if(i>=p-1)o[i]=s/p;}return o;};
+RP.atr=(S,i,p=14)=>{if(i<p)return null;let s=0;for(let j=i-p+1;j<=i;j++){const tr=Math.max(S.h[j]-S.l[j],Math.abs(S.h[j]-S.c[j-1]),Math.abs(S.l[j]-S.c[j-1]));s+=tr;}return s/p;};
+RP.isPivotLow=(S,j,k)=>{for(let q=1;q<=k;q++)if(S.l[j]>S.l[j-q]||S.l[j]>S.l[j+q])return false;return true;};
+RP.isPivotHigh=(S,j,k)=>{for(let q=1;q<=k;q++)if(S.h[j]<S.h[j-q]||S.h[j]<S.h[j+q])return false;return true;};
+/* most recent confirmed swing low below price, using only bars up to i */
+RP.swingStop=(S,i,price,k=3,back=150)=>{for(let j=i-k;j>=Math.max(k,i-back);j--)if(RP.isPivotLow(S,j,k)&&S.l[j]<price)return S.l[j];return null;};
+/* nearest swing high above price that no later bar (up to i) has exceeded */
+RP.swingTarget=(S,i,price,k=3,back=150)=>{let best=null;for(let j=i-k;j>=Math.max(k,i-back);j--){if(!RP.isPivotHigh(S,j,k))continue;const v=S.h[j];if(v<=price*1.003)continue;let broken=false;for(let q=j+1;q<=i;q++)if(S.h[q]>v){broken=true;break;}if(!broken&&(best==null||v<best))best=v;}return best;};
+RP.run=(S,isEntry,o)=>{
+  o=Object.assign({from:0,exit:"course",hold:20,tgt:10,sl:5,useStop:true,amount:100000,reinvest:true,cost:0.25,slip:0.05,allow:null},o||{});
+  const n=S.c.length,sm20=RP.sma(S.c,20),sm50=RP.sma(S.c,50),slp=o.slip/100,half=o.cost/200;
+  let cash=o.amount,pos=null,pend=null;const trades=[],curve=[],notes=new Set();let daysIn=0;
+  const closePart=(i,qty,px,reason)=>{const v=qty*px;cash+=v-v*half;pos.legs.push({i,t:S.t[i],qty,px,reason});pos.qty-=qty;
+    if(pos.qty<=0){const sold=pos.legs.reduce((a,l)=>a+l.qty*l.px,0),q0=pos.q0,buyV=q0*pos.px,costs=buyV*half+sold*half;
+      const pnl=sold-buyV-costs;trades.push({entryI:pos.i,entryT:S.t[pos.i],entry:pos.px,qty:q0,exitI:i,exitT:S.t[i],exit:sold/q0,reason:pos.legs.map(l=>l.reason).filter((x,k,a)=>a.indexOf(x)===k).join(" + "),pnl,pct:pnl/(buyV+buyV*half)*100,days:Math.round((S.t[i]-S.t[pos.i])/864e5),sl:pos.sl0,tgt:pos.tgt0,note:pos.note,open:false});pos=null;}};
+  for(let i=o.from;i<n;i++){
+    // 1) orders placed at yesterday's close execute at today's open
+    if(pend){const p=pend;pend=null;
+      if(p.type==="buy"){const px=S.o[i]*(1+slp);const base=o.reinvest?cash:Math.min(cash,o.amount);const qty=Math.floor(base/(px*(1+half)));
+        let sl=p.sl,tgt=p.tgt,note=p.note||"";
+        if(o.exit==="fixed"){sl=px*(1-o.sl/100);tgt=px*(1+o.tgt/100);}
+        if(sl!=null&&S.o[i]<=sl){notes.add("Some signals were skipped because the next day opened below the stop-loss.");}
+        else if(qty<1){notes.add("Some signals were skipped because the amount was smaller than one share.");}
+        else{if(tgt!=null&&tgt<=px)tgt=null;cash-=qty*px+qty*px*half;pos={i,px,qty,q0:qty,sl,tgt,sl0:sl,tgt0:tgt,legs:[],half:false,note,trail:o.exit==="sma"||(o.exit==="course"&&tgt==null)};}}
+      else if(p.type==="sell"&&pos){const q=p.frac<1?Math.max(1,Math.floor(pos.qty*p.frac)):pos.qty;closePart(i,Math.min(q,pos.qty),S.o[i]*(1-slp),p.reason);if(pos&&p.frac<1)pos.half=true;}}
+    // 2) intraday stop / target
+    if(pos){const st=pos.sl!=null&&S.l[i]<=pos.sl,tg=pos.tgt!=null&&S.h[i]>=pos.tgt;
+      if(st)closePart(i,pos.qty,Math.min(S.o[i],pos.sl)*(1-slp),"stop-loss");
+      else if(tg)closePart(i,pos.qty,Math.max(S.o[i],pos.tgt)*(1-slp),"target");}
+    // 3) end-of-day rules
+    if(pos){daysIn++;
+      if(o.exit==="hold"&&i-pos.i+1>=o.hold)closePart(i,pos.qty,S.c[i]*(1-slp),`held ${o.hold} days`);
+      else if(pos.trail&&i>pos.i&&i<n-1){const bear=S.c[i]<S.o[i];
+        if(sm50[i]!=null&&S.c[i]<sm50[i]&&bear)pend={type:"sell",frac:1,reason:"closed below 50 SMA"};
+        else if(!pos.half&&sm20[i]!=null&&S.c[i]<sm20[i]&&bear)pend={type:"sell",frac:0.5,reason:"half below 20 SMA"};}}
+    if(!pos&&!pend&&i<n-1&&isEntry(i)&&(!o.allow||o.allow(i))){
+      let sl=null,tgt=null,note="";const ref=S.c[i];
+      if(o.exit!=="fixed"&&(o.exit==="course"||o.useStop)){sl=RP.swingStop(S,i,ref);if(sl==null){const a=RP.atr(S,i);if(a){sl=ref-2*a;note="no swing low below: stop 2 ATR below";}}}
+      if(o.exit==="course"){tgt=RP.swingTarget(S,i,ref);if(tgt==null)note=(note?note+"; ":"")+"at highs: no target, trailed with 20/50 SMA";}
+      pend={type:"buy",sl,tgt,note};}
+    curve.push({t:S.t[i],v:cash+(pos?pos.qty*S.c[i]:0)});}
+  let openTrade=null;if(pos){const last=n-1,mv=pos.qty*S.c[last];const sold=pos.legs.reduce((a,l)=>a+l.qty*l.px,0);const buyV=pos.q0*pos.px;const pnl=sold+mv-buyV-buyV*half-sold*half;
+    openTrade={entryI:pos.i,entryT:S.t[pos.i],entry:pos.px,qty:pos.q0,exitI:last,exitT:S.t[last],exit:S.c[last],reason:"still open (valued at last close)",pnl,pct:pnl/(buyV*(1+half))*100,days:Math.round((S.t[last]-S.t[pos.i])/864e5),sl:pos.sl0,tgt:pos.tgt0,note:pos.note,open:true};}
+  return Object.assign(RP.stats(curve,trades,openTrade,o),{trades:openTrade?trades.concat([openTrade]):trades,curve,notes:[...notes],exposure:curve.length?daysIn/curve.length*100:0});};
+RP.stats=(curve,trades,openTrade,o)=>{const start=o.amount,end=curve.length?curve[curve.length-1].v:start;const yrs=curve.length>1?(curve[curve.length-1].t-curve[0].t)/(365.25*864e5):0;
+  let pk=-Infinity,mdd=0;for(const p of curve){pk=Math.max(pk,p.v);mdd=Math.max(mdd,(pk-p.v)/pk*100);}
+  const w=trades.filter(t=>t.pnl>0),l=trades.filter(t=>t.pnl<=0);const gw=w.reduce((a,t)=>a+t.pnl,0),gl=-l.reduce((a,t)=>a+t.pnl,0);
+  return {start,end,totalPct:(end/start-1)*100,cagr:yrs>0.2&&end>0?(Math.pow(end/start,1/yrs)-1)*100:null,years:yrs,maxDD:mdd,n:trades.length,wins:w.length,
+    winRate:trades.length?w.length/trades.length*100:null,avgWin:w.length?w.reduce((a,t)=>a+t.pct,0)/w.length:null,avgLoss:l.length?l.reduce((a,t)=>a+t.pct,0)/l.length:null,
+    avgTrade:trades.length?trades.reduce((a,t)=>a+t.pct,0)/trades.length:null,best:trades.length?Math.max(...trades.map(t=>t.pct)):null,worst:trades.length?Math.min(...trades.map(t=>t.pct)):null,
+    pf:gl>0?gw/gl:(gw>0?Infinity:null),avgDays:trades.length?trades.reduce((a,t)=>a+t.days,0)/trades.length:null,openPct:openTrade?openTrade.pct:null};};
+/* buy and hold over the same days (same costs and slippage) */
+RP.buyHold=(S,from,o)=>{o=Object.assign({amount:100000,cost:0.25,slip:0.05},o||{});const half=o.cost/200,slp=o.slip/100;const px=S.o[from]*(1+slp);const qty=Math.floor(o.amount/(px*(1+half)));const cash0=o.amount-qty*px*(1+half);
+  const curve=[];for(let i=from;i<S.c.length;i++)curve.push({t:S.t[i],v:cash0+qty*S.c[i]});const last=S.c.length-1;const endV=cash0+qty*S.c[last]*(1-slp)*(1-half);
+  if(curve.length)curve[curve.length-1].v=endV;return Object.assign(RP.stats(curve,[],null,o),{curve});};
+if(typeof module!=="undefined")module.exports=RP;
+
+/* =====================================================================
+   SIGNAL REPLAY UI ("what if I had followed the signals?")
+   ===================================================================== */
+const RP_EXCLUDE={qualset:"uses today’s fundamentals (would look into the future)",deliv:"needs past delivery data, which isn’t stored",resgap:"needs past results dates",ipobase:"uses today’s listing window"};
+const RP_STATE={cache:{},token:0,last:null};
+function rpFires(v){return (typeof v==="number"&&v===0)||v===true||v==="above"||(v&&typeof v==="object"&&v.state==="confirmed");}
+function rpEntryOptions(sel){sel.replaceChildren();const add=(v,t,g,dis)=>{const o=el("option",null,t);o.value=v;if(dis)o.disabled=true;(g||sel).append(o);};
+  add("pmrev","Course rank-1: support reversal + RSI 40 + volume");add("anybull","Any bullish signal (first one to appear)");
+  for(const [g,gl] of PAT_GROUPS){const og=document.createElement("optgroup");og.label=gl;let k=0;for(const S of SIGNALS.filter(x=>x.group===g&&x.bias==="bull")){add(S.id,S.label+(RP_EXCLUDE[S.id]?" (not available: "+RP_EXCLUDE[S.id]+")":""),og,!!RP_EXCLUDE[S.id]);k++;}if(k)sel.append(og);}
+  sel.value=RP_STATE.entry||"pmrev";}
+function rpMarketLevels(){const s=seriesOf("NIFTY500","NSE")||seriesOf("NIFTY50","GLB")||seriesOf("NIFTY50","NSE");if(!s)return null;const s20=smaA(s.c,20),s50=smaA(s.c,50);
+  return t=>{let lo=0,hi=s.t.length-1;if(t<s.t[0])return null;while(lo<hi){const m=(lo+hi+1)>>1;if(s.t[m]<=t)lo=m;else hi=m-1;}const c=s.c[lo];if(s50[lo]==null)return null;return (c>s20[lo]?1:0)+(c>s50[lo]?1:0);};}
+async function rpSeries(sym,market){let base=seriesOf(sym,market);if(market==="NSE"&&OTHERS[sym]){await ensureSeries(sym);base=seriesOf(sym,market);}if(!base)return null;
+  if(market==="NSE"||market==="US"){try{const L=await fetchCsvSeries(longPath(sym,market),sym,false);if(L&&L.t.length&&L.t[0]<base.t[0]){const k=L.t.findIndex(t=>t>=base.t[0]);const e=k<0?L.t.length:k;
+    return {t:L.t.slice(0,e).concat(base.t),o:L.o.slice(0,e).concat(base.o),h:L.h.slice(0,e).concat(base.h),l:L.l.slice(0,e).concat(base.l),c:L.c.slice(0,e).concat(base.c),v:L.v.slice(0,e).concat(base.v),long:true};}}catch(e){}}
+  return base;}
+/* day-by-day signal scan using only data up to each day (cached per stock/period/rules) */
+async function rpScan(sym,market,S,from,onProgress,token){const key=[sym,market,S.t.length,S.t[S.t.length-1],from,JSON.stringify(prefs.settings)].join("|");if(RP_STATE.cache[key])return RP_STATE.cache[key];
+  const st=Object.assign({},prefs.settings,{recent:1});const fired=new Array(S.c.length).fill(null);const W=320;
+  for(let i=Math.max(60,from-1);i<S.c.length;i++){if(token!==RP_STATE.token)return null;const a=Math.max(0,i-W+1);const sl={t:S.t.slice(a,i+1),o:S.o.slice(a,i+1),h:S.h.slice(a,i+1),l:S.l.slice(a,i+1),c:S.c.slice(a,i+1),v:S.v.slice(a,i+1)};
+    const r=analyze(sl,st);if(!r.short){const set=new Set();for(const k in r.sig)if(rpFires(r.sig[k]))set.add(k);fired[i]=set;}
+    if(i%40===0){onProgress((i-from)/(S.c.length-from));await new Promise(res=>setTimeout(res,0));}}
+  RP_STATE.cache[key]=fired;return fired;}
+function rpEntryFn(fired,id){return i=>{const a=fired[i],b=fired[i-1];if(!a)return false;if(id==="anybull"){for(const k of a){const S=SIGMAP[k];if(S&&S.bias==="bull"&&!RP_EXCLUDE[k]&&!(b&&b.has(k)))return true;}return false;}return a.has(id)&&!(b&&b.has(id));};}
+function rpOpts(){const v=id=>$(id).value;return {exit:v("#rpExit"),hold:Math.max(1,+v("#rpHold")||20),tgt:Math.max(0.5,+v("#rpTgt")||10),sl:Math.max(0.5,+v("#rpSl")||5),useStop:$("#rpUseStop").checked,
+  amount:Math.max(1000,+v("#rpAmt")||100000),reinvest:$("#rpReinv").checked,cost:Math.max(0,+v("#rpCost")||0),slip:Math.max(0,+v("#rpSlip")||0),years:+v("#rpYears")||5,mkt:v("#rpMkt")};}
+function rpParamsVis(){const e=$("#rpExit").value;$("#rpHoldL").hidden=e!=="hold";$("#rpTgtL").hidden=e!=="fixed";$("#rpSlL").hidden=e!=="fixed";$("#rpUseStopL").hidden=!(e==="sma"||e==="hold");}
+function renderReplayTab(r,market){const box=$("#stReplay");if(box.dataset.sym===r.sym+"|"+market&&box.children.length)return;box.dataset.sym=r.sym+"|"+market;box.replaceChildren();
+  const f=el("div","rp-form");f.innerHTML=`<label>Buy when<select id="rpEntry" class="btn"></select></label>
+   <label>Sell using<select id="rpExit" class="btn"><option value="course">Course method: swing-low stop, unbroken swing-high target</option><option value="sma">20 / 50 SMA trail (half below 20, rest below 50)</option><option value="hold">Hold a fixed number of days</option><option value="fixed">Fixed target and stop-loss %</option></select></label>
+   <label id="rpHoldL">Days to hold<input id="rpHold" type="number" min="1" value="20"></label><label id="rpTgtL">Target %<input id="rpTgt" type="number" min="0.5" step="0.5" value="10"></label><label id="rpSlL">Stop-loss %<input id="rpSl" type="number" min="0.5" step="0.5" value="5"></label>
+   <label class="check" id="rpUseStopL"><input type="checkbox" id="rpUseStop" checked> Also use the swing-low stop</label>
+   <label>Period<select id="rpYears" class="btn"><option value="1">1 year</option><option value="3">3 years</option><option value="5" selected>5 years</option><option value="10">10 years</option></select></label>
+   <label>Market filter<select id="rpMkt" class="btn"><option value="any">Any market</option><option value="1">Not weak (Nifty 500 above 20 or 50 SMA)</option><option value="2">Strong only (above both)</option></select></label>
+   <label>Amount ₹<input id="rpAmt" type="number" min="1000" step="1000" value="100000"></label><label class="check"><input type="checkbox" id="rpReinv" checked> Reinvest profits</label>
+   <details class="rp-cost"><summary>Costs</summary><label>Round-trip costs %<input id="rpCost" type="number" min="0" step="0.05" value="0.25"></label><label>Slippage % per side<input id="rpSlip" type="number" min="0" step="0.01" value="0.05"></label><p class="pnote">Default 0.25% covers brokerage, STT, stamp duty, exchange charges and GST for delivery trades at a typical discount broker.</p></details>
+   <button type="button" class="btn primary" id="rpRun">Run replay</button>`;
+  box.append(el("p","pnote","Replays history: whenever the chosen signal appeared at a day’s close, it buys at the next day’s open and sells by your exit rule. Only data available on each day is used."),f,el("div","rp-status"),el("div","rp-out"));
+  box.querySelector(".rp-status").id="rpStatus";box.querySelector(".rp-out").id="rpOut";rpEntryOptions($("#rpEntry"));
+  if(RP_STATE.last)for(const [k,v] of Object.entries(RP_STATE.last)){const e=$("#rp"+k);if(e){if(e.type==="checkbox")e.checked=v;else e.value=v;}}
+  rpParamsVis();$("#rpExit").addEventListener("change",rpParamsVis);$("#rpRun").addEventListener("click",()=>runReplay(r,market));}
+async function runReplay(r,market){const tok=++RP_STATE.token;const o=rpOpts();const entry=$("#rpEntry").value;RP_STATE.entry=entry;
+  RP_STATE.last={Entry:entry,Exit:o.exit,Hold:o.hold,Tgt:o.tgt,Sl:o.sl,UseStop:o.useStop,Years:o.years,Mkt:o.mkt,Amt:o.amount,Reinv:o.reinvest,Cost:o.cost,Slip:o.slip};
+  const stt=$("#rpStatus"),out=$("#rpOut");out.replaceChildren();stt.textContent="Loading full price history…";
+  const S=await rpSeries(r.sym,market);if(tok!==RP_STATE.token)return;if(!S||S.c.length<120){stt.textContent="Not enough price history for a replay.";return;}
+  const cut=S.t[S.t.length-1]-o.years*365.25*864e5;let from=S.t.findIndex(t=>t>=cut);if(from<60)from=60;const yrsAvail=(S.t[S.t.length-1]-S.t[from])/(365.25*864e5);
+  const fired=await rpScan(r.sym,market,S,from,p=>{stt.textContent=`Checking every trading day for signals… ${Math.round(p*100)}%`;},tok);if(!fired||tok!==RP_STATE.token)return;
+  let allow=null;if(o.mkt!=="any"&&market==="NSE"){const lv=rpMarketLevels();if(lv)allow=i=>{const x=lv(S.t[i]);return x==null||x>=+o.mkt;};}
+  const R=RP.run(S,rpEntryFn(fired,entry),Object.assign({},o,{from,allow}));const BH=RP.buyHold(S,from,o);
+  const N=seriesOf("NIFTY50","GLB")||seriesOf("NIFTY50","NSE");let nRet=null,nCurve=null;if(N){const a=N.t.findIndex(t=>t>=S.t[from]);if(a>=0){nRet=(N.c[N.c.length-1]/N.c[a]-1)*100;nCurve=[];for(let i=a;i<N.c.length;i++)nCurve.push({t:N.t[i],v:o.amount*N.c[i]/N.c[a]});}}
+  stt.textContent=`${r.sym}: ${nf(yrsAvail,1)} years (${fmtD(S.t[from])} to ${fmtD(S.t[S.t.length-1])})${S.long?"":" (only the stored 3-year history is available)"}.`;
+  renderReplayResult(out,r,market,S,from,R,BH,nRet,nCurve,o,entry);}
+function rpLabel(entry){return entry==="anybull"?"any bullish signal":entry==="pmrev"?"course rank-1 setup":(SIGMAP[entry]||{}).label||entry;}
+function renderReplayResult(out,r,market,S,from,R,BH,nRet,nCurve,o,entry){
+  const exitTxt={course:"course method",sma:"20/50 SMA trail",hold:`hold ${o.hold} days`,fixed:`+${o.tgt}% target / −${o.sl}% stop`}[o.exit];
+  const v=el("div","rp-verdict");const beat=R.totalPct>BH.totalPct;
+  v.append(el("div",null,`Buying ${r.sym} on ${rpLabel(entry)} and selling by ${exitTxt}:`),el("b",R.totalPct>=0?"up":"dn",`${fmtPct(R.totalPct,true)}${R.cagr!=null?` (${fmtPct(R.cagr,true)} a year)`:""}`),
+    el("div","pnote",`Buy and hold ${r.sym}: ${fmtPct(BH.totalPct,true)}${BH.cagr!=null?` (${fmtPct(BH.cagr,true)} a year)`:""}${nRet!=null?` · Nifty 50: ${fmtPct(nRet,true)}`:""}. The rule ${beat?"beat":"trailed"} buy and hold by ${nf(Math.abs(R.totalPct-BH.totalPct),1)} points${R.maxDD<BH.maxDD?`, with a smaller worst fall (${nf(R.maxDD,0)}% vs ${nf(BH.maxDD,0)}%)`:""}.`));
+  out.append(v);
+  if(R.n<10)out.append(el("div","warn-note",R.n?`Only ${R.n} trade${R.n>1?"s":""}: too few to judge whether this rule really works. Try a longer period, “Any bullish signal”, or test it across many stocks on the Pattern backtest page.`:"The signal never appeared with these settings in this period."));
+  const g=el("div","an-grid");const c1=el("div","an-card");c1.append(el("h4",null,"Trades"),kv("Number of trades",String(R.n)),kv("Won / lost",R.n?`${R.wins} / ${R.n-R.wins} (${nf(R.winRate,0)}% won)`:"–"),kv("Average win / loss",`${R.avgWin!=null?fmtPct(R.avgWin,true):"–"} / ${R.avgLoss!=null?fmtPct(R.avgLoss,true):"–"}`),kv("Profit factor",R.pf==null?"–":R.pf===Infinity?"no losses":nf(R.pf,2)),kv("Best / worst trade",R.n?`${fmtPct(R.best,true)} / ${fmtPct(R.worst,true)}`:"–"),kv("Average days held",R.avgDays!=null?nf(R.avgDays,0):"–"));
+  const c2=el("div","an-card");c2.append(el("h4",null,"Money"),kv("Start → end",`${inr(R.start)} → ${inr(R.end)}`),kv("Worst fall (strategy / buy & hold)",`${nf(R.maxDD,1)}% / ${nf(BH.maxDD,1)}%`),kv("Time invested",nf(R.exposure,0)+"% of days"),kv("Costs and slippage",`${o.cost}% round trip + ${o.slip}% a side`),kv("Profits",o.reinvest?"reinvested":"not reinvested (fixed amount)"));
+  g.append(c1,c2);out.append(g);
+  const ch1=el("div","rp-ch"),ch2=el("div","rp-ch small");out.append(el("h4","rp-h","Trades on the chart"),ch1,el("h4","rp-h","Growth of "+inr(o.amount)),ch2);
+  const t=el("div","tbl-wrap");t.id="rpT";out.append(el("h4","rp-h","Trade list"),t);
+  dataTable(t,[{k:"e",label:"Bought",f:x=>fmtD(x.entryT),v:x=>x.entryT},{k:"p",label:"Buy price",f:x=>nf(x.entry),v:x=>x.entry},{k:"x",label:"Sold",f:x=>x.open?"open":fmtD(x.exitT),v:x=>x.exitT},{k:"q",label:"Sell price",f:x=>nf(x.exit),v:x=>x.exit},
+    {k:"r",label:"Why",cls:"l",f:x=>{const s=el("span",null,x.reason);if(x.note)s.title=x.note;return s;}},{k:"d",label:"Days",f:x=>nf(x.days,0),v:x=>x.days},{k:"s",label:"Stop / target",f:x=>`${x.sl!=null?nf(x.sl):"–"} / ${x.tgt!=null?nf(x.tgt):"–"}`},{k:"g",label:"Profit / loss",f:x=>{const d=el("span",null);d.append(pctLike(x.pnl),el("small",null,` ${fmtPct(x.pct,true)}`));return d;},v:x=>x.pnl}],R.trades,{sortKey:"e"});
+  const acts=el("div","tsx-acts");const ex=el("button","btn","Download trades CSV");ex.type="button";ex.addEventListener("click",()=>{const L=["Symbol,Signal,Exit rule,Buy date,Buy price,Sell date,Sell price,Quantity,Reason,Days,Stop,Target,P&L,P&L %,Note"].concat(R.trades.map(x=>[r.sym,`"${rpLabel(entry)}"`,`"${exitTxt}"`,isoDay(x.entryT),x.entry.toFixed(2),x.open?"open":isoDay(x.exitT),x.exit.toFixed(2),x.qty,`"${x.reason}"`,x.days,x.sl!=null?x.sl.toFixed(2):"",x.tgt!=null?x.tgt.toFixed(2):"",x.pnl.toFixed(2),x.pct.toFixed(2),`"${x.note||""}"`].join(",")));
+    const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([L.join("\n")],{type:"text/csv"}));a.download=`replay-${r.sym}.csv`;document.body.append(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);});acts.append(ex);out.append(acts);
+  if(R.notes.length)out.append(el("p","pnote",R.notes.join(" ")));
+  out.append(el("p","pnote","Past simulated results, not a prediction. Signals use only data available on each day; buys happen at the next day’s open; if a stop and target fall on the same day, the stop is assumed. Dividends are not included in either the strategy or buy and hold."));
+  requestAnimationFrame(async()=>{const ok=await ensureLWC();if(!ok)return;const L=window.LightweightCharts;const T=t=>new Date(t).toISOString().slice(0,10);
+    const c=L.createChart(ch1,chartBaseOpts(false));const m=c.addSeries(L.CandlestickSeries,{upColor:cssv("--bull"),downColor:cssv("--bear"),borderVisible:false,wickUpColor:cssv("--bull"),wickDownColor:cssv("--bear")});
+    const d=[];for(let i=from;i<S.c.length;i++)d.push({time:T(S.t[i]),open:S.o[i],high:S.h[i],low:S.l[i],close:S.c[i]});m.setData(d);
+    const mk=[];for(const x of R.trades){mk.push({time:T(x.entryT),position:"belowBar",color:cssv("--bull"),shape:"arrowUp",text:"Buy"});if(!x.open)mk.push({time:T(x.exitT),position:"aboveBar",color:x.pnl>=0?cssv("--bull"):cssv("--bear"),shape:"arrowDown",text:`${x.pct>=0?"+":""}${x.pct.toFixed(1)}%`});}
+    mk.sort((a,b)=>a.time<b.time?-1:a.time>b.time?1:0);if(L.createSeriesMarkers)L.createSeriesMarkers(m,mk);c.timeScale().fitContent();
+    const c2=L.createChart(ch2,chartBaseOpts(false));const line=(pts,color,title)=>{const s=c2.addSeries(L.LineSeries,{color,lineWidth:2,priceLineVisible:false,title});const seen=new Set();s.setData(pts.map(p=>({time:T(p.t),value:p.v})).filter(p=>!seen.has(p.time)&&seen.add(p.time)));};
+    line(R.curve,cssv("--accent"),"Strategy");line(BH.curve,"#8b98a9","Buy & hold");if(nCurve)line(nCurve,"#d08a12","Nifty 50");c2.timeScale().fitContent();});}
+
+/* =====================================================================
+   STRATEGY MODE ON THE BACKTEST PAGE (whole universe, fast rules)
+   ===================================================================== */
+const ST_IDS=["hammer","mstar","engulf","piercing","bharami","tws","ihammer","dragonfly","tweezb","kickerb","r3m","ababyb","range","hi52","gapup","gcross","pocket","trendtpl","stage2"];
+function stPassesCourse(A,id,i,st){const v=A.v||[];if(!REV_BULL.has(id))return true;const len=CANDLE_LEN[id]||(id==="mstar"?3:id==="engulf"?2:1),first=i-len+1;
+  if(st.volConfirm!==false&&v[i]>0&&v[i-1]>0&&!(v[i]>v[i-1]))return false;const mm=st.minMove==null?5:+st.minMove;
+  if(st.downtrend!==false&&mm>0&&first>16){let hi=-Infinity,lo=Infinity;for(let j=first-15;j<first;j++)hi=Math.max(hi,A.h[j]);for(let j=first;j<=i;j++)lo=Math.min(lo,A.l[j]);if((hi/lo-1)*100<mm)return false;}return true;}
+let ST_RES=null,ST_RUN=0;
+async function runStrategyAll(){const tok=++ST_RUN;const N=state.data.NSE;if(!N)return;const id=$("#stEntry").value,uni=$("#btUni").value;const o={exit:$("#stExit").value,hold:20,tgt:10,sl:5,useStop:true,amount:100000,reinvest:true,cost:0.25,slip:0.05};
+  if(o.exit==="hold")o.hold=+$("#stHold").value||20;if(o.exit==="fixed"){o.tgt=+$("#stTgt").value||10;o.sl=+$("#stSl").value||5;}
+  const mf=$("#stMkt").value;const lv=mf!=="any"?rpMarketLevels():null;const st=prefs.settings;const syms=universeSyms(uni).filter(x=>N.series[x]&&KIND[x]!=="etf"&&KIND[x]!=="index");const rows=[];let k=0;
+  for(const sym of syms){if(tok!==ST_RUN)return;const s=N.series[sym];if(s.c.length<120){k++;continue;}const A={o:s.o,h:s.h,l:s.l,c:s.c,v:s.v};const {D,ok}=btDetectors(A,st);const f=D[id];if(!f){k++;continue;}
+    const R=RP.run(s,i=>i>=60&&f(i)&&ok(id,i)&&stPassesCourse(A,id,i,st),Object.assign({},o,{from:60,allow:lv?(i=>{const x=lv(s.t[i]);return x==null||x>=+mf;}):null}));const BH=RP.buyHold(s,60,o);
+    rows.push({sym,n:R.n,win:R.winRate,ret:R.totalPct,cagr:R.cagr,bh:BH.totalPct,dd:R.maxDD,bhdd:BH.maxDD,avg:R.avgTrade,trades:R.trades});k++;
+    if(k%20===0){$("#stStatus").textContent=`Simulating… ${k} of ${syms.length} stocks`;await new Promise(r=>setTimeout(r,0));}}
+  ST_RES={id,o,rows,from:N.series[syms[0]]?N.series[syms[0]].t[60]:null};renderStrategyAll();}
+function renderStrategyAll(){const box=$("#stOut");box.replaceChildren();if(!ST_RES){return;}const R=ST_RES.rows.filter(r=>r.n>0);const all=ST_RES.rows;
+  const T=[].concat(...R.map(r=>r.trades.filter(t=>!t.open)));const wins=T.filter(t=>t.pnl>0).length;const med=a=>{if(!a.length)return null;const b=a.slice().sort((x,y)=>x-y);return b[Math.floor(b.length/2)];};
+  $("#stStatus").textContent=`${all.length} stocks simulated since ${ST_RES.from?fmtD(ST_RES.from):"–"}, ${R.length} had at least one trade.`;
+  const g=el("div","an-grid");const c=el("div","an-card");c.append(el("h4",null,`${(SIGMAP[ST_RES.id]||{}).label||ST_RES.id}: across all stocks`),kv("Closed trades",String(T.length)),kv("Won",T.length?`${nf(wins/T.length*100,0)}%`:"–"),kv("Average trade",T.length?fmtPct(T.reduce((a,t)=>a+t.pct,0)/T.length,true):"–"),
+    kv("Median stock: strategy vs buy & hold",R.length?`${fmtPct(med(R.map(r=>r.ret)),true)} vs ${fmtPct(med(R.map(r=>r.bh)),true)}`:"–"),kv("Stocks where the rule beat buy & hold",R.length?`${R.filter(r=>r.ret>r.bh).length} of ${R.length}`:"–"),kv("Median worst fall: strategy vs buy & hold",R.length?`${nf(med(R.map(r=>r.dd)),0)}% vs ${nf(med(R.map(r=>r.bhdd)),0)}%`:"–"));
+  g.append(c);box.append(g);if(T.length<30)box.append(el("div","warn-note","Fewer than 30 trades in total: too few to judge this rule."));
+  const t=el("div","tbl-wrap");t.id="stT";box.append(t);dataTable(t,[{k:"s",label:"Stock",cls:"l",f:r=>nameCell(r.sym,(NSE_INFO[r.sym]||{}).name),v:r=>r.sym,asc:true},{k:"n",label:"Trades",f:r=>nf(r.n,0),v:r=>r.n},{k:"w",label:"Won",f:r=>r.win==null?"–":nf(r.win,0)+"%",v:r=>r.win},
+    {k:"r",label:"Strategy",f:r=>pctCell(r.ret),v:r=>r.ret},{k:"b",label:"Buy & hold",f:r=>pctCell(r.bh),v:r=>r.bh},{k:"d",label:"Worst fall",f:r=>fmtPct(-r.dd,true),v:r=>-r.dd}],R,{onClick:r=>openStock(r.sym,"NSE"),sortKey:"r"});
+  box.append(el("p","pnote","Uses the stored ~3 years of daily data, ₹1 lakh starting amount per stock with profits reinvested, 0.25% costs and 0.05% slippage a side. The stock list is today’s index list, so companies that dropped out (often poor performers) are missing and results look somewhat better than reality (survivorship bias). Past simulated results, not a prediction."));}
 
 /* ---------- start ---------- */
 (async()=>{
