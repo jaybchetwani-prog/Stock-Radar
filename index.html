@@ -720,6 +720,38 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
 .rp-verdict{background:var(--surface-2);border-radius:10px;padding:12px 14px;margin:8px 0;display:grid;gap:4px}.rp-verdict b{font-size:22px;font-weight:650}
 .rp-ch{height:340px;border:1px solid var(--line);border-radius:10px;overflow:hidden}.rp-ch.small{height:220px}.rp-h{margin:14px 0 6px;font-size:13.5px}
 .st-panel{margin:14px 0}
+/* ===== Redesign stage 1 ===== */
+:root[data-theme="dark"]{--bg:#0b1119;--surface:#111a26;--surface-2:#16212f;--line:#1f2b3b;--ink:#e3eaf2;--muted:#8796a8;--accent:#5b9cf5;--accent-ink:#0b1119;--bull:#2fbf71;--bear:#f0524a}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0b1119;--surface:#111a26;--surface-2:#16212f;--line:#1f2b3b;--ink:#e3eaf2;--muted:#8796a8;--accent:#5b9cf5;--accent-ink:#0b1119;--bull:#2fbf71;--bear:#f0524a}}
+.side,#sideScrim{display:none!important}.layout{display:block!important;grid-template-columns:none!important}
+.top{gap:14px!important;padding-top:8px!important;padding-bottom:8px!important;margin-bottom:0!important}
+.brand h1 small{display:none!important}.brand h1{font-size:17px!important}
+.topnav{display:flex;gap:2px;margin-left:6px}
+.topnav button{border:0;background:none;color:var(--muted);font:inherit;font-size:14px;font-weight:550;padding:7px 12px;border-radius:8px;cursor:pointer;white-space:nowrap}
+.topnav button:hover{color:var(--ink);background:var(--surface-2)}.topnav button[aria-current="page"]{color:var(--ink);background:var(--surface-2);box-shadow:inset 0 -2px 0 var(--accent)}
+.gsearch{flex:1 1 200px;max-width:380px;min-width:0}@media (min-width:1001px){.top{grid-template-columns:auto auto minmax(180px,1fr) auto!important}.top .gsearch{justify-self:end;width:100%}}.top .top-right{flex:none;display:flex;gap:6px;align-items:center}.brand{flex:none}
+.ticker{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin:0 calc(-1*clamp(12px,3vw,28px)) 12px;padding:6px clamp(12px,3vw,28px);border-bottom:1px solid var(--line);background:var(--surface)}
+.ticker::-webkit-scrollbar{display:none}.tk{display:flex;gap:7px;align-items:baseline;border:0;background:none;color:var(--ink);font:inherit;font-size:12.5px;padding:3px 10px;border-right:1px solid var(--line);white-space:nowrap;cursor:pointer;font-variant-numeric:tabular-nums}
+.tk:hover{background:var(--surface-2)}.tk-n{color:var(--muted)}.tk b{font-weight:600}.tk .up{color:var(--bull)}.tk .dn{color:var(--bear)}
+.more-menu{position:fixed;z-index:60;top:56px;right:clamp(12px,6vw,120px);width:min(420px,calc(100vw - 24px));background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 20px 48px -16px rgba(0,0,0,.55);padding:10px}
+.mm-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}.mm-grid button{display:flex;gap:10px;align-items:center;border:0;background:none;color:var(--ink);font:inherit;font-size:13.5px;padding:9px 10px;border-radius:8px;cursor:pointer;text-align:left}
+.mm-grid button:hover,.mm-grid button[aria-current="page"]{background:var(--surface-2)}.mm-grid svg{width:18px;height:18px;color:var(--accent);flex:none}.more-menu .pnote{margin:8px 6px 2px}
+.hero{padding-bottom:10px!important;margin-bottom:12px!important}.hero h2{font-size:19px!important}.hero p{font-size:13px!important}
+.panel{padding:12px 14px!important}.panel h3{font-size:13px!important;text-transform:none;letter-spacing:0;color:var(--muted)!important;font-weight:600!important;margin-bottom:8px!important}
+.subnav{margin-bottom:12px}.subnav button{padding:8px 11px;font-size:13px}
+.ov-grid{gap:10px!important}
+.mrow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;width:100%;border:0;border-bottom:1px solid var(--line);background:none;color:var(--ink);font:inherit;padding:7px 2px;cursor:pointer;text-align:left}
+.mrow:hover{background:var(--surface-2)}.mrow.muted{color:var(--muted);cursor:default;display:block;font-size:13px}
+.mr-n{min-width:70px;overflow:hidden}.mr-n b{display:block;font-size:13.5px;font-weight:600}.mr-n span{display:block;font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mr-p{text-align:right;font-variant-numeric:tabular-nums}.mr-p b{display:block;font-size:13px;font-weight:600}.mr-p span{font-size:12px}
+.mr-x{display:flex;gap:6px;align-items:center;min-width:0;max-width:190px;overflow:hidden;justify-content:flex-end}.mr-x .tsig{max-width:128px;min-width:0}.mr-x .mr-sc{flex:none}.mrow .spark{width:72px;height:22px}
+.mr-sc{font-weight:650;font-size:12.5px;padding:1px 7px;border-radius:5px;background:var(--surface-2);font-variant-numeric:tabular-nums}.mr-sc.sb,.mr-sc.b{color:var(--bull)}.mr-sc.n{color:var(--sig-hammer)}
+.link-btn{border:0;background:none;color:var(--accent);font:inherit;font-size:13px;font-weight:550;padding:8px 2px 0;cursor:pointer}
+.pf-snap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:8px}.pf-snap div{background:var(--surface-2);border-radius:8px;padding:8px 10px}.pf-snap span{display:block;font-size:11.5px;color:var(--muted)}.pf-snap b{font-size:14px;font-variant-numeric:tabular-nums}
+.pf-stat{display:flex;gap:6px;flex-wrap:wrap}.pf-pill{font-size:12px;font-weight:600;padding:3px 9px;border-radius:99px;background:var(--surface-2)}.pf-pill.add{color:var(--bull)}.pf-pill.review{color:var(--bear)}
+@media (max-width:1000px){.topnav{display:none}.more-menu{top:auto;bottom:calc(64px + env(safe-area-inset-bottom,0px));right:12px;left:12px;width:auto}}
+@media (max-width:640px){.pf-snap{grid-template-columns:1fr 1fr}}
+.sum-text.clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 [hidden]{display:none !important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
@@ -750,6 +782,7 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
 
       <h1>Chartviewer<small>Market research terminal: India, US and global markets</small></h1>
     </div>
+<nav class="topnav" id="topnav" aria-label="Main sections"><button type="button" data-view="overview" data-sec="markets">Markets</button><button type="button" data-view="radar" data-sec="discover">Discover</button><button type="button" data-view="fund" data-sec="analysis">Analysis</button><button type="button" data-view="portfolio" data-sec="portfolio">Portfolio</button><button type="button" data-sec="more" data-more aria-expanded="false" aria-controls="moreMenu">More ▾</button></nav>
     <div class="gsearch" id="gsearch">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
       <input id="gq" type="search" autocomplete="off" placeholder="Search stocks, ETFs, indices" aria-label="Search stocks, ETFs and indices" role="combobox" aria-expanded="false" aria-controls="gres">
@@ -767,6 +800,8 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
       <button type="button" class="icon-btn" id="themeBtn"></button>
     </div>
   </header>
+  <div class="ticker" id="ticker" hidden></div>
+<div class="more-menu" id="moreMenu" hidden><div class="mm-grid"><button type="button" data-view="watch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8 6.8 19.5l1-5.8-4.2-4.1 5.8-.8z"/></svg><span>Watchlist</span></button><button type="button" data-view="alerts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg><span>Alerts</span></button><button type="button" data-view="sectors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v9h9A9 9 0 1 1 12 3z"/></svg><span>Sector rotation</span></button><button type="button" data-view="ipo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.5 5 5.5.8-4 3.9 1 5.5L12 15.6 7 18.2l1-5.5-4-3.9 5.5-.8z"/></svg><span>IPO centre</span></button><button type="button" data-view="heatmap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="10" height="11" rx="1"/><rect x="15" y="3" width="6" height="7" rx="1"/><rect x="15" y="12" width="6" height="9" rx="1"/><rect x="3" y="16" width="10" height="5" rx="1"/></svg><span>Heatmap</span></button><button type="button" data-view="backtest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg><span>Pattern backtest</span></button><button type="button" data-view="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span>Settings</span></button><button type="button" data-view="guide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M8 7h7"/></svg><span>Guide</span></button></div><p class="pnote">Prices delayed about 15 minutes; some data is end of day.</p></div>
   <div class="layout">
   <aside class="side" id="side" aria-label="Sections"><div class="side-inner"><nav class="side-group"><button type="button" data-view="overview" data-sec="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg><span>Market overview</span></button><button type="button" data-view="screener" data-sec="screener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg><span>Stock screener</span></button><button type="button" data-view="radar" data-sec="radar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-4 3 2 5-6"/></svg><span>Technical analysis</span></button><button type="button" data-view="backtest" data-sec="patterns"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l4-8 4 5 4-10 6 13"/></svg><span>Chart patterns</span></button><button type="button" data-view="fund" data-sec="fund"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 16v-4M12 16V8M16 16v-6"/></svg><span>Fundamental analysis</span></button><button type="button" data-view="sectors" data-sec="sectors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v9h9A9 9 0 1 1 12 3z"/><path d="M15 3.5A9 9 0 0 1 20.5 9H15z"/></svg><span>Sector analysis</span></button><button type="button" data-view="global" data-sec="global"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span>Global markets</span></button><button type="button" data-view="watch" data-sec="watch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8 6.8 19.5l1-5.8-4.2-4.1 5.8-.8z"/></svg><span>Watchlist</span></button><button type="button" data-view="portfolio" data-sec="portfolio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7"/></svg><span>Portfolio</span></button><button type="button" data-view="alerts" data-sec="alerts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg><span>Alerts</span></button><button type="button" data-view="settings" data-sec="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span>Settings</span></button></nav><button type="button" id="installBtn" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg><span>Install as app</span></button><p class="side-note" id="sideNote"></p></div></aside>
   <main class="main-col" id="main">
@@ -851,12 +886,15 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
       <div class="pf-actions"><div class="ind-menu"><button type="button" class="btn" id="wBtn" aria-expanded="false" aria-controls="wPop">Customise</button><div class="ind-pop w-pop" id="wPop" hidden></div></div></div></div>
     <div class="sentiment" id="ovSentiment" data-w="summary"></div>
     <div id="ovMcond" data-w="mcond"></div>
-    <section class="panel ov-sum" data-w="summary"><div class="sum-head"><h3>Market summary</h3><button type="button" class="btn" id="sumCopy">Copy</button></div><p id="ovSummary" class="sum-text"></p></section>
+    <section class="panel ov-sum" data-w="summary"><div class="sum-head"><h3>Market summary</h3><button type="button" class="btn" id="sumCopy">Copy</button></div><p id="ovSummary" class="sum-text clamp"></p><button type="button" class="link-btn" id="sumMore">Read more</button></section>
     <div class="ov-cards" id="ovCards" data-w="cards"></div>
     <div class="ov-grid">
+      <section class="panel" data-w="setups"><h3>Today’s best technical setups</h3><div id="ovSetups"></div></section>
+      <section class="panel" data-w="movers"><h3>Top gainers and losers</h3><div id="ovMovers"></div></section>
+      <section class="panel" data-w="watch"><h3 id="ovWatchT">Watchlist</h3><div id="ovWatch"></div></section>
+      <section class="panel" data-w="pf"><h3>Portfolio summary</h3><div id="ovPf"></div></section>
       <section class="panel" data-w="sectors"><h3>Sector performance today</h3><div id="ovSectors"></div></section>
       <section class="panel" data-w="breadth"><h3>Market breadth (Nifty 500)</h3><div id="ovBreadth"></div></section>
-      <section class="panel" data-w="movers"><h3>Top bullish and bearish</h3><div id="ovMovers"></div></section>
       <section class="panel" data-w="fii"><h3>FII / DII (₹ crore)</h3><div id="ovFii"></div></section>
       <section class="panel" data-w="alerts"><h3>Triggered alerts</h3><div id="ovAlerts"></div></section>
       <section class="panel" data-w="status"><h3>Market status</h3><div id="ovStatus" class="status-board"></div></section>
@@ -970,6 +1008,7 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
     <div class="hero"><div class="hero-main"><h2 id="stTitle">Settings</h2><p>Appearance, your investing profile, data and help. Everything is saved on this device.</p></div></div>
     <div class="set-grid">
       <section class="panel"><h3>Appearance</h3><div class="small-seg" role="group" aria-label="Theme"><button type="button" data-th="auto">Match device</button><button type="button" data-th="light">Light</button><button type="button" data-th="dark">Dark</button></div></section>
+      <section class="panel"><h3>Portfolio status wording</h3><div class="small-seg" role="group" aria-label="Status wording"><button type="button" data-sw="action">Add more / Hold / Review</button><button type="button" data-sw="neutral">Strengthening / Stable / Needs a look</button></div><p class="pnote">Both describe each holding’s chart trend with the reasons shown. Use the neutral wording if you share the site publicly (see the note on investment-advice rules in the Guide).</p></section>
       <section class="panel"><h3>Investing profile</h3><p class="pnote" id="setProf"></p><button type="button" class="btn" id="setProfBtn">Edit profile</button></section>
       <section class="panel"><h3>Scanner rules</h3><p class="pnote">Lookback, “near” distance, prior-trend and support/resistance rules for patterns.</p><button type="button" class="btn" id="setScanBtn">Open scanner settings</button></section>
       <section class="panel"><h3>Data freshness</h3><div id="setData"></div><p class="pnote">Prices are delayed about 15 minutes (Yahoo Finance) or end of day (NSE). Nothing on this site is real-time.</p></section>
@@ -1142,7 +1181,7 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
   </div>
 </div>
 
-<nav class="bottom-nav" aria-label="Sections"><button type="button" data-view="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg><span>Markets</span></button><button type="button" data-view="radar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-4 3 2 5-6"/></svg><span>Technical</span></button><button type="button" data-view="watch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8 6.8 19.5l1-5.8-4.2-4.1 5.8-.8z"/></svg><span>Watchlist</span></button><button type="button" data-view="portfolio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7"/></svg><span>Portfolio</span></button><button type="button" id="moreBtn" aria-controls="side" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>More</span></button></nav><div class="side-scrim" id="sideScrim" hidden></div>
+<nav class="bottom-nav" aria-label="Sections"><button type="button" data-view="overview" data-sec="markets"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-4 3 2 5-6"/></svg><span>Markets</span></button><button type="button" data-view="radar" data-sec="discover"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/><path d="M8.5 12.5l2-3 2 2 2-3"/></svg><span>Discover</span></button><button type="button" data-view="fund" data-sec="analysis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 16v-4M12 16V8M16 16v-6"/></svg><span>Analysis</span></button><button type="button" data-view="portfolio" data-sec="portfolio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7"/></svg><span>Portfolio</span></button><button type="button" id="moreBtn" data-sec="more" data-more aria-expanded="false" aria-controls="moreMenu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><span>More</span></button></nav><div class="side-scrim" id="sideScrim" hidden></div>
 <footer class="site-foot">
   <div class="foot-inner">
     <div class="foot-brand"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#logoSym"/></svg><b>Chartviewer</b></div>
@@ -1280,7 +1319,7 @@ async function loadIndexLists(){
       if(it.isin&&it.isin!=="nan"&&!ISIN_MAP[it.isin])ISIN_MAP[it.isin]=it.sym;}
     OTHERS_N=Object.keys(OTHERS).length;INDEX_LISTS.sgb=Object.values(OTHERS).filter(x=>x.kind==="sgb").map(x=>x.sym);if(!INDEX_LISTS.sgb.length)INDEX_LISTS.sgb=null;}}catch(e){}
 }
-const DEFAULTS={market:"NSE",tf:"D",active:["mstar","hammer","engulf","breakout","support"],sort:"best",theme:"auto",index:"200",view:"overview",match:"any",starredOnly:false,
+const DEFAULTS={market:"NSE",tf:"D",active:["mstar","hammer","engulf","breakout","support"],sort:"best",theme:"dark",index:"200",view:"overview",match:"any",starredOnly:false,
   settings:{lookback:20,tol:3,recent:1,downtrend:true,volume:false,atSupport:true,atResistance:true,volConfirm:true,minMove:5,rsiZones:"pm"},stars:{NSE:[],US:[]}};
 
 /* ---------- preferences (per-device) ---------- */
@@ -2288,7 +2327,7 @@ const inrSigned=x=>x==null||!isFinite(x)?"–":(x>=0?"+":"−")+"₹"+Math.round
 function gaugeSvg(v){const r=19,c=2*Math.PI*r,col=v>=70?"var(--bull)":v>=50?"var(--sig-hammer)":"var(--bear)";
   return `<svg viewBox="0 0 46 46" aria-hidden="true"><circle cx="23" cy="23" r="${r}" fill="none" stroke="var(--surface-2)" stroke-width="6"/><circle cx="23" cy="23" r="${r}" fill="none" stroke="${col}" stroke-width="6" stroke-linecap="round" stroke-dasharray="${(v/100*c).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 23 23)"/></svg>`;}
 function hbar(label,pct,color,right){const w=el("div","hbar");const t=el("div","track"),f=el("div","fill");f.style.width=Math.max(1,pct)+"%";f.style.background=color;t.append(f);w.append(el("span",null,label),t,el("span","num",right));return w;}
-function renderPortfolio(){
+function renderPortfolio(){applyStatusWords();
   const ds=$("#pfSyms");if(!ds.children.length){const f=document.createDocumentFragment();for(const k of Object.keys(NSE_INFO).sort()){const o=document.createElement("option");o.value=k;o.label=NSE_INFO[k].name||"";f.append(o);}ds.append(f);}
   document.querySelectorAll("#pfFilter [data-f]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.f===pfState.filter)));
   $("#pfSort").value=pfState.sort;
@@ -2564,6 +2603,7 @@ document.querySelectorAll("[data-dm]").forEach(b=>b.addEventListener("click",()=
 $("#drawClear").addEventListener("click",()=>{if(!currentRow)return;setDraw(currentRow.sym,sheetMarket,[]);setDrawMode(null);renderChart(currentRow,sheetMarket);});
 $("#fsBtn").addEventListener("click",()=>{const b=$("#lwcBox");if(document.fullscreenElement)document.exitFullscreen();else if(b.requestFullscreen)b.requestFullscreen().catch(()=>toast("Full screen isn’t available in this browser."));else toast("Full screen isn’t available in this browser.");});
 document.addEventListener("fullscreenchange",()=>{if(currentRow&&!$("#sheet").hidden)setTimeout(()=>renderChart(currentRow,sheetMarket),60);});
+$("#sumMore").addEventListener("click",()=>{const t=$("#ovSummary");const c=t.classList.toggle("clamp");$("#sumMore").textContent=c?"Read more":"Show less";});
 $("#sumCopy").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("#ovSummary").textContent);toast("Summary copied.");}catch(e){toast("Couldn’t copy. Select the text and copy it instead.");}});
 $("#noteClose").addEventListener("click",closeNote);$("#noteSave").addEventListener("click",()=>{const it=$("#noteDlg")._it;if(it){it.note=$("#nNote").value.trim()||undefined;it.tBuy=toNum($("#nBuy").value)||undefined;it.tSell=toNum($("#nSell").value)||undefined;saveWL();}closeNote();render();});
 $("#installBtn").addEventListener("click",async()=>{if(!installEvt){toast("Use your browser menu → Install app or Add to Home Screen.");return;}installEvt.prompt();try{await installEvt.userChoice;}catch(e){}installEvt=null;$("#installBtn").hidden=true;});
@@ -3792,7 +3832,7 @@ function createAlertFromPage(){
    SETTINGS PAGE
    ===================================================================== */
 function renderSettings(){
-  document.querySelectorAll("[data-th]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.th===(prefs.theme||"auto"))));
+  document.querySelectorAll("[data-th]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.th===(prefs.theme||"auto"))));document.querySelectorAll("[data-sw]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.sw===(prefs.statusWords||"action"))));
   const p=profile();$("#setProf").textContent=`${APPETITE[p.appetite].label} risk appetite, ${p.exp}% expected return a year${p.cap?`, capital ${inr(p.cap)}`:""}.${p.set?"":" (Default; not set yet.)"}`;
   const m=liveMeta&&liveMeta.markets;$("#setData").replaceChildren();
   if(m)for(const [k,lab] of [["NSE","Indian stocks, ETFs and indices"],["GLB","Global indices, commodities, currencies"],["US","US stocks"]])if(m[k]){$("#setData").append(kv(lab,new Date(m[k].updatedAt).toLocaleString(undefined,{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})));}
@@ -3805,11 +3845,12 @@ function renderSettings(){
 /* =====================================================================
    DASHBOARD WIDGETS (customisable)
    ===================================================================== */
-const WIDGETS=[["mcond","Market condition (20 & 50 SMA)"],["summary","Market summary"],["cards","Key markets"],["sectors","Sector performance"],["breadth","Market breadth"],["movers","Top bullish and bearish"],["fii","FII / DII"],["status","Market status"],["alerts","Triggered alerts"],["news","Headlines"]];
+const WIDGETS=[["mcond","Market condition (20 & 50 SMA)"],["summary","Market summary"],["cards","Key markets"],["setups","Today’s best technical setups"],["watch","Watchlist snapshot"],["pf","Portfolio summary"],["sectors","Sector performance"],["breadth","Market breadth"],["movers","Top gainers and losers"],["fii","FII / DII"],["status","Market status"],["alerts","Triggered alerts"],["news","Headlines"]];
 function widgetOn(k){return !(prefs.wOff||[]).includes(k);}
 function renderWidgets(){
   for(const [k] of WIDGETS){const e=document.querySelector(`[data-w="${k}"]`);if(e)e.hidden=!widgetOn(k);}
   const pop=$("#wPop");if(!pop.children.length)for(const [k,lab] of WIDGETS){const l=el("label");const c=el("input");c.type="checkbox";c.checked=widgetOn(k);c.addEventListener("change",()=>{const s=new Set(prefs.wOff||[]);if(c.checked)s.delete(k);else s.add(k);prefs.wOff=[...s];savePrefs();renderWidgets();});l.append(c,document.createTextNode(lab));pop.append(l);}
+  try{renderHomeExtras();}catch(e){console.warn(e);}
   {const mc=$("#ovMcond");if(mc){mc.replaceChildren();const b=mcBanner();if(b)mc.append(b);}}
   // sectors widget
   const sb=$("#ovSectors");if(sb&&widgetOn("sectors")){sb.replaceChildren();let S=null;try{S=buildSectors();}catch(e){}
@@ -4655,6 +4696,71 @@ function renderStrategyAll(){const box=$("#stOut");box.replaceChildren();if(!ST_
     {k:"r",label:"Strategy",f:r=>pctCell(r.ret),v:r=>r.ret},{k:"b",label:"Buy & hold",f:r=>pctCell(r.bh),v:r=>r.bh},{k:"d",label:"Worst fall",f:r=>fmtPct(-r.dd,true),v:r=>-r.dd}],R,{onClick:r=>openStock(r.sym,"NSE"),sortKey:"r"});
   box.append(el("p","pnote","Uses the stored ~3 years of daily data, ₹1 lakh starting amount per stock with profits reinvested, 0.25% costs and 0.05% slippage a side. The stock list is today’s index list, so companies that dropped out (often poor performers) are missing and results look somewhat better than reality (survivorship bias). Past simulated results, not a prediction."));}
 
+/* =====================================================================
+   REDESIGN STAGE 1: 5 sections, top navigation, ticker, home dashboard
+   ===================================================================== */
+SECTIONS.splice(0,SECTIONS.length,
+  ["markets","Markets",[["overview","Dashboard"],["india","Indian markets"],["global","Global markets"],["commod","Commodities & currencies"],["movers","Movers"],["fiidii","FII / DII"],["corp","News & events"]]],
+  ["discover","Discover",[["radar","Technical screener"],["screener","Stock screener"]]],
+  ["analysis","Analysis",[["fund","Fundamentals & compare"],["multi","Multi-chart"]]],
+  ["portfolio","Portfolio",[["portfolio","Portfolio"]]],
+  ["more","More",[["watch","Watchlist"],["alerts","Alerts"],["sectors","Sector rotation"],["ipo","IPO centre"],["heatmap","Heatmap"],["backtest","Pattern backtest"],["settings","Settings"],["guide","Guide"]]]);
+for(const k in SEC_OF)delete SEC_OF[k];for(const [k,,subs] of SECTIONS)for(const [v] of subs)SEC_OF[v]=k;
+function paintNav(v){const sec=SEC_OF[v]||"markets";
+  document.querySelectorAll("#topnav [data-sec], .bottom-nav [data-sec]").forEach(b=>b.setAttribute("aria-current",b.dataset.sec===sec?"page":"false"));
+  document.querySelectorAll("#moreMenu [data-view]").forEach(b=>b.setAttribute("aria-current",b.dataset.view===v?"page":"false"));
+  const bar=$("#subnav");const S=SECTIONS.find(x=>x[0]===sec);bar.replaceChildren();bar.hidden=!S||S[2].length<2;
+  if(S&&S[2].length>1)for(const [k,lab] of S[2]){const b=el("button",null,lab);b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",String(k===v));b.addEventListener("click",()=>goView(k));bar.append(b);}
+  renderTicker();}
+function goView(v){prefs.view=v;savePrefs();closeMore();render();window.scrollTo(0,0);}
+function toggleMore(force){const m=$("#moreMenu");const open=force!=null?force:m.hidden;m.hidden=!open;document.querySelectorAll("[data-more]").forEach(b=>b.setAttribute("aria-expanded",String(open)));}
+function closeMore(){toggleMore(false);}
+/* status wording (portfolio) */
+const STATUS_WORDS={action:{add:"Add more",hold:"Hold",review:"Review"},neutral:{add:"Trend strengthening",hold:"Stable",review:"Needs a look"}};
+function applyStatusWords(){const w=STATUS_WORDS[prefs.statusWords||"action"];ACT_LABEL.add=w.add;ACT_LABEL.hold=w.hold;ACT_LABEL.review=w.review;
+  const short=prefs.statusWords==="neutral"?{add:"Strengthening",hold:"Stable",review:"Needs a look"}:w;for(const k of ["add","hold","review"]){const b=document.querySelector(`#pfBody [data-f="${k}"]`);if(b)b.textContent=short[k];}}
+/* ---------- ticker ---------- */
+const TICK=["NIFTY50","SENSEX","BANKNIFTY","NIFTYMID100","INDIAVIX","SPX","IXIC","DJI","FTSE","N225","HSI","GOLD","BRENT","USDINR","BTC"];
+function renderTicker(){const box=$("#ticker");if(!box)return;const G=state.data.GLB;if(!G){box.hidden=true;return;}box.hidden=false;
+  const items=TICK.filter(k=>G.series[k]).map(k=>{const s=dstats(G.series[k]);return s?{k,s,name:(GMETA[k]||{}).short||(GMETA[k]||{}).name||k}:null;}).filter(Boolean);
+  const sig=items.map(x=>x.k+x.s.c).join("|");if(box.dataset.sig===sig)return;box.dataset.sig=sig;box.replaceChildren();
+  for(const x of items){const b=el("button","tk");b.type="button";b.append(el("span","tk-n",x.name.replace(/^NIFTY /,"Nifty ").replace("S&P 500","S&P 500")),el("b",null,nf(x.s.c,x.s.c<10?3:2)),el("span",x.s.chp>=0?"up":"dn",fmtPct(x.s.chp,true)));b.addEventListener("click",()=>openStock(x.k,"GLB"));box.append(b);}}
+/* ---------- home widgets ---------- */
+let SETUP_CACHE={key:"",rows:[]};
+function bestSetups(){const d=state.data.NSE;if(!d)return [];const key=d.version+"|"+JSON.stringify(prefs.settings)+"|"+prefs.index;if(SETUP_CACHE.key===key)return SETUP_CACHE.rows;
+  const out=[];for(const sym of universeSyms(prefs.index==="500"?"500":"200")){const s=d.series[sym];if(!s||s.c.length<60||KIND[sym]==="etf"||KIND[sym]==="index")continue;const a=analyze(s,prefs.settings);if(a.short)continue;
+    symSignals(sym,"NSE",s,a);const r=Object.assign({sym,series:s},a);r.sl=sigList(r);const conf=r.sl.filter(x=>x.conf&&x.S.bias==="bull");if(!conf.length||r.sl.some(x=>x.conf&&x.S.bias==="bear"))continue;
+    const ts=techScore(sym,"NSE","st",r.sig);if(!ts||ts.score==null)continue;r.score=ts.score;r.ts=ts;r.top=conf;out.push(r);}
+  out.sort((a,b)=>b.score-a.score);SETUP_CACHE={key,rows:out.slice(0,8)};return SETUP_CACHE.rows;}
+function miniRow(sym,market,name,px,chp,extra){const r=el("button","mrow");r.type="button";const n=el("div","mr-n");n.append(el("b",null,sym),el("span",null,name||""));const p=el("div","mr-p");p.append(el("b",null,fmtP(px)),el("span",chp>=0?"up":"dn",fmtPct(chp,true)));r.append(n);if(extra)r.append(extra);r.append(p);r.addEventListener("click",()=>openStock(sym,market));return r;}
+function renderHomeExtras(){
+  const sb=$("#ovSetups");if(sb&&widgetOn("setups")){sb.replaceChildren();const rows=bestSetups();
+    if(!rows.length)sb.append(el("div","empty-note",state.data.NSE?"No clean bullish setups today (no stock has a confirmed bullish signal without a bearish one).":"Appears once prices load."));
+    for(const r of rows){const ex=el("div","mr-x");ex.append(sigChip(r.top[0]));const sc=el("span","mr-sc "+BAND(r.score)[1],String(r.score));sc.title="Short-term technical score";ex.append(sc);sb.append(miniRow(r.sym,"NSE",(NSE_INFO[r.sym]||{}).name,r.close,r.chg,ex));}
+    if(rows.length){const a=el("button","link-btn","Open the technical screener →");a.type="button";a.addEventListener("click",()=>{TS.sort="score";saveTS();goView("radar");});sb.append(a);}}
+  const wb=$("#ovWatch");if(wb&&widgetOn("watch")){wb.replaceChildren();const L=activeWL();$("#ovWatchT").textContent=`Watchlist: ${L.name}`;const items=L.items.slice(0,8);
+    if(!items.length){wb.append(el("div","empty-note","Your watchlist is empty. Tap ☆ on any stock to add it."));}
+    for(const it of items){const s=seriesOf(it.sym,it.market);const st=s?dstats(s):null;if(!st){wb.append(el("div","mrow muted",it.sym+": no price yet"));continue;}wb.append(miniRow(it.sym,it.market,(it.market==="GLB"?(GMETA[it.sym]||{}).name:(NSE_INFO[it.sym]||{}).name)||"",st.c,st.chp,sparkline(s)));}
+    if(L.items.length>8){const a=el("button","link-btn",`All ${L.items.length} stocks →`);a.type="button";a.addEventListener("click",()=>goView("watch"));wb.append(a);}}
+  const pb=$("#ovPf");if(pb&&widgetOn("pf")){pb.replaceChildren();if(!PF.length){pb.append(el("div","empty-note","No portfolio yet. Upload your holdings to see value, P&L, health and warnings here."));const a=el("button","btn primary","Go to Portfolio");a.type="button";a.addEventListener("click",()=>goView("portfolio"));pb.append(a);}
+    else{const {rows}=analyzeHoldings();const priced=rows.filter(r=>r.value!=null);const val=priced.reduce((a,r)=>a+r.value,0),inv=priced.reduce((a,r)=>a+(r.invested||0),0),pnl=priced.reduce((a,r)=>a+(r.pnl||0),0),day=priced.reduce((a,r)=>a+(r.day||0),0);
+      let hs=0,hw=0;for(const r of priced)if(r.health!=null){hs+=r.health*r.value;hw+=r.value;}const cnt={add:0,hold:0,review:0};for(const r of rows)if(cnt[r.action]!=null)cnt[r.action]++;
+      const g=el("div","pf-snap");const cell=(l,v,cls)=>{const c=el("div");c.append(el("span",null,l),el("b",cls||"",v));g.append(c);};
+      cell("Value",inr(val));cell("Total P&L",`${inrSigned(pnl)} (${fmtPct(inv?pnl/inv*100:0,true)})`,pnl>=0?"up":"dn");cell("Today",inrSigned(day),day>=0?"up":"dn");cell("Trend score",hw?String(Math.round(hs/hw)):"–");pb.append(g);
+      const st=el("div","pf-stat");for(const k of ["add","hold","review"])st.append(el("span","pf-pill "+k,`${ACT_LABEL[k]} ${cnt[k]}`));pb.append(st);
+      const a=el("button","link-btn","Open portfolio analysis →");a.type="button";a.addEventListener("click",()=>goView("portfolio"));pb.append(a);}}}
+
+setTimeout(()=>{
+  if(!prefs.themeV2){if(!prefs.theme||prefs.theme==="auto")prefs.theme="dark";prefs.themeV2=1;savePrefs();applyTheme();}
+  applyStatusWords();
+  const mb=$("#moreBtn");if(mb){const nb=mb.cloneNode(true);mb.replaceWith(nb);}
+  document.querySelectorAll("[data-more]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();toggleMore();}));
+  $("#moreMenu").addEventListener("click",e=>{if(e.target.closest("[data-view]"))closeMore();});
+  document.addEventListener("click",e=>{if(!$("#moreMenu").hidden&&!e.target.closest("#moreMenu")&&!e.target.closest("[data-more]"))closeMore();});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMore();});
+  document.querySelectorAll("[data-sw]").forEach(b=>b.addEventListener("click",()=>{prefs.statusWords=b.dataset.sw;savePrefs();applyStatusWords();renderSettings();}));
+  renderTicker();
+},0);
 /* ---------- start ---------- */
 (async()=>{
   state.loading=true;applyTheme();render();updateBell();maybeDisclaimer();
