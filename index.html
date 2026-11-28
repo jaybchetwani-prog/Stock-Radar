@@ -803,6 +803,20 @@ h1,h2,h3,h4,.hero h2,.g-h,.pf-card dd,.chip .count,.brand h1,.views button,.mc-s
 .bk-item:hover,.bk-item[aria-current="true"]{background:var(--surface-2)}.bk-nav>.btn{margin:8px 4px 2px}
 .bk-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}.bk-head h3{margin:0;font-size:18px}
 .bk-edit{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}.bk-edit .wl-add{flex:1 1 220px}.bk-ch{min-height:270px}.bk-w{width:64px;padding:3px 6px;border-radius:6px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink)}
+/* ===== Scanners ===== */
+.sc-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:4px 0 12px}.sc-head h2{margin:0;font-size:17px;font-weight:700;letter-spacing:.01em}.sc-ico{color:#a855f7;font-size:18px}.sc-head a{color:var(--ink);font-weight:600}
+.sc-panel{padding:14px 16px!important}.sc-seg{font-size:14px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:10px}.sc-seg select{padding:4px 8px!important}.sc-segnote{width:100%}
+.sc-conds{border-left:2px dashed var(--line);padding-left:14px;display:grid;gap:4px;margin:6px 0 14px}
+.sc-cond{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 10px;border-radius:8px;background:var(--surface-2)}.sc-cond.off{opacity:.45}.sc-cond.off .sc-tx{text-decoration:line-through}
+.sc-tx{font-size:14px;line-height:1.6}.sc-tx i{font-style:normal;color:var(--muted)}.sc-tx b{font-weight:650}.sc-tx em{font-style:normal;color:#c026d3;font-weight:600}:root[data-theme="dark"] .sc-tx em{color:#e879f9}.sc-tx small{color:var(--muted)}
+.sc-n{width:66px;padding:2px 6px;border-radius:6px;border:1px solid var(--line);background:var(--ink);color:var(--bg);font-weight:700;font-size:13px;text-align:center}
+.sc-tog{width:38px;height:22px;border-radius:99px;border:0;background:var(--line);position:relative;cursor:pointer;flex:none}.sc-tog::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left .15s}
+.sc-tog[aria-checked="true"]{background:var(--bull)}.sc-tog[aria-checked="true"]::after{left:19px}
+.sc-btns{display:flex;flex-wrap:wrap;gap:8px}.sc-btns .btn{font-weight:600!important}.sc-run{border-color:var(--bull)!important;color:var(--bull)!important}.sc-bt{border-color:#c026d3!important;color:#c026d3!important}:root[data-theme="dark"] .sc-bt{color:#e879f9!important;border-color:#e879f9!important}.sc-alert{border-color:var(--sig-hammer)!important;color:var(--sig-hammer)!important}.sc-alert.primary{background:var(--sig-hammer)!important;color:#111!important}
+.sc-pop{width:240px!important;grid-template-columns:1fr!important;right:0}.sc-pop button,.sc-pop a{display:block;text-align:left;border:0;background:none;color:var(--ink);font:inherit;font-size:13px;padding:7px 8px;border-radius:6px;cursor:pointer;text-decoration:none}.sc-pop button:hover,.sc-pop a:hover{background:var(--surface-2)}
+.sc-out{margin-top:12px}.sc-rhead{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px}.sc-rhead b{font-size:15px}
+.sc-why{display:flex;gap:3px;flex-wrap:wrap}.sc-w{width:20px;height:20px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;cursor:help}.sc-w.ok{background:color-mix(in srgb,var(--bull) 18%,transparent);color:var(--bull)}.sc-w.no{background:color-mix(in srgb,var(--bear) 16%,transparent);color:var(--bear)}.sc-w.na{background:var(--surface-2);color:var(--muted)}
+.sc-near{margin-top:12px}.sc-near summary{cursor:pointer;font-weight:600;margin-bottom:8px}
 [hidden]{display:none !important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
@@ -1645,13 +1659,13 @@ function showView(){
   if(typeof paintNav==="function")paintNav(v);
   document.querySelector(".top .seg").style.visibility=v==="radar"?"":"hidden";
 }
-function render(){
+function render(){if(typeof SCAN_BY!=="undefined"&&state.data.NSE&&state.data.NSE.version!==SCAN_ALERT_VER){SCAN_ALERT_VER=state.data.NSE.version;for(const k in SCAN_RES)delete SCAN_RES[k];setTimeout(()=>scanAlertsCheck(),800);}
   showView();
   const V=prefs.view;
   if(V==="overview"){renderOverview();return;}if(V==="india"){renderIndia();return;}if(V==="global"){renderGlobal();return;}if(V==="commod"){renderCommod();return;}
   if(V==="screener"){renderScreener();return;}if(V==="fund"){renderFundView();return;}if(V==="movers"){renderMoversPage();return;}
   if(V==="fiidii"){renderFii();return;}if(V==="heatmap"){renderHeatmap();return;}if(V==="backtest"){renderBacktest();return;}if(V==="ipo"){renderIpo();return;}if(V==="multi"){renderMulti();return;}
-  if(V==="guide"){renderGuidePatterns();return;}if(V==="alerts"){renderAlertsPage();return;}if(V==="regime"){renderRegime();return;}if(V==="mood"){renderMood();return;}if(V==="baskets"){renderBaskets();return;}if(V==="risk"){renderRiskPage();return;}if(V==="events"){paintEvBar();renderEvents();return;}if(V==="settings"){renderSettings();return;}if(V==="corp"){renderCorp();return;}
+  if(V==="guide"){renderGuidePatterns();return;}if(V==="alerts"){renderAlertsPage();return;}if(SCAN_BY[V]){renderScan(V);return;}if(V==="regime"){renderRegime();return;}if(V==="mood"){renderMood();return;}if(V==="baskets"){renderBaskets();return;}if(V==="risk"){renderRiskPage();return;}if(V==="events"){paintEvBar();renderEvents();return;}if(V==="settings"){renderSettings();return;}if(V==="corp"){renderCorp();return;}
   if(prefs.view==="portfolio"){renderPortfolio();return;}
   if(prefs.view==="guide")return;
   if(prefs.view==="sectors"){renderSectors();return;}
@@ -4875,6 +4889,7 @@ function paintNav(v){const sec=SEC_OF[v]||"dash";
   document.querySelectorAll(".bottom-nav [data-sec]").forEach(b=>b.setAttribute("aria-current",b.dataset.sec===sec?"page":"false"));
   const bar=$("#subnav");const S=SECTIONS.find(x=>x[0]===sec);bar.replaceChildren();bar.hidden=!S||S[2].length<2;
   if(S&&S[2].length>1)for(const [k,lab] of S[2]){const b=el("button",null,lab);b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",String(k===v));b.addEventListener("click",()=>goView(k));bar.append(b);}
+  {const sel=bar.querySelector('[aria-selected="true"]');bar.scrollLeft=0;if(sel&&sel.offsetLeft+sel.offsetWidth>bar.clientWidth)bar.scrollLeft=sel.offsetLeft-12;}
   renderTicker();renderDataPill();}
 function renderDataPill(){const p=$("#dataPill");if(!p)return;const m=liveMeta&&liveMeta.markets&&(liveMeta.markets.NSE||liveMeta.markets.GLB);
   if(!m){p.textContent=state.loading?"Loading data…":"No data";p.className="data-pill warn";return;}
@@ -5275,6 +5290,130 @@ function renderBaskets(){const nav=$("#bkNav"),body=$("#bkBody");nav.replaceChil
   body.append(el("p","src",`Simulated: today’s constituents bought at the start of the period with ${def.theme?"equal":"your"} weights and held (no rebalancing, no costs, no dividends). Stocks that were removed from a theme in the past are not included (survivorship bias). Themes are illustrative groupings by this site, not recommendations.`));}
 
 {const mk=SECTIONS.find(x=>x[0]==="markets");mk[2].splice(1,0,["mood","Market mood"]);const dc=SECTIONS.find(x=>x[0]==="discover");dc[2].splice(2,0,["baskets","Baskets"]);VIEWS.push("mood","baskets");SEC_OF.mood="markets";SEC_OF.baskets="discover";}
+/* =====================================================================
+   SCANNERS (CA Rahul Ranka's Chartink scans, rebuilt condition by condition)
+   ===================================================================== */
+const TFN={D:"Daily",W:"Weekly",M:"Monthly"},TFU={D:"day",W:"week",M:"month"};
+/* ---- condition library: each returns {text(P), params, eval(ctx,ix,P)->{ok,val}} ---- */
+const C={
+  rsiX:tf=>({k:`rsiX${tf}`,html:P=>`<i>${TFN[tf]}</i> <b>RSI(14)</b> <em>Crossed above</em> <i>1 ${TFU[tf]} ago</i> <b>RSI(14)</b>`,
+    ev:(x,ix)=>{const r=x.get(tf,"rsi",14),i=ix[tf];if(i<2||r[i]==null||r[i-2]==null)return null;return {ok:r[i]>r[i-1]&&r[i-1]<=r[i-2],val:`RSI ${nf(r[i],1)} vs ${nf(r[i-1],1)} (bar before ${nf(r[i-2],1)})`};}}),
+  rsiCmp:(tf,op,n)=>({k:`rsi${tf}${op}`,p:{n},html:P=>`<i>${TFN[tf]}</i> <b>RSI(14)</b> <em>${OPN[op]}</em> Number <input class="sc-n" data-p="n" type="number" step="any" value="${P.n}">`,
+    ev:(x,ix,P)=>{const r=x.get(tf,"rsi",14)[ix[tf]];if(r==null)return null;return {ok:cmp(r,op,+P.n),val:`RSI ${nf(r,1)}`};}}),
+  closeOpen:tf=>({k:`co${tf}`,html:()=>`<i>${TFN[tf]}</i> <b>Close</b> <em>Greater than equal to</em> <i>${TFN[tf]}</i> <b>Open</b>`,
+    ev:(x,ix)=>{const S=x[tf],i=ix[tf];return {ok:S.c[i]>=S.o[i],val:`close ${nf(S.c[i])} vs open ${nf(S.o[i])}`};}}),
+  closePrev:tf=>({k:`cp${tf}`,html:()=>`<i>${TFN[tf]}</i> <b>Close</b> <em>Greater than</em> <i>1 ${TFU[tf]} ago</i> <b>Close</b>`,
+    ev:(x,ix)=>{const S=x[tf],i=ix[tf];if(i<1)return null;return {ok:S.c[i]>S.c[i-1],val:`${nf(S.c[i])} vs ${nf(S.c[i-1])} (${fmtPct((S.c[i]/S.c[i-1]-1)*100,true)})`};}}),
+  volPrev:tf=>({k:`vp${tf}`,html:()=>`<i>${TFN[tf]}</i> <b>Volume</b> <em>Greater than equal to</em> <i>1 ${TFU[tf]} ago</i> <b>Volume</b>`,
+    ev:(x,ix)=>{const S=x[tf],i=ix[tf];if(i<1)return null;return {ok:S.v[i]>=S.v[i-1],val:`${fmtVolN(S.v[i])} vs ${fmtVolN(S.v[i-1])}`};}}),
+  volSma:(tf,p,m)=>({k:`vs${tf}`,p:{m},html:P=>`<i>${TFN[tf]}</i> <b>Volume</b> <em>Greater than</em> <i>${TFN[tf]}</i> <b>SMA(volume,${p})</b> * Number <input class="sc-n" data-p="m" type="number" step="any" value="${P.m}">`,
+    ev:(x,ix,P)=>{const S=x[tf],i=ix[tf],a=x.get(tf,"vsma",p)[i];if(a==null)return null;return {ok:S.v[i]>a*(+P.m),val:`${fmtVolN(S.v[i])} vs avg ${fmtVolN(a)} (${nf(S.v[i]/a,2)}×)`};}}),
+  closeEma:(tfc,tfe,p)=>({k:`ce${tfc}${tfe}${p}`,html:()=>`<i>${TFN[tfc]}</i> <b>Close</b> <em>Greater than equal to</em> <i>${TFN[tfe]}</i> <b>EMA(${TFN[tfe]} close,${p})</b>`,
+    ev:(x,ix)=>{const c=x[tfc].c[ix[tfc]],e=x.get(tfe,"ema",p)[ix[tfe]];if(e==null)return null;return {ok:c>=e,val:`close ${nf(c)} vs EMA ${nf(e)}`};}}),
+  emaEma:(tf,a,b)=>({k:`ee${tf}`,html:()=>`<i>${TFN[tf]}</i> <b>EMA(${TFN[tf]} close,${a})</b> <em>Greater than equal to</em> <i>${TFN[tf]}</i> <b>EMA(${TFN[tf]} close,${b})</b>`,
+    ev:(x,ix)=>{const i=ix[tf],e1=x.get(tf,"ema",a)[i],e2=x.get(tf,"ema",b)[i];if(e1==null||e2==null)return null;return {ok:e1>=e2,val:`EMA${a} ${nf(e1)} vs EMA${b} ${nf(e2)}`};}}),
+  mcap:n=>({k:"mcap",p:{n},html:P=>`<b>Market Cap</b> <em>Greater than equal to</em> Number <input class="sc-n" data-p="n" type="number" step="any" value="${P.n}"> <small>₹ Cr</small>`,
+    ev:(x,ix,P)=>{const f=fundOf(x.sym,"NSE");if(!f||!f.mcap)return {ok:null,val:"market cap not available"};const cr=f.mcap/1e7;return {ok:cr>=+P.n,val:`₹${nf(cr,0)} Cr`};}}),
+  nearHigh:(days,m)=>({k:"nh",p:{m},html:P=>`<i>Daily</i> <b>Close</b> <em>Greater than equal to</em> Bracket( <i>Daily</i> <b>Max(${days}, Daily High)</b> ) * Number <input class="sc-n" data-p="m" type="number" step="any" value="${P.m}">`,
+    ev:(x,ix,P)=>{const S=x.D,i=ix.D;if(i<20)return null;let mx=-Infinity;for(let j=Math.max(0,i-days+1);j<=i;j++)mx=Math.max(mx,S.h[j]);return {ok:S.c[i]>=mx*(+P.m),val:`close ${nf(S.c[i])} vs ${nf(mx)} × ${P.m} = ${nf(mx*P.m)} (${nf((1-S.c[i]/mx)*100,1)}% below high)`};}})};
+const OPN={le:"Less than equal to",lt:"Less than",gt:"Greater than",ge:"Greater than equal to"};
+const cmp=(a,op,b)=>op==="le"?a<=b:op==="lt"?a<b:op==="gt"?a>b:a>=b;
+const fmtVolN=v=>v>=1e7?nf(v/1e7,2)+" Cr":v>=1e5?nf(v/1e5,2)+" L":nf(v,0);
+const SCANS=[
+  {id:"scanDrev",name:"Daily TF Reversal Scanner",tf:"D",seg:"futures",uni:"200",url:"https://chartink.com/screener/daily-tf-reversal-scanner-2",conds:[C.rsiX("D"),C.rsiCmp("D","le",55),C.closeOpen("D"),C.volPrev("D")]},
+  {id:"scanWrev",name:"Weekly TF Reversal Scanner",tf:"W",seg:"futures",uni:"200",url:"https://chartink.com/screener/daily-tf-reversal-scanner",conds:[C.rsiX("W"),C.rsiCmp("W","le",55),C.closeOpen("W"),C.closeEma("W","D",10),C.volPrev("W")]},
+  {id:"scanMrev",name:"Monthly TF Reversal Scanner",tf:"M",seg:"nifty 500",uni:"500",url:"https://chartink.com/screener/monthly-tf-reversal-scanner",conds:[C.rsiX("M"),C.rsiCmp("M","le",55),C.closeOpen("M"),C.closeEma("M","W",20)]},
+  {id:"scanDbo",name:"Daily TF Breakout Scanner",tf:"D",seg:"cash",uni:"all",url:"https://chartink.com/screener/trading-breakout-scanner",conds:[C.volSma("D",20,1),C.closePrev("D"),C.rsiCmp("D","gt",55),C.emaEma("D",10,20),C.mcap(1000),C.rsiCmp("D","le",85),C.closeEma("D","D",20),C.nearHigh(250,0.75)]},
+  {id:"scanWbo",name:"Weekly TF Breakout Scanner",tf:"W",seg:"cash",uni:"all",url:"https://chartink.com/screener/investment-breakout-scanner-12",conds:[C.closePrev("W"),C.rsiCmp("W","gt",50),C.mcap(1000),C.volSma("W",10,1),C.emaEma("W",10,20),C.nearHigh(250,0.75)]},
+  {id:"scanMbo",name:"Monthly TF Breakout Scanner",tf:"M",seg:"cash",uni:"all",url:"https://chartink.com/screener/monthly-tf-breakout-scanner",conds:[C.rsiCmp("M","gt",50),C.mcap(1000),C.emaEma("M",10,20),C.nearHigh(250,0.75),C.closePrev("M"),C.volSma("M",10,1)]}];
+const SCAN_BY={};for(const s of SCANS)SCAN_BY[s.id]=s;
+/* ---- per-scan state: params, toggles, universe (session) + saved copy ---- */
+function scanCfg(s,saved){const sv=(prefs.scanCfg||{})[s.id];const base={uni:s.uni,off:{},p:{}};for(const c of s.conds)if(c.p)base.p[c.k]=Object.assign({},c.p);if(!saved&&SCAN_RT[s.id])return SCAN_RT[s.id];
+  const out=sv?{uni:sv.uni||base.uni,off:Object.assign({},sv.off),p:Object.assign({},base.p,JSON.parse(JSON.stringify(sv.p||{})))}:base;SCAN_RT[s.id]=out;return out;}
+const SCAN_RT={},SCAN_RES={};
+/* ---- monthly candles: 10-year file + recent months from daily data ---- */
+let MONTHLY=null,MONTHLY_LOADING=null;
+async function loadMonthly(){if(MONTHLY)return MONTHLY;if(MONTHLY_LOADING)return MONTHLY_LOADING;MONTHLY_LOADING=(async()=>{try{const r=await fetch(`data/nse_monthly.csv?v=${encodeURIComponent((liveMeta&&liveMeta.generatedAt)||"")}`);if(!r.ok)throw 0;const txt=await r.text();
+  const map={};const lines=txt.split("\n");for(let i=1;i<lines.length;i++){const a=lines[i].split(",");if(a.length<7)continue;const m=map[a[0]]||(map[a[0]]={t:[],o:[],h:[],l:[],c:[],v:[]});const [y,mo]=a[1].split("-").map(Number);m.t.push(Date.UTC(y,mo-1,1));m.o.push(+a[2]);m.h.push(+a[3]);m.l.push(+a[4]);m.c.push(+a[5]);m.v.push(+a[6]);}
+  MONTHLY=map;}catch(e){MONTHLY={};}return MONTHLY;})();return MONTHLY_LOADING;}
+function monthlyOf(sym,D){const R=resample(D,"M");const F=MONTHLY&&MONTHLY[sym];if(!F||!F.t.length||!R.t.length)return {S:R,long:false};const cut=R.t[1]??R.t[0];const k=F.t.findIndex(t=>t>=cut);const e=k<0?F.t.length:k;
+  const S={t:F.t.slice(0,e).concat(R.t.slice(1)),o:F.o.slice(0,e).concat(R.o.slice(1)),h:F.h.slice(0,e).concat(R.h.slice(1)),l:F.l.slice(0,e).concat(R.l.slice(1)),c:F.c.slice(0,e).concat(R.c.slice(1)),v:F.v.slice(0,e).concat(R.v.slice(1))};return {S,long:e>0};}
+function scanCtx(sym,needM){const D=state.data.NSE.series[sym];if(!D||D.c.length<30)return null;const x={sym,D,W:resample(D,"W"),cache:{}};if(needM){const m=monthlyOf(sym,D);x.M=m.S;x.longM=m.long;}
+  x.get=(tf,kind,p)=>{const k=tf+kind+p;if(x.cache[k])return x.cache[k];const S=x[tf];let a;if(kind==="rsi")a=rsiSeries(S.c,p);else if(kind==="ema")a=emaA(S.c,p);else if(kind==="vsma")a=smaA(S.v,p);x.cache[k]=a;return a;};return x;}
+function lastIx(x){return {D:x.D.c.length-1,W:x.W.c.length-1,M:x.M?x.M.c.length-1:-1};}
+function evalScan(s,cfg,x,ix){const res=[];let ok=true,fails=0;for(const c of s.conds){if(cfg.off[c.k])continue;const r=c.ev(x,ix,cfg.p[c.k]||{});if(!r||r.ok===null){res.push({c,ok:null,val:r?r.val:"not enough data"});ok=false;fails++;continue;}res.push({c,ok:r.ok,val:r.val});if(!r.ok){ok=false;fails++;}}return {ok,fails,res};}
+function scanUniverse(cfg){const N=state.data.NSE;if(!N)return [];const all=Object.keys(N.series).filter(sym=>KIND[sym]!=="etf"&&KIND[sym]!=="index"&&!OTHERS[sym]);
+  return cfg.uni==="all"?all:universeSyms(cfg.uni).filter(sym=>N.series[sym]&&KIND[sym]!=="etf"&&KIND[sym]!=="index");}
+async function runScan(id,silent){const s=SCAN_BY[id],cfg=scanCfg(s);const needM=s.conds.some(c=>/M/.test(c.k))||s.tf==="M";if(needM)await loadMonthly();
+  const rows=[],near=[];let noMcap=0,longM=0,cnt=0;for(const sym of scanUniverse(cfg)){const x=scanCtx(sym,needM);if(!x)continue;cnt++;if(x.longM)longM++;const E=evalScan(s,cfg,x,lastIx(x));
+    if(E.res.some(r=>r.c.k==="mcap"&&r.ok===null))noMcap++;const st=dstats(x.D);const row={sym,name:(NSE_INFO[sym]||{}).name||"",sector:(NSE_INFO[sym]||{}).sector||"",c:st.c,chp:st.chp,v:st.v,E,x};if(E.ok)rows.push(row);else if(E.fails===1)near.push(row);}
+  rows.sort((a,b)=>b.chp-a.chp);near.sort((a,b)=>b.chp-a.chp);const R={rows,near,cnt,noMcap,longM,needM,at:Date.now(),lastT:state.data.NSE.lastT||null};SCAN_RES[id]=R;if(!silent&&prefs.view===id)renderScanResults(id);return R;}
+/* ---- backtest: every bar the scan first matched, forward returns ---- */
+const BT_H={D:[5,10,20],W:[4,8,13],M:[3,6,12]},BT_WIN={D:250,W:156,M:120};
+function mapIdx(D,X){const out=new Array(D.t.length);let k=0;for(let i=0;i<D.t.length;i++){while(k+1<X.t.length&&X.t[k+1]<=D.t[i])k++;out[i]=k;}return out;}
+async function backtestScan(id,onProg){const s=SCAN_BY[id],cfg=scanCfg(s);const needM=s.conds.some(c=>/M/.test(c.k))||s.tf==="M";if(needM)await loadMonthly();const tf=s.tf,H=BT_H[tf];const sig=[];const base=H.map(()=>({s:0,n:0}));const syms=scanUniverse(cfg);let k=0;
+  for(const sym of syms){const x=scanCtx(sym,needM);k++;if(k%40===0){onProg(k/syms.length);await new Promise(r=>setTimeout(r,0));}if(!x)continue;const P=x[tf];if(!P||P.c.length<30)continue;
+    const mW=mapIdx(x.D,x.W),mM=x.M?mapIdx(x.D,x.M):null;const lastD={};if(tf!=="D"){const mm=tf==="W"?mW:mM;for(let i=0;i<x.D.t.length;i++)lastD[mm[i]]=i;}
+    const n=P.c.length,from=Math.max(1,n-BT_WIN[tf]-H[H.length-1]);let prev=false;
+    for(let j=from;j<n;j++){let iD=tf==="D"?j:lastD[j];if(iD==null){prev=false;continue;}const ix={D:iD,W:mW[iD],M:mM?mM[iD]:-1};if(tf==="W")ix.W=j;if(tf==="M")ix.M=j;
+      for(let h=0;h<H.length;h++)if(j+H[h]<n){base[h].s+=P.c[j+H[h]]/P.c[j]-1;base[h].n++;}
+      const E=evalScan(s,cfg,x,ix);if(E.ok&&!prev){const r=H.map(h=>j+h<n?(P.c[j+h]/P.c[j]-1)*100:null);sig.push({sym,t:P.t[j],c:P.c[j],r});}prev=E.ok;}}
+  const st=H.map((h,i)=>{const a=sig.map(z=>z.r[i]).filter(v=>v!=null);const b=a.slice().sort((p,q)=>p-q);return {h,n:a.length,win:a.length?a.filter(v=>v>0).length/a.length*100:null,avg:a.length?a.reduce((p,q)=>p+q,0)/a.length:null,med:b.length?b[Math.floor(b.length/2)]:null,base:base[i].n?base[i].s/base[i].n*100:null};});
+  sig.sort((a,b)=>b.t-a.t);return {sig,st,tf,syms:syms.length};}
+/* ---- alerts: new stocks entering a scan (checked when prices refresh) ---- */
+let SCAN_ALERT_VER=null;
+async function scanAlertsCheck(){const A=prefs.scanAlerts||{};const ids=Object.keys(A).filter(k=>A[k]&&A[k].on);if(!ids.length)return;
+  for(const id of ids){const R=await runScan(id,true);const now=R.rows.map(r=>r.sym);const prevL=A[id].last;const fresh=prevL?now.filter(x=>!prevL.includes(x)):[];A[id].last=now;
+    if(fresh.length){const msg=`${SCAN_BY[id].name}: ${fresh.slice(0,8).join(", ")}${fresh.length>8?` and ${fresh.length-8} more`:""} entered the scan.`;toast(msg);try{if("Notification" in window&&Notification.permission==="granted")new Notification("Chartviewer scanner alert",{body:msg});}catch(e){}}}
+  prefs.scanAlerts=A;savePrefs();}
+/* ---- UI ---- */
+function renderScan(id){const s=SCAN_BY[id],box=$("#"+id+"View");const cfg=scanCfg(s);if(!box.dataset.built){box.dataset.built="1";box.innerHTML=`<div class="sc-head"><span class="sc-ico">↺</span><h2>${s.name.toUpperCase()}</h2><span class="pnote">by <a href="${s.url}" target="_blank" rel="noopener">CA Rahul Ranka ↗</a></span></div>
+  <section class="panel sc-panel"><div class="sc-seg">Stock passes all of the below filters in <select class="btn sc-uni" aria-label="Universe"><option value="200">Nifty 200</option><option value="500">Nifty 500</option><option value="all">All stocks on the site</option></select> segment: <span class="pnote sc-segnote"></span></div>
+   <div class="sc-conds"></div>
+   <div class="sc-btns"><button type="button" class="btn sc-run">▷ Run Scan</button><button type="button" class="btn sc-save">💾 Save Scan</button><button type="button" class="btn sc-bt">↺ Backtest Results</button><button type="button" class="btn sc-alert">🔔 Create Alert</button>
+    <div class="ind-menu"><button type="button" class="btn sc-more" aria-expanded="false">More ▾</button><div class="ind-pop sc-pop" hidden><button type="button" data-a="csv">Export results (CSV)</button><button type="button" data-a="copy">Copy scan conditions</button><button type="button" data-a="reset">Reset to original</button><a href="${s.url}" target="_blank" rel="noopener">Open original on Chartink ↗</a></div></div></div></section>
+  <div class="sc-out"></div>`;
+  const q=sel=>box.querySelector(sel);q(".sc-uni").addEventListener("change",e=>{cfg.uni=e.target.value;paintSeg();});q(".sc-run").addEventListener("click",async()=>{q(".sc-out").replaceChildren(el("p","pnote","Scanning…"));await runScan(id);});
+  q(".sc-save").addEventListener("click",()=>{prefs.scanCfg=prefs.scanCfg||{};prefs.scanCfg[id]=JSON.parse(JSON.stringify(cfg));savePrefs();toast("Scan settings saved on this device.");});
+  q(".sc-bt").addEventListener("click",()=>renderScanBacktest(id));q(".sc-alert").addEventListener("click",async()=>{prefs.scanAlerts=prefs.scanAlerts||{};const a=prefs.scanAlerts[id];if(a&&a.on){a.on=false;toast("Scanner alert turned off.");}else{prefs.scanAlerts[id]={on:true,last:null};toast("Alert on: you’ll be told when new stocks enter this scan (while the site is open).");try{if("Notification" in window&&Notification.permission==="default")Notification.requestPermission();}catch(e){}await scanAlertsCheck();}savePrefs();paintAlertBtn();});
+  q(".sc-more").addEventListener("click",e=>{e.stopPropagation();const p=q(".sc-pop");p.hidden=!p.hidden;});document.addEventListener("click",e=>{if(!e.target.closest(".sc-pop")&&!e.target.closest(".sc-more"))q(".sc-pop").hidden=true;});
+  q(".sc-pop").addEventListener("click",async e=>{const a=e.target.dataset.a;if(!a)return;q(".sc-pop").hidden=true;
+    if(a==="csv"){const R=SCAN_RES[id];if(!R){toast("Run the scan first.");return;}const L=["Symbol,Company,Sector,Close,Change %,Volume"].concat(R.rows.map(r=>[r.sym,`"${r.name}"`,`"${r.sector}"`,r.c.toFixed(2),r.chp.toFixed(2),r.v].join(",")));const b=document.createElement("a");b.href=URL.createObjectURL(new Blob([L.join("\n")],{type:"text/csv"}));b.download=`${s.name.replace(/\W+/g,"-")}.csv`;document.body.append(b);b.click();setTimeout(()=>{URL.revokeObjectURL(b.href);b.remove();},1000);}
+    if(a==="copy"){const t=s.conds.filter(c=>!cfg.off[c.k]).map(c=>{const d=document.createElement("div");d.innerHTML=c.html(cfg.p[c.k]||{});d.querySelectorAll("input").forEach(i=>i.replaceWith(i.value));return d.textContent.replace(/\s+/g," ").trim();}).join("\n");try{await navigator.clipboard.writeText(t);toast("Conditions copied.");}catch(e){toast("Couldn’t copy.");}}
+    if(a==="reset"){if(prefs.scanCfg)delete prefs.scanCfg[id];savePrefs();delete SCAN_RT[id];box.dataset.built="";renderScan(id);toast("Reset to the original conditions.");}});}
+  const q=sel=>box.querySelector(sel);q(".sc-uni").value=cfg.uni;
+  function paintSeg(){q(".sc-segnote").textContent=s.seg==="futures"?`Original: futures (F&O) segment. The site has no F&O list, so the Nifty 200 is the closest match.`:s.seg==="cash"?`Original: whole NSE cash segment. The site covers the Nifty 500 plus your extra tickers.`:"Same as the original (Nifty 500).";}paintSeg();
+  function paintAlertBtn(){const on=((prefs.scanAlerts||{})[id]||{}).on;q(".sc-alert").textContent=on?"🔔 Alert on":"🔔 Create Alert";q(".sc-alert").classList.toggle("primary",!!on);}paintAlertBtn();
+  const cl=q(".sc-conds");cl.replaceChildren();for(const c of s.conds){const row=el("div","sc-cond"+(cfg.off[c.k]?" off":""));const tx=el("div","sc-tx");tx.innerHTML=c.html(cfg.p[c.k]||{});
+    tx.querySelectorAll("input[data-p]").forEach(inp=>inp.addEventListener("change",()=>{cfg.p[c.k]=cfg.p[c.k]||{};cfg.p[c.k][inp.dataset.p]=+inp.value;}));
+    const tg=el("button","sc-tog");tg.type="button";tg.setAttribute("role","switch");tg.setAttribute("aria-checked",String(!cfg.off[c.k]));tg.title="Turn this condition on or off";tg.addEventListener("click",()=>{cfg.off[c.k]=!cfg.off[c.k];row.classList.toggle("off",!!cfg.off[c.k]);tg.setAttribute("aria-checked",String(!cfg.off[c.k]));});row.append(tx,tg);cl.append(row);}
+  if(SCAN_RES[id])renderScanResults(id);else if(state.data.NSE)runScan(id);else q(".sc-out").replaceChildren(el("p","pnote",state.loading?"Loading prices…":"No price data yet."));}
+function renderScanResults(id){const s=SCAN_BY[id],box=$("#"+id+"View").querySelector(".sc-out"),R=SCAN_RES[id];box.replaceChildren();
+  const hd=el("div","sc-rhead");hd.append(el("b",null,`${R.rows.length} stock${R.rows.length===1?"":"s"} found`),el("span","pnote",`of ${R.cnt} scanned · latest candle ${fmtD(state.data.NSE.series[Object.keys(state.data.NSE.series)[0]].t.slice(-1)[0])} · ${s.tf!=="D"?`current ${TFU[s.tf]}’s candle is still forming, as on Chartink`:"daily candles"}`));box.append(hd);
+  const notes=[];if(R.noMcap)notes.push(`${R.noMcap} stocks have no market cap from Yahoo Finance yet, so they can’t pass the market-cap filter.`);if(R.needM&&R.longM<R.cnt*0.5)notes.push("The 10-year monthly candle file isn’t available yet, so monthly indicators use 3 years of data and may differ slightly from Chartink until the next weekly data update.");
+  for(const t of notes)box.append(el("p","warn-note",t));
+  const mk=(rows,idT)=>{const t=el("div","tbl-wrap");t.id=idT;dataTable(t,[{k:"i",label:"#",f:(r,i)=>String(rows.indexOf(r)+1)},{k:"s",label:"Stock",cls:"l",f:r=>nameCell(r.sym,r.name),v:r=>r.sym,asc:true},{k:"sec",label:"Sector",cls:"l",f:r=>r.sector,v:r=>r.sector,asc:true},
+      {k:"c",label:"Price",f:r=>nf(r.c),v:r=>r.c},{k:"chp",label:"% Chg",f:r=>pctCell(r.chp),v:r=>r.chp},{k:"v",label:"Volume",f:r=>fmtVolN(r.v),v:r=>r.v},
+      {k:"w",label:"Why it qualified",cls:"l",f:r=>{const d=el("div","sc-why");for(const z of r.E.res){const sp=el("span","sc-w "+(z.ok===true?"ok":z.ok===false?"no":"na"),z.ok===true?"✓":z.ok===false?"✗":"?");const d2=document.createElement("div");d2.innerHTML=z.c.html(scanCfg(s).p[z.c.k]||{});d2.querySelectorAll("input").forEach(i=>i.replaceWith(i.value));sp.title=`${d2.textContent.replace(/\s+/g," ").trim()}\n→ ${z.val}`;d.append(sp);}return d;}},
+      {k:"a",label:"",f:r=>{const on=findWlItem(r.sym,"NSE");const b=el("button","tstar",on?"★":"☆");b.type="button";b.title="Watchlist";b.addEventListener("click",e=>{e.stopPropagation();toggleStar(r.sym);renderScanResults(id);});return b;}}],rows,{onClick:r=>openStock(r.sym,"NSE"),sortKey:"chp"});return t;};
+  if(!R.rows.length)box.append(el("div","empty-note","No stocks pass all conditions right now."));else box.append(mk(R.rows,id+"T"));
+  if(R.near.length){const d=el("details","sc-near");d.append(el("summary",null,`Near misses: ${R.near.length} stocks fail only one condition`),mk(R.near.slice(0,60),id+"N"));box.append(d);}
+  box.append(el("p","src",`Hover the ✓ marks to see each condition’s actual value. Conditions are rebuilt one by one from CA Rahul Ranka’s Chartink scan using this site’s delayed prices (Yahoo Finance) and Yahoo market caps; results can differ slightly from Chartink (data vendor, segment, timing). Technical screening only, not a recommendation.`));}
+async function renderScanBacktest(id){const s=SCAN_BY[id],box=$("#"+id+"View").querySelector(".sc-out");box.replaceChildren(el("p","pnote","Running the scan on every past "+TFU[s.tf]+"…"));
+  const B=await backtestScan(id,p=>{box.firstChild.textContent=`Running the scan on every past ${TFU[s.tf]}… ${Math.round(p*100)}%`;});box.replaceChildren();
+  const back=el("button","btn","← Back to scan results");back.type="button";back.addEventListener("click",()=>renderScanResults(id));box.append(back);
+  const span={D:"about 1 year of trading days",W:"about 3 years of weeks",M:`up to 10 years of months`}[s.tf];
+  box.append(el("h3","g-h",`Backtest: ${B.sig.length} signals over ${span} (${B.syms} stocks)`));
+  const t=el("div","tbl-wrap");t.id=id+"BT";box.append(t);dataTable(t,[{k:"h",label:"Holding period",cls:"l",f:z=>`${z.h} ${TFU[s.tf]}s`},{k:"n",label:"Signals",f:z=>nf(z.n,0)},{k:"w",label:"Went up",f:z=>z.win==null?"–":nf(z.win,0)+"%"},{k:"a",label:"Average return",f:z=>pctCell(z.avg)},{k:"m",label:"Median",f:z=>pctCell(z.med)},{k:"b",label:"Any "+TFU[s.tf]+" (baseline)",f:z=>pctCell(z.base)}],B.st);
+  if(B.sig.length<30)box.append(el("p","warn-note","Fewer than 30 signals: too few to judge the scan reliably."));
+  const L=el("div","tbl-wrap");L.id=id+"BL";box.append(el("h3","g-h","Latest signals"),L);const H=BT_H[s.tf];
+  dataTable(L,[{k:"d",label:"Date",f:z=>fmtD(z.t),v:z=>z.t},{k:"s",label:"Stock",cls:"l",f:z=>z.sym,v:z=>z.sym,asc:true},{k:"c",label:"Close then",f:z=>nf(z.c),v:z=>z.c},...H.map((h,i)=>({k:"r"+i,label:`After ${h} ${TFU[s.tf]}s`,f:z=>z.r[i]==null?"–":pctCell(z.r[i]),v:z=>z.r[i]}))],B.sig.slice(0,200),{onClick:z=>openStock(z.sym,"NSE"),sortKey:"d"});
+  box.append(el("p","src",`Each signal is the first ${TFU[s.tf]} a stock passed all active conditions (repeat matches in a run are not double-counted). Returns are close-to-close on ${TFN[s.tf].toLowerCase()} candles, before costs and taxes. Today’s index lists are used for the whole period, which flatters results (survivorship bias). Past results don’t guarantee future returns.`));}
+/* ---- navigation section + views ---- */
+SECTIONS.splice(SECTIONS.findIndex(x=>x[0]==="discover")+1,0,["scanners","Scanners",SCANS.map(s=>[s.id,s.name])]);
+SEC_ICON.scanners='<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 12l6-6"/>';
+for(const s of SCANS){VIEWS.push(s.id);SEC_OF[s.id]="scanners";const sec=document.createElement("section");sec.id=s.id+"View";sec.hidden=true;sec.className="scan-view";const main=$("#main");const foot=main.querySelector(".site-foot");if(foot)main.insertBefore(sec,foot);else main.append(sec);}
+
 /* ---------- start ---------- */
 (async()=>{
   state.loading=true;applyTheme();render();updateBell();maybeDisclaimer();

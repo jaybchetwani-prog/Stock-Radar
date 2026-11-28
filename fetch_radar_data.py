@@ -686,6 +686,16 @@ def long_update(mode, nse_pairs, us_pairs):
                 out[key] = old
         if df is not None:
             print(f"Long history {key}: {write_split(df, os.path.join(OUT, 'l', key))} files")
+            if key == "nse":
+                try:
+                    m = df.sort_values(["Symbol", "Date"]).copy()
+                    m["Month"] = m["Date"].astype(str).str[:7]
+                    g = m.groupby(["Symbol", "Month"]).agg(Open=("Open", "first"), High=("High", "max"), Low=("Low", "min"),
+                                                         Close=("Close", "last"), Volume=("Volume", "sum")).reset_index()
+                    g.round(2).to_csv(os.path.join(OUT, "nse_monthly.csv"), index=False)
+                    print(f"Monthly candles: {len(g)} rows for {g['Symbol'].nunique()} stocks")
+                except Exception as e:
+                    print(f"  monthly candles failed: {e}")
             LISTINGS[key] = {str(k): str(v) for k, v in df.groupby("Symbol")["Date"].min().items()}
     with open(os.path.join(OUT, "listings.json"), "w") as f:
         json.dump({"note": f"First trading day within the last {LONG_PERIOD} of data", "period": LONG_PERIOD, **LISTINGS}, f, separators=(",", ":"))
